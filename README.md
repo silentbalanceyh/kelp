@@ -4,7 +4,7 @@
 
 ## Performance
 
-1. [Parallel Algorithm](#)
+1. [Parallel Algorithm](/note-parallel-algorithm/README.md)
 
 
 
