@@ -1,3 +1,6 @@
 # Table of content
 
-* [First Chapter](chapter1.md)
+* [Parallel Algorithm](/note-parallel-algorithm/README.md)
+
+
+
