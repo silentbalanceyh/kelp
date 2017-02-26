@@ -6,9 +6,8 @@
 
 1. [Parallel Algorithm](/note-parallel-algorithm/README.md)
 
-## Vert.X
+## Thesis
 
-
-
+1. 
 
 
