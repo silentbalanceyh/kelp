@@ -5,6 +5,7 @@
 ## Performance
 
 1. [Parallel Algorithm](/note-parallel-algorithm/README.md)
+2. [Data Mining](/node-data-mining/README.md)
 
 ## Thesis
 
