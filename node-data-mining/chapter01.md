@@ -8,5 +8,13 @@ KDD：Knowledge Discovery in Database，将未加工的数据转换为拥有信�
 
 Preprocessing/Closing The Loop/Postprocessing：三个基本概念
 
+### 挑战
+
+* 可伸缩
+* 高维性
+* 异种数据，复杂数据
+* 数据的所有权和分布
+* 非传统的分析
+
 
 
