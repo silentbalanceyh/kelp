@@ -6,5 +6,5 @@ Exclude：使用数据库管理系统查找个别记录，通过Internet搜索�
 
 KDD：Knowledge Discovery in Database，将未加工的数据转换为拥有信息的过程。
 
-
+Preprocessing/Closing The Loop/Postprocessing：三个基本概念
 
