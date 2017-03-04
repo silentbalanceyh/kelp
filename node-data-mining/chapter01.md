@@ -15,6 +15,14 @@ Preprocessing/Closing The Loop/Postprocessing：三个基本概念
 * 异种数据，复杂数据
 * 数据的所有权和分布
 * 非传统的分析
+  * 时机样本：Opportunistic Sample
+  * 随机样本：Random Sample
+
+### 上下层
+
+上：统计学、数据挖掘、AI、机器学习、模式识别
+
+下：数据库技术、并行运算、分布式运算
 
 
 
