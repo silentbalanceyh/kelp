@@ -6,7 +6,7 @@
 
 ## Environment
 
-* 1. Documentation Rules
+* [Documentation Rules](environment/documentation-rules.md)
 
 ## Reference
 
