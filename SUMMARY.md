@@ -1,6 +1,9 @@
-# Table of content
+# Summary
 
-* [Parallel Algorithm](/note-parallel-algorithm/README.md)
+## Notes
 
+* [Introduction](README.md)
+* Language
 
+## Reference
 
