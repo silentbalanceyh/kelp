@@ -15,7 +15,7 @@
   * [2.3.Columns](environment/specifications/23columns.md)
   * [2.4.Op / Actions](environment/specifications/24op-actions.md)
   * 2.1.Component Spec
-    * 2.1.1.Controls
+    * [2.1.1.Controls](environment/specifications/211controls.md)
     * [2.1.2.Field UCA](environment/specifications/22field-uca.md)
   * [2.5.Validation Rule](environment/specifications/25validation-rule.md)
 * [3. Implementation](environment/implementation.md)
