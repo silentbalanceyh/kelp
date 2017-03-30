@@ -8,7 +8,6 @@
 
 * [1. Documentation Rules](environment/documentation-rules.md)
 * [2. Specifications](environment/specifications.md)
-  * [2.2. Basic Control](environment/specifications/22-basic-control.md)
 * [3. Implementation](environment/implementation.md)
 * [4. Engine Analyzing](environment/engine-analyzing.md)
 
