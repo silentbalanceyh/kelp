@@ -11,13 +11,12 @@
   * 1.2.Rules for Developer
   * 1.3.Rules for Git
 * [2. Specifications](environment/specifications.md)
-  * [2.1.Basic Controls](environment/specifications/21basic-controls.md)
-  * [2.3.Columns](environment/specifications/23columns.md)
-  * [2.4.Op / Actions](environment/specifications/24op-actions.md)
-  * 2.1.Component Spec
+  * [2.1.Component Spec](environment/specifications/21component-spec.md)
     * [2.1.1.Controls](environment/specifications/211controls.md)
-    * [2.1.2.Field UCA](environment/specifications/22field-uca.md)
-  * [2.5.Validation Rule](environment/specifications/25validation-rule.md)
+    * [2.1.2.Fields](environment/specifications/212fields.md)
+    * [2.1.3.Columns](environment/specifications/213columns.md)
+    * [2.1.4.Op / Actions](environment/specifications/214op-actions.md)
+    * [2.1.5.Validation Rules](environment/specifications/215validation-rules.md)
 * [3. Implementation](environment/implementation.md)
   * [3.1.Environment Preparing](environment/implementation/31environment-preparing.md)
 * [4. Engine Analyzing](environment/engine-analyzing.md)
