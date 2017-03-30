@@ -6,7 +6,7 @@
 
 ## Environment
 
-* [1. Documentation Rules](environment/documentation-rules.md)
+* [1. Management Rules](environment/documentation-rules.md)
   * 1.1.Rules for Reader
   * 1.2.Rules for Developer
   * 1.3.Rules for Git
