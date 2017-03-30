@@ -12,5 +12,5 @@
 
 ## Reference
 
-* [Basic Knowledge](reference/basic-knowledge.md)
+* [1. Basic Knowledge](reference/basic-knowledge.md)
 
