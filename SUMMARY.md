@@ -2,8 +2,7 @@
 
 ## Introduction
 
-* [0. Klep Introduction](README.md)
-  * 1. Documentation Rules
+* [Klep Introduction](README.md)
 
 ## Environment
 
