@@ -13,5 +13,5 @@
 ## Reference
 
 * [1. Basic Knowledge](reference/basic-knowledge.md)
-* [External Courses](reference/external-courses.md)
+* [2. External Courses](reference/external-courses.md)
 
