@@ -1,6 +1,6 @@
 # Summary
 
-## Introduction
+## Reference
 
 * [Test](reference/test.md)
 
