@@ -1,10 +1,13 @@
 # Summary
 
-## Reference
+## Introduction
 
-* 2. Knowledge Management
+* [Test](reference/test.md)
+* 1. Preparing for Development
 
 ## Introduction
 
 * [1. Environment Build](README.md)
+
+## Environment
 
