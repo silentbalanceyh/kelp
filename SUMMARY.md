@@ -3,7 +3,7 @@
 ## Notes
 
 * [Introduction](README.md)
-* Language
+* [Basic Courses](language.md)
 
 ## Reference
 
