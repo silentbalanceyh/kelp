@@ -2,8 +2,6 @@
 
 ## Reference
 
-* [Test](reference/test.md)
-
 ## Introduction
 
 * [1. Environment Build](README.md)
