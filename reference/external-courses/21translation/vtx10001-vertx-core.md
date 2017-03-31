@@ -46,6 +46,16 @@ Core中这些功能相当底层——您不会在这里找到类似数据库访�
 </dependency>
 ```
 
+* Gradle（您的`build.gradle`中）
+
+```
+compile io.vertx:vertx-core:3.4.1
+```
+
+接下来讨论Vert.X Core中不同的概念和特性。
+
+
+
 ## 引用
 
 1. Vert.X的扩展包是Vert.X的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
