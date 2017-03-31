@@ -12,5 +12,9 @@ JavaScript引擎是在Vie服务端嵌入的用于定制Restful接口逻辑的组
 
 引擎专用脚本位于下边路径：
 
+```
+<Bonjour Project>/src/main/resources/engine/script/js/
+```
+
 
 
