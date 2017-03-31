@@ -80,6 +80,11 @@
 | credential.type | First |  | 一代身份证 |
 |  | Second |  | 二代身份证 |
 |  | Driving.License |  | 驾驶证 |
+|  | Passport |  | 护照 |
+|  | Osifer |  | 军官证 |
+|  | Soldier |  | 士兵证 |
+|  | HK.Macau |  | 港澳通行证 |
+|  | Home.Return |  | 回乡证 |
 |  |  |  |  |
 
 
