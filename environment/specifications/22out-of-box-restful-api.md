@@ -12,5 +12,11 @@ src/main/resources/deploy/oob/vertx/route/
 src/main/resources/deploy/oob/vertx/uri/
 ```
 
+## 1.Table Content
+
+| 文档地址 | Restful API | 备注 |
+| :--- | :--- | :--- |
+| WS10001 | /api/oth/authorize | OAuth认证申请授权码接口 |
+
 
 
