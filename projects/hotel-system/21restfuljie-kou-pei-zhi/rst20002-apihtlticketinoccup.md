@@ -85,7 +85,7 @@
 |  | Serial | Preordain | 订单编号 |
 |  | Serial | PreordainCredence | 订单凭证编号 |
 |  | Serial | Inoccup | 入住记录编号 |
-|  | Serial | Traveler | 宾客档案编号 |
+|  | Serial | TravelerHistory | 宾客档案编号 |
 
 ## 5. 请求数据实例
 
