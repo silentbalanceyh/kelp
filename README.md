@@ -4,6 +4,7 @@
 
 * [RTV组件配置教程](/environment/specifications/21component-spec.md)
 * [VIE脚本引擎教程](/environment/implementation/31script-engine.md)
+* [VIE中Restful教程](/environment/implementation/32restful-configuration.md)
 * [OOB Restful接口](/environment/specifications/22out-of-box-restful-api.md)
 
 ## 2. Knowledge Reference
