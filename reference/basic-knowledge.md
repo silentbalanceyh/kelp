@@ -1,8 +1,8 @@
 # Basic Knowledge
 
-## 1. JavaScript
+## 1. Computer Language
 
-* [ECMA Script 6.0](/reference/basic-knowledge/11javascript-library/111ecma-60.md)
+* [KM10001 - ECMA Script 6.0](/reference/basic-knowledge/11javascript-library/111ecma-60.md)
 
 
 
