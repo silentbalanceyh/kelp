@@ -3,8 +3,10 @@
 ## 1. 配置文件清单
 
 ```
+根目录：/src/main/resources/deploy/htl
+
 1. Vert.X路由配置
- - /src/main/resources/deploy/htl/vertx/route/api.htl.orders.json
+ - /vertx/route/api.htl.orders.json
 2. Api接口配置
  - /src/main/resources/deploy/htl/vertx/uri/Htl-PreOrder/post.htl.order/data.json
 3. 转换器和验证器
