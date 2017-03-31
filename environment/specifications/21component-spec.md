@@ -1,6 +1,6 @@
 # Component Spec
 
-## 0. Intrudction
+## 0. Introduction
 
 组件规范用于描述在配置过程中各种组件的用法，组件主要包含下边几个部分：
 
@@ -9,8 +9,6 @@
 * Columns：`ui.column`配置教程
 * Op / Actions：`ui.op`和`sec.action`配置教程
 * Validation Rules：`ui.validate.rule`配置教程
-
-
 
 
 
