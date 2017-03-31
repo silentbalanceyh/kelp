@@ -29,7 +29,22 @@
 | CodeMarket | 市场码序号 | PREFIX + CURRENT\(3\) | MKC001 |
 | CodeSource | 来源码序号 | PREFIX + CURRENT\(3\) | SRC001 |
 | CodeShift | 班别码序号 | PREFIX + CURRENT\(3\) | DTC001 |
-|  |  |  |  |
+| CodeMoney | 佣金码序号 | PREFIX + CURRENT\(3\) | MMC001 |
+| CodeGroup | 团购码序号 | PREFIX + CURRENT\(3\) | GPC001 |
+| CodePrice | 房价码序号 | PREFIX + CURRENT\(3\) | RPC001 |
+| Preordain | 预定订单序号 | PREFIX + CURRENT\(10\) | POD0000000001 |
+| Preordainitem | 预定订单项序号 | PREFIX + CURRENT\(10\) | POI0000000001 |
+| Member | 会员号 | PREFIX + CURRENT\(10\) | MBR0000000001 |
+| Employee | 员工工号 | PREFIX + CURRENT\(10\) | EMP0000000001 |
+| PreordainCredence | 订单凭证号 | PREFIX + ${time} + ${seed} | FC20150203110000000001 |
+| Inoccup | 入住记录序号 | PREFIX + CURRENT\(12\) | IOP000000000001 |
+| Schedule | 排房记录序号 | PREFIX + CURRENT\(12\) | SCH000000000001 |
+| AccountItem | 会计科目编号 | PREFIX + CURRENT\(10\) | AT0000000001 |
+| PayBill | 账单编号 | PREFIX + CURRENT\(16\) | PB0000000000000001 |
+| PriceType | 价格类型 | PREFIX + CURRENT\(3\) | PT001 |
+| PreOrderMethod | 预定方式 | PREFIX + CURRENT\(3\) | ODM001 |
+| PreOrderHCat | 预定类型 | PREFIX + CURRENT\(3\) | ODC001 |
+| TravelerHistory | 宾客档案 | PREFIX + CURRENT\(8\) | THR00000001 |
 
 
 
