@@ -7,7 +7,7 @@
 ## 2. Knowledge Reference
 
 * [基础知识](/reference/basic-knowledge.md)
-* Vert.X社区工作
+* [Vert.X社区工作](/reference/external-courses.md)
 
 ## 3. Training Courses
 
