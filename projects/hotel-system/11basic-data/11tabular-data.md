@@ -77,7 +77,9 @@
 |  | Team |  | 团队入住 |
 | traveler.status | OnGoing |  | 在住宾客 |
 |  | History |  | 历史宾客 |
-| credential.type |  |  |  |
+| credential.type | First |  | 一代身份证 |
+|  | Second |  | 二代身份证 |
+|  |  |  |  |
 
 
 
