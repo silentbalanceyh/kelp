@@ -73,7 +73,11 @@
 |  | Registered |  | 已登记 |
 |  | Delay |  | 延迟 |
 |  | Cancel |  | 已撤销 |
-|  |  |  |  |
+| inoccup.type | Single |  | 散客入住 |
+|  | Team |  | 团队入住 |
+| traveler.status | OnGoing |  | 在住宾客 |
+|  | History |  | 历史宾客 |
+| credential.type |  |  |  |
 
 
 
