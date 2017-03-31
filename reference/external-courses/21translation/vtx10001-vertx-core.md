@@ -10,7 +10,5 @@
 
 ## 正文
 
-Vert.X内部的Java API集合称为**Vert.X Core**
-
-
+Vert.X内部的Java API集合称为**Vert.X Core**，
 
