@@ -19,7 +19,6 @@
     * [2.1.4.Op / Actions](environment/specifications/214op-actions.md)
     * [2.1.5.Validation Rules](environment/specifications/215validation-rules.md)
 * [3. Implementation](environment/implementation.md)
-  * [3.1.Environment Preparing](environment/implementation/31environment-preparing.md)
 * [4. Engine Analyzing](environment/engine-analyzing.md)
   * [4.1.Structures](environment/engine-analyzing/41structures.md)
 
