@@ -59,7 +59,17 @@
 
 1. 根据HTL\_ORDER创建的订单批量创建HTL系统订单项
 
-## 4. 请求数据示例
+## 4. 常量表
+
+| 类型 | 表 | 值 | 说明 |
+| :--- | :--- | :--- | :--- |
+| member.type | Tabular | Registered | 创建会员流程——会员类型 |
+| member.status | Tabular | New | 创建会员流程——会员状态 |
+| order.status | Tabular | Ordered | 预订单初始化状态 |
+| order.type | HCat | Preordain | 订单类型 |
+| order.item.type | HCat | Preordain | 订单项类型 |
+
+## 5. 请求数据示例
 
 ```
 {
