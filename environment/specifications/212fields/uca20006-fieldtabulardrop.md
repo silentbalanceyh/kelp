@@ -2,7 +2,7 @@
 
 ## 1. Tree Map
 
-![](/engine/spec/component/img/field-007-01.JPG)
+![](/_images/specs/field/field-006-01.JPG)
 
 ## 2. Attributes
 
@@ -16,9 +16,7 @@
 
 ## 3. Special
 
-* **code**：对应状态树上边的Tabular数据列表的code值
-
-![](/engine/spec/component/img/field-007-02.png)
+* **code**：对应状态树上边的Tabular数据列表的code值![](/_images/specs/field/field-006-02.png)
 
 * **value/display**：下拉框中显示对应的字段以及值对应的字段信息
 
