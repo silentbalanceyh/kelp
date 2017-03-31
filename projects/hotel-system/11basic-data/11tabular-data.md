@@ -101,6 +101,8 @@
 |  | Disabled |  | 停用房 |
 |  | Self |  | 自用房 |
 |  | Left |  | 预留房 |
+| pay.type | Cash |  | 现金 |
+|  |  |  |  |
 |  |  |  |  |
 
 
