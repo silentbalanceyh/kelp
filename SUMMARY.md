@@ -27,6 +27,6 @@
 
 * [1. Basic Knowledge](reference/basic-knowledge.md)
   * [1.1.JavaScript Library](reference/basic-knowledge/11javascript-library.md)
-    * [1.1.1.ECMA 6.0](reference/basic-knowledge/11javascript-library/111ecma-60.md)
+    * [1.1.1.ECMA Script 6.0](reference/basic-knowledge/11javascript-library/111ecma-60.md)
 * [2. External Courses](reference/external-courses.md)
 
