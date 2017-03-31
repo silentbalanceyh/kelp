@@ -6,7 +6,8 @@
 * **code.group**：团购码
 * **code.market**：市场码
 * **code.source**：来源码
-
+* **code.shift**：班别码
+* 
 ## 2. Table List
 
 | type（类型） | code（系统内码） | marker（显示，用户内码） | name（名称） |
@@ -28,7 +29,15 @@
 | code.source | Enterprise | 企业单位 | SEP-企业单位 |
 |  | Goverment | 事业单位 | SGM-事业单位 |
 |  | Non-Profit | 非营利组织 | SNP-非营利组织 |
-|  |  |  |  |
+|  | Overseas | 国外公司 | SOS-国外公司 |
+|  | Customer | 回头客 | SCM-回头客 |
+|  | Direct | 直接上门 | SDT-直接上门 |
+|  | Center | 订房中心 | SCT-订房中心 |
+|  | AreaSale | 地区销售 | SAS-地区销售 |
+| code.shift | Morning | 早班 | MNS-早班 |
+|  | Middle | 中班 | MDS-中班 |
+|  | Evening | 晚班 | EVS-晚班 |
+|  | Night | 夜班 | NTS-夜班 |
 
 
 
