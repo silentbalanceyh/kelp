@@ -30,7 +30,7 @@
   * 如果房间类型和抵达日期都有值，则直接统计目前房型的可预订数量
   * 房间类型和抵达日期变更时，重算目前房型可预订数量
 
-Restful接口：
+### 2.3. Restful接口
 
-
+[RST20001 - /api/htl/ticket/orders](/projects/hotel-system/21restfuljie-kou-pei-zhi/rst20001-apihtlticketorders.md)
 
