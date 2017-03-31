@@ -42,7 +42,8 @@
   * [3.2.Restful Api](environment/implementation/32restful-configuration.md)
     * 3.2.1.Meta Environment
       * [MTS10001 - Restful配置默认值](environment/implementation/32restful-configuration/vtx10001-default-values.md)
-  * 3.3.Development
+  * [3.3.Development](environment/implementation/33development.md)
+    * [DEV10001 - 不重启Engine发布脚本](environment/implementation/dev10001-bu-zhong-qi-engine-fa-bu-jiao-ben.md)
 * [4. Engine Analyzing](environment/engine-analyzing.md)
   * [4.1.Structures](environment/engine-analyzing/41structures.md)
 
