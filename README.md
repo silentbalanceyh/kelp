@@ -4,6 +4,7 @@
 
 * [RTV组件配置教程](/environment/specifications/21component-spec.md)
 * [VIE脚本引擎教程](/environment/implementation/31script-engine.md)
+* OOB Restful接口
 
 ## 2. Knowledge Reference
 
