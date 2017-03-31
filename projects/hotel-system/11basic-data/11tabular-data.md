@@ -16,7 +16,9 @@
 |  | Fixed | 定额 | MFD-定额 |
 | code.group | Timer | 限时团购 | TC-限时团购 |
 |  | Package | 批量团购 | BC-批量团购 |
-| code.market |  |  |  |
+| code.market | Frant | 前台散客 | MFT-前台散客 |
+|  | Qunar | 去哪儿网 | MQR-去哪儿网 |
+|  |  |  |  |
 
 
 
