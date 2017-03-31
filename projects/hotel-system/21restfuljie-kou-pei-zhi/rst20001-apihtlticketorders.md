@@ -34,5 +34,61 @@
 
 ## 3. 请求数据示例
 
+```
+{
+  "identifier" : "htl.orders",
+  "method" : "POST",
+  "script" : {
+    "in" : "in.api.htl.ticket.orders.post",
+    "out" : "out.api.htl.ticket.orders.post"
+  },
+  "query" : { },
+  "data" : {
+    "hotelId" : 1,
+    "companyId" : 1,
+    "sigma" : "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+    "preservor" : "裴元庆",
+    "mobile" : 33333333,
+    "partner" : "",
+    "member" : "CD10000105",
+    "amount" : 200,
+    "subscribe" : "",
+    "method" : 121,
+    "codeGroup" : 5,
+    "codeSource" : 15,
+    "codeMarket" : 7,
+    "codeMoney" : 1,
+    "comment" : "",
+    "orderItems" : [ {
+      "roomCounter" : "2",
+      "insidePersons" : "",
+      "brekker" : "on",
+      "leaveTime" : "2017-01-20T13:18:00.000Z",
+      "arriveTime" : "2017-01-18T13:18:43.711Z",
+      "sigma" : "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+      "codeRoom" : 34,
+      "roomTypeId" : "1",
+      "insideDays" : "2",
+      "pos" : "on",
+      "divide" : "on"
+    }, {
+      "sigma" : "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+      "roomTypeId" : "2",
+      "codeRoom" : "55",
+      "insideDays" : "4",
+      "leaveTime" : "2017-01-22T13:19:00.000Z",
+      "roomCounter" : "2",
+      "insidePersons" : "",
+      "brekker" : "on",
+      "pos" : "on",
+      "divide" : "on",
+      "arriveTime" : "2017-01-18T13:19:31.374Z"
+    } ],
+    "sig" : "12065B409F10CA1C49AE09D1185F368830F573AA61C1FD4F09A \n
+      1E6B087147B0B83636121F0E1F7CD94440D84C1DFEFBA7602AA1743C67D0A21E058E96ED5CBB8",
+    "$$USER$$" : "87655095-15A0-412E-A887-1660040845FA"
+}
+```
+
 
 
