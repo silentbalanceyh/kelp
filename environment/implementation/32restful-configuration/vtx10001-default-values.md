@@ -13,7 +13,7 @@
 
 ## 1. Vert.X专用配置
 
-Vert.X专用配置有两个，表中R表示必须配置的属性，不配置的带有默认值：
+Vert.X专用配置有两个：
 
 ```
 Address - <ROOT>/vertx/address/*.json
@@ -34,6 +34,22 @@ Verticle - <ROOT>/vertx/verticle/*.json
 |  | ha | 支持HA？ | FALSE |
 |  | worker | 是Worker实例？ | FALSE |
 |  | multi | 是Multi Thread Worker？ | FALSE |
+
+## 2. Restful Api专用配置
+
+Restful Api专用配置主要有四个：
+
+```
+Route - <ROOT>/vertx/route/*.json
+Uri - <ROOT>/vertx/uri/<两级目录>/data.json
+Script
+  - <ROOT>/vertx/uri/<两级目录>/script/in.json                ## in脚本配置
+  - <ROOT>/vertx/uri/<两级目录>/script/<in-name>.js           ## in脚本文件
+  - <ROOT>/vertx/uri/<两级目录>/script/out.json               ## out脚本配置
+  - <ROOT>/vertx/uri/<两级目录>/script/<out-name>.js          ## out脚本文件
+Rule - <ROOT>/vertx/uri/<两级目录>/rules/*.json
+
+```
 
 
 
