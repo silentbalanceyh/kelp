@@ -48,8 +48,11 @@ Script
   - <ROOT>/vertx/uri/<两级目录>/script/out.json               ## out脚本配置
   - <ROOT>/vertx/uri/<两级目录>/script/<out-name>.js          ## out脚本文件
 Rule - <ROOT>/vertx/uri/<两级目录>/rules/*.json
-
 ```
+
+| 模型名 | 配置属性 | 备注 | 默认值 |
+| :--- | :--- | :--- | :--- |
+|  |  |  |  |
 
 
 
