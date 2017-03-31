@@ -55,7 +55,13 @@ Rule - <ROOT>/vertx/uri/<两级目录>/rules/*.json
 | PEScript | namespace | 脚本名空间 | （必填） |
 |  | name | 脚本名称 | （必填） |
 |  | content | 当前目录的JS文件名 | 不填则文件名为&lt;name&gt;.js |
-| PERule |  |  |  |
+| PERule | name | 字段名称 | （必填） |
+|  | type | 字段类型 | （必填） |
+|  | order | 一个接口中的执行顺序 | （必填，且同一接口不同） |
+|  | errorMessage | 一般用于验证器，验证失败时的错误信息 |  |
+|  | config | 组件专用JSON配置 | （必填） |
+|  | componentType | 只能是VALIDATOR \| CONVERTOR | （必填） |
+|  | componentClass | 组件类全名 |  |
 
 
 
