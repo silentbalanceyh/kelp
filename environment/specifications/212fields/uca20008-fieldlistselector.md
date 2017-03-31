@@ -2,11 +2,11 @@
 
 ## 1. Tree Map
 
-
+![](/_images/specs/field/field-008-01.JPG)
 
 ## 2. Attributes
 
-共享配置说明参考：[UCA20001：共享配置说明](/engine/spec/component/field-shared.md)
+共享配置说明参考：[SPC20001 - 共享配置说明](/environment/specifications/212fields/spc20001-shared-configuration.md)
 
 * 顶层：cid, name, type = **"field.ListSelector"**
 * 提示类：label, hint, tips
