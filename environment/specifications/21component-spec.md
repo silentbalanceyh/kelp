@@ -25,11 +25,27 @@
 
 * [UCA20001 - field.TextBox](/environment/specifications/212fields/uca10001-fieldtextbox.md)
 * [UCA20002 - field.RemoteCombo](/environment/specifications/212fields/uca20002-fieldremotecombo.md)
+* UCA20003 - field.DurationBox
+* UCA20004 - field.DatePicker
+* UCA20005 - field.PositiveBox
+* UCA20006 - field.TabularDrop
+* UCA20007 - field.CurrencyBox
+* UCA20008 - field.ListSelector
+* UCA20009 - field.CalculateDater
+* UCA20010 - field.CounterBox
 * [SPC20001 - 共享配置说明](/environment/specifications/212fields/spc20001-shared-configuration.md)
 
 ### 1.3. Columns
 
 ### 1.4. Op / Actions
+
+* SPC40001 - 配置添加Field为List的按钮
+* SPC40002 - DataList中编辑/删除按钮专用配置
+* UCA40001 - List字段提交弹出验证
+
+### 1.5. Validation Rules
+
+* UCA50001 - Required必填验证
 
 
 
