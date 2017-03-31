@@ -34,7 +34,7 @@
 
 * [Htl - 零点酒店管理系统](projects/hotel-system.md)
   * [1.Basic Data - 基础数据表](projects/hotel-system/11basic-data.md)
-    * [1.1.Tabular Data](projects/hotel-system/11basic-data/11tabular-data.md)
+    * [1.1.Tabular Data - 基础数据表](projects/hotel-system/11basic-data/11tabular-data.md)
 
 ## Training Courses
 
