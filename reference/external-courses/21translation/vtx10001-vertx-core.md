@@ -12,3 +12,10 @@
 
 Vert.X内部的Java API集合称为**Vert.X Core**，[Repository](#)
 
+Vert.X Core提供了下列功能
+
+* 开发TCP客户端和服务端
+* 开发HTTP客户端和支持WebSocket的服务端
+
+
+
