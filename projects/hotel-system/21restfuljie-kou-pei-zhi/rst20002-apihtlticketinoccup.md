@@ -70,7 +70,17 @@
 
 ## 4. 常量表
 
-
+| 类型 | 表 | 值 | 说明 |
+| :--- | :--- | :--- | :--- |
+| member.type | Tabular | Registered | 创建会员流程——会员类型 |
+| member.status | Tabular | New | 创建会员流程——会员状态 |
+| order.status | Tabular | Ordered | 预订单初始化状态 |
+| order.type | HCat | Preordain | 订单类型 |
+| order.item.type | HCat | Preordain | 订单项类型 |
+|  | Serial | Member | 会员编号 |
+|  | Serial | PreordainItem | 订单项编号 |
+|  | Serial | Preordain | 订单编号 |
+|  | Serial | PreordainCredence | 订单凭证编号 |
 
 ## 5. 请求数据实例
 
