@@ -23,7 +23,8 @@
 
 ### 1.2. Fields
 
-* UCA20001 - field.TextBox
+* [UCA20001 - field.TextBox](/environment/specifications/212fields/uca10001-fieldtextbox.md)
+* [SPC20001 - 共享配置说明](/environment/specifications/212fields/spc20001-shared-configuration.md)
 
 ### 1.3. Columns
 
