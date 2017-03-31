@@ -121,6 +121,25 @@
 |  | IncomeTax |  | 所得税 |
 | invoice.type | Order |  | 订单发票 |
 |  | Deposit |  | 充值发票 |
+| bill.type | PreOrder |  | 预定账单 |
+|  | Consume |  | 消费账单 |
+|  | RunUp |  | 挂账账单 |
+|  | Knocker |  | 赊账账单 |
+|  | Virtual |  | 虚拟账单 |
+| accmgmt.type | Cooperation.Account |  | 协议单位账号 |
+|  | Vendor.Account |  | 供应商账号 |
+|  | Member.Account |  | 酒店会员账号 |
+| accounting.code | Expenses |  | 费用项 |
+|  | Collection |  | 代收代付 |
+|  | Discount |  | 折扣款待 |
+|  | Receivables |  | 收款项 |
+| price.type | Standard | 挂牌价 | PSD-挂牌价 |
+|  | Single | 散客执行价 | PSE-散客执行价 |
+|  | Member | 会员价 | PMB-会员价 |
+|  | Cooperation | 协议单位价 | PCP-协议单位价 |
+|  | TravelAgent | 旅行社协议价 | PTA-旅行社协议价 |
+|  | Internal | 内招价 | PIL-内招价 |
+|  | HourRoom | 钟点房 | PHR-钟点房 |
 |  |  |  |  |
 
 
