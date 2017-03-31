@@ -22,7 +22,9 @@
 
 | 基本信息 | 值 | 备注 |
 | :--- | :--- | :--- |
-| Restful地址 | /api/htl/ticket/inoccup | 前台接待首页 -&gt; 直接入住 |
+| Restful地址 | /api/htl/ticket/inoccup | 前台接待首页直接入住 |
+| 模型ID和数据表 | htl.orders | 对应数据表HTL\_ORDERS |
+|  |  |  |
 
 
 
