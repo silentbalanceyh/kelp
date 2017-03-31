@@ -14,7 +14,7 @@
 
 * [HTL30001 - 房态计算](/projects/hotel-system/htl20001-fang-tai-ji-suan-shuo-ming.md)
 * [HTL30002 - 散客/团队预定](/projects/hotel-system/htl30002-san-5ba2-tuan-dui-yu-ding.md)
-* HTL30003 - 前台接待入住
+* [HTL30003 - 前台接待入住](/projects/hotel-system/htl30003-qian-tai-jie-dai-ru-zhu.md)
 
 
 
