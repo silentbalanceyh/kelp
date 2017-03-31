@@ -48,7 +48,7 @@ Core中这些功能相当底层——您不会在这里找到类似数据库访�
 
 * Gradle（您的`build.gradle`中）
 
-```gradle
+```groovy
 compile io.vertx:vertx-core:3.4.1
 ```
 
