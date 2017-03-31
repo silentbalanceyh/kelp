@@ -87,7 +87,7 @@
 |  | Serial | Inoccup | 入住记录编号 |
 |  | Serial | TravelerHistory | 宾客档案编号 |
 
-## 5. 请求数据实例
+## 5. 请求数据示例
 
 ```
 {
