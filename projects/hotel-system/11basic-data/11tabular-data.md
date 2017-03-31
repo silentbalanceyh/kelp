@@ -87,6 +87,11 @@
 |  | Home.Return |  | 回乡证 |
 |  | Interim |  | 临时身份证 |
 |  | Household |  | 户口薄 |
+|  | Police |  | 警官证 |
+|  | Other |  | 其他 |
+| room.op.status | Taken |  | 占用房 |
+|  | Empty |  | 空房间 |
+|  | Leaving |  | 预离房 |
 |  |  |  |  |
 
 
