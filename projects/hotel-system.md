@@ -3,10 +3,12 @@
 ## 1. 基础数据
 
 * [HTL10001 - Tabular列表基础数据](/projects/hotel-system/11basic-data/11tabular-data.md)
-* [Assist辅助数据表](/projects/hotel-system/11basic-data/12assist-data.md)
 
-## 2. 复杂逻辑说明
+## 2. 辅助数据
 
-* 
+## 3. 复杂逻辑
+
+* [HTL20001 - 房态计算说明](/projects/hotel-system/htl20001-fang-tai-ji-suan-shuo-ming.md)
+
 
 
