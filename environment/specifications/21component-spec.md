@@ -14,7 +14,7 @@
 
 ### 1.1. Controls
 
-* UCA10001：配置子表单中的DataList表格
+* [UCA10001：配置子表单中的DataList表格](/environment/specifications/211controls/uca10001ff1a-pei-zhi-zi-biao-dan-zhong-datalist-biao-ge.md)
 
 
 
