@@ -89,7 +89,7 @@
 
 ## 5. 请求数据示例
 
-```
+```json
 {
   "identifier" : "htl.orders",
   "method" : "POST",
