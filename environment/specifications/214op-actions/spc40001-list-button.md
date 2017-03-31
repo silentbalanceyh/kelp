@@ -14,7 +14,7 @@
 
 1. 按钮内容配置
 
-   ```
+   ```json
     # ui.op -> op.CommonButton
     ...
     "config":{
@@ -71,3 +71,4 @@ From
 To
 
 ![](/_images/specs/specs/spec-40001-04.JPG)
+
