@@ -1,10 +1,8 @@
 # Klep Notebook \( Knowledge Management \)
 
-## Basic Courses
+## 1. Document Reference
 
 
-
-## Self Management
 
 ## 
 
