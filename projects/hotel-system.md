@@ -6,7 +6,7 @@
 
 ## 2. 辅助数据
 
-* Restful接口配置信息
+* [Restful接口配置](/projects/hotel-system/21restfuljie-kou-pei-zhi.md)
 
 ## 3. 复杂逻辑
 
