@@ -3,6 +3,7 @@
 ## 1. Comments
 
 * **code.money**：佣金码
+* **code.group**：团购码
 
 ## 2. Table List
 
@@ -10,6 +11,11 @@
 | :--- | :--- | :--- | :--- |
 | code.money | Rate | 按比例 | MRT-按比例 |
 |  | RoomNight | 按房晚 | MRN-按房晚 |
+|  | Person | 按人数 | MPS-按人数 |
+|  | Fixed | 定额 | MFD-定额 |
+| code.group | Timer | 限时团购 | TC-限时团购 |
+|  |  |  |  |
+|  |  |  |  |
 
 
 
