@@ -27,6 +27,8 @@
 | HTTP方法 | POST |  |
 | 脚本引擎 | in.api.htl.ticket.inoccup.post.js |  |
 |  | out.api.htl.ticket.inoccup.post.js |  |
+| 事件总线地址 | MSG://MESSAGE/QUEUE/DATA |  |
+|  |  |  |
 
 
 
