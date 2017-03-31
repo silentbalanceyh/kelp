@@ -14,10 +14,10 @@
 
 ```
 {
-	"root":"deploy/htl/vertx/uri/",
-	"path":[
-		"Htl-PreOrder/post.htl.inoccup/"
-	]
+    "root":"deploy/htl/vertx/uri/",
+    "path":[
+        "Htl-PreOrder/post.htl.inoccup/"
+    ]
 }
 ```
 
@@ -33,6 +33,14 @@
 ```
 
 ## 4. 运行结果
+
+![](/_images/impl/develop/dev-10001-03.JPG)
+
+如果出现了瞎编语句则表示这个脚本更新成功，可以重新发Restful请求：
+
+```
+Updated: <script name>
+```
 
 
 
