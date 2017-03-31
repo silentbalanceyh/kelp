@@ -10,7 +10,7 @@
 
 ## 正文
 
-Vert.X内部的Java API集合称为**Vert.X Core**，[Repository](#)
+Vert.X内部的Java API集合称为**Vert.X Core**，文档地址：[Repository](#)。
 
 Vert.X Core提供了下列功能
 
@@ -25,6 +25,8 @@ Vert.X Core提供了下列功能
 * 文件系统访问
 * 高可用性
 * 集群
+
+Core中这些功能相当底层——您不会在这里找到类似数据库访问、授权或高层Web应用的材料，这些材料您可以在**Vert.X ext**（扩展包）中找到。
 
 ## 引用
 
