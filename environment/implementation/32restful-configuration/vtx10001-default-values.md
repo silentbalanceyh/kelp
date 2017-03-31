@@ -52,7 +52,10 @@ Rule - <ROOT>/vertx/uri/<两级目录>/rules/*.json
 
 | 模型名 | 配置属性 | 备注 | 默认值 |
 | :--- | :--- | :--- | :--- |
-| PEScript | namespace | 脚本名空间 |  |
+| PEScript | namespace | 脚本名空间 | （必填） |
+|  | name | 脚本名称 | （必填） |
+|  | content | 当前目录的JS文件名 | 不填则文件名为&lt;name&gt;.js |
+| PERule |  |  |  |
 
 
 
