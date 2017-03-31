@@ -36,5 +36,5 @@
 
 ## Training Courses
 
-* [Web Service Training](training-courses/web-service-training.md)
+* [TC10001：Web Service Training](training-courses/web-service-training.md)
 
