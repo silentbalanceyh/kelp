@@ -28,6 +28,8 @@ Vert.X Core提供了下列功能
 
 Core中这些功能相当底层——您不会在这里找到类似数据库访问、授权或高层Web应用的材料，这些材料您可以在**Vert.X ext**[^1]（扩展包）中找到。
 
+
+
 ## 引用
 
 [^1]: Vert.X的扩展包是Vert.X的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
