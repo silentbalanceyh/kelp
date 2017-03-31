@@ -61,7 +61,8 @@
 | 必须参数 | preservor | 预订人 |
 |  | mobile | 联系电话 |
 |  | orderItems | Array - 订单项，来源于子表单 |
-|  |  |  |
+| 转换器/验证器 | member | 会员卡号 -&gt; 会员ID |
+|  | partner | 协议单位名称 -&gt; 协议单位ID |
 
 
 
