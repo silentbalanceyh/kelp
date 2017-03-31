@@ -5,7 +5,7 @@
 
 ## 1. Translation
 
-* VTX10001 - Vert.X Core
+* [VTX10001 - Vert.X Core](/reference/external-courses/21translation/vtx10001-vertx-core.md)
 
 
 
