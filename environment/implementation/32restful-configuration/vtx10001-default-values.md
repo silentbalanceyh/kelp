@@ -9,9 +9,9 @@ Address - <ROOT>/vertx/address/*.json
 Verticle - <ROOT>/vertx/verticle/*.json
 ```
 
-| 模型名（表名） | 配置属性 | 必填/可选？ | 默认值 |
+| 模型名 | 配置属性 | 必填/可选？ | 默认值 |
 | :--- | :--- | :--- | :--- |
-|  |  |  |  |
+| PEAddress |  |  |  |
 
 
 
