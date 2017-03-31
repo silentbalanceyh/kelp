@@ -10,7 +10,7 @@
 
 ## 3. Training Courses
 
-* [培训教程](/training-courses/web-service-training.md)
+* KTM101 - Web Service
 
 ## 4. History Reference
 
