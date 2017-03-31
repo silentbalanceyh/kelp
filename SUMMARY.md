@@ -29,7 +29,7 @@
       * [UCA20010 - field.CounterBox](environment/specifications/212fields/uca20010-fieldcounterbox.md)
     * [2.1.3.Columns](environment/specifications/213columns.md)
     * [2.1.4.Op / Actions](environment/specifications/214op-actions.md)
-    * [UCA40001 - Field为List结构提交按钮弹出框验证](environment/specifications/214op-actions/uca40001-list-validation.md)
+      * [UCA40001 - List Validation](environment/specifications/214op-actions/uca40001-list-validation.md)
     * [2.1.5.Validation Rules](environment/specifications/215validation-rules.md)
       * [UCA50001 - Required必填验证](environment/specifications/215validation-rules/uca50001-required.md)
 * [3. Implementation](environment/implementation.md)
