@@ -1,4 +1,4 @@
-[Klep Introduction ](/README.md) &gt;&gt; Component Spec &gt;&gt; UCA10001
+[Klep Introduction ](/README.md) &gt;&gt; [2.1.Component Spec](/environment/specifications/21component-spec.md) &gt;&gt; UCA10001
 
 ---
 
