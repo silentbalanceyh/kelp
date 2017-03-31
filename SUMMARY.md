@@ -75,6 +75,7 @@
   * 2.Assist Data - 辅助数据
     * [2.1.Restful接口配置](projects/hotel-system/21restfuljie-kou-pei-zhi.md)
       * [RST20001 - /api/htl/ticket/orders](projects/hotel-system/21restfuljie-kou-pei-zhi/rst20001-apihtlticketorders.md)
+      * [RST20002 - /api/htl/ticket/inoccup](projects/hotel-system/21restfuljie-kou-pei-zhi/rst20002-apihtlticketinoccup.md)
   * [3.Complex Logical - 复杂逻辑](projects/hotel-system/2complex-logical.md)
     * [HTL30001 - 房态计算](projects/hotel-system/htl20001-fang-tai-ji-suan-shuo-ming.md)
     * [HTL30002 - 散客/团队预定](projects/hotel-system/htl30002-san-5ba2-tuan-dui-yu-ding.md)
