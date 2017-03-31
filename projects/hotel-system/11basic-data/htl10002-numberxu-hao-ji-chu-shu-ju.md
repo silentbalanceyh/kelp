@@ -24,9 +24,10 @@
 
 ## 2. Table List
 
-| 序号代码 | 备注 | 格式 | 完整序号/示例 |
+| 序号代码 | 备注 | 格式 | 示例 |
 | :--- | :--- | :--- | :--- |
-|  |  |  |  |
+| CodeMarket | 市场码序号 | PREFIX + CURRENT\(3\) | MKC001 |
+| CodeSource | 来源码序号 | PREFIX + CURRENT\(3\) | SRC001 |
 |  |  |  |  |
 
 
