@@ -7,9 +7,8 @@
 ## Environment
 
 * [1. Management Rules](environment/documentation-rules.md)
-  * [1.1.Rules for Reader](environment/documentation-rules/11rules-for-reader.md)
-  * [1.2.Rules for Developer](environment/documentation-rules/12rules-for-developer.md)
-  * [1.3.Rules for Git](environment/documentation-rules/13rules-for-git.md)
+  * 1.1.Basic Rules
+    * [1.1.1.Source Version](environment/documentation-rules/111source-version.md)
 * [2. Specifications](environment/specifications.md)
   * [2.1.Component Spec](environment/specifications/21component-spec.md)
     * [2.1.1.Controls](environment/specifications/211controls.md)
