@@ -66,7 +66,6 @@
 ## Projects
 
 * [Htl - 零点酒店管理系统](projects/hotel-system.md)
-  * 
 * * 2.Assist Data - 辅助数据表
     * [2.1.Restful接口配置](projects/hotel-system/21restfuljie-kou-pei-zhi.md)
       * [RST20001 - /api/htl/ticket/orders](projects/hotel-system/21restfuljie-kou-pei-zhi/rst20001-apihtlticketorders.md)
