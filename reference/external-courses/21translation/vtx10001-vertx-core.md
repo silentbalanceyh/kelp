@@ -56,9 +56,9 @@ compile io.vertx:vertx-core:3.4.1
 
 ### 故事从Vert.X开始
 
-_注意：_
+_注意：本文大部分内容专用于Java语言——若有需要可以切换到语言特定部分（手册中）。_
 
-
+除非您可以与[Vert.X](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html)对象交流，否则在Vert.X大陆中您不能做太多的事情。
 
 ## 引用
 
