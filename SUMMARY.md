@@ -50,6 +50,7 @@
 * [2. Vert.X Works](reference/external-courses.md)
   * [2.1.Translation](reference/external-courses/21translation.md)
     * [VTX10001 - Vert.X Core](reference/external-courses/21translation/vtx10001-vertx-core.md)
+    * [VTX10002 - Vert.X Web](reference/external-courses/21translation/vtx10002-vertx-web.md)
 
 ## Training
 
