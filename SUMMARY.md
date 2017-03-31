@@ -16,6 +16,7 @@
     * [2.1.1.Controls](environment/specifications/211controls.md)
       * [SPC10001 - 配置子表单中DataList表格](environment/specifications/211controls/uca10001ff1a-pei-zhi-zi-biao-dan-zhong-datalist-biao-ge.md)
     * [2.1.2.Fields](environment/specifications/212fields.md)
+      * [SPC20001 - 共享配置说明](environment/specifications/212fields/spc20001-gong-xiang-pei-zhi-shuo-ming.md)
       * [UCA20001 - field.TextBox](environment/specifications/212fields/uca10001-fieldtextbox.md)
     * [2.1.3.Columns](environment/specifications/213columns.md)
     * [2.1.4.Op / Actions](environment/specifications/214op-actions.md)
