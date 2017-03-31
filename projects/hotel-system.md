@@ -9,6 +9,7 @@
 ## 3. 复杂逻辑
 
 * [HTL20001 - 房态计算说明](/projects/hotel-system/htl20001-fang-tai-ji-suan-shuo-ming.md)
+* HTL20002 - 散客/团队预定逻辑
 
 
 
