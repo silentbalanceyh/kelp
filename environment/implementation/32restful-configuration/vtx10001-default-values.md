@@ -62,6 +62,17 @@ Rule - <ROOT>/vertx/uri/<两级目录>/rules/*.json
 |  | config | 组件专用JSON配置 | （必填） |
 |  | componentType | 只能是VALIDATOR \| CONVERTOR | （必填） |
 |  | componentClass | 组件类全名 |  |
+| PERoute | parent | 路由父路径 | /api |
+|  | path | 当前路由的路径 | （必填） |
+|  | consumerMimes | Consume的MIME支持 | json |
+|  | producerMimes | Producer的MIME支持 | json |
+|  | requestHandler | 执行接口请求的Handler | com.viee.impl.request.EngineExecutor |
+|  | failureHandler | 遇到错误的专用Handler |  |
+|  | method | HTTP方法 | GET |
+|  | order | 当前路由的执行顺序 | 500000 |
+| PEUri | uri | Restful全路径 | （必填） |
+|  | identifier | 操作模型的Global ID | （必填） |
+|  |  |  |  |
 
 
 
