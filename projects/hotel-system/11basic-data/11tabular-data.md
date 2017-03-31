@@ -79,7 +79,7 @@
 |  | History |  | 历史宾客 |
 | credential.type | First |  | 一代身份证 |
 |  | Second |  | 二代身份证 |
-|  | DrivingLicense |  | 驾驶证 |
+|  | Driving.License |  | 驾驶证 |
 |  |  |  |  |
 
 
