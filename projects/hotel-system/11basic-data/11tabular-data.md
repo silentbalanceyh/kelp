@@ -102,7 +102,13 @@
 |  | Self |  | 自用房 |
 |  | Left |  | 预留房 |
 | pay.type | Cash |  | 现金 |
-|  |  |  |  |
+|  | Credit |  | 信用卡 |
+|  | Debit |  | 借记卡 |
+|  | Cheque |  | 支票 |
+|  | Transfer |  | 银行转账 |
+|  | Net |  | 网上支付 |
+| accounting.type | LiquidAssets |  | 流动资产 |
+|  | NonLiquidAssets |  | 非流动资产 |
 |  |  |  |  |
 
 
