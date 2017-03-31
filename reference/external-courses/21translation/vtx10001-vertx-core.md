@@ -26,7 +26,7 @@ Vert.X Core提供了下列功能
 * 高可用性
 * 集群
 
-Core中这些功能相当底层——您不会在这里找到类似数据库访问、授权或高层Web应用的材料，这些材料您可以在**Vert.X ext **\[1\]（扩展包）中找到。
+Core中这些功能相当底层——您不会在这里找到类似数据库访问、授权或高层Web应用的材料，这些材料您可以在**Vert.X ext**[^1]（扩展包）中找到。
 
 **Vert.X Core**很小、很轻量级，您可以仅仅使用您想要的（功能），它可以完全嵌入在已存在的应用里——它不强制您使用特殊的方式设计【Structure】您的应用，所以您可以（随时）使用Vert.X。
 
@@ -34,7 +34,5 @@ Core中这些功能相当底层——您不会在这里找到类似数据库访�
 
 ## 引用
 
-1. \[1\]Vert.X的扩展包是Vert.X的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
-
-
+[^1]: Vert.X的扩展包是Vert.X的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
 
