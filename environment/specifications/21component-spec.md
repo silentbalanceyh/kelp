@@ -10,6 +10,11 @@
 * Op / Actions：`ui.op`和`sec.action`配置教程
 * Validation Rules：`ui.validate.rule`配置教程
 
+所有组件规范文档遵循下边基本原则
+
+* UCA组件的单独配置，文档全部使用UCA前缀编号
+* 一些特殊组件的配置，使用SPC前缀编号
+
 ## 1.Table Content
 
 ### 1.1. Controls
