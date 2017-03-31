@@ -9,7 +9,6 @@
 * Columns：`ui.column`配置教程
 * Op / Actions：`ui.op`和`sec.action`配置教程
 * Validation Rules：`ui.validate.rule`配置教程
-* Special：特殊配置
 
 ## 1.Table Content
 
