@@ -19,11 +19,11 @@
 
 ### 1.1. Controls
 
-* [SPC10001：配置子表单中的DataList表格](/environment/specifications/211controls/uca10001ff1a-pei-zhi-zi-biao-dan-zhong-datalist-biao-ge.md)
+* [SPC10001 - 配置子表单中的DataList表格](/environment/specifications/211controls/uca10001ff1a-pei-zhi-zi-biao-dan-zhong-datalist-biao-ge.md)
 
 ### 1.2. Fields
 
-* UCA10001：field.TextBox
+* UCA10001 - field.TextBox
 
 ### 1.3. Columns
 
