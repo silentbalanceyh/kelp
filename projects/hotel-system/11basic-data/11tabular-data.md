@@ -109,7 +109,14 @@
 |  | Net |  | 网上支付 |
 | accounting.type | LiquidAssets |  | 流动资产 |
 |  | NonLiquidAssets |  | 非流动资产 |
-|  |  |  |  |
+|  | LiquidLiabilities |  | 流动负债 |
+|  | NonLiquidLiabilities |  | 非流动负债 |
+|  | OwnerEquity |  | 所有者权益 |
+|  | Cost |  | 成本 |
+|  | OprRevenue |  | 营业收入 |
+|  | OtherEquity |  | 其他收益 |
+|  | CostTax |  | 营业成本及税金 |
+|  | OtherExpense |  | 其他损失 |
 
 
 
