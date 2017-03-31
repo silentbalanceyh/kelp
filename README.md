@@ -6,8 +6,8 @@
 
 ## 2. Knowledge Reference
 
-* [ECMA Script 6.0](/reference/basic-knowledge/11javascript-library/111ecma-60.md)
-
+* [基础知识](/reference/basic-knowledge.md)
+* 
 ## 3. Projects List
 
 
