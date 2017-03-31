@@ -117,6 +117,11 @@
 |  | OtherEquity |  | 其他收益 |
 |  | CostTax |  | 营业成本及税金 |
 |  | OtherExpense |  | 其他损失 |
+|  | Expense |  | 期间费用 |
+|  | IncomeTax |  | 所得税 |
+| invoice.type | Order |  | 订单发票 |
+|  | Deposit |  | 充值发票 |
+|  |  |  |  |
 
 
 
