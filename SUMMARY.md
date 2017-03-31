@@ -50,14 +50,16 @@
 * [2. External Courses](reference/external-courses.md)
   * [2.1.Translation](reference/external-courses/21translation.md)
 
+## Training
+
+## History
+
+* [1.Vertica Database](history/1vertica-database.md)
+
 ## Projects
 
 * [Htl - 零点酒店管理系统](projects/hotel-system.md)
   * [1.Basic Data - 基础数据表](projects/hotel-system/11basic-data.md)
     * [1.1.Tabular Data - 列表项](projects/hotel-system/11basic-data/11tabular-data.md)
     * [1.2.Assist Data - 辅助数据表](projects/hotel-system/11basic-data/12assist-data.md)
-
-## Training Courses
-
-* [TC10001：Web Service Training](training-courses/web-service-training.md)
 
