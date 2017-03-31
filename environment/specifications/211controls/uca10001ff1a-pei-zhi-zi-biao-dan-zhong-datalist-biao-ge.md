@@ -1,7 +1,3 @@
-[Klep Introduction ](/README.md) &gt;&gt; [2.1.Component Spec](/environment/specifications/21component-spec.md) &gt;&gt; UCA10001
-
----
-
 # UCA10001：配置子表单中的DataList表格
 
 ## 1. Example
