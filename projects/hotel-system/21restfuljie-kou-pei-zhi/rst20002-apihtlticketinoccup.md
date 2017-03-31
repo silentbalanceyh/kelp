@@ -32,7 +32,10 @@
 |  | mobile | 联系电话 |
 |  | traveler | 入住人信息 |
 |  | leaveTime | 离店日期 |
-| 转换器/验证器 |  |  |
+| 转换器/验证器 | member | 会员卡号 -&gt; 会员ID |
+|  | partner | 协议单位名称 -&gt; 协议单位ID |
+|  | leaveTime | 时间格式化 |
+|  | arriveTime | 时间格式化 |
 
 
 
