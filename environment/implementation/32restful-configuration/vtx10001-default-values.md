@@ -72,7 +72,19 @@ Rule - <ROOT>/vertx/uri/<两级目录>/rules/*.json
 |  | order | 当前路由的执行顺序 | 500000 |
 | PEUri | uri | Restful全路径 | （必填） |
 |  | identifier | 操作模型的Global ID | （必填） |
-|  |  |  |  |
+|  | secure | 是否启用认证授权？ | true |
+|  | method | HTTP方法 | GET |
+|  | paramType | 参数类型：QUERY \| BODY \| FORM \| CUSTOM | QUERY |
+|  | requiredParam | 接口必填参数表 | \[\] |
+|  | returnFilters | 返回字段过滤表 | \[\] |
+|  | contentMimes | Content-Type默认MIME | application/json |
+|  | acceptMimes | Accept默认MIME | application/json |
+|  | sender | 消息发送器 | com.vie.un.flow.JsonSender |
+|  | responder | 响应处理器 | com.vie.un.flow.CommonRepdor |
+|  | mapping | 【不配脚本生效】属性名称转换器 | {} |
+|  | joined | 【不配脚本生效】联合更新、联合删除配置 | {} |
+|  | in | in脚本名称 |  |
+|  | out | out脚本名称 |  |
 
 
 
