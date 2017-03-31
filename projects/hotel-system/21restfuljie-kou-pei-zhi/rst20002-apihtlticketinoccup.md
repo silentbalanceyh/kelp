@@ -76,6 +76,7 @@
 | member.type | Tabular | Registered | 创建会员流程——会员类型 |
 | member.status | Tabular | New | 创建会员流程——会员状态 |
 | order.status | Tabular | Ordered | 预订单初始化状态 |
+| inoccup.status | Tabular | Registered | 入住记录 |
 | order.type | HCat | Preordain | 订单类型 |
 | order.item.type | HCat | Preordain | 订单项类型 |
 |  | Serial | Member | 会员编号 |
