@@ -29,7 +29,7 @@
 |  | out.api.htl.ticket.inoccup.post.js |  |
 | 事件总线地址 | MSG://MESSAGE/QUEUE/DATA |  |
 | 必须参数 | preservor | 预订人 |
-|  | mobile | 联系电话 |
+|  | phone | 联系电话（和入住区分使用phone） |
 |  | traveler | 入住人信息 |
 |  | leaveTime | 离店日期 |
 | 转换器/验证器 | member | 会员卡号 -&gt; 会员ID |
