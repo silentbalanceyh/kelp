@@ -52,6 +52,8 @@
 
 ## Training
 
+* KTM101 - Web Service
+
 ## History
 
 * 2012 Web Service
