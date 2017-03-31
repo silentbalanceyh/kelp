@@ -5,6 +5,7 @@
 ## 1. 基础数据
 
 * [HTL10001 - Tabular列表基础数据](/projects/hotel-system/11basic-data/11tabular-data.md)
+* HTL10002 - Number序号基础数据
 
 ## 2. 辅助数据
 
