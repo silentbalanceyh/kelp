@@ -6,9 +6,10 @@
 
 ## 2. Table List
 
-| 类型 | 名称 | 显示信息（Marker） | 代码（系统专用） |
+| type（类型） | code（系统内码） | marker（显示，用户内码） | name（名称） |
 | :--- | :--- | :--- | :--- |
-| code.money | MRT-按比例 | 按比例 | Rate |
+| code.money | Rate | 按比例 | MRT-按比例 |
+|  |  |  |  |
 
 
 
