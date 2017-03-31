@@ -2,7 +2,7 @@
 
 ## 1. Tree Map
 
-![](/engine/spec/component/img/field-006-01.JPG)
+![](/_images/specs/field/field-005-01.JPG)
 
 ## 2. Attributes
 
