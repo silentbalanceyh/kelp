@@ -89,5 +89,58 @@
 
 ## 5. 请求数据实例
 
+```
+{
+  "identifier" : "htl.orders",
+  "method" : "POST",
+  "script" : {
+    "in" : "in.api.htl.ticket.inoccup.post",
+    "out" : "out.api.htl.ticket.inoccup.post"
+  },
+  "query" : { },
+  "data" : {
+    "cat" : "$TABULAR$:Personal=preorder.category",
+    "hotelId" : 1,
+    "companyId" : 1,
+    "method" : 135,
+    "codeGroup" : 5,
+    "codeSource" : 15,
+    "codeMarket" : 7,
+    "codeMoney" : 1,
+    "arriveTime" : "2017-04-01 06:09",
+    "codeRoom" : 34,
+    "member" : "E0B742FB-C614-4877-ADB4-AA26332E9B13",
+    "amount" : 200,
+    "preservor" : "宇文成都",
+    "phone" : 22222222,
+    "insideDays" : 2,
+    "leaveTime" : "2017-04-03 06:09",
+    "comment" : "测试直接入住",
+    "traveler" : [ {
+      "roomNumber" : "1301",
+      "roomTypeId" : 1,
+      "type" : 46,
+      "secret" : false,
+      "idcType" : 66,
+      "mobile" : "15922611447",
+      "nation" : "汉族",
+      "realname" : "裴元庆",
+      "nickname" : "霹雳火",
+      "nativePlace" : "四川省",
+      "idcNumber" : "500235198508170010",
+      "tserial" : "THR00000010",
+      "address" : "测试地址",
+      "country" : "中国",
+      "birthday" : "1985-10-17 00:00:00",
+      "$INDEX$" : 0
+    } ],
+    "sigma" : "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+    "sig" : "109E9ACBB30C1EA60C95309E9E476C4A985F26A6D9EEEE7A2D146506576EE93AEEB \n 
+      A87FEDFBC40657D63296A4BF84942241F41496D6D52054A0460C8F423E96E",
+    "$$USER$$" : "3FE1E35D-0B7D-48DA-8DCC-9E5438D7F5B0"
+  }
+}
+```
+
 
 
