@@ -1,5 +1,16 @@
 # Restful配置默认值
 
+## 0. 映射关系
+
+模型和数据表的对应关系如下
+
+* PEAddress - EVX\_ADDRESS
+* PERoute - EVX\_ROUTE
+* PERule - EVX\_RULE
+* PEUri - EVX\_URI
+* PEVerticle - EVX\_VERTICLE
+* PEScript - ENG\_SCRIPT
+
 ## 1. Vert.X专用配置
 
 Vert.X专用配置有两个：
