@@ -1,7 +1,3 @@
-[Kelp Introduction](/README.md) &gt;&gt; Basic Knowledge
-
----
-
 # Basic Knowledge
 
 ## 1. JavaScript
