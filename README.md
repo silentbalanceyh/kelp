@@ -1,8 +1,8 @@
 # Klep Notebook \( Knowledge Management \)
 
-## 1. Implementation Reference
+## 1. Vie/Rtv Reference
 
-* [组件配置规范](/environment/specifications/21component-spec.md)
+* RTV[组件配置规范](/environment/specifications/21component-spec.md)
 
 ## 2. Knowledge Reference
 
