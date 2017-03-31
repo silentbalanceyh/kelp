@@ -16,7 +16,9 @@ JavaScript引擎是在Vie服务端嵌入的用于定制Restful接口逻辑的组
 <Bonjour Project>/src/main/resources/engine/script/js/
 ```
 
-目前引擎脚本主要包含下边目录：
+目前引擎脚本目录结构如下：
+
+![](/_images/impl/script-engine/js/js-001-01.JPG)
 
 
 
