@@ -70,5 +70,6 @@
     * [HTL10001 - Tabular Data - 列表项](projects/hotel-system/11basic-data/11tabular-data.md)
   * 2.Assist Data - 辅助数据表
   * [3.Complex Logical - 复杂逻辑](projects/hotel-system/2complex-logical.md)
-    * [HTL20001 - 房态计算说明](projects/hotel-system/htl20001-fang-tai-ji-suan-shuo-ming.md)
+    * [HTL30001 - 房态计算](projects/hotel-system/htl20001-fang-tai-ji-suan-shuo-ming.md)
+    * [HTL30002 - 散客/团队预定](projects/hotel-system/htl30002-san-5ba2-tuan-dui-yu-ding.md)
 
