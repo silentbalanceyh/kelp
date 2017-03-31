@@ -36,7 +36,7 @@
 | Preordainitem | 预定订单项序号 | PREFIX + CURRENT\(10\) | POI0000000001 |
 | Member | 会员号 | PREFIX + CURRENT\(10\) | MBR0000000001 |
 | Employee | 员工工号 | PREFIX + CURRENT\(10\) | EMP0000000001 |
-| PreordainCredence | 订单凭证号 | PREFIX + ${time} + ${seed} | FC20150203110000000001 |
+| PreordainCredence | 订单凭证号 | PREFIX + ${time} + CURRENT\(10\) | FC20150203110000000001 |
 | Inoccup | 入住记录序号 | PREFIX + CURRENT\(12\) | IOP000000000001 |
 | Schedule | 排房记录序号 | PREFIX + CURRENT\(12\) | SCH000000000001 |
 | AccountItem | 会计科目编号 | PREFIX + CURRENT\(10\) | AT0000000001 |
