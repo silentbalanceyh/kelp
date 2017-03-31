@@ -1,6 +1,6 @@
 # Component Spec
 
-## 0. Introduction
+## 0.Introduction
 
 组件规范用于描述在配置过程中各种组件的用法，组件主要包含下边几个部分：
 
