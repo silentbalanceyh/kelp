@@ -60,6 +60,8 @@ _注意：本文大部分内容专用于Java语言——若有需要可以切换
 
 除非您可以与[Vert.X](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html)对象交流，否则在Vert.X大陆中您不能做太多的事情。
 
+它（Vert.X对象）是Vert.X的控制中心，
+
 ## 引用
 
 1. Vert.X的扩展包是Vert.X的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
