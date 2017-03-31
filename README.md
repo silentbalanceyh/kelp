@@ -40,6 +40,7 @@
 |  | WS | Web Service | OOB中Web Service专用文档 |
 |  | MTS | Meta Server | H2中配置数据专用文档 |
 |  | STE | Script Engine | 脚本引擎专用文档 |
+|  | DEV | Development | 开发调试技巧工具文档 |
 | Reference | KM | Knowledge Management | 知识整理专用文档 |
 |  | VTX | Vert.x | Vert.X社区工作专用文档 |
 | Training | KT | Knowledge Transfer | 培训专用文档 |
