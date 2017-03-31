@@ -9,6 +9,8 @@
 * [1. Management Rules](environment/documentation-rules.md)
   * 1.1.Basic Rules
     * [1.1.1.Source Version](environment/documentation-rules/111source-version.md)
+  * 1.2.Environment Building
+    * [1.2.1.Document](environment/documentation-rules/121document.md)
 * [2. Specifications](environment/specifications.md)
   * [2.1.Component Spec](environment/specifications/21component-spec.md)
     * [2.1.1.Controls](environment/specifications/211controls.md)
