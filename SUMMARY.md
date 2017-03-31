@@ -34,3 +34,7 @@
 
 * [1.Htl - （零点酒店管理系统）](projects/hotel-system.md)
 
+## Training Courses
+
+* [Web Service Training](training-courses/web-service-training.md)
+
