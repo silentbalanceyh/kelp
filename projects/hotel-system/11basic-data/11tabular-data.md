@@ -17,7 +17,6 @@
 * **contract.type**：协议类型
 * **employee.type**：员工类型
 * **inoccup.status**：入住单状态
-* **inoccup.type**：入住单类型
 * **traveler.status**：宾客状态
 * **credential.type**：证件类型
 * **room.op.status**：房间状态（由房间的leaving/arriving两个字段决定）
@@ -100,8 +99,6 @@
 |  | Registered |  | 已登记 |
 |  | Delay |  | 延迟 |
 |  | Cancel |  | 已撤销 |
-| inoccup.type | Single |  | 散客入住 |
-|  | Team |  | 团队入住 |
 | traveler.status | OnGoing |  | 在住宾客 |
 |  | History |  | 历史宾客 |
 | credential.type | First |  | 一代身份证 |
