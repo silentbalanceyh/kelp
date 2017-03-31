@@ -20,7 +20,7 @@ JavaScript引擎是在Vie服务端嵌入的用于定制Restful接口逻辑的组
 
 ![](/_images/impl/script-engine/js/js-001-01.JPG)
 
-* `init.properties`：
+* `init.properties`：引擎初始化脚本的顺序配置文件
 
 
 
