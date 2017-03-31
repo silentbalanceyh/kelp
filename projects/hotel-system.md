@@ -3,9 +3,10 @@
 ## 1. 基础数据
 
 * [HTL10001 - Tabular列表基础数据](/projects/hotel-system/11basic-data/11tabular-data.md)
-* HTL10002 - Restful接口数据
 
 ## 2. 辅助数据
+
+* Restful接口配置信息
 
 ## 3. 复杂逻辑
 
