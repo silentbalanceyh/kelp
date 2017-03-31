@@ -72,7 +72,7 @@
   * 0.User Guide
   * 1.Basic Data - 基础数据
     * [HTL10001 - Tabular列表基础数据](projects/hotel-system/11basic-data/11tabular-data.md)
-    * HTL10002 - Number序号基础数据
+    * [HTL10002 - Number序号基础数据](projects/hotel-system/11basic-data/htl10002-numberxu-hao-ji-chu-shu-ju.md)
   * 2.Assist Data - 辅助数据
     * [2.1.Restful接口配置](projects/hotel-system/21restfuljie-kou-pei-zhi.md)
       * [RST20001 - /api/htl/ticket/orders](projects/hotel-system/21restfuljie-kou-pei-zhi/rst20001-apihtlticketorders.md)
