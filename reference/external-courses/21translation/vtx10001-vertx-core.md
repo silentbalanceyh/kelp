@@ -30,7 +30,5 @@ Core中这些功能相当底层——您不会在这里找到类似数据库访�
 
 ## 引用
 
-
-
-[^1]: Vert.X的扩展包，包含了不同功能的Vert.X的子项目，类似Web、Web Client、Data Access等。
+[^1]: Vert.X的扩展包是Vert.X的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
 
