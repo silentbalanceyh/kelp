@@ -15,6 +15,7 @@
  - /vertx/uri/Htl-PreOrder/post.htl.inoccup/script/in.json
  - /vertx/uri/Htl-PreOrder/post.htl.inoccup/script/in.api.htl.ticket.inoccup.post.js
  - /vertx/uri/Htl-PreOrder/post.htl.inoccup/script/out.json
+ - /vertx/uri/Htl-PreOrder/post.htl.inoccup/script/out.api.htl.ticket.inoccup.post.js
 ```
 
 
