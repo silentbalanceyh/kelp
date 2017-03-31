@@ -140,7 +140,23 @@
 |  | TravelAgent | 旅行社协议价 | PTA-旅行社协议价 |
 |  | Internal | 内招价 | PIL-内招价 |
 |  | HourRoom | 钟点房 | PHR-钟点房 |
-|  |  |  |  |
+| order.status | Ordered |  | 已预定 |
+|  | Registered |  | 已登记 |
+|  | Payed |  | 已结账 |
+|  | Finished |  | 已退房 |
+| order.item.status | Pending |  | 等待入住 |
+|  | Inoccup |  | 入住完成 |
+|  | Except |  | 未入住 |
+| preorder.method | Visit | 上门预定 | PVT-上门预定 |
+|  | Phone | 电话预定 | PPE-电话预定 |
+|  | WeChat | 微信预定 | PWT-微信预定 |
+|  | Web | 网页预定 | PWB-网页预定 |
+|  | App | APP预定 | PAP-APP预定 |
+|  | Team | 团队预定 | PTM-团队预定 |
+|  | TravelAgent | 旅行社预定 | PTA-旅行社预定 |
+|  | OTA | OTA预定 | POA-OTA预定 |
+| preorder.category | Personal | 散客预订 | POD-散客预定 |
+|  | Company | 团队预定 | COD-团队预定 |
 
 
 
