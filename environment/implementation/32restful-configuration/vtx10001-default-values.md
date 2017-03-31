@@ -52,7 +52,7 @@ Rule - <ROOT>/vertx/uri/<两级目录>/rules/*.json
 
 | 模型名 | 配置属性 | 备注 | 默认值 |
 | :--- | :--- | :--- | :--- |
-|  |  |  |  |
+| PEScript | namespace | 脚本名空间 |  |
 
 
 
