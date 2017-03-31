@@ -1,7 +1,3 @@
-[Klep Introduction](/README.md) &gt;&gt; 2.1.Component Spec
-
----
-
 # Component Spec
 
 ## 0.Introduction
