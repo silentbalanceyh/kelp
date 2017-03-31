@@ -4,7 +4,7 @@
 
 ```
 1. Vert.X路由配置
-
+ - /src/main/resources/deploy/htl/vertx/route/api.htl.orders.json
 ```
 
 
