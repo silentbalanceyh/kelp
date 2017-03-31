@@ -96,6 +96,9 @@
 | room.clean.status | Dirty |  | 脏房 |
 |  | Checked |  | 清洁已检查 |
 |  | Unchecked |  | 清洁未检查 |
+|  | Operation |  | 可操作 |
+|  | Mind |  | 维修中 |
+|  |  |  |  |
 
 
 
