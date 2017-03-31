@@ -10,7 +10,7 @@
 
 ## 正文
 
-Vert.X内部的Java API集合称为**Vert.X Core**，文档地址：[Repository](#)。
+Vert.X内部的Java API集合称为**Vert.X Core**，[文档地址](https://github.com/eclipse/vert.x)。
 
 Vert.X Core提供了下列功能
 
