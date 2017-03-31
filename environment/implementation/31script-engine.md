@@ -21,6 +21,8 @@ JavaScript引擎是在Vie服务端嵌入的用于定制Restful接口逻辑的组
 ![](/_images/impl/script-engine/js/js-001-01.JPG)
 
 * `init.properties`：引擎初始化脚本的顺序配置文件，描述了目录中脚本的加载先后顺序。
-
+* **api**：脚本引擎读写数据库专用的统一调用API。
+* **db**：数据库访问专用的库。
+* 
 
 
