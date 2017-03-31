@@ -2,7 +2,7 @@
 
 ## 1. Tree Map
 
-![](/assets/field-001-01.JPG)
+![](/_images/specs/field/field-001-01.JPG)
 
 ## 2. Attributes
 
