@@ -40,6 +40,7 @@
 * [3. Implementation](environment/implementation.md)
   * [3.1.Script Engine \( JS \)](environment/implementation/31script-engine.md)
   * [3.2.Restful Api](environment/implementation/32restful-configuration.md)
+    * 3.2.1.Meta Environment
 * [4. Engine Analyzing](environment/engine-analyzing.md)
   * [4.1.Structures](environment/engine-analyzing/41structures.md)
 
