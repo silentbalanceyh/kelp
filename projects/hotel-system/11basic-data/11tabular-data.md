@@ -4,6 +4,7 @@
 
 * **code.money**：佣金码
 * **code.group**：团购码
+* **code.market**：市场码
 
 ## 2. Table List
 
@@ -14,8 +15,8 @@
 |  | Person | 按人数 | MPS-按人数 |
 |  | Fixed | 定额 | MFD-定额 |
 | code.group | Timer | 限时团购 | TC-限时团购 |
-|  |  |  |  |
-|  |  |  |  |
+|  | Package | 批量团购 | BC-批量团购 |
+| code.market |  |  |  |
 
 
 
