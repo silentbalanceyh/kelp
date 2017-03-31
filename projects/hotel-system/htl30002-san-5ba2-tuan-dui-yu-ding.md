@@ -37,9 +37,9 @@
 * URI：`/api/htl/ticket/orders`
 * Method：POST
 * Required Parameters：
-  * 
+  * preservor：预订人
+  * mobile：联系电话
+  * orderItems：订单项（订单项至少包含1条）
 * 
-
-
 
 
