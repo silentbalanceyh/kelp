@@ -34,7 +34,9 @@ Core中这些功能相当底层——您不会在这里找到类似数据库访�
 
 从现在开始文中使用core代表**Vert.X Core**。
 
-如果你在使用Maven或Gradle \[2\]，将下边依赖项添加到您的项目描述（文件）中`dependencies`部分
+如果您在使用Maven或Gradle \[2\]，（可以通过）将下列依赖项添加到您的项目描述（文件）中`dependencies`部分来访问**Vert.X Core**的API：
+
+
 
 ## 引用
 
