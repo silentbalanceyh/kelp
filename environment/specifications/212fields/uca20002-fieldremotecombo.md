@@ -23,7 +23,7 @@
       2. current部分的数据没有加载的时候，即当前值在undefined的时候
 2. 可选配置
    1. **expr**：可选，display部分是否可支持表达式类型，如果可支持表达式类型则expr为true，这个属性可用于大部分组件，并不是当前组件专用
-      ```
+      ```json
       "ajouter":{
           "label":"房价码",
           "value":"uniqueId",
@@ -47,7 +47,7 @@ Remote专用配置（ingest节点）
 
 **关于ingest的特殊说明**
 
-```
+```json
    "ajouter":{
        "monitor":{
            "roomTypeId":["form","fmRoomForm","values","roomTypeId"]
@@ -65,7 +65,7 @@ Remote专用配置（ingest节点）
 
 注意远程配置中的对应关系，传递关系为：**Redux State -&gt; Monitor -&gt; Input**，也就是说上述配置可以按照以下片段配置：
 
-```
+```json
    "ajouter":{
        "monitor":{
            "monitorField":["form","fmRoomForm","values","reduxField"]

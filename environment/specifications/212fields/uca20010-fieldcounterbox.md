@@ -16,7 +16,7 @@
 
 ## 3. Special
 
-```
+```json
 "ajouter":{
     ...
     "monitor":{
@@ -47,7 +47,7 @@
 
 ### 4. Remote
 
-```
+```json
 "ingest":{
     "uri":"/htl/room-etat/q/day",
     "input":{

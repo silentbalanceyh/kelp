@@ -35,7 +35,7 @@ Remote专用配置（ingest节点）
    key：当前ListSelector记录中的字段值  
    value：填充的Form中对应的字段的name信息
 
-```
+```json
 "ingest":{
     "uri":"/vip/cards/pager",
     "input":{

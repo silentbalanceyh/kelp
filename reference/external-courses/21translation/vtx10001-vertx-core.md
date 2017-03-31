@@ -64,8 +64,6 @@ _注意：本文大部分内容专用于Java语言——若有需要可以切换
 
 所以您怎么去获取一个（Vert.X）实例呢？
 
-
-
 ## 引用
 
 1. Vert.X的扩展包是Vert.X的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。

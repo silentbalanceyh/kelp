@@ -16,7 +16,7 @@
 
 ## 3. Special
 
-```
+```json
 "ajouter":{
     ...
     "monitor":{
