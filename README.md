@@ -3,7 +3,7 @@
 ## 1. Vie/Rtv Reference
 
 * [RTV组件配置教程](/environment/specifications/21component-spec.md)
-* [VIE实施教程](/environment/implementation.md)
+* [VIE脚本引擎教程](/environment/implementation.md)
 
 ## 2. Knowledge Reference
 
