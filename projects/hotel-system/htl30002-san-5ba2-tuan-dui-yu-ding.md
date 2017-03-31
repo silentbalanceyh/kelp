@@ -34,18 +34,5 @@
 
 [RST20001 - /api/htl/ticket/orders](/projects/hotel-system/21restfuljie-kou-pei-zhi/rst20001-apihtlticketorders.md)
 
-### 3.1.接口逻辑
-
-* 会员卡号在接口中自动转换成会员的ID
-* 协议单位名称在接口中自动转换成协议单位ID
-
-### 3.2.脚本逻辑
-
-#### in
-
-* 会员流程：
-
-#### out
-
 
 
