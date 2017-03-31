@@ -28,6 +28,7 @@
 | :--- | :--- | :--- | :--- |
 | CodeMarket | 市场码序号 | PREFIX + CURRENT\(3\) | MKC001 |
 | CodeSource | 来源码序号 | PREFIX + CURRENT\(3\) | SRC001 |
+| CodeShift | 班别码序号 | PREFIX + CURRENT\(3\) | DTC001 |
 |  |  |  |  |
 
 
