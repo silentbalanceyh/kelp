@@ -35,7 +35,15 @@
 ### 3.1. 配置文件清单
 
 ```
-
+# Vert.X路由配置
+/src/main/resources/deploy/vertx/route/api.htl.orders.json
+# Api接口配置
+/src/main/resources/deploy/vertx/uri/Htl-PreOrder/post.htl.order/data.json
+/src/main/resources/deploy/vertx/uri/Htl-PreOrder/post.htl.order/rules/c-replaced.json
+/src/main/resources/deploy/vertx/uri/Htl-PreOrder/post.htl.order/script/in.json
+/src/main/resources/deploy/vertx/uri/Htl-PreOrder/post.htl.order/script/in.api.htl.ticket.orders.post.js
+/src/main/resources/deploy/vertx/uri/Htl-PreOrder/post.htl.order/script/out.json
+/src/main/resources/deploy/vertx/uri/Htl-PreOrder/post.htl.order/script/out.api.htl.ticket.orders.post.js
 ```
 
 ### 3.2. 接口配置
