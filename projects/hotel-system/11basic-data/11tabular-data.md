@@ -7,8 +7,7 @@
 * **code.market**：市场码
 * **code.source**：来源码
 * **code.shift**：班别码
-* 
-## 2. Table List
+* ## 2. Table List
 
 | type（类型） | code（系统内码） | marker（显示，用户内码） | name（名称） |
 | :--- | :--- | :--- | :--- |
@@ -38,6 +37,13 @@
 |  | Middle | 中班 | MDS-中班 |
 |  | Evening | 晚班 | EVS-晚班 |
 |  | Night | 夜班 | NTS-夜班 |
+| card.type | Inactive |  | 临时会员卡（未激活） |
+|  | Using |  | 正式会员卡（已激活） |
+|  | Best |  | 白金会员卡 |
+| member.status | Active |  | 已激活 |
+|  | New |  | 未激活 |
+|  | Verified |  | 已认证 |
+|  | Locked |  | 已锁定 |
 
 
 
