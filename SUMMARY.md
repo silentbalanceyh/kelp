@@ -54,7 +54,9 @@
 
 ## History
 
-* [1.Vertica Database](history/1vertica-database.md)
+* 2012 Web Service
+* 2015 Big Data
+* 2016 Software Skills
 
 ## Projects
 
