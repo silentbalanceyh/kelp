@@ -12,7 +12,7 @@
 
 1. LinkBar专用配置：LinkBar目前仅用于内置DataList中，不配置ui.column
 2. LinkBar配置信息
-3. ```
+3. ```json
    # ui.control -> （内置配置）
    "spec":{
        "tables":{
@@ -46,5 +46,6 @@
      * field：索引字段，索引字段只能为$INDEX$这个值，不可以是其他值，这个会影响两个按钮的行为，必须填写
 
 ## 4. Development
+
 
 
