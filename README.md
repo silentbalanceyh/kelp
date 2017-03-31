@@ -7,8 +7,10 @@
 ## 2. Knowledge Reference
 
 * [基础知识](/reference/basic-knowledge.md)
-* 
+
 ## 3. Projects List
+
+* [Htl——零点酒店管理系统](/projects/hotel-system.md)
 
 
 
