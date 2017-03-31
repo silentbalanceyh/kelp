@@ -16,7 +16,7 @@
 
 ## 1. Table Content
 
-* WS
+* [MTS10001 - Restful配置默认值](/environment/implementation/32restful-configuration/vtx10001-default-values.md)
 
 
 
