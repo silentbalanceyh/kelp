@@ -67,6 +67,6 @@
 
 * [Htl - 零点酒店管理系统](projects/hotel-system.md)
   * [1.Basic Data - 基础数据表](projects/hotel-system/11basic-data.md)
-    * [1.1.Tabular Data - 列表项](projects/hotel-system/11basic-data/11tabular-data.md)
-    * [1.2.Assist Data - 辅助数据表](projects/hotel-system/11basic-data/12assist-data.md)
+    * [HTL10001 - Tabular Data - 列表项](projects/hotel-system/11basic-data/11tabular-data.md)
+    * [Assist Data - 辅助数据表](projects/hotel-system/11basic-data/12assist-data.md)
 
