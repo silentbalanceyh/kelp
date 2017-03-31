@@ -18,11 +18,10 @@
 * [UCA50001 - Required必填验证](/environment/specifications/215validation-rules/uca50001-required.md)
 * [WS10001 - /api/oth/authorize](/environment/specifications/22out-of-box-restful-api/ws10001-apiothauthorize.md)
 * [MTS10001 - Restful配置默认值](/environment/implementation/32restful-configuration/vtx10001-default-values.md)
+* [DEV10001 - 不重启Engine发布脚本](/environment/implementation/dev10001-bu-zhong-qi-engine-fa-bu-jiao-ben.md)
 * [KM10001 - ECMA Script 6.0](/reference/basic-knowledge/11javascript-library/111ecma-60.md)
 * [VTX10001 - Vert.X Core](/reference/external-courses/21translation/vtx10001-vertx-core.md)
 * [VTX10002 - Vert.X Web](/reference/external-courses/21translation/vtx10002-vertx-web.md)
-
-
 
 
 
