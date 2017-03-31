@@ -10,7 +10,7 @@
 
 ## 3. Training Courses
 
-* 培训教程
+* [培训教程](/training-courses/web-service-training.md)
 
 ## 4. Projects List
 
