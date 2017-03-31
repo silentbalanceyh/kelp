@@ -28,7 +28,11 @@
 | 脚本引擎 | in.api.htl.ticket.inoccup.post.js |  |
 |  | out.api.htl.ticket.inoccup.post.js |  |
 | 事件总线地址 | MSG://MESSAGE/QUEUE/DATA |  |
-| 必须参数 |  |  |
+| 必须参数 | preservor | 预订人 |
+|  | mobile | 联系电话 |
+|  | traveler | 入住人信息 |
+|  | leaveTime | 离店日期 |
+| 转换器/验证器 |  |  |
 
 
 
