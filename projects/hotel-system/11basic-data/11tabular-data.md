@@ -64,6 +64,16 @@
 |  | Apartment |  | 公寓房 |
 | partner.type | Corporation |  | 协议单位 |
 |  | Vendor |  | 供应商 |
+| contract.type | Company |  | 公司协议 |
+|  | Agent |  | 中介协议 |
+|  | Travel |  | 旅行协议 |
+| employee.type | CW |  | 试用员工 |
+|  | Regular |  | 正式员工 |
+| inoccup.status | Created |  | 新创建 |
+|  | Registered |  | 已登记 |
+|  | Delay |  | 延迟 |
+|  | Cancel |  | 已撤销 |
+|  |  |  |  |
 
 
 
