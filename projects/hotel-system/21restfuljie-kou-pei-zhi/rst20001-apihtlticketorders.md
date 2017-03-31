@@ -25,8 +25,8 @@
 | Restful地址 | /api/htl/ticket/orders | 团队预定/散客预定统一接口 |
 | 模型ID和数据表 | htl.orders | 对应数据表HTL\_ORDERS |
 | HTTP方法 | POST |  |
-| 脚本引擎 | in.api.htl.ticket.orders.post |  |
-|  | out.api.htl.ticket.orders.post |  |
+| 脚本引擎 | in.api.htl.ticket.orders.post.js |  |
+|  | out.api.htl.ticket.orders.post.js |  |
 | 事件总线地址 | MSG://MESSAGE/QUEUE/DATA |  |
 | 必须参数 | preservor | 预订人 |
 |  | mobile | 联系电话 |
