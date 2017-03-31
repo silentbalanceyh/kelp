@@ -36,6 +36,7 @@
       * [UCA50001 - Required必填验证](environment/specifications/215validation-rules/uca50001-required.md)
   * [2.2.Out-Of-Box Restful Api](environment/specifications/22out-of-box-restful-api.md)
     * 2.2.1.Security Api
+      * WS10001 - /api/oth/authorize
 * [3. Implementation](environment/implementation.md)
   * [3.1.Script Engine \( JS \)](environment/implementation/31script-engine.md)
 * [4. Engine Analyzing](environment/engine-analyzing.md)
