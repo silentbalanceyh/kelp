@@ -16,7 +16,7 @@
 
 1. 按钮内容配置
 
-   ```
+   ```json
     # ui.op -> op.CommonButton
     ...
     "config":{
@@ -53,5 +53,6 @@
 ```
 File：rtv/src/plot/form/Form.Submit.js （ validate函数 )
 ```
+
 
 
