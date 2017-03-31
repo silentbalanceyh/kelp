@@ -70,10 +70,10 @@
 
 * [Htl - 零点酒店管理系统](projects/hotel-system.md)
   * 0.User Guide
-  * 1.Basic Data - 基础数据
+  * [1.Basic Data - 基础数据](projects/hotel-system/1basic-data-ji-chu-shu-ju.md)
     * [HTL10001 - Tabular列表基础数据](projects/hotel-system/11basic-data/11tabular-data.md)
     * [HTL10002 - Number序号基础数据](projects/hotel-system/11basic-data/htl10002-numberxu-hao-ji-chu-shu-ju.md)
-  * 2.Assist Data - 辅助数据
+  * [2.Kernel Info - 核心信息](projects/hotel-system/2assist-data-fu-zhu-shu-ju.md)
     * [2.1.Restful接口配置](projects/hotel-system/21restfuljie-kou-pei-zhi.md)
       * [RST20001 - /api/htl/ticket/orders](projects/hotel-system/21restfuljie-kou-pei-zhi/rst20001-apihtlticketorders.md)
       * [RST20002 - /api/htl/ticket/inoccup](projects/hotel-system/21restfuljie-kou-pei-zhi/rst20002-apihtlticketinoccup.md)
