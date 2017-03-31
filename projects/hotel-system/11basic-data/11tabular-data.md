@@ -85,6 +85,8 @@
 |  | Soldier |  | 士兵证 |
 |  | HK.Macau |  | 港澳通行证 |
 |  | Home.Return |  | 回乡证 |
+|  | Interim |  | 临时身份证 |
+|  | Household |  | 户口薄 |
 |  |  |  |  |
 
 
