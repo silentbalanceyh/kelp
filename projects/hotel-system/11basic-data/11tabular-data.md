@@ -44,6 +44,26 @@
 |  | New |  | 未激活 |
 |  | Verified |  | 已认证 |
 |  | Locked |  | 已锁定 |
+| member.type | Registered |  | 注册会员 |
+|  | Silver |  | 白银会员 |
+|  | Gold |  | 黄金会员 |
+|  | Platinum |  | 白金会员 |
+|  | Diamond |  | 钻石会员 |
+| deposit.source | Cash |  | 现金 |
+|  | Card |  | 刷卡 |
+|  | Present |  | 赠送 |
+|  | Alipay |  | 支付宝 |
+|  | WeChat |  | 微信 |
+| deposit.type | Direct |  | 充值 |
+|  | Present |  | 赠送 |
+| in.room.type | Common |  | 普通房 |
+|  | Hourly |  | 钟点房 |
+|  | Special |  | 特殊房 |
+|  | Self |  | 自用房 |
+|  | Free |  | 免费房 |
+|  | Apartment |  | 公寓房 |
+| partner.type | Corporation |  | 协议单位 |
+|  | Vendor |  | 供应商 |
 
 
 
