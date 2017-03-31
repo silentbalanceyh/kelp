@@ -61,7 +61,7 @@
 
 ## Training
 
-* KTM101 - Web Service
+* KT101 - Web Service
 
 ## History
 

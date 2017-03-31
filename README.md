@@ -1,9 +1,5 @@
 # Klep Notebook \( Knowledge Management \)
 
-## 0. Document Rules
-
-
-
 ## 1. Vie/Rtv Reference
 
 * [Rtv组件配置教程](/environment/specifications/21component-spec.md)
@@ -29,6 +25,24 @@
 ## 5. Projects List
 
 * [Htl——零点酒店管理系统](/projects/hotel-system.md)
+
+## 6. Document Rules
+
+文档前缀以及对应的含义，所有文档编号从10001开始，有些部分文档会进行分区，但不重复。
+
+| 章节 | 文档前缀 | 全称 | 含义 |
+| :--- | :--- | :--- | :--- |
+| Environment | SPC | Specification | 组件规范专用文档 |
+|  | UCA | UCA | 自定义组件 |
+|  | WS | Web Service | OOB中Web Service专用文档 |
+|  | MTS | Meta Server | H2中配置数据专用文档 |
+|  | STE | Script Engine | 脚本引擎专用文档 |
+| Reference | KM | Knowledge Management | 知识整理专用文档 |
+|  | VTX | Vert.x | Vert.X社区工作专用文档 |
+| Training | KT | Knowledge Transfer | 培训专用文档 |
+| History | HIS | History | 历史文档 |
+| Projects | HTL | Hotel System | HTL系统专用文档 |
+|  | RST | Restful | 项目中的Restful接口专用文档 |
 
 
 
