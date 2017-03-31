@@ -17,7 +17,7 @@ Vert.X Core提供了下列功能
 * 开发TCP客户端和服务端
 * 开发HTTP客户端和支持WebSocket的服务端
 * 事件总线【Event Bus】
-* 
+
 ## 引用
 
 
