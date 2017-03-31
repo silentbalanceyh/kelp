@@ -54,6 +54,8 @@ compile io.vertx:vertx-core:3.4.1
 
 接下来讨论Vert.X Core中不同的概念和特性。
 
+### 故事从Vert.X开始
+
 
 
 ## 引用
