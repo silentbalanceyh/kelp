@@ -37,11 +37,18 @@ Core中这些功能相当底层——您不会在这里找到类似数据库访�
 如果您在使用Maven或Gradle \[2\]，将下列依赖项添加到您的项目描述（文件）中`dependencies`节点【section】来访问**Vert.X Core**的API：
 
 * Maven（您的`pom.xml`中）
-* 
+
+```
+<dependency>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-core</artifactId>
+  <version>3.4.1</version>
+</dependency>
+```
+
 ## 引用
 
 1. Vert.X的扩展包是Vert.X的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
-
 2. 两种常用的项目构建工具。
 
 
