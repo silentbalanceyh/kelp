@@ -32,6 +32,10 @@ Core中这些功能相当底层——您不会在这里找到类似数据库访�
 
 您可以使用Vert.X支持的其他语言中的任意一种（来开发）。但这儿有一个很酷的点——它不强制您直接使用Java API，（也可以使用）JavaScript或Ruby——毕竟，不同的语言有不同的约定和风格，若让Ruby开发员强制使用Java编码风格将会变得很奇怪。相反，它会为每一种语言自动生成和核心Java API等价的符合语言习惯的（API）。
 
+从现在开始文中使用core代表**Vert.X Core**。
+
+
+
 ## 引用
 
 [^1]: Vert.X的扩展包是Vert.X的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
