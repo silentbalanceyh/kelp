@@ -7,6 +7,33 @@
 * **code.market**：市场码
 * **code.source**：来源码
 * **code.shift**：班别码
+* **card.type**：会员卡类型
+* **member.status**：会员状态
+* **member.type**：会员类型
+* **deposit.source**：充值来源
+* **deposit.type**：充值方式
+* **in.room.type**：入住类型
+* **partner.type**：合作伙伴类型
+* **contract.type**：协议类型
+* **employee.type**：员工类型
+* **inoccup.status**：入住单状态
+* **inoccup.type**：入住单类型
+* **traveler.status**：宾客状态
+* **credential.type**：证件类型
+* **room.op.status**：房间状态（由房间的leaving/arriving两个字段决定）
+* **room.clean.status**：清洁状态
+* **room.status**：房间特殊状态
+* **pay.type**：支付类型
+* accounting.type：
+* invoice.type：发票类型
+* bill.type：账单类型
+* accmgmt.type：银行账号类型
+* accounting.code：
+* price.type：房价码中的价格类型
+* order.status：订单状态
+* order.item.status：订单项状态
+* preorder.method：预订方式
+* preorder.category：预定类型
 * ## 2. Table List
 
 | type（类型） | code（系统内码） | marker（显示，用户内码） | name（名称） |
