@@ -19,6 +19,7 @@
       * [SPC20001 - 共享配置说明](environment/specifications/212fields/spc20001-shared-configuration.md)
       * [UCA20001 - field.TextBox](environment/specifications/212fields/uca10001-fieldtextbox.md)
       * [UCA20002 - field.RemoteCombo](environment/specifications/212fields/uca20002-fieldremotecombo.md)
+      * [UCA20003 - field.DurationBox](environment/specifications/212fields/uca20003-fielddurationbox.md)
     * [2.1.3.Columns](environment/specifications/213columns.md)
     * [2.1.4.Op / Actions](environment/specifications/214op-actions.md)
     * [2.1.5.Validation Rules](environment/specifications/215validation-rules.md)
