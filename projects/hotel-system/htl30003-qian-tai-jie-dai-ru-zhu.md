@@ -23,7 +23,5 @@
 
 ## 3. Restful接口
 
-RST20002 - /api/htl/ticket/inoccup
-
-
+[RST20002 - /api/htl/ticket/inoccup](/projects/hotel-system/21restfuljie-kou-pei-zhi/rst20002-apihtlticketinoccup.md)
 
