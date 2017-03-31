@@ -24,16 +24,16 @@
 * **room.clean.status**：清洁状态
 * **room.status**：房间特殊状态
 * **pay.type**：支付类型
-* accounting.type：
-* invoice.type：发票类型
-* bill.type：账单类型
-* accmgmt.type：银行账号类型
-* accounting.code：
-* price.type：房价码中的价格类型
-* order.status：订单状态
-* order.item.status：订单项状态
-* preorder.method：预订方式
-* preorder.category：预定类型
+* **accounting.type**：
+* **invoice.type**：发票类型
+* **bill.type**：账单类型
+* **accmgmt.type**：银行账号类型
+* **accounting.code**：
+* **price.type**：房价码中的价格类型
+* **order.status**：订单状态
+* **order.item.status**：订单项状态
+* **preorder.method**：预订方式
+* **preorder.category**：预定类型
 * ## 2. Table List
 
 | type（类型） | code（系统内码） | marker（显示，用户内码） | name（名称） |
