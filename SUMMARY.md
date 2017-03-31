@@ -25,6 +25,8 @@
       * [UCA20006 - field.TabularDrop](environment/specifications/212fields/uca20006-fieldtabulardrop.md)
       * [UCA20007 - field.CurrencyBox](environment/specifications/212fields/uca20007-fieldcurrencybox.md)
       * [UCA20008 - field.ListSelector](environment/specifications/212fields/uca20008-fieldlistselector.md)
+      * [UCA20009 - field.CalculateDater](environment/specifications/212fields/uca20009-fieldcalculatedater.md)
+      * [UCA20010 - field.CounterBox](environment/specifications/212fields/uca20010-fieldcounterbox.md)
     * [2.1.3.Columns](environment/specifications/213columns.md)
     * [2.1.4.Op / Actions](environment/specifications/214op-actions.md)
     * [2.1.5.Validation Rules](environment/specifications/215validation-rules.md)
