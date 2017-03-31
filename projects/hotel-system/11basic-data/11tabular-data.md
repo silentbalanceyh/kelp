@@ -33,7 +33,8 @@
 * **order.item.status**：订单项状态
 * **preorder.method**：预订方式
 * **preorder.category**：预定类型
-* ## 2. Table List
+
+## 2. Table List
 
 | type（类型） | code（系统内码） | marker（显示，用户内码） | name（名称） |
 | :--- | :--- | :--- | :--- |
