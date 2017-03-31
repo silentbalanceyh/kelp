@@ -16,7 +16,7 @@
 {
 	"root":"deploy/htl/vertx/uri/",
 	"path":[
-		"Htl-Hotel/put.htl.hotel/"
+		"Htl-PreOrder/post.htl.inoccup/"
 	]
 }
 ```
@@ -33,8 +33,6 @@
 ```
 
 ## 4. 运行结果
-
-
 
 
 
