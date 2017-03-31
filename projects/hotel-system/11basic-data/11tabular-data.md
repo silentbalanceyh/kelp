@@ -92,7 +92,10 @@
 | room.op.status | Taken |  | 占用房 |
 |  | Empty |  | 空房间 |
 |  | Leaving |  | 预离房 |
-|  |  |  |  |
+|  | Arriving |  | 预抵房 |
+| room.clean.status | Dirty |  | 脏房 |
+|  | Checked |  | 清洁已检查 |
+|  | Unchecked |  | 清洁未检查 |
 
 
 
