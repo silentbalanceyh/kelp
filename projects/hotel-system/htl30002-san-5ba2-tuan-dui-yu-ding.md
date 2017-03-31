@@ -32,8 +32,13 @@
 
 ## 3. 接口说明
 
-### 3.1. 接口基本信息
+### 3.1. 接口信息
 
+* URI：`/api/htl/ticket/orders`
+* Method：POST
+* Required Parameters：
+  * 
+* 
 
 
 
