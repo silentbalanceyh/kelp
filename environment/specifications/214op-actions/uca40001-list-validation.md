@@ -1,14 +1,16 @@
-# SPC40002：Field为List结构提交按钮弹出框验证
+# UCA40001 - List字段提交弹出框验证
 
 ## 1.Example
 
-![](/engine/spec/component/img/op-002-01.png)
+![](/_images/specs/op/op-001-01.png)
 
 验证效果：
 
-![](/engine/spec/component/img/op-002-02.JPG)
+![](/_images/specs/op/op-001-02.JPG)
 
-## 2.Tree Map![](/engine/spec/component/img/op-002-03.JPG)
+## 2.Tree Map
+
+![](/_images/specs/op/op-001-03.JPG)
 
 ## 3.Comments
 
@@ -51,8 +53,6 @@
 ```
 File：rtv/src/plot/form/Form.Submit.js （ validate函数 )
 ```
-
-
 
 
 
