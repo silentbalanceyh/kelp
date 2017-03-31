@@ -30,7 +30,7 @@
     * [2.1.3.Columns](environment/specifications/213columns.md)
     * [2.1.4.Op / Actions](environment/specifications/214op-actions.md)
       * [SPC40001 - 配置添加Field为List的按钮](environment/specifications/214op-actions/spc40001-list-button.md)
-      * [SPC40002 - DataList中的编辑和删除按钮专用配置](environment/specifications/214op-actions/spc40002-linkbar.md)
+      * [SPC40002 - DataList中编辑/删除按钮专用配置](environment/specifications/214op-actions/spc40002-linkbar.md)
       * [UCA40001 - List字段提交弹出框验证](environment/specifications/214op-actions/uca40001-list-validation.md)
     * [2.1.5.Validation Rules](environment/specifications/215validation-rules.md)
       * [UCA50001 - Required必填验证](environment/specifications/215validation-rules/uca50001-required.md)
