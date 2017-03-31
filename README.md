@@ -2,7 +2,7 @@
 
 ## 1. Vie/Rtv Reference
 
-* RTV[组件配置规范](/environment/specifications/21component-spec.md)
+* [RTV组件配置规范](/environment/specifications/21component-spec.md)
 
 ## 2. Knowledge Reference
 
