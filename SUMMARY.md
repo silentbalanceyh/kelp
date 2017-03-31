@@ -47,7 +47,7 @@
   * 1.2.Source Control
     * 1.2.Git
       * [1.2.1.Pull Request \( Fork \)](reference/basic-knowledge/121pull-request-fork.md)
-* [2. External Courses](reference/external-courses.md)
+* [2. Vert.X Works](reference/external-courses.md)
   * [2.1.Translation](reference/external-courses/21translation.md)
 
 ## Training
