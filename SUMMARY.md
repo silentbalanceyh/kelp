@@ -80,6 +80,18 @@
   * [3.3.Server \( sco-server \)](reference/3kts-works/33server-sco-server.md)
   * [3.4.Client \( sco-portal \)](reference/3kts-works/34client-sco-portal.md)
 * [4.Library](reference/library.md)
+  * react 15.4.2
+  * react-dom 15.4.2
+  * react-redux 5.0.3
+  * react-router 3.0.2
+  * react-router-redux 4.0.8
+  * redux 3.6.0
+  * redux-act 1.1.1
+  * [redux-form 6.5.0](reference/library/redux-form-650.md)
+  * redux-observable 0.14.1
+  * redux-orm 0.9.0-rc.3
+  * redux-orm-proptypes 0.1.0
+  * rxjs 5.2.0
 
 ## Training
 
