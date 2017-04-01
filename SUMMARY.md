@@ -75,6 +75,10 @@
     * [VTX10001 - Vert.X Core](reference/external-courses/21translation/vtx10001-vertx-core.md)
     * [VTX10002 - Vert.X Web](reference/external-courses/21translation/vtx10002-vertx-web.md)
 * [3. KTS Works](reference/3kts-works.md)
+  * [3.1.Training](reference/3kts-works/31training.md)
+  * [3.2.TS UI Component](reference/3kts-works/32ts-ui-component.md)
+  * [3.3.Server \( sco-server \)](reference/3kts-works/33server-sco-server.md)
+  * [3.4.Client \( sco-portal \)](reference/3kts-works/34client-sco-portal.md)
 
 ## Training
 
