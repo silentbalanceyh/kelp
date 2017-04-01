@@ -79,6 +79,7 @@
   * [3.2.TS UI Component](reference/3kts-works/32ts-ui-component.md)
   * [3.3.Server \( sco-server \)](reference/3kts-works/33server-sco-server.md)
   * [3.4.Client \( sco-portal \)](reference/3kts-works/34client-sco-portal.md)
+* [Library](reference/library.md)
 
 ## Training
 
