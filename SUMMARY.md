@@ -65,6 +65,11 @@
     * [1.5.2.Jacoco](reference/basic-knowledge/15testing/152jacoco.md)
     * [1.5.3.Jasmine](reference/basic-knowledge/15testing/153jasmine.md)
     * [1.5.4.JUnit](reference/basic-knowledge/15testing/154junit.md)
+  * [1.6.Building](reference/basic-knowledge/16building.md)
+    * 1.6.1.Webpack
+    * [1.6.2.Browserify](reference/basic-knowledge/162browserify.md)
+    * [1.6.3.Grunt](reference/basic-knowledge/163grunt.md)
+    * [1.6.4.Gulp](reference/basic-knowledge/164gulp.md)
 * [2. Vert.X Works](reference/external-courses.md)
   * [2.1.Translation](reference/external-courses/21translation.md)
     * [VTX10001 - Vert.X Core](reference/external-courses/21translation/vtx10001-vertx-core.md)
