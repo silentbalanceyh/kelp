@@ -55,6 +55,7 @@
       * [KM10001 - ECMA Script 6.0](reference/basic-knowledge/11javascript-library/111ecma-60.md)
   * 1.2.Source Control
     * [1.2.1.Git](reference/basic-knowledge/121git.md)
+      * [KM10002 - Forking Workflow](reference/basic-knowledge/121git/km10002-forking-workflow.md)
   * 1.3.Cloud Computing
     * [1.3.1.Docker](reference/basic-knowledge/131docker.md)
   * 1.4.Develop Skills
