@@ -51,12 +51,20 @@
 
 * [1. Basic Knowledge](reference/basic-knowledge.md)
   * 1.1.Computer Language
-    * [1.1.1.JavaScript Library](reference/basic-knowledge/11javascript-library.md)
+    * [1.1.1.JavaScript](reference/basic-knowledge/11javascript-library.md)
       * [KM10001 - ECMA Script 6.0](reference/basic-knowledge/11javascript-library/111ecma-60.md)
   * 1.2.Source Control
     * [1.2.1.Git](reference/basic-knowledge/121git.md)
   * 1.3.Cloud Computing
     * [1.3.1.Docker](reference/basic-knowledge/131docker.md)
+  * 1.4.Develop Skills
+    * [1.4.1.Spring Boot](reference/basic-knowledge/141spring-boot.md)
+    * [1.4.2.Adom IDE](reference/basic-knowledge/142adom-ide.md)
+  * [1.5.Testing](reference/basic-knowledge/15testing.md)
+    * [1.5.1.Mockito](reference/basic-knowledge/15testing/151mockito.md)
+    * [1.5.2.Jacoco](reference/basic-knowledge/15testing/152jacoco.md)
+    * [1.5.3.Jasmine](reference/basic-knowledge/15testing/153jasmine.md)
+    * [1.5.4.JUnit](reference/basic-knowledge/15testing/154junit.md)
 * [2. Vert.X Works](reference/external-courses.md)
   * [2.1.Translation](reference/external-courses/21translation.md)
     * [VTX10001 - Vert.X Core](reference/external-courses/21translation/vtx10001-vertx-core.md)
