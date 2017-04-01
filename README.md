@@ -9,8 +9,10 @@
 
 ## 2. Knowledge Reference
 
-* [基础知识](/reference/basic-knowledge.md)
-* [Vert.X社区工作](/reference/external-courses.md)
+* [1. Basic Knowledge](/reference/basic-knowledge.md)
+* [2. Vert.X Works](/reference/external-courses.md)
+* [3. KTS Works](/reference/3kts-works.md)
+* [4. Library](/reference/library.md)
 
 ## 3. Training Courses
 
