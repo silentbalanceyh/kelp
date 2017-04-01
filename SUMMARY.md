@@ -74,7 +74,7 @@
   * [2.1.Translation](reference/external-courses/21translation.md)
     * [VTX10001 - Vert.X Core](reference/external-courses/21translation/vtx10001-vertx-core.md)
     * [VTX10002 - Vert.X Web](reference/external-courses/21translation/vtx10002-vertx-web.md)
-* [3.KTS Works](reference/3kts-works.md)
+* [3. KTS Works](reference/3kts-works.md)
 
 ## Training
 
