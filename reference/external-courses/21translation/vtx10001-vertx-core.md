@@ -6,6 +6,7 @@
 * Server：服务端
 * Writing：编写（有些地方译为开发）
 * Event Bus：事件总线
+* Event Loop：事件轮询（线程）
 * Options：配置项
 * Handler/Handle：处理器/处理
 * Block：阻塞
@@ -178,7 +179,13 @@ server.requestHandler(request -> {
 
 ### Reactor和Multi-Reactor
 
-我们前边提过Vert.x的API都是事件驱动的——
+我们前边提过Vert.x的API都是事件驱动的——当事件可用时Vert.x 将这个事件传给处理器。
+
+在多数情况下，Vert.x使用一个称为事件轮询的线程来调用您的处理器。
+
+Vert.x或应用程序块中没有任何阻塞，这个事件轮询线程可以快速地运行，以便在事件到达时向不同的处理器成功传递事件。
+
+因为没有阻塞，一个事件轮询线程可以在短时间内传递大量的事件。例如，单个事件轮询线程可以很快处理数千个HTTP请求。
 
 ## 引用
 
