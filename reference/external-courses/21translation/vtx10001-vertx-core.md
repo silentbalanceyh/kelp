@@ -268,7 +268,7 @@ vertx.executeBlocking(future -> {
 
 默认情况，如果executeBlocking在同一个上下文环境中（如：同一个Verticle实例）被调用了多次，那么这些不同的executeBlocking代码块会顺序执行（一个接一个）。
 
-若您不需要关心您调用[executeBlocking](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#executeBlocking-io.vertx.core.Handler-boolean-io.vertx.core.Handler-)的顺序，可以将`ordered`参数的值设为false。这样任何executeBlocking都会在一个worker Pool (1)中并行执行。
+若您不需要关心您调用[executeBlocking](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#executeBlocking-io.vertx.core.Handler-boolean-io.vertx.core.Handler-)的顺序，可以将`ordered`参数的值设为false。这样任何executeBlocking都会在一个worker Pool \(1\)中并行执行。
 
 另外一种运行阻塞式代码的方法是使用[Worker Verticle](http://vertx.io/docs/vertx-core/java/#worker_verticles)。
 
@@ -290,7 +290,7 @@ executor.executeBlocking(future -> {
 });
 ```
 
-这个`worker executor` (2)在不需要的时候必须被关闭：
+这个`worker executor` \(2\)在不需要的时候必须被关闭：
 
 ```java
 executor.close();
@@ -312,11 +312,11 @@ long maxExecuteTime = 120000;
 WorkerExecutor executor = vertx.createSharedWorkerExecutor("my-worker-pool", poolSize, maxExecuteTime);
 ```
 
-*注意：这个配置信息在worker pool创建的时候设置。*
+_注意：这个配置信息在worker pool创建的时候设置。_
 
 ### 异步协调
 
-多个操作结果的协调是由Vert.x中的futures来完成。
+多个操作结果的协调是由Vert.x中的[futures](http://vertx.io/docs/apidocs/io/vertx/core/Future.html)来完成。
 
 ## 引用
 
