@@ -178,7 +178,7 @@ server.requestHandler(request -> {
 
 ### Reactor和Multi-Reactor
 
-
+我们前边提过Vert.x的API都是事件驱动的——
 
 ## 引用
 
