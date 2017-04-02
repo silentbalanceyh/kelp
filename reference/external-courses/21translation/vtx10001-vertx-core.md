@@ -185,13 +185,13 @@ server.requestHandler(request -> {
 
 Vert.x或应用程序块中没有任何阻塞，这个**Event Loop**可以快速地运行，以便在事件到达时向不同的处理器成功传递事件。
 
-因为没有阻塞，一个**Event Loop**可以在短时间内传递大量的事件。例如，一个**Single Event Loop**可以很快处理数千个HTTP请求。
+因为没有阻塞，一个**Event Loop**可以在短时间内传递大量的事件。例如，一个单独的**Event Loop**可以很快处理数千个HTTP请求。
 
 我们称之为[反应堆【Reactor】模式](https://en.wikipedia.org/wiki/Reactor_pattern)。
 
 您之前也许听说过它——例如Node.js实现了这种模式。
 
-一个标准的反应堆实现中，有一个Single Event Loop会轮询执行，当所有事件到达时将这些事件传递给所有处理器。
+一个标准的反应堆实现中，有一个单独的Event Loop会轮询执行，当所有事件到达时将这些事件传递给所有处理器。
 
 一个线程的麻烦就是它在任何一个时间只能在一个单一的核上运行，如果您希望单线程反应堆应用（如您的Node.js应用）扩展到您的多核服务器上，则不得不启动并且管理许多不同的过程。
 
@@ -226,7 +226,7 @@ _注意：即使一个Vertx实例维护了多个Event Loop，任何特定的处�
 
 您要等多久？它取决于您的应用程序和所需的并发数量。
 
-如果您有一个Single Event Loop，
+如果您有一个单独的Event Loop，
 
 ## 引用
 
