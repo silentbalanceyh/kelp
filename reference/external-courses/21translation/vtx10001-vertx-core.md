@@ -8,6 +8,7 @@
 * Event Bus：事件总线
 * Reactor：反应堆
 * Options：配置项
+* Context：上下文环境
 * Handler/Handle：处理器/处理
 * Block：阻塞
 
@@ -253,6 +254,25 @@ Vert.x还将提供堆栈跟踪，以精确定位发生阻塞的位置。
 如之前讨论，您不能在Event Loop中直接调用阻塞式操作，因为这样做会阻止Event Loop执行其他有用的任务。那么您能怎么做？
 
 可以通过调用[executeBlocking](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#executeBlocking-io.vertx.core.Handler-boolean-io.vertx.core.Handler-)方法来指定阻塞式代码的执行和阻塞式代码执行过后结果处理器的异步回调。
+
+```java
+vertx.executeBlocking(future -> {
+  // Call some blocking API that takes a significant amount of time to return
+  // 调用一些需要耗费大量可用时间返回结果的阻塞式API
+  String result = someAPI.blockingMethod("hello");
+  future.complete(result);
+}, res -> {
+  System.out.println("The result is: " + res.result());
+});
+```
+
+默认情况，如果executeBlocking在同一个上下文环境中（如：同一个Verticle实例）被调用了多次，那么这些不同的executeBlocking代码块会顺序执行（一个接一个）。
+
+若您不需要关心您调用[executeBlocking](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#executeBlocking-io.vertx.core.Handler-boolean-io.vertx.core.Handler-)的顺序，可以将`ordered`参数的值设为false。这样任何executeBlocking都会在一个Worker Pool中并行执行。
+
+另外一种运行阻塞式代码的方法是使用Worker Verticle。
+
+
 
 ## 引用
 
