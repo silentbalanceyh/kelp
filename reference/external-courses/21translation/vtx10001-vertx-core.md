@@ -322,7 +322,7 @@ _注意：这个配置信息在worker pool创建的时候设置。_
 
 **1.all**
 
-[CompositeFuture.all](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#all-io.vertx.core.Future-io.vertx.core.Future-)需要多个future参数（最多6个），当所有的future都成功完成时返回*succeeded*，如果有一个future执行失败则返回*failed*：
+[CompositeFuture.all](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#all-io.vertx.core.Future-io.vertx.core.Future-)需要多个future参数（最多6个），当所有的future都成功完成时返回_succeeded_，如果有一个future执行失败则返回_failed_：
 
 ```java
 Future<HttpServer> httpServerFuture = Future.future();
@@ -334,10 +334,10 @@ netServer.listen(netServerFuture.completer());
 CompositeFuture.all(httpServerFuture, netServerFuture).setHandler(ar -> {
   if (ar.succeeded()) {
     // All servers started
-	// 所有服务器启动完成
+    // 所有服务器启动完成
   } else {
     // At least one server failed
-	// 有一个服务器启动失败
+    // 有一个服务器启动失败
   }
 });
 ```
@@ -352,16 +352,16 @@ CompositeFuture.all(Arrays.asList(future1, future2, future3));
 
 **2.any**
 
-不同于`all`的合并会等待所有的future要么全成功（或其中一个失败），`any`的合并会等待第一个成功的future。[CompositeFuture.any](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#any-io.vertx.core.Future-io.vertx.core.Future-)需要多个future参数（最多6个），当任何一个future成功完成则返回*succeeded*，所有的future都失败则返回*failed*：
+不同于`all`的合并会等待所有的future要么全成功（或其中一个失败），`any`的合并会等待第一个成功的future。[CompositeFuture.any](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#any-io.vertx.core.Future-io.vertx.core.Future-)需要多个future参数（最多6个），当任何一个future成功完成则返回_succeeded_，所有的future都失败则返回_failed_：
 
 ```java
 CompositeFuture.any(future1, future2).setHandler(ar -> {
   if (ar.succeeded()) {
     // At least one is succeeded
-	// 至少一个成功
+    // 至少一个成功
   } else {
     // All failed
-	// 所有的都失败
+    // 所有的都失败
   }
 });
 ```
@@ -376,16 +376,16 @@ CompositeFuture.any(Arrays.asList(f1, f2, f3));
 
 `join`的合并会等待所有的future完成，不论是一个成功还是一个失败都可。
 
-[CompositeFuture.join](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#join-io.vertx.core.Future-io.vertx.core.Future-)需要多个future参数（最多6个），当所有的future都成功时返回一个*succeeded*的future，当所有的future都完成时，至少有一个future失败则返回*failed*。
+[CompositeFuture.join](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#join-io.vertx.core.Future-io.vertx.core.Future-)需要多个future参数（最多6个），当所有的future都成功时返回一个_succeeded_的future，当所有的future都完成时，至少有一个future失败则返回_failed_。
 
 ```java
 CompositeFuture.join(future1, future2, future3).setHandler(ar -> {
   if (ar.succeeded()) {
     // All succeeded
-	// 所有都成功
+    // 所有都成功
   } else {
     // All completed and at least one failed
-	// 至少一个失败
+    // 至少一个失败
   }
 });
 ```
@@ -417,11 +417,11 @@ fut1.compose(v -> {
   return fut2;
 }).compose(v -> {
           // When the file is written (fut2), execute this:
-		  // fut2文件写入完成后执行
+          // fut2文件写入完成后执行
           fs.move("/foo", "/bar", startFuture.completer());
         },
         // mark startFuture it as failed if any step fails.
-		// 如果任何一步失败，将startFuture标记成failed
+        // 如果任何一步失败，将startFuture标记成failed
         startFuture);
 ```
 
@@ -431,7 +431,7 @@ fut1.compose(v -> {
 2. 一些东西被写入到文件（`fut2`）
 3. 文件被移走（`startFuture`）
 
-如果这三个步骤全部成功，则最终的future（`startFuture`）返回*succeeded*，然而任何一步失败，则最终future返回*failed*。
+如果这三个步骤全部成功，则最终的future（`startFuture`）返回_succeeded_，然而任何一步失败，则最终future返回_failed_。
 
 使用例子：
 
@@ -462,7 +462,7 @@ Verticle是由Vert.x部署和运行的代码块，默认情况一个Vert.x实例
 
 Verticle类必须实现[Verticle](http://vertx.io/docs/apidocs/io/vertx/core/Verticle.html)接口。
 
-如果你喜欢可以直接实现该接口，但是通常直接从抽象类`AbstractVerticle`中继承更简单。
+如果你喜欢可以直接实现该接口，但是通常直接从抽象类[AbstractVerticle](http://vertx.io/docs/apidocs/io/vertx/core/AbstractVerticle.html)中继承更简单。
 
 ## 引用
 
