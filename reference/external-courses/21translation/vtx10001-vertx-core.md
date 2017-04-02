@@ -116,7 +116,7 @@ response.write("some text");
 response.end();
 ```
 
-### 不要Call它，它会Call您 \[3\]
+### 不要Call我，我会Call您 \[3\]
 
 Vert.x的API大部分都是事件驱动，也就是说您对Vert.x中发生的事情感兴趣时它会通过给您发送事件的方式Call您。
 
