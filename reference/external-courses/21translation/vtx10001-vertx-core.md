@@ -96,6 +96,16 @@ Vertx vertx = Vertx.vertx(new VertxOptions().setWorkerPoolSize(40));
 
 ### 您Fluent吗？
 
+您也许注意到前边的例子里使用了一个Fluent的API。
+
+一个Fluent的API表示：多个方法形成链式结构一起按序调用。例如：
+
+```java
+request.response().putHeader("Content-Type", "text/plain").write("some text").end();
+```
+
+这是贯穿Vert.x的API中的一个通用模式，所以您要习惯它。
+
 
 
 ## 引用
