@@ -155,6 +155,10 @@ server.requestHandler(request -> {
 
 ### 不要阻塞我
 
+除了很少的特例（如以“Sync"结尾的某些文件系统操作），Vert.x中的所有API都不会阻塞调用线程。
+
+
+
 ## 引用
 
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
