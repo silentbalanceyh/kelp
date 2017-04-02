@@ -9,7 +9,7 @@
 * Event Loop：事件循环
 * Reactor：反应堆
 * Options：配置项
-* Handler/Handle：处理程序/处理
+* Handler/Handle：处理器/处理
 * Block：阻塞
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
@@ -192,7 +192,9 @@ Vert.x或应用程序块中没有任何阻塞，这个事件循环线程可以�
 
 您之前也许听说过它——例如Node.js实现了这种模式。
 
-一个标准的反应堆实现中，有一个单事件循环线程在一个Loop中循环执行，当所有事件到达时将这些事件传递给所有处理程序。
+一个标准的反应堆实现中，有一个单事件循环线程在一个Loop中循环执行，当所有事件到达时将这些事件传递给所有处理器。
+
+
 
 ## 引用
 
