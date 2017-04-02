@@ -8,6 +8,8 @@
 * Event Bus：事件总线
 * Options：配置项
 
+关于文中Vert.x和Vertx的区别：Vert.x为标准的Vert.x部分，所有概念一律使用Vert.x表示，而Vertx通常表示Java中的类名。
+
 ## 正文
 
 Vert.x内部的Java API集合称为**Vert.x Core**，[文档地址](https://github.com/eclipse/vert.x)。
@@ -87,8 +89,6 @@ Vertx vertx = Vertx.vertx(new VertxOptions().setWorkerPoolSize(40));
 [VertxOptions](http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html)对象有很多设置，它允许您配置一些类似集群、高可用、池大小等其他各种设置，Javadoc中描述了所有设置的细节。
 
 #### 创建集群的Vert.x对象
-
-
 
 ## 引用
 
