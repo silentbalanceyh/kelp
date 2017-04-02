@@ -4,7 +4,7 @@
 
 * Client：客户端
 * Server：服务端
-* Writing：写（有些地方译为开发）
+* Writing：编写（有些地方译为开发）
 * Event Bus：事件总线
 * Options：配置项
 
@@ -16,8 +16,8 @@ Vert.x内部的Java API集合称为**Vert.x Core**，[文档地址](https://gith
 
 Vert.x Core提供了下列功能
 
-* 开发TCP客户端和服务端
-* 开发HTTP客户端和支持WebSocket的服务端
+* 编写TCP客户端和服务端
+* 编写HTTP客户端和支持WebSocket的服务端
 * 事件总线【Event Bus】
 * 共享数据——本地的Map和分布式集群Map
 * 周期性、延迟性行为
@@ -106,7 +106,7 @@ request.response().putHeader("Content-Type", "text/plain").write("some text").en
 
 这是贯穿Vert.x的API中的一个通用模式，所以您要习惯它。
 
-
+这样的链式调用会让您编写一些稍微冗长的代码。
 
 ## 引用
 
