@@ -92,7 +92,7 @@ Vertx vertx = Vertx.vertx(new VertxOptions().setWorkerPoolSize(40));
 
 如果您想创建一个集群的Vert.x【Clustered Vert.x】（参考[event bus](http://vertx.io/docs/vertx-core/java/#event_bus)章节了解更多事件总线集群的细节），通常您将使用异步协变方式【Variant】来创建一个Vertx对象。
 
-这是因为有时候一个集群中的不同Vert.X实例
+这是因为一个集群中的不同Vert.X实例
 
 ## 引用
 
