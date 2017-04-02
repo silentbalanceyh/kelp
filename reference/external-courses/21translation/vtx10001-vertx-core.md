@@ -84,7 +84,7 @@ _注意：大部分应用将只会需要一个Vert.x实例，但如果您有需�
 Vertx vertx = Vertx.vertx(new VertxOptions().setWorkerPoolSize(40));
 ```
 
-[VertxOptions](http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html)对象有很多设置，它允许您配置一些类似集群、高可用、池大小等其他各种设置。
+[VertxOptions](http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html)对象有很多设置，它允许您配置一些类似集群、高可用、池大小等其他各种事。Javadoc中描述了所有设置的细节。
 
 ## 引用
 
