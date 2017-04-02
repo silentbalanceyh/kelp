@@ -7,6 +7,7 @@
 * Writing：编写（有些地方译为开发）
 * Event Bus：事件总线
 * Event Loop：事件轮询（线程）
+* Reactor：反应堆
 * Options：配置项
 * Handler/Handle：处理器/处理
 * Block：阻塞
@@ -190,8 +191,6 @@ Vert.x或应用程序块中没有任何阻塞，这个事件轮询线程可以�
 我们称之为[Reactor模式](https://en.wikipedia.org/wiki/Reactor_pattern)。
 
 您之前也许听说过它——例如Node.js实现了这种模式。
-
-
 
 ## 引用
 
