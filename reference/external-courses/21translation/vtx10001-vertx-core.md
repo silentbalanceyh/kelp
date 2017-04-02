@@ -8,7 +8,7 @@
 * Event Bus：事件总线
 * Options：配置项
 
-关于文中Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：\`\`。
+关于文中Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：`io.vertx.core.Vertx`。
 
 ## 正文
 
