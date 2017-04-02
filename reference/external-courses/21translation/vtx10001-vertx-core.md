@@ -555,7 +555,21 @@ _注意：您不需要在一个Verticle的stop方法中手工去撤销启动时�
 
 #### Standard Verticles
 
-当Standard Verticle被创建时，它会被分派给一个Event Loop线程，并在这个Event Loop中执行它的start方法。当您调用
+当Standard Verticle被创建时，它会被分派给一个Event Loop线程，并在这个Event Loop中执行它的start方法。当您在一个Event Loop调用了Core API中处理器上任意其他方法时，Vert.x将保证这些处理器在调用时在相同的Event Loop中执行。
+
+这意味着我们可以保证您的Verticle实例中所有的代码都是在相同Event Loop中执行（只要您不创建自己的线程并调用它！）
+
+同样意味着您可以将您的应用中的所有代码用单线程方式编写，让Vert.x去担心线程和扩展问题。（您）不再担心同步和不稳定，当多线程应用开发使用传统方式手工回滚时，这种避免其他竞争条件和死锁（的方式）会更流行。
+
+#### Worker Verticles
+
+一个Worker Verticle和Standard Verticle很像，但它并不是由一个Event Loop来执行，而是由Vert.x中的Worker Pool中的线程执行。
+
+Worker Verticle被设计来调用阻塞式代码，但它不会阻塞任何Event Loop。
+
+如果您不想使用Worker Verticle来运行阻塞式代码，您还可以在一个Event Loop中直接使用内联阻塞式代码。
+
+
 
 ## 引用
 
