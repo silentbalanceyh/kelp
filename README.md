@@ -24,11 +24,7 @@
 * 2015 Big Data大数据培训资料
 * 2016 Software Skills培训资料
 
-## 5. Projects List
-
-* [Htl——零点酒店管理系统](/projects/hotel-system.md)
-
-## 6. Document Rules
+## 5. Document Rules
 
 文档前缀以及对应的含义，所有文档编号从10001开始，有些部分文档会进行分区，但不重复，文档索引参考下边：
 
