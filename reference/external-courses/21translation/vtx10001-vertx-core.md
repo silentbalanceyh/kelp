@@ -185,7 +185,7 @@ server.requestHandler(request -> {
 
 Vert.x或应用程序块中没有任何阻塞，这个**Event Loop**可以快速地运行，以便在事件到达时向不同的处理器成功传递事件。
 
-因为没有阻塞，一个**Event Loop**可以在短时间内传递大量的事件。例如，一个单独的**Event Loop**可以很快处理数千个HTTP请求。
+因为没有阻塞，一个Event Loop可以在短时间内传递大量的事件。例如，一个单独的**Event Loop**可以很快处理数千个HTTP请求。
 
 我们称之为[反应堆【Reactor】模式](https://en.wikipedia.org/wiki/Reactor_pattern)。
 
@@ -226,7 +226,19 @@ _注意：即使一个Vertx实例维护了多个Event Loop，任何特定的处�
 
 您要等多久？它取决于您的应用程序和所需的并发数量。
 
-如果您有一个单独的Event Loop，
+如果您有一个单独的Event Loop，而且您希望每秒处理10000个HTTP请求，很明显的是每一个请求处理时间不可以超过0.1毫秒，所以您不能阻塞任何过多（大于0.1毫秒）的时间。
+
+**这个数学题并不难，将留给读者作为练习。**
+
+如果您的应用程序没有响应，可能是一个迹象，表明您在某个地方阻塞了Event Loop。为了帮助您诊断类似问题，若Vert.x检测到Event Loop有一段时间没有响应，将会自动记录这种警告。如果您在日志中看到类似警告，那么您需要进行调查。
+
+```
+Thread vertx-eventloop-thread-3 has been blocked for 20458 ms
+```
+
+Vert.x还将提供堆栈跟踪，以精确定位发生阻塞的位置。
+
+如果想关闭这些警告或更改设置，您可以在创建Vertx对象之前在VertxOptions中完成此操作。
 
 ## 引用
 
