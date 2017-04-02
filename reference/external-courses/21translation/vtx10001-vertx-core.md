@@ -494,7 +494,7 @@ public class MyVerticle extends AbstractVerticle {
 
 有些时候您的Verticle启动会耗费一些时间，您想要在这个过程做一些事，并且您做的这些事并不想等到Verticle发布完成过后再发生。如：您想在start方法中发布其他的Verticle。
 
-您不能在您的start方法中阻塞等待其他的Verticle发布完成，这样做会破坏黄金法则。
+您不能在您的start方法中阻塞等待其他的Verticle发布完成，这样做会破坏[黄金法则](http://vertx.io/docs/vertx-core/java/#golden_rule)。
 
 ## 引用
 
