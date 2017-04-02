@@ -10,9 +10,11 @@
 * Context：上下文环境
 * Undeploy：撤销（部署）
 * Destroyed：销毁
-* Handler/Handle：处理器/处理
+* Handler/Handle：处理器/处理，有些特定处理器未翻译，如Completion Handler等。
 * Block：阻塞
 * Out of Box：标准环境（开箱即用）
+* Timer：计时器
+* Worker Pool：工作线程池，大部分地方未翻译
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
@@ -597,13 +599,13 @@ vertx.deployVerticle(myVerticle);
 
 您同样可以指定Verticle的名称来部署它。
 
-这个Verticle的名称会用于查找实例化Verticle实例的特定[VerticleFactory](http://vertx.io/docs/apidocs/io/vertx/core/spi/VerticleFactory.html)。
+这个Verticle的名称会用于查找实例化Verticle的特定[VerticleFactory](http://vertx.io/docs/apidocs/io/vertx/core/spi/VerticleFactory.html)。
 
-不同的Verticle工厂会对——实例化不同语言的Verticle以及其他原因如加载服务、运行时从Maven中获取Verticle等——合法可用。
+不同的Verticle Factory会对实例化不同语言的Verticle以及其他原因如加载服务、运行时从Maven中获取Verticle等——合法可用。
 
-这允许您部署使用任何Vert.x支持的语言编写的Verticle实例。
+这允许您部署用任何Vert.x支持的语言编写的Verticle实例。
 
-这儿有一个部署不同类型的Verticle例子：
+这儿有一个部署不同类型Verticle的例子：
 
 ```java
 vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle");
@@ -616,6 +618,306 @@ vertx.deployVerticle("verticles/myverticle.js");
 // 部署Ruby的Verticle
 vertx.deployVerticle("verticles/my_verticle.rb");
 ```
+
+#### Verticle名称到Factory的映射规则
+
+若使用名称部署Verticle，这个名称用于选择一个将要实例化Verticle的Factory。
+
+Verticle名称可以有一个前缀——使用字符串紧跟着一个冒号，它用于查找存在的Factory，参考例子。
+
+```
+js:foo.js // 使用JavaScript的Factory
+groovy:com.mycompany.SomeGroovyCompiledVerticle // 用Groovy的Factory
+service:com.mycompany:myorderservice // 用Service的Factory
+```
+
+如果不指定前缀，Vert.x将根据提供名字后缀来查找对应Factory，如：
+
+```
+foo.js // 将使用JavaScript的Factory
+SomeScript.groovy // 将使用Groovy的Factory
+```
+
+若前缀后缀都没指定，Vert.x将假定这个名字是一个Java限定类全名（FQCN）然后尝试实例化它。
+
+#### 如何定位Verticle Factory？
+
+大部分Verticle Factory会在Vert.x启动时注册并且从类路径（CLASSPATH）中加载。
+
+您同样可以使用编程的方式去注册或注销Verticle Factory：[registerVerticleFactory](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#registerVerticleFactory-io.vertx.core.spi.VerticleFactory-)和[unregisterVerticleFactory](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#unregisterVerticleFactory-io.vertx.core.spi.VerticleFactory-)
+
+#### 等待部署完成
+
+Verticle的部署是异步方式，可能在deploy方法调用返回后一段时间才会完成部署。
+
+如果你想要在部署完成时发出通知则可以指定一个Completion Handler。
+
+```java
+vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", res -> {
+  if (res.succeeded()) {
+    System.out.println("Deployment id is: " + res.result());
+  } else {
+    System.out.println("Deployment failed!");
+  }
+});
+```
+
+如果部署成功，这个Completion Handler的结果（result）中将会被传入一个包含了部署ID的字符串。
+
+这个部署ID可以在之后您想要撤销它时使用。
+
+#### 撤销Verticle
+
+部署（好的Verticle）可以使用[undeploy](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#undeploy-java.lang.String-)被撤销。
+
+撤销也是异步方式，因此若你想要在撤销完成过后发出通知则可以指定另一个Completion Handler。
+
+```java
+vertx.undeploy(deploymentID, res -> {
+  if (res.succeeded()) {
+    System.out.println("Undeployed ok");
+  } else {
+    System.out.println("Undeploy failed!");
+  }
+});
+```
+
+#### 设置Verticle实例数
+
+当使用名称部署一个Verticle时，您可以指定您想要部署的Verticle实例的数量。
+
+```java
+DeploymentOptions options = new DeploymentOptions().setInstances(16);
+vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", options);
+```
+
+若跨多核简化水平扩展时这个功能很有用。如，您的计算机上有一个包含Web服务器的Verticle需要部署以及跨多核，因此你需要部署多个实例来利用所有的（服务器）核。
+
+#### 传入配置给Verticle
+
+一个JSON格式的配置可在部署时传给Verticle
+
+```java
+JsonObject config = new JsonObject().put("name", "tim").put("directory", "/blah");
+DeploymentOptions options = new DeploymentOptions().setConfig(config);
+vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", options);
+```
+
+这个配置之后通过[Context](http://vertx.io/docs/apidocs/io/vertx/core/Context.html)对象或直接使用[config](http://vertx.io/docs/apidocs/io/vertx/core/AbstractVerticle.html#config--)方法访问【Available】。
+
+这个配置会返回一个JSON对象，因此您可以用下边代码读取之中数据：
+
+```java
+System.out.println("Configuration: " + config().getString("name"));
+```
+
+#### 访问Verticle环境变量
+
+环境变量和系统属直接通过Java API访问：
+
+```java
+System.getProperty("prop");
+System.getenv("HOME");
+```
+
+#### Verticle隔离组【Isolation Groups】
+
+默认情况，Vert.x有一个水平类路径【flat classpath】，当Vert.x部署Verticle时它会调用当前类加载器来做——它不会创建一个新的（类加载器），大多数情况下，这是最简单、最清晰和最干净的事。
+
+但是在某些情况下，您可能需要部署一个Verticle，它包含的类要与应用程序中其他类隔离开来。
+
+可能是这种情况，例如：您想要在一个Vert.x实例中部署两个同名不同类的Verticle，或者在同一个jar库文件中您有两个不同版本的Verticle。
+
+当使用隔离组时，您需要用[setIsolatedClassed](http://vertx.io/docs/apidocs/io/vertx/core/DeploymentOptions.html#setIsolatedClasses-java.util.List-)方法，并提供一个您想隔离的类名列表给它——（列表）项可以是一个Java限定类全名如`com.mycompany.myproject.engine.MyClass`，也可以是包含通配符的可匹配某个包或子包的任何类。例如`com.mycompany.myproject.*`将会匹配所有`com.mycompany.myproject`包或任意子包中的任意类名。
+
+请注意仅仅只有匹配的类会被隔离——其他任意类会被当前类加载器加载。
+
+若您想要加载的类和资源不存在于主类路径，您可使用[setExtraClasspath](http://vertx.io/docs/apidocs/io/vertx/core/DeploymentOptions.html#setExtraClasspath-java.util.List-)将额外的类路径添加到这里。
+
+*警告：谨慎使用此功能，类加载器可能是一个蠕虫病毒，除其他事情外它会使调试变得困难。*
+
+以下是使用隔离组隔离Verticle的部署例子：
+
+```java
+DeploymentOptions options = new DeploymentOptions().setIsolationGroup("mygroup");
+options.setIsolatedClasses(Arrays.asList("com.mycompany.myverticle.*",
+                   "com.mycompany.somepkg.SomeClass", "org.somelibrary.*"));
+vertx.deployVerticle("com.mycompany.myverticle.VerticleClass", options);
+```
+
+#### 高可用性【High Availability】
+
+Verticle可以启用高可用方式（HA）部署，在上下文环境中，当其中一个部署在Vert.x实例中的Verticle突然死掉，这个Verticle可以在集群环境中的另一个Vert.x实例中重新部署。
+
+若要启用高可用方式运行一个Verticle，仅需要追加`-ha`参数：
+
+```
+	vertx run my-verticle.js -ha
+```
+
+当启用高可用方式时，不需要追加`-cluster`参数。
+
+关于高可用的功能和配置可参考[高可用和故障切换](http://vertx.io/docs/vertx-core/java/#_high_availability_and_fail_over)
+
+#### 从命令行运行Verticle
+
+您可以在Maven或Gradle项目中以正常方式添加Vert.x Core到项目依赖节点，从哪里直接使用Vert.x。
+
+但是，您也可以从命令行直接运行Vert.x的Verticle。
+
+为此，您需要下载并安装Vert.x的发行版【distribution】，并且将安装的`bin`目录添加到您的`PATH`环境变量中，还要确保您的`PATH`中设置了Java 8的JDK环境。
+
+*注意：JDK需要支持Java代码的快速编译【Fly compilcation】。*
+
+现在您可以使用`vertx run`命令运行Verticle了，这儿是一些例子：
+
+```
+# Run a JavaScript verticle
+# 运行JavaScript的Verticle
+vertx run my_verticle.js
+
+# Run a Ruby verticle
+# 运行Ruby的Verticle
+vertx run a_n_other_verticle.rb
+
+# Run a Groovy script verticle, clustered
+# 使用集群模式运行Groovy的Verticle
+vertx run FooVerticle.groovy -cluster
+```
+
+您甚至可以不必编译Java源代码，直接运行它：
+
+```
+vertx run SomeJavaSourceFile.java
+```
+
+Vert.x将在运行它之前对Java源代码文件执行快速编译，这对于快速原型制作很有用并非常适用于演示——没有必要首先设置一个Maven或Gradle来构建！
+
+有关在命令行执行`vertx`可用的各种选项完整信息，可以直接在命令行键入`vertx`（查看）。
+
+#### 导致Vert.x退出
+
+所有Vert.x实例维护的线程不是守护线程，所以它们将会阻止JVM退出。
+
+如果您正在嵌入Vert.x并且完成了它，您可以调用[close](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#close--)方法关闭它。
+
+这将关闭所有内部线程池并关闭其他资源，而且将允许JVM退出。
+
+#### Context对象
+
+当Vert.x传递一个事件给处理器或者调用Verticle的`start`或`stop`方法时，它的执行会关联一个`Context`对象。通常一个context又是一个event-loop context并且绑定到一个特定的event-loop线程，所以执行该context总是在同一个event loop线程中；同样Worker Vertcle以及运行的内联阻塞式代码中，一个worker context将会绑定其执行关联到一个特定的worker pool的线程中。
+
+您可用[getOrCreateContext](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#getOrCreateContext--)方法获取context：
+
+```java
+Context context = vertx.getOrCreateContext();
+```
+
+若已经有一个context和当前线程关联，那么它直接重用这个context对象，如果没有则它会创建一个新的。您可以测试获取的context的类型：
+
+```java
+Context context = vertx.getOrCreateContext();
+if (context.isEventLoopContext()) {
+  System.out.println("Context attached to Event Loop");
+} else if (context.isWorkerContext()) {
+  System.out.println("Context attached to Worker Thread");
+} else if (context.isMultiThreadedWorkerContext()) {
+  System.out.println("Context attached to Worker Thread - multi threaded worker");
+} else if (! Context.isOnVertxThread()) {
+  System.out.println("Context not attached to a thread managed by vert.x");
+}
+```
+
+当您获取了这个context对象，您就可以在context中异步执行代码了。换句话说，您提交一个任务（和之后的任务）最终将会在同一个context中运行：
+
+```java
+vertx.getOrCreateContext().runOnContext( (v) -> {
+  System.out.println("This will be executed asynchronously in the same context");
+});
+```
+
+若同一个context中运行了多个处理器，它们也许想要共享数据，这个context对象提供了在context中存储和读取数据（实现）共享的方法。例如：它允许你将数据传递到[runOnContext](http://vertx.io/docs/apidocs/io/vertx/core/Context.html#runOnContext-io.vertx.core.Handler-)运行的某些操作中。
+
+```java
+final Context context = vertx.getOrCreateContext();
+context.put("data", "hello");
+context.runOnContext((v) -> {
+  String hello = context.get("data");
+});
+```
+
+这个context对象还可以让你使用[config](http://vertx.io/docs/apidocs/io/vertx/core/Context.html#config--)方法访问Verticle的配置信息，查看传入配置给Verticle章节了解更多配置信息。
+
+#### 执行周期性/延迟性操作
+
+Vert.x中，想要延迟之后执行或定期执行操作很常见。
+
+在Standard Verticle中您不能让线程休眠以引入延迟，因为它会阻塞Event Loop线程。
+
+取而代之是使用Vert.x定时器，定时器可以是一次性【One-shot】或定期的【periodic】，我们将讨论二者。
+
+**一次性计时器【One-shot】**
+
+一个一次性计时器会在一定延迟后调用一个Event Handler，以毫秒为单位。
+
+您可用[setTimer](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#setTimer-long-io.vertx.core.Handler-)方法传递延迟和一个处理器来设置计时器的触发。
+
+```java
+long timerID = vertx.setTimer(1000, id -> {
+  System.out.println("And one second later this is printed");
+});
+
+System.out.println("First this is printed");
+```
+
+返回值是一个唯一的计时器id，该id可用于之后取消该计时器，处理器也被传入了这个计时器id。
+
+**周期性计时器【Periodic】**
+
+您同样可以使用[setPeriodic](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#setPeriodic-long-io.vertx.core.Handler-)设置一个周期性触发的计时器。
+
+这儿将有一个等于该时间的初始化延迟。
+
+setPeriodic的返回值也是一个唯一的计时器id，若之后该计时器需要取消则使用该id。
+
+传给这个计时器中处理器的参数也是这个唯一的计时器id。
+
+请记住这个计时器将会定期触发，如果您的定期（任务）执行【treatment】将会花费大量时间，您的计时器事件能持续执行或最坏的情况：重叠。
+
+这种情况，您应考虑使用[setTimer](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#setTimer-long-io.vertx.core.Handler-)，一旦任务执行完成您可设置下一个计时器。
+
+```java
+long timerID = vertx.setPeriodic(1000, id -> {
+  System.out.println("And every second this is printed");
+});
+
+System.out.println("First this is printed");
+```
+
+**取消计时器**
+
+指定一个计时器id并调用[cancelTimer](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#cancelTimer-long-)来取消一个周期性计时器。如：
+
+```java
+vertx.cancelTimer(timerID);
+```
+
+**Verticle中自动清除**
+
+如果您在Verticle中创建了计时器，当这个Verticle被撤销时这个计时器会被自动关闭。
+
+#### Verticle工作线程池
+
+Verticle使用Vert.x中的工作线程池【Worker Pool】来执行阻塞式行为——如：[executeBlocking](http://vertx.io/docs/apidocs/io/vertx/core/Context.html#executeBlocking-io.vertx.core.Handler-boolean-io.vertx.core.Handler-)或Worker Verticle。
+
+还可以在部署配置项中指定不同的工作线程池：
+
+```java
+vertx.deployVerticle("the-verticle", new DeploymentOptions().setWorkerPoolName("the-specific-pool"));
+```
+
+### Event Bus
+
 
 
 ## 引用
