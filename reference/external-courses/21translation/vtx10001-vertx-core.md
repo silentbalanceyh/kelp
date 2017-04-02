@@ -106,7 +106,7 @@ request.response().putHeader("Content-Type", "text/plain").write("some text").en
 
 这是贯穿Vert.x的API中的一个通用模式，所以您要习惯它。
 
-这样的链式调用会让您编写一些稍微冗长的代码。当然，如果您不喜欢Fluent的方式，它不强制您使用这种方式（编码），如果您更喜欢下边这种方式写代码，您可以开心地忽略Fluent：
+这样的链式调用会让您编写一些稍微冗长的代码。当然，如果您不喜欢Fluent的方式，它不强制您使用这种方式（编码），如果您更喜欢下边这种方式编写代码，您可以开心地忽略Fluent：
 
 ```java
 HttpServerResponse response = request.response();
@@ -114,6 +114,8 @@ response.putHeader("Content-Type", "text/plain");
 response.write("some text");
 response.end();
 ```
+
+### 不要调用它，它会调用您
 
 
 
