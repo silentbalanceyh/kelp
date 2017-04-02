@@ -316,7 +316,33 @@ _注意：这个配置信息在worker pool创建的时候设置。_
 
 ### 异步协调
 
-多个操作结果的协调是由Vert.x中的[futures](http://vertx.io/docs/apidocs/io/vertx/core/Future.html)来完成。
+多个操作调用结果的协调是由Vert.x中的[futures](http://vertx.io/docs/apidocs/io/vertx/core/Future.html)来完成。它支持并发组合（并行执行多个异步调用）和顺序组合（依次执行异步调用）。
+
+#### 并发组合【Concurrent Composition】
+
+[CompositeFuture.all](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#all-io.vertx.core.Future-io.vertx.core.Future-)方法需要多个futures参数（最多6个），当所有的futures都成功完成时候返回*succeeded*，如果有一个futures执行失败则返回*failed*。
+
+```java
+Future<HttpServer> httpServerFuture = Future.future();
+httpServer.listen(httpServerFuture.completer());
+
+Future<NetServer> netServerFuture = Future.future();
+netServer.listen(netServerFuture.completer());
+
+CompositeFuture.all(httpServerFuture, netServerFuture).setHandler(ar -> {
+  if (ar.succeeded()) {
+    // All servers started
+	// 所有服务器启动完成
+  } else {
+    // At least one server failed
+	// 有一个服务器启动失败
+  }
+});
+```
+
+这些操作同时运行，所有返回结果组合完成时，附在返回future上的处理器（[Handler](http://vertx.io/docs/apidocs/io/vertx/core/Handler.html)）会被调用。当一个操作失败（传入一个future被标记成failure），则返回的future会被标记成failed。当所有的操作都成功时，返回的future被标记成success。
+
+
 
 ## 引用
 
