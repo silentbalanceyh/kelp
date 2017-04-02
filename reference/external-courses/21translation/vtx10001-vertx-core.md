@@ -316,7 +316,7 @@ WorkerExecutor executor = vertx.createSharedWorkerExecutor("my-worker-pool", poo
 
 ### 异步协调
 
-
+多个操作结果的协调是由Vert.x中的futures来完成。
 
 ## 引用
 
