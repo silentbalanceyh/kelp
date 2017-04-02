@@ -320,7 +320,7 @@ _注意：这个配置信息在worker pool创建的时候设置。_
 
 #### 并发组合【Concurrent Composition】
 
-[CompositeFuture.all](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#all-io.vertx.core.Future-io.vertx.core.Future-)方法需要多个futures参数（最多6个），当所有的futures都成功完成时候返回*succeeded*，如果有一个futures执行失败则返回*failed*。
+[CompositeFuture.all](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#all-io.vertx.core.Future-io.vertx.core.Future-)方法需要多个futures参数（最多6个），当所有的futures都成功完成时返回*succeeded*，如果有一个futures执行失败则返回*failed*。
 
 ```java
 Future<HttpServer> httpServerFuture = Future.future();
