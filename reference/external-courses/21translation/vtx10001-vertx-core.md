@@ -586,7 +586,36 @@ Worker Verticle实例绝对不会在Vert.x中被多个线程同时执行，但�
 
 #### 编程方式部署Verticle
 
+您可以指定一个Verticle名称或传入您已经创建好的Verticle实例，使用任意一个[deployVerticle](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#deployVerticle-io.vertx.core.Verticle-)方法来部署Verticle。
 
+*注意：部署Verticle仅限Java语言*
+
+```java
+Verticle myVerticle = new MyVerticle();
+vertx.deployVerticle(myVerticle);
+```
+
+您同样可以指定Verticle的名称来部署它。
+
+这个Verticle的名称会用于查找实例化Verticle实例的特定[VerticleFactory](http://vertx.io/docs/apidocs/io/vertx/core/spi/VerticleFactory.html)。
+
+不同的Verticle工厂会对——实例化不同语言的Verticle以及其他原因如加载服务、运行时从Maven中获取Verticle等——合法可用。
+
+这允许您部署使用任何Vert.x支持的语言编写的Verticle实例。
+
+这儿有一个部署不同类型的Verticle例子：
+
+```java
+vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle");
+
+// Deploy a JavaScript verticle
+// 部署JavaScript的Verticle
+vertx.deployVerticle("verticles/myverticle.js");
+
+// Deploy a Ruby verticle verticle
+// 部署Ruby的Verticle
+vertx.deployVerticle("verticles/my_verticle.rb");
+```
 
 
 ## 引用
