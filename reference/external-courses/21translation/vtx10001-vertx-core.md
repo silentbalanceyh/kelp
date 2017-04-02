@@ -47,23 +47,23 @@ Core中这些功能相当底层——您不会在这里找到类似数据库访�
 
 * Gradle（您的`build.gradle`中）
 
-```groovy
+```gradle
 dependencies {
     compile 'io.vertx:vertx-core:3.4.1'
 }
 ```
 
-接下来讨论Vert.X Core中不同的概念和特性。
+接下来讨论Vert.x Core中不同的概念和特性。
 
-### 故事从Vert.X开始
+### 故事从Vert.x开始
 
 _注意：本文大部分内容专用于Java语言——若有需要可以切换到语言特定部分（手册中）。_
 
-除非您可以与[Vert.X](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html)对象交流，否则在Vert.X大陆中您不能做太多的事情。
+除非您可以与[Vert.x](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html)对象交流，否则在Vert.x大陆中您不能做太多的事情。
 
-它（Vert.X对象）是Vert.X的控制中心，也是你如何去做几乎一切事情（的基础），包括创建客户端和服务端、获取事件总线的引用、设置定时器等其他很多事情。
+它（Vert.x对象）是Vert.x的控制中心，也是你如何去做几乎一切事情（的基础），包括创建客户端和服务端、获取事件总线的引用、设置定时器等其他很多事情。
 
-那么您怎么去获取一个（Vert.X）实例呢？
+那么您怎么去获取一个（Vert.x）实例呢？
 
 ## 引用
 
