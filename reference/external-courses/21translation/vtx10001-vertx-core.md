@@ -117,6 +117,8 @@ response.end();
 
 ### 不要调用它，它会调用您 \[3\]
 
+Vert.x的API大部分都是事件驱动【Event Driven】，
+
 ## 引用
 
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
