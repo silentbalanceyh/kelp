@@ -567,9 +567,7 @@ _注意：您不需要在一个Verticle的stop方法中手工去撤销启动时�
 
 Worker Verticle被设计来调用阻塞式代码，但它不会阻塞任何Event Loop。
 
-如果您不想使用Worker Verticle来运行阻塞式代码，您还可以在一个Event Loop中直接使用内联阻塞式代码。
-
-
+如果您不想使用Worker Verticle来运行阻塞式代码，您还可以在一个Event Loop中直接使用[内联阻塞式代码](http://vertx.io/docs/vertx-core/java/#blocking_code)。
 
 ## 引用
 
