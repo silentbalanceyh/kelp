@@ -93,7 +93,7 @@ Vertx vertx = Vertx.vertx(new VertxOptions().setWorkerPoolSize(40));
 
 如果您想创建一个集群的Vert.x【Clustered Vert.x】（参考[event bus](http://vertx.io/docs/vertx-core/java/#event_bus)章节了解更多事件总线集群细节），通常您将使用异步协变方式【Variant】来创建一个Vertx对象。
 
-这是因为一个集群中的不同Vert.X实例一起使用（协同运行）将会耗费一些时间（也许是几秒钟），这个时间段，它不想去阻塞调用线程，所以它会异步返回结果给您。
+这是因为一个集群中的不同Vert.X实例一起使用（协同运行）将会耗费一些时间（也许是几秒钟），这个时间段，我们不想去阻塞调用线程，所以我们会异步返回结果给您。
 
 ### 您Fluent吗？
 
@@ -153,8 +153,6 @@ server.requestHandler(request -> {
 这一点主导了Vert.x中一些重要的概念。
 
 ### 不要阻塞它
-
-
 
 ## 引用
 
