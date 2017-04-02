@@ -3,7 +3,7 @@
 ## 中英对照表
 
 * Client：客户端
-* Server：服务端
+* Server：服务器
 * Writing：编写（有些地方译为开发）
 * Reactor：反应堆
 * Options：配置项
@@ -30,8 +30,8 @@ Vert.x内部的Java API集合我们称为**Vert.x Core**，[文档地址](https:
 
 Vert.x Core提供了下列功能
 
-* 编写TCP客户端和服务端
-* 编写HTTP客户端和支持WebSocket的服务端
+* 编写TCP客户端和服务器
+* 编写HTTP客户端和支持WebSocket的服务器
 * Event Bus（事件总线）
 * 共享数据——本地的Map和分布式集群Map
 * 周期性、延迟性行为
@@ -78,7 +78,7 @@ _注意：本文大部分内容专用于Java语言——若有需要可以切换
 
 除非您可以与[Vert.x](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html)对象交流，否则在Vert.x大陆中您不能做太多的事情。
 
-它（Vert.x对象）是Vert.x的控制中心，也是您如何去做几乎一切事情（的基础），包括创建客户端和服务端、获取事件总线的引用、设置定时器等其他很多事情。
+它（Vert.x对象）是Vert.x的控制中心，也是您如何去做几乎一切事情（的基础），包括创建客户端和服务器、获取事件总线的引用、设置定时器等其他很多事情。
 
 那么您怎么去获取一个（Vert.x）实例呢？
 
@@ -90,7 +90,7 @@ Vertx vertx = Vertx.vertx();
 
 如果您要使用Verticle——
 
-_注意：大部分应用将只会需要一个Vert.x实例，但如果您有需要也有可能创建多个Vert.x实例，如：隔离客户端和服务端的不同分组或事件总线。_
+_注意：大部分应用将只会需要一个Vert.x实例，但如果您有需要也有可能创建多个Vert.x实例，如：隔离客户端和服务器的不同分组或事件总线。_
 
 #### 创建Vertx对象时指定配置项
 
@@ -668,7 +668,7 @@ vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", res -> {
 });
 ```
 
-如果部署成功，这个Completion Handler的结果（result）中将会被传入一个包含了部署ID的字符串。
+如果部署成功，这个Completion Handler的结果（result）中将会传入一个包含了部署id的字符串。
 
 这个部署ID可以在之后您想要撤销它时使用。
 
@@ -676,7 +676,7 @@ vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", res -> {
 
 部署（好的Verticle）可以使用[undeploy](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#undeploy-java.lang.String-)被撤销。
 
-撤销也是异步方式，因此若您想要在撤销完成过后发出通知则可以指定另一个Completion Handler。
+撤销也是异步方式，因此若您想要在撤销完成过后收到通知则可以指定另一个Completion Handler。
 
 ```java
 vertx.undeploy(deploymentID, res -> {
@@ -876,7 +876,7 @@ long timerID = vertx.setTimer(1000, id -> {
 System.out.println("First this is printed");
 ```
 
-返回值是一个唯一的计时器id，该id可用于之后取消该计时器，处理器也被传入了这个计时器id。
+返回值是一个唯一的计时器id，该id可用于之后取消该计时器，这个计时器id会传入给处理器。
 
 **周期性计时器【Periodic】**
 
@@ -1237,7 +1237,7 @@ vertx run my-verticle.js -cluster
 
 ### 配置Event Bus
 
-Event Bus可以配置，当Event Bus运行在集群模式这是特别有用的。在引擎【hood】之下，Event Bus使用TCP连接发送和接收消息，因此[EventBusOptions](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/EventBusOptions.html)可以让您配置TCP连接的所有方面。由于Event Bus作为了服务端和客户端，这些配置近似于[NetClientOptions](http://vertx.io/docs/apidocs/io/vertx/core/net/NetClientOptions.html)和[NetServerOptions](http://vertx.io/docs/apidocs/io/vertx/core/net/NetServerOptions.html)。
+Event Bus可以配置，当Event Bus运行在集群模式这是特别有用的。在引擎【hood】之下，Event Bus使用TCP连接发送和接收消息，因此[EventBusOptions](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/EventBusOptions.html)可以让您配置TCP连接的所有方面。由于Event Bus作为了服务器和客户端，这些配置近似于[NetClientOptions](http://vertx.io/docs/apidocs/io/vertx/core/net/NetClientOptions.html)和[NetServerOptions](http://vertx.io/docs/apidocs/io/vertx/core/net/NetServerOptions.html)。
 
 ```java
 VertxOptions options = new VertxOptions()
@@ -1406,13 +1406,13 @@ Boolean boolVal = array.getBoolean(2);
 
 您可使用[encode](http://vertx.io/docs/apidocs/io/vertx/core/json/JsonArray.html#encode--)将一个数组编码成字符串格式。
 
-#### Buffers
+### Buffers
 
 在Vert.x内部大部分数据使用Buffers的格式【Shuffled】
 
 一个Buffer是可以读取或写入的0个或多个字节序列，并且根据需要可以自动扩容、将任意字节写入Buffer。您也许可以将Buffer想成智能字节数组。
 
-##### 创建Buffer
+#### 创建Buffer
 
 可以使用一个静态方法[Buffer.buffer](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html#buffer--)来创建Buffer。
 
@@ -1452,7 +1452,7 @@ Buffer buff = Buffer.buffer(bytes);
 Buffer buff = Buffer.buffer(10000);
 ```
 
-##### 写入Buffer
+#### 写入Buffer
 
 写入Buffer的方式有两种：追加和随机访问。任何一种情况下Buffer始终进行自动扩容，所以不可能在Buffer中遇到`IndexOutOfBoundsException`。
 
@@ -1483,7 +1483,7 @@ buff.setInt(1000, 123);
 buff.setString(0, "hello");
 ```
 
-##### 从Buffer中读取
+#### 从Buffer中读取
 
 可使用`getXXX`方法从Buffer中读取数据，它存在各种不同数据类型的方法，这些方法的第一个参数是从哪里获取数据的索引（获取位置）。
 
@@ -1494,7 +1494,7 @@ for (int i = 0; i < buff.length(); i += 4) {
 }
 ```
 
-##### 使用无符号数据
+#### 使用无符号数据
 
 可使用`getUnsignedXXX`，`appendUnsignedXXX`和`setUnsignedXXX`方法将无符号正数从Buffer中读取或追加/设置到Buffer。这对实现优化网络协议和最小化带宽消耗而实现的编解码器是很有用的。
 
@@ -1508,21 +1508,158 @@ System.out.println(buff.getUnsignedByte(pos));
 ```
 控制台中显示'200'。
 
-##### Buffer长度
+#### Buffer长度
 
 可使用[length](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html#length--)获取Buffer长度，Buffer的长度值是Buffer中包含字节（数据）的最大索引 + 1。
 
-##### 拷贝Buffer
+#### 拷贝Buffer
 
 可使用[copy](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html#copy--)创建一个Buffer的副本。
 
-##### 分片Buffer
+#### 分片Buffer
 
 一个分片Buffer是基于原始Buffer的一个新的Buffer，如，它不会拷贝底层数据。使用[slice](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html#slice--)创建一个分片Buffer。
 
-##### Buffer重用
+#### Buffer重用
 
 将Buffer写入到一个Socket或其他类似位置后，Buffer就不可被重用了。
+
+### 编写TCP服务器和客户端
+
+Vert.x允许您很容易编写非阻塞的TCP客户端和服务器。
+
+#### 创建一个TCP服务器
+
+使用所有默认配置项，最简单地创建一个TCP服务器如下：
+
+```java
+NetServer server = vertx.createNetServer();
+```
+
+#### 配置一个TCP服务器
+
+若您不想使用默认配置，可以在创建时通过传入一个[NetServerOptions](http://vertx.io/docs/apidocs/io/vertx/core/net/NetServerOptions.html)实例来配置服务器：
+
+```java
+NetServerOptions options = new NetServerOptions().setPort(4321);
+NetServer server = vertx.createNetServer(options);
+```
+
+#### 启动服务监听【Server Listening】
+
+要告诉服务器监听传入的请求，您可以使用其中一个[listen](http://vertx.io/docs/apidocs/io/vertx/core/net/NetServer.html#listen--)方式。
+
+在配置项中告诉服务器监听指定的主机和端口：
+
+```java
+NetServer server = vertx.createNetServer();
+server.listen();
+```
+
+或在调用`listen`时指定主机和端口号，这样就忽略了配置项（中的主机和端口）：
+
+```java
+NetServer server = vertx.createNetServer();
+server.listen(1234, "localhost");
+```
+
+默认主机名是`0.0.0.0`，它表示：监听所有可用地址；默认端口号是`0`，这也是一个特殊值，它告诉服务器本地没有使用的端口中随机选择一个并且使用它。
+
+实际的绑定也是异步的，因此服务器也许并没有在调用listen返回时监听，而是在一段时间过后（才监听）。
+
+若您希望在服务器实际监听时收到通知，您可以向listen提供一个处理器。例如：
+
+```java
+NetServer server = vertx.createNetServer();
+server.listen(1234, "localhost", res -> {
+  if (res.succeeded()) {
+    System.out.println("Server is now listening!");
+  } else {
+    System.out.println("Failed to bind!");
+  }
+});
+```
+
+#### 监听随机端口
+
+若设置监听端口为`0`，服务器将随机寻找一个没有使用的端口来监听。
+
+若您想知道服务器实际监听的端口，可以调用[actualPort](http://vertx.io/docs/apidocs/io/vertx/core/net/NetServer.html#actualPort--)方法：
+
+```java
+NetServer server = vertx.createNetServer();
+server.listen(0, "localhost", res -> {
+  if (res.succeeded()) {
+    System.out.println("Server is now listening on actual port: " + server.actualPort());
+  } else {
+    System.out.println("Failed to bind!");
+  }
+});
+```
+
+#### 收到传入连接【Incoming Connection】的通知
+
+若您想要在连接创建完时收到通知，则需要设置一个[connectHandler](http://vertx.io/docs/apidocs/io/vertx/core/net/NetServer.html#connectHandler-io.vertx.core.Handler-)：
+
+```java
+NetServer server = vertx.createNetServer();
+server.connectHandler(socket -> {
+  // Handle the connection in here
+  // 在这里处理连接
+});
+```
+
+当连接成功时，将会传入一个[NetSocket](http://vertx.io/docs/apidocs/io/vertx/core/net/NetSocket.html)实例给处理器，并调用它。
+
+这是一个与实际连接类似的socket接口，它允许您读取和写入数据、以及执行各种其他操作如关闭socket。
+
+#### 从Socket读取数据
+
+您可以在Socket中设置一个[handler](http://vertx.io/docs/apidocs/io/vertx/core/net/NetSocket.html#handler-io.vertx.core.Handler-)从Socket中读取数据。
+
+每次当Socket接收到数据时，会传入一个[Buffer](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html)实例给处理器，并调用它。
+
+```java
+NetServer server = vertx.createNetServer();
+server.connectHandler(socket -> {
+  socket.handler(buffer -> {
+    System.out.println("I received some bytes: " + buffer.length());
+  });
+});
+```
+
+#### 写数据到Socket
+
+您可使用[write](http://vertx.io/docs/apidocs/io/vertx/core/net/NetSocket.html#write-io.vertx.core.buffer.Buffer-)方法写入数据到Socket：
+
+```java
+Buffer buffer = Buffer.buffer().appendFloat(12.34f).appendInt(123);
+socket.write(buffer);
+
+// Write a string in UTF-8 encoding
+// 以UTF-8的编码方式写入一个字符串
+socket.write("some data");
+
+// Write a string using the specified encoding
+// 以指定的编码方式写入一个字符串
+socket.write("some data", "UTF-16");
+```
+
+写入操作是异步的，直到调用write方法返回过后一段时间它才发生。
+
+#### 关闭处理器【Close Handler】
+
+若您想要在Socket关闭时收到通知，可（在Socket上）设置一个[closeHandler](http://vertx.io/docs/apidocs/io/vertx/core/net/NetSocket.html#closeHandler-io.vertx.core.Handler-)：
+
+```java
+socket.closeHandler(v -> {
+  System.out.println("The socket has been closed");
+});
+```
+
+#### 处理异常
+
+当Socket发生异常时，您可以设置一个[exceptionHandler](http://vertx.io/docs/apidocs/io/vertx/core/net/NetSocket.html#exceptionHandler-io.vertx.core.Handler-)来接收任何异常信息。
 
 
 
