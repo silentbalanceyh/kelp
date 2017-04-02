@@ -5,12 +5,12 @@
 * Client：客户端
 * Server：服务端
 * Writing：编写（有些地方译为开发）
-* Event Bus：事件总线
 * Reactor：反应堆
 * Options：配置项
 * Context：上下文环境
 * Handler/Handle：处理器/处理
 * Block：阻塞
+* Out of Box：标准环境（开箱即用）
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
@@ -22,7 +22,7 @@ Vert.x Core提供了下列功能
 
 * 编写TCP客户端和服务端
 * 编写HTTP客户端和支持WebSocket的服务端
-* 事件总线【Event Bus】
+* Event Bus（事件总线）
 * 共享数据——本地的Map和分布式集群Map
 * 周期性、延迟性行为
 * 部署和撤销Verticle实例
@@ -443,6 +443,24 @@ fut1.compose(v -> {
 您可以使用[completer](http://vertx.io/docs/apidocs/io/vertx/core/Future.html#completer--)来完成一个带操作结果（自定义）或失败的future，它避免使用传统方式编写：如果成功则完成future，否则就失败【if success then complete the future else fail the future】。
 
 ### Verticles
+
+标准环境的Vert.x提供了一个简单的、可扩展的、类似Actor-Model的部署模型和并发模型，您可以按自己的方式保存和编写。
+
+**这个模型是可选的，如果您不想这样做，Vert.x不强制您用这种方式创建您的应用程序。**
+
+这个模型不能说是严格的Actor-Model的实现，但它确实有相似之处，特别是在并发、扩展和部署等方面。
+
+要使用该模型，您需要将您的代码组织成**verticle**的集合。
+
+Verticle是由Vert.x部署和运行的代码块，默认情况一个Vert.x实例维护了N（默认：N = 核 x 2）个Event Loop线程。Verticle实例可使用任意Vert.x支持的计算机语言编写，一个简单的应用程序也可以包含多种语言编写的Verticle。
+
+您可以将Verticle想成[Actor Model](https://en.wikipedia.org/wiki/Actor_model)中的Actor。
+
+一个应用程序通常是由同一时间运行在同一个Vert.x实例中的许多Verticle实例组合而成。不同的Verticle实例可通过发送消息给event bus和其他Verticle实例通讯。
+
+#### 编写Verticle
+
+Verticle类必须实现[Verticle](http://vertx.io/docs/apidocs/io/vertx/core/Verticle.html)接口。
 
 
 
