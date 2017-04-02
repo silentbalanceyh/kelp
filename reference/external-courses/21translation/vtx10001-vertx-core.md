@@ -918,6 +918,14 @@ vertx.deployVerticle("the-verticle", new DeploymentOptions().setWorkerPoolName("
 
 ### Event Bus
 
+Event Bus是Vert.x中的神经系统【Nervous System】。
+
+每一个Vert.x实例都有一个单独的Event Bus实例，可通过方法[eventBus](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#eventBus--)来获得。
+
+Event Bus您的应用中的不同部分相互通信，无论它们使用哪一种语言实现，以及它们是否在同一个Vert.x实例中，或在不同的Vert.x实例中。
+
+它甚至可以桥接允许在浏览器中运行的客户端JavaScript在相同的Event Bus上相互通信。
+
 
 
 ## 引用
