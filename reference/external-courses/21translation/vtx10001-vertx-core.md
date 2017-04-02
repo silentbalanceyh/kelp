@@ -316,9 +316,9 @@ _注意：这个配置信息在worker pool创建的时候设置。_
 
 ### 异步协调
 
-多个操作调用结果的协调是由Vert.x中的[futures](http://vertx.io/docs/apidocs/io/vertx/core/Future.html)来完成。它支持并发组合（并行执行多个异步调用）和顺序组合（依次执行异步调用）。
+多个操作调用结果的协调是由Vert.x中的[futures](http://vertx.io/docs/apidocs/io/vertx/core/Future.html)来完成。它支持并发合并（并行执行多个异步调用）和顺序合并（依次执行异步调用）。
 
-#### 并发组合【Concurrent Composition】
+#### 并发合并【Concurrent Composition】
 
 **1.all**
 
@@ -342,7 +342,7 @@ CompositeFuture.all(httpServerFuture, netServerFuture).setHandler(ar -> {
 });
 ```
 
-这些操作同时运行，所有返回结果组合完成时，附在返回future上的处理器（[Handler](http://vertx.io/docs/apidocs/io/vertx/core/Handler.html)）会被调用。当一个操作失败（传入一个future被标记成failure），则返回的future会被标记成failed。当所有的操作都成功时，返回的future被标记成success。
+这些操作同时运行，所有返回结果合并完成时，附在返回future上的处理器（[Handler](http://vertx.io/docs/apidocs/io/vertx/core/Handler.html)）会被调用。当一个操作失败（传入一个future被标记成failure），则返回的future会被标记成failed。当所有的操作都成功时，返回的future被标记成success。
 
 您可以传入一个future的列表（默认为空）：
 
@@ -352,7 +352,7 @@ CompositeFuture.all(Arrays.asList(future1, future2, future3));
 
 **2.any**
 
-不同于`all`的组合会等待所有的future要么全成功（或其中一个失败），`any`的组合会等待第一个成功的future。[CompositeFuture.any](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#any-io.vertx.core.Future-io.vertx.core.Future-)需要多个future参数（最多6个），当任何一个future成功完成则返回*succeeded*，所有的future都失败则返回*failed*：
+不同于`all`的合并会等待所有的future要么全成功（或其中一个失败），`any`的合并会等待第一个成功的future。[CompositeFuture.any](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#any-io.vertx.core.Future-io.vertx.core.Future-)需要多个future参数（最多6个），当任何一个future成功完成则返回*succeeded*，所有的future都失败则返回*failed*：
 
 ```java
 CompositeFuture.any(future1, future2).setHandler(ar -> {
@@ -374,7 +374,7 @@ CompositeFuture.any(Arrays.asList(f1, f2, f3));
 
 **3.join**
 
-`join`的组合会等待所有的future完成，不论是一个成功还是一个失败都可。
+`join`的合并会等待所有的future完成，不论是一个成功还是一个失败都可。
 
 [CompositeFuture.join](http://vertx.io/docs/apidocs/io/vertx/core/CompositeFuture.html#join-io.vertx.core.Future-io.vertx.core.Future-)需要多个future参数（最多6个），当所有的future都成功时返回一个*succeeded*的future，当所有的future都完成时，至少有一个future失败则返回*failed*。
 
@@ -396,11 +396,11 @@ CompositeFuture.join(future1, future2, future3).setHandler(ar -> {
 CompositeFuture.join(Arrays.asList(future1, future2, future3));
 ```
 
-#### 顺序组合【Sequential Composition】
+#### 顺序合并【Sequential Composition】
 
 **1.compose**
 
-和`all`以及`any`实现的并发组合不同，[compose](http://vertx.io/docs/apidocs/io/vertx/core/Future.html#compose-io.vertx.core.Handler-io.vertx.core.Future-)用于链式化【chaining】future（顺序组合）。
+和`all`以及`any`实现的并发合并不同，[compose](http://vertx.io/docs/apidocs/io/vertx/core/Future.html#compose-io.vertx.core.Handler-io.vertx.core.Future-)用于链式化【chaining】future（顺序合并）。
 
 ```java
 FileSystem fs = vertx.fileSystem();
@@ -435,7 +435,7 @@ fut1.compose(v -> {
 
 使用例子：
 
-* [compose](http://vertx.io/docs/apidocs/io/vertx/core/Future.html#compose-io.vertx.core.Handler-io.vertx.core.Future-)：当前future完成时，执行返回future的函数。当返回的future完成时，它会完成该组合。
+* [compose](http://vertx.io/docs/apidocs/io/vertx/core/Future.html#compose-io.vertx.core.Handler-io.vertx.core.Future-)：当前future完成时，执行返回future的函数。当返回的future完成时，它会完成该合并。
 * [compose](http://vertx.io/docs/apidocs/io/vertx/core/Future.html#compose-io.vertx.core.Handler-io.vertx.core.Future-)：当前future完成时，执行完成下一个future的处理器。
 
 在第二个例子中，处理器（[Handler](http://vertx.io/docs/apidocs/io/vertx/core/Handler.html)）应该完成下一个（`next`）future过后来报告成功或者失败。
