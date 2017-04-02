@@ -8,6 +8,7 @@
 * Event Bus：事件总线
 * Options：配置项
 * Handler/Handle：处理器/处理
+* Block：阻塞
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
@@ -153,8 +154,6 @@ server.requestHandler(request -> {
 这一点引导我们（去理解）Vert.x中一些重要的概念。
 
 ### 不要阻塞我
-
-
 
 ## 引用
 
