@@ -252,7 +252,7 @@ Vert.x还将提供堆栈跟踪，以精确定位发生阻塞的位置。
 
 如之前讨论，您不能在Event Loop中直接调用阻塞式操作，因为这样做会阻止Event Loop执行其他有用的任务。那么您能怎么做？
 
-可以通过调用executeBlocking方法来指定阻塞式代码的执行和阻塞式代码执行过后结果处理器的异步回调。
+可以通过调用[executeBlocking](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#executeBlocking-io.vertx.core.Handler-boolean-io.vertx.core.Handler-)方法来指定阻塞式代码的执行和阻塞式代码执行过后结果处理器的异步回调。
 
 ## 引用
 
