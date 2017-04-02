@@ -152,7 +152,9 @@ server.requestHandler(request -> {
 
 这一点引导我们（去理解）Vert.x中一些重要的概念。
 
-### 不要阻塞它
+### 不要阻塞我
+
+
 
 ## 引用
 
