@@ -94,7 +94,7 @@ Vertx vertx = Vertx.vertx(new VertxOptions().setWorkerPoolSize(40));
 
 这是因为一个集群中的不同Vert.X实例一起使用（协同运行）将会耗费一些时间（也许是几秒钟），这个时间段，它不想去阻塞调用线程，所以它会异步返回结果给您。
 
-### 您流利吗？
+### 您Fluent吗？
 
 
 
