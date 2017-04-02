@@ -198,6 +198,12 @@ Vert.x或应用程序块中没有任何阻塞，这个事件循环线程可以�
 
 这一点Vert.x的工作有所不同，每个Vertx实例不是维护的一个事件循环线程，而是维护的多个。默认情况下，我们会根据机器上可用的核数量来选择事件循环线程数，而这个（设置）可以被覆盖。
 
+与Node.js不同，这意味着单个Vertx进程可以跨服务器扩展。
+
+我们将这种模式称为多反应堆模式【Multi-Reactor】，将它和单线程反应堆模式进行区分。
+
+_注意：_
+
 ## 引用
 
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
