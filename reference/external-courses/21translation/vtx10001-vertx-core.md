@@ -456,13 +456,13 @@ Verticle是由Vert.x部署和运行的代码块，默认情况一个Vert.x实例
 
 您可以将Verticle想成[Actor Model](https://en.wikipedia.org/wiki/Actor_model)中的Actor。
 
-一个应用程序通常是由同一时间运行在同一个Vert.x实例中的许多Verticle实例组合而成。不同的Verticle实例可通过发送消息给event bus和其他Verticle实例通讯。
+一个应用程序通常是由同一时间运行在同一个Vert.x实例中的许多Verticle实例组合而成。不同的Verticle实例可通过发送消息给event bus来相互通信。
 
 #### 编写Verticle
 
 Verticle类必须实现[Verticle](http://vertx.io/docs/apidocs/io/vertx/core/Verticle.html)接口。
 
-
+如果你喜欢可以直接实现该接口，但是通常直接从抽象类`AbstractVerticle`中继承更简单。
 
 ## 引用
 
