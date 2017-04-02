@@ -115,15 +115,17 @@ response.write("some text");
 response.end();
 ```
 
-### 不要调用它，它会调用您 \[3\]
+### 不要Call它，它会Call您 \[3\]
 
-Vert.x的API大部分都是事件驱动【Event Driven】，
+Vert.x的API大部分都是事件驱动【Event Driven】，也就是说您对Vert.x中发生的事情感兴趣时它会通过给您发送事件的方式Call您。
+
+
 
 ## 引用
 
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
 2. 两种常用的项目构建工具。
-3. Don't call us, we'll call you。
+3. Don't call us, we'll call you，Call斟酌了很久是翻译还是不翻译，调用听起来过于生硬，在这个标题中辅助理解就没有翻译这个词。
 
 ## 注释
 
