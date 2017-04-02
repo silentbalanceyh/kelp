@@ -19,7 +19,8 @@
 * Sender：发送者
 * Consumer：消费者
 * Receiver/Recipient：接收者
-* 
+* Entry：条目（一条key=value的键值对）
+* Map：动词翻译成“映射”，名词为数据结构未翻译
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
@@ -1287,6 +1288,241 @@ Vertx.clusteredVertx(options, res -> {
 ```
 
 ### JSON
+
+和其他一些语言不同，Java没有对JSON的原生支持【first class support】，因此我们提供了两个类，以便在Vert.x应用中处理JSON更容易。
+
+#### JSON对象
+
+[JsonObject](http://vertx.io/docs/apidocs/io/vertx/core/json/JsonObject.html)类用来描述JSON对象。
+
+一个JSON对象基本上只是一个Map结构，它具有字符串的键，值可以是任意一种JSON支持的类型（string, number, boolean）。
+
+JSON对象也支持null值。
+
+**创建JSON对象**
+
+可以使用默认构造函数创建空的JSON对象。
+
+您可以从JSON格式的字符串创建一个JSON对象：
+
+```java
+String jsonString = "{\"foo\":\"bar\"}";
+JsonObject object = new JsonObject(jsonString);
+```
+
+您可以从一个Map创建一个JSON对象：
+
+```java
+Map<String, Object> map = new HashMap<>();
+map.put("foo", "bar");
+map.put("xyz", 3);
+JsonObject object = new JsonObject(map);
+```
+
+**将条目放入JSON对象**
+
+使用[put](http://vertx.io/docs/apidocs/io/vertx/core/json/JsonObject.html#put-java.lang.String-java.lang.Enum-)方法可以将值放入到JSON对象。
+
+因为Vert.x支持Fluent的API，所以这个方法调用可以是链式化的。
+
+```java
+JsonObject object = new JsonObject();
+object.put("foo", "bar").put("num", 123).put("mybool", true);
+```
+
+**从JSON对象获取值**
+
+您可使用`getXXX`方法从JSON对象中获取值。例如：
+
+```java
+String val = jsonObject.getString("some-key");
+int intVal = jsonObject.getInteger("some-other-key");
+```
+
+**JSON对象和Java对象间的映射**
+
+您可以从Java对象的字段创建一个JSON对象，如下所示：
+
+(官缺）
+
+也可以实例化一个Java对象并从JSON对象填充其字段值。如下所示：
+
+```java
+request.bodyHandler(buff -> {
+  JsonObject jsonObject = buff.toJsonObject();
+  User javaObject = jsonObject.mapTo(User.class);
+});
+```
+
+请注意上述映射方向都使用了Jackson的`ObjectMapper#convertValue()`来执行映射，字段和构造函数可见性的影响、有关跨对象引用的序列化完和反序列化等可参考Jackson的文档获取更多信息。
+
+然而在最简单的情况下，所有Java类中字段都是public（或者有public的getter/setter）时，并且有一个public的默认构造函数（或不定义构造函数），`mapFrom`和`mapTo`都应该成功。
+
+只要对象图是非循环的，引用对象通过to/from执行过滤性的序列化和反序列化时同样会作用于嵌套JSON对象。
+
+**将JSON对象编码成String**
+
+您可使用[encode](http://vertx.io/docs/apidocs/io/vertx/core/json/JsonObject.html#encode--)将一个对象编码成字符串格式。
+
+#### JSON数组
+
+[JsonArray](http://vertx.io/docs/apidocs/io/vertx/core/json/JsonArray.html)类用来描述JSON数组。
+
+一个JSON数组是一系列值的有序集（string、number、boolean）。
+
+JSON数组同样可以包含null值。
+
+**创建JSON数组**
+
+可以使用默认构造函数创建空的JSON数组。
+
+您可以从JSON格式的字符串创建一个JSON数组：
+
+```java
+String jsonString = "[\"foo\",\"bar\"]";
+JsonArray array = new JsonArray(jsonString);
+```
+
+**将条目添加JSON数组**
+
+您可以使用[add](http://vertx.io/docs/apidocs/io/vertx/core/json/JsonArray.html#add-java.lang.Enum-)方法添加条目到JSON数组中
+
+```java
+JsonArray array = new JsonArray();
+array.add("foo").add(123).add(false);
+```
+
+**从JSON数组中获取值**
+
+您可使用`getXXX`方法从JSON数组中获取值。例如：
+
+```java
+String val = array.getString(0);
+Integer intVal = array.getInteger(1);
+Boolean boolVal = array.getBoolean(2);
+```
+
+**将JSON数组编码成String**
+
+您可使用[encode](http://vertx.io/docs/apidocs/io/vertx/core/json/JsonArray.html#encode--)将一个数组编码成字符串格式。
+
+#### Buffers
+
+在Vert.x内部大部分数据使用Buffers的格式【Shuffled】
+
+一个Buffer是可以读取或写入的0个或多个字节序列，并且根据需要可以自动扩容、将任意字节写入Buffer。您也许可以将Buffer想成智能字节数组。
+
+##### 创建Buffer
+
+可以使用一个静态方法[Buffer.buffer](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html#buffer--)来创建Buffer。
+
+Buffer可以从字符串或字节数组初始化，或者创建空的Buffer。
+
+这儿有一些创建Buffer的例子：
+
+创建一个空的Buffer：
+
+```java
+Buffer buff = Buffer.buffer();
+```
+
+从字符串创建一个Buffer，这个Buffer中的字符串必须可用UTF-8编码：
+
+```java
+Buffer buff = Buffer.buffer("some string");
+```
+从字符串创建一个BUffer，这个字符串可以用指定的编码方式编码，例如：
+
+```java
+Buffer buff = Buffer.buffer("some string", "UTF-16");
+```
+
+从字节数组byte[]创建Buffer：
+
+```java
+byte[] bytes = new byte[] {1, 3, 5};
+Buffer buff = Buffer.buffer(bytes);
+```
+
+创建一个带有初始化尺寸的Buffer。若您知道您的Buffer会写入一定量的数据，您可以创建Buffer并指定它的尺寸。这使得这个Buffer初始化时分配了更多的内存，比数据写入时重新调整尺寸效率更高。
+
+注意以这种方式创建的Buffer是空的，它也不会创建一个填满了0的Buffer。
+
+```java
+Buffer buff = Buffer.buffer(10000);
+```
+
+##### 写入Buffer
+
+写入Buffer的方式有两种：追加和随机访问。任何一种情况下Buffer始终进行自动扩容，所以不可能在Buffer中遇到`IndexOutOfBoundsException`。
+
+1. **追加到Buffer**
+
+您可以使用`appendXXX`方法追加数据到Buffer，它存在各种不同数据类型的方法。
+
+因为`appendXXX`方法的返回值就是Buffer自身，所以它可以链式化【Fluent】:
+
+```java
+Buffer buff = Buffer.buffer();
+
+buff.appendInt(123).appendString("hello\n");
+
+socket.write(buff);
+```
+
+2. **随机访问写Buffer**
+
+您还可以指定一个索引值，通过`setXXX`方法写入数据到Buffer，它也存在各种不同数据类型的方法。所有的set方法都会将索引值作为第一个参数——这表示Buffer中开始写入数据的位置。
+
+Buffer始终根据需要进行自动扩容：
+
+```java
+Buffer buff = Buffer.buffer();
+
+buff.setInt(1000, 123);
+buff.setString(0, "hello");
+```
+
+##### 从Buffer中读取
+
+可使用`getXXX`方法从Buffer中读取数据，它存在各种不同数据类型的方法，这些方法的第一个参数是从哪里获取数据的索引（获取位置）。
+
+```java
+Buffer buff = Buffer.buffer();
+for (int i = 0; i < buff.length(); i += 4) {
+  System.out.println("int value at " + i + " is " + buff.getInt(i));
+}
+```
+
+##### 使用无符号数据
+
+可使用`getUnsignedXXX`，`appendUnsignedXXX`和`setUnsignedXXX`方法将无符号正数从Buffer中读取或追加/设置到Buffer。这对实现优化网络协议和最小化带宽消耗而实现的编解码器是很有用的。
+
+下边例子中，值200倍设置到一个仅占用一个字节的固定位置：
+
+```java
+Buffer buff = Buffer.buffer(128);
+int pos = 15;
+buff.setUnsignedByte(pos, (short) 200);
+System.out.println(buff.getUnsignedByte(pos));
+```
+控制台中显示'200'。
+
+##### Buffer长度
+
+可使用[length](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html#length--)获取Buffer长度，Buffer的长度值是Buffer中包含字节（数据）的最大索引 + 1。
+
+##### 拷贝Buffer
+
+可使用[copy](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html#copy--)创建一个Buffer的副本。
+
+##### 分片Buffer
+
+一个分片Buffer是基于原始Buffer的一个新的Buffer，如，它不会拷贝底层数据。使用[slice](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html#slice--)创建一个分片Buffer。
+
+##### Buffer重用
+
+将Buffer写入到一个Socket或其他类似位置后，Buffer就不可被重用了。
 
 
 
