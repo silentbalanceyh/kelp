@@ -176,6 +176,10 @@ server.requestHandler(request -> {
 
 对于许多现代应用程序所要求的并发级别，阻塞式（编程）将会难于扩展。
 
+### Reactor和Multi-Reactor
+
+
+
 ## 引用
 
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
