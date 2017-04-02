@@ -8,13 +8,18 @@
 * Reactor：反应堆
 * Options：配置项
 * Context：上下文环境
-* Undeploy：撤销（部署）
+* Undeploy：撤销（对应部署）
+* Unregister：注销（对应注册）
 * Destroyed：销毁
 * Handler/Handle：处理器/处理，有些特定处理器未翻译，如Completion Handler等。
 * Block：阻塞
 * Out of Box：标准环境（开箱即用）
 * Timer：计时器
 * Worker Pool：工作线程池，大部分地方未翻译
+* Sender：发送者
+* Consumer：消费者
+* Receiver/Recipient：接收者
+* 
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
@@ -72,7 +77,7 @@ _注意：本文大部分内容专用于Java语言——若有需要可以切换
 
 除非您可以与[Vert.x](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html)对象交流，否则在Vert.x大陆中您不能做太多的事情。
 
-它（Vert.x对象）是Vert.x的控制中心，也是你如何去做几乎一切事情（的基础），包括创建客户端和服务端、获取事件总线的引用、设置定时器等其他很多事情。
+它（Vert.x对象）是Vert.x的控制中心，也是您如何去做几乎一切事情（的基础），包括创建客户端和服务端、获取事件总线的引用、设置定时器等其他很多事情。
 
 那么您怎么去获取一个（Vert.x）实例呢？
 
@@ -171,7 +176,7 @@ server.requestHandler(request -> {
 
 * 从Socket中读取数据
 * 写数据到磁盘
-* 发送消息给收件人并等待回复
+* 发送消息给接收者并等待回复
 * ...其他很多情况
 
 在上述所有情况下，当您的线程正在等待结果时它不能做任何事情——此时，这些线程实际上是无用的。
@@ -466,7 +471,7 @@ Verticle是由Vert.x部署和运行的代码块，默认情况一个Vert.x实例
 
 Verticle类必须实现[Verticle](http://vertx.io/docs/apidocs/io/vertx/core/Verticle.html)接口。
 
-如果你喜欢可以直接实现该接口，但是通常直接从抽象类[AbstractVerticle](http://vertx.io/docs/apidocs/io/vertx/core/AbstractVerticle.html)继承更简单。
+如果您喜欢可以直接实现该接口，但是通常直接从抽象类[AbstractVerticle](http://vertx.io/docs/apidocs/io/vertx/core/AbstractVerticle.html)继承更简单。
 
 这儿有一个例子：
 
@@ -650,7 +655,7 @@ SomeScript.groovy // 将使用Groovy的Factory
 
 Verticle的部署是异步方式，可能在deploy方法调用返回后一段时间才会完成部署。
 
-如果你想要在部署完成时发出通知则可以指定一个Completion Handler。
+如果您想要在部署完成时发出通知则可以指定一个Completion Handler。
 
 ```java
 vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", res -> {
@@ -670,7 +675,7 @@ vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", res -> {
 
 部署（好的Verticle）可以使用[undeploy](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#undeploy-java.lang.String-)被撤销。
 
-撤销也是异步方式，因此若你想要在撤销完成过后发出通知则可以指定另一个Completion Handler。
+撤销也是异步方式，因此若您想要在撤销完成过后发出通知则可以指定另一个Completion Handler。
 
 ```java
 vertx.undeploy(deploymentID, res -> {
@@ -691,7 +696,7 @@ DeploymentOptions options = new DeploymentOptions().setInstances(16);
 vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", options);
 ```
 
-若跨多核简化水平扩展时这个功能很有用。如，您的计算机上有一个包含Web服务器的Verticle需要部署以及跨多核，因此你需要部署多个实例来利用所有的（服务器）核。
+若跨多核简化水平扩展时这个功能很有用。如，您的计算机上有一个包含Web服务器的Verticle需要部署以及跨多核，因此您需要部署多个实例来利用所有的（服务器）核。
 
 #### 传入配置给Verticle
 
@@ -836,7 +841,7 @@ vertx.getOrCreateContext().runOnContext( (v) -> {
 });
 ```
 
-若同一个context中运行了多个处理器，它们也许想要共享数据，这个context对象提供了在context中存储和读取数据（实现）共享的方法。例如：它允许你将数据传递到[runOnContext](http://vertx.io/docs/apidocs/io/vertx/core/Context.html#runOnContext-io.vertx.core.Handler-)运行的某些操作中。
+若同一个context中运行了多个处理器，它们也许想要共享数据，这个context对象提供了在context中存储和读取数据（实现）共享的方法。例如：它允许您将数据传递到[runOnContext](http://vertx.io/docs/apidocs/io/vertx/core/Context.html#runOnContext-io.vertx.core.Handler-)运行的某些操作中。
 
 ```java
 final Context context = vertx.getOrCreateContext();
@@ -846,7 +851,7 @@ context.runOnContext((v) -> {
 });
 ```
 
-这个context对象还可以让你使用[config](http://vertx.io/docs/apidocs/io/vertx/core/Context.html#config--)方法访问Verticle的配置信息，查看传入配置给Verticle章节了解更多配置信息。
+这个context对象还可以让您使用[config](http://vertx.io/docs/apidocs/io/vertx/core/Context.html#config--)方法访问Verticle的配置信息，查看传入配置给Verticle章节了解更多配置信息。
 
 #### 执行周期性/延迟性操作
 
@@ -925,6 +930,363 @@ Event Bus是Vert.x中的神经系统【Nervous System】。
 Event Bus您的应用中的不同部分相互通信，无论它们使用哪一种语言实现，以及它们是否在同一个Vert.x实例中，或在不同的Vert.x实例中。
 
 它甚至可以桥接允许在浏览器中运行的客户端JavaScript在相同的Event Bus上相互通信。
+
+Event Bus可形成跨越多个服务器节点和多个浏览器的分布式对等消息系统。
+
+Event Bus支持发布/订阅、点对点、请求/响应的消息通信（模式）。
+
+Event Bus的API很简单，它主要涉及注册处理器、撤销处理器和发送和发布消息。
+
+首先看些理论：
+
+#### 理论
+
+**寻址【Addressing】**
+
+消息在Event Bus上会发送到一个地址【Address】。
+
+同任何花哨的寻址方式相比Vert.x（寻址）并不麻烦，Vert.x中的地址是一个简单的字符串，任意字符串都合法。然后，使用某种模式仍然是明智之举，如：使用据点来划分名空间。
+
+一些合法的地址形如：europe.news.feed1、acme.games.pacman, sausages和X。
+
+**处理器【Handlers】**
+
+消息在处理器中被接收，您可以在一个地址上注册一个处理器。
+
+同一个地址可以注册许多不同的处理器，一个处理器也可以在许多不同的地址上注册。
+
+**发布/订阅消息【Publish/Subscribe Messaging】**
+
+Event Bus支持发布消息功能。
+
+消息将被发布到一个地址中，发布意味着将详细传递给所有注册在该地址上的处理器。
+
+这和发布/订阅模式很类似。
+
+**点对点和请求-响应消息**
+
+Event Bus也支持点对点消息。
+
+消息将被发送到一个地址中，Vert.x将会把消息分发【route】到某个注册在该地址上的处理器。
+
+若这个地址上有不止一个注册过的处理器，它将使用不严格的轮询算法选择其中一个。
+
+通过点对点的消息传递，可在消息发送的时候指定可选的Reply Handler。
+
+当接收者收到消息并且已经被处理时，它可以选择性决定回复该消息，若选择回复则Reply Handler将会被调用。
+
+当发送者收到回复消息时，它也可以回复，这个过程可以不断重复，它允许在两个不同的Verticle之间设置一个对话框。
+
+这就是一种称为**请求-响应**模式的消息模式。
+
+**尽力服务传输【Best-effort delivery】**
+
+Vert.x会尽它最大努力去传递消息，并且保证消息不会出现丢失，这种称为**尽力服务**传输。
+
+但是，在Event Bus中全部或部分（位置）发生故障，则可能会丢失消息。
+
+若您的应用关心丢失的消息，您应该编写具有幂等性的处理器，并且您的发送者可以在恢复后重试。
+
+**消息类型【Types of messages】**
+
+标准Vert.x允许任何基本/简单类型、String或[buffers](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html)作为消息发送。
+
+不过在Vert.x中通常以[JSON](http://json.org/)格式作为发送消息的惯例和常用实践。
+
+对于Vert.x支持的所有语言，JSON非常容易创建、读取和解析，因此它已经成为了Vert.x中的通用语【lingua franca】。
+
+但是若您不想用它，并不强制您使用JSON。
+
+Event Bus非常灵活并且支持在Event Bus中发送任意对象，您可以针对您想要发送的对象自定义一个[codec](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/MessageCodec.html)来实现。
+
+#### Event Bus API
+
+让我们跳到API
+
+**获取Event Bus**
+
+您可以使用下边代码获取Event Bus的一个引用：
+
+```java
+EventBus eb = vertx.eventBus();
+```
+
+在一个Vert.x实例中它是单例的。
+
+**注册处理器**
+
+最简单的注册处理器的方式是使用[consumer](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/EventBus.html#consumer-java.lang.String-io.vertx.core.Handler-)，这儿有个例子：
+
+```java
+EventBus eb = vertx.eventBus();
+
+eb.consumer("news.uk.sport", message -> {
+  System.out.println("I have received a message: " + message.body());
+});
+```
+
+当一个消息达到您的处理器，它将被调用，传递[消息](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/Message.html)。
+
+consumer()调用过后的返回对象是一个[MessageConsumer](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/MessageConsumer.html)的实例。
+
+该对象随后可用于撤销处理器、或将处理器用作流。
+
+或者、您可以不设置处理器而使用[consumer](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/EventBus.html#consumer-java.lang.String-io.vertx.core.Handler-)返回一个MessageConsumer，之后再来设置处理器。如：
+
+```java
+EventBus eb = vertx.eventBus();
+
+MessageConsumer<String> consumer = eb.consumer("news.uk.sport");
+consumer.handler(message -> {
+  System.out.println("I have received a message: " + message.body());
+});
+```
+
+在集群的Event Bus上注册处理器时，注册会花费一些时间才能到达集群中的所有节点。
+
+若您希望在完成后收到通知，您可以在MessageConsumer对象上注册一个[completion handler](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/MessageConsumer.html#completionHandler-io.vertx.core.Handler-)。
+
+```java
+consumer.completionHandler(res -> {
+  if (res.succeeded()) {
+    System.out.println("The handler registration has reached all nodes");
+  } else {
+    System.out.println("Registration failed!");
+  }
+});
+```
+
+**撤销处理器**
+
+要撤销处理器，请调用[unregister](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/MessageConsumer.html#unregister--)。
+
+若你位于一个集群的Event Bus中，撤销处理器同样会花费一些时间跨节点传播，若您想在完成后收到通知：
+
+```java
+consumer.unregister(res -> {
+  if (res.succeeded()) {
+    System.out.println("The handler un-registration has reached all nodes");
+  } else {
+    System.out.println("Un-registration failed!");
+  }
+});
+```
+
+**发布消息**
+
+发布消息很简单，仅用[publish](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/EventBus.html#publish-java.lang.String-java.lang.Object-)指定一个地址去发布
+
+```java
+eventBus.publish("news.uk.sport", "Yay! Someone kicked a ball");
+```
+
+这个消息将会传递给所有在地址news.uk.sport上注册过的处理器。
+
+**发送消息**
+
+发送消息将会把结果传递给在该地址注册的所有处理器中的一个来接收，这是点对点模式，处理器的选择使用不严格的轮询算法。
+
+您可以使用[send](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/EventBus.html#send-java.lang.String-java.lang.Object-)来发送消息：
+
+```java
+eventBus.send("news.uk.sport", "Yay! Someone kicked a ball");
+```
+
+**设置消息头**
+
+在Event Bus上发送的消息可包含头信息。
+
+这可通过在发送或发布时提供的[DeliveryOptions](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/DeliveryOptions.html)来指定。
+
+```java
+DeliveryOptions options = new DeliveryOptions();
+options.addHeader("some-header", "some-value");
+eventBus.send("news.uk.sport", "Yay! Someone kicked a ball", options);
+```
+
+**消息顺序**
+
+Vert.x将按照特定发送者发送消息的顺序来传递消息给特定处理器。
+
+**消息对象**
+
+您在Message Handler中接收到的一个对象就是一个[Message](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/Message.html)。
+
+消息的[body](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/Message.html#body--)对应于发送或发布的对象。
+
+消息的头信息在[headers](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/Message.html#headers--)中可用。
+
+**确认消息/发送回复**
+
+当使用[send](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/EventBus.html#send-java.lang.String-java.lang.Object-)(发送消息）时Event Bus会尝试将详细传递到在Event Bus上注册过的[MessageConsumer](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/MessageConsumer.html)中。
+
+在某些情况下，发送者知道消费者何时收到消息并“处理”消息是有用的。
+
+要确认消息已被处理，消费者可以通过调用[reply](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/Message.html#reply-java.lang.Object-)来回复消息。
+
+当这种情况发生，它会将消息回发给发送者并且在回复中调用Reply Handler。
+
+一个例子将使之更清楚：
+
+接收者【Receiver】：
+
+```java
+MessageConsumer<String> consumer = eventBus.consumer("news.uk.sport");
+consumer.handler(message -> {
+  System.out.println("I have received a message: " + message.body());
+  message.reply("how interesting!");
+});
+```
+
+发送者【Sender】：
+
+```java
+eventBus.send("news.uk.sport", "Yay! Someone kicked a ball across a patch of grass", ar -> {
+  if (ar.succeeded()) {
+    System.out.println("Received reply: " + ar.result().body());
+  }
+});
+```
+
+这个回复可有用信息在消息体中。
+
+什么是“处理”？实际上它是应用程序定义的，完全取决于消费者如何执行，不是Vert.x中的Event Bus本身知道或关心的东西，
+
+一些例子：
+
+* 一个简单的实现了一个返回当天时间服务的消息消费者会去确认回复的消息体中包含了当天时间信息。
+* 一个实现了持久化队列的消息消费者，也许会用`true`确认消息已经成功持久化到存储中，或`false`表示（持久化）失败。
+* 一个处理订单的消息消费者也许会用`true`确认这个订单已经成功处理，因此它可以从数据库中删除。
+
+**带超时的发送**
+
+当发送带有Reply Handler的消息时，可以在[DeliveryOptions](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/DeliveryOptions.html)中指定一个超时时间。
+
+如果恢复在这个时间只能没有收到，则Reply Handler将被调用失败。默认超时是30秒。
+
+**发送故障**
+
+消息发送可能会因为其他原因故障，包括：
+
+* 没有和发送消息对应的处理器可用
+* 接收者调用了[fail](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/Message.html#fail-int-java.lang.String-)显示声明故障
+
+在所有情况Reply Handler将会针对特定的故障被调用。
+
+**消息编解码器【Message Codecs】**
+
+若您定义并注册了一个[消息编解码](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/MessageCodec.html)器，您可以在Event Bus中发送任意您想要的对象。
+
+消息编解码器有一个名称，并且在发送或发布消息时在[DeliveryOptions](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/DeliveryOptions.html)中指定。
+
+```java
+eventBus.registerCodec(myCodec);
+
+DeliveryOptions options = new DeliveryOptions().setCodecName(myCodec.name());
+
+eventBus.send("orders", new MyPOJO(), options);
+```
+
+若您总是希望将特定类型对象用于相同的编解码器，那么您可以为其注册默认编解码器，这样您就不需要在[DeliveryOptions](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/DeliveryOptions.html)中指定特定编解码器。
+
+```java
+eventBus.registerDefaultCodec(MyPOJO.class, myCodec);
+
+eventBus.send("orders", new MyPOJO());
+```
+
+您可以使用[unregisterCodec](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/EventBus.html#unregisterCodec-java.lang.String-)撤销一个消息编解码器。
+
+消息编解码器并不一定使用同一类型进行编码和解码。例如您可以编写一个编解码器允许MyPOJO类被编码发送，但是当消息发送给处理器后解码成MyOtherPOJO类。
+
+**集群Event Bus**
+
+Event Bus不仅仅存在于单个Vert.x实例中，通过您在网络上将不同的Vert.x实例集群在一起，它可以形成一个单一的、分布式的Event Bus。
+
+**编程化集群**
+
+若您用编程的方式创建Vert.x实例，则可以通过将Vert.x实例配置成集群来获取集群的Event Bus。
+
+```java
+VertxOptions options = new VertxOptions();
+Vertx.clusteredVertx(options, res -> {
+  if (res.succeeded()) {
+    Vertx vertx = res.result();
+    EventBus eventBus = vertx.eventBus();
+    System.out.println("We now have a clustered event bus: " + eventBus);
+  } else {
+    System.out.println("Failed: " + res.cause());
+  }
+});
+```
+
+您应该确保您有一个[ClusterManager](http://vertx.io/docs/apidocs/io/vertx/core/spi/cluster/ClusterManager.html)实现类在您的类路径中，如默认的`HazelcastClusterManager`。
+
+**通过命令行集群**
+
+您可以用下边命令运行一个Vert.x集群
+
+```
+vertx run my-verticle.js -cluster
+```
+
+**Verticle中的自动清理**
+
+若您在Verticle中注册了Event Bus的处理器，这些处理器在Verticle被撤销的时候会自动被注销。
+
+### 配置Event Bus
+
+Event Bus可以配置，当Event Bus运行在集群模式这是特别有用的。在引擎【hood】之下，Event Bus使用TCP连接发送和接收消息，因此[EventBusOptions](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/EventBusOptions.html)可以让您配置TCP连接的所有方面。由于Event Bus作为了服务端和客户端，这些配置近似于[NetClientOptions](http://vertx.io/docs/apidocs/io/vertx/core/net/NetClientOptions.html)和[NetServerOptions](http://vertx.io/docs/apidocs/io/vertx/core/net/NetServerOptions.html)。
+
+```java
+VertxOptions options = new VertxOptions()
+    .setEventBusOptions(new EventBusOptions()
+        .setSsl(true)
+        .setKeyStoreOptions(new JksOptions().setPath("keystore.jks").setPassword("wibble"))
+        .setTrustStoreOptions(new JksOptions().setPath("keystore.jks").setPassword("wibble"))
+        .setClientAuth(ClientAuth.REQUIRED)
+    );
+
+Vertx.clusteredVertx(options, res -> {
+  if (res.succeeded()) {
+    Vertx vertx = res.result();
+    EventBus eventBus = vertx.eventBus();
+    System.out.println("We now have a clustered event bus: " + eventBus);
+  } else {
+    System.out.println("Failed: " + res.cause());
+  }
+});
+```
+
+上边代码段描述了如何在Event Bus中使用SSL连接替换纯的TCP连接。
+
+*警告：要在集群模式下强制执行安全性，您必须将集群管理器【Cluster】配置成加密的或强制安全性（的方式）。参考集群管理器的文档获取更多细节。*
+
+Event Bus的配置需要在所有集群节点中保持一致性。
+
+[EventBusOptions](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/EventBusOptions.html)还允许您指定Event Bus是否集群、主机信息和端口，您可使用[setClustered](http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html#setClustered-boolean-)、[getClusterHost](http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html#getClusterHost--)和[getClusterPort](http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html#getClusterPort--)这样做。
+
+在容器中使用时，您也可以配置公共主机和端口号：
+
+```java
+VertxOptions options = new VertxOptions()
+    .setEventBusOptions(new EventBusOptions()
+        .setClusterPublicHost("whatever")
+        .setClusterPublicPort(1234)
+    );
+
+Vertx.clusteredVertx(options, res -> {
+  if (res.succeeded()) {
+    Vertx vertx = res.result();
+    EventBus eventBus = vertx.eventBus();
+    System.out.println("We now have a clustered event bus: " + eventBus);
+  } else {
+    System.out.println("Failed: " + res.cause());
+  }
+});
+```
+
+### JSON
 
 
 
