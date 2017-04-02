@@ -547,6 +547,16 @@ _注意：您不需要在一个Verticle的stop方法中手工去撤销启动时�
 
 #### Verticle类型
 
+这儿有三种不同类型的Verticle：
+
+* **Stardand Verticles**：这是常用的一类Verticle——它们会被一个Event Loop线程执行，稍后的章节我们会讨论更多。
+* **Worker Verticles**：这类Verticle会使用Worker Pool中的线程，一个实例绝对不会被多个线程同时执行。
+* **Multi-threaded worker verticles**：这类Verticle也会使用Worker Pool中的线程，一个实例可以由多个线程同时执行。
+
+#### Standard Verticles
+
+当Standard Verticle被创建时，它会被分派给一个Event Loop线程，并在这个Event Loop中执行它的start方法。当您调用
+
 ## 引用
 
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
