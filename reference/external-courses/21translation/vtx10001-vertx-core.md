@@ -7,12 +7,13 @@
 * Writing：编写（有些地方译为开发）
 * Event Bus：事件总线
 * Options：配置项
+* Handler/Handle：处理器/处理
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
 ## 正文
 
-Vert.x内部的Java API集合称为**Vert.x Core**，[文档地址](https://github.com/eclipse/vert.x)。
+Vert.x内部的Java API集合我们称为**Vert.x Core**，[文档地址](https://github.com/eclipse/vert.x)。
 
 Vert.x Core提供了下列功能
 
@@ -30,11 +31,11 @@ Vert.x Core提供了下列功能
 
 Core中这些功能相当底层——您不会在这里找到类似数据库访问、授权或高层Web应用的材料，这些材料您可以在**Vert.x ext** \[1\]（扩展包）中找到。
 
-**Vert.x Core**很小、很轻量级，您可以仅仅使用您想要的（功能），它可以完全嵌入在已存在的应用里——它不强制您使用特殊的方式构造【Structure】您的应用，所以您可以（随时）使用Vert.x。
+**Vert.x Core**很小、很轻量级，您可以仅仅使用您想要的（功能），它可以完全嵌入在已存在的应用里——我们不强制您使用特殊的方式构造【Structure】您的应用，所以您可以（随时）使用Vert.x。
 
-您可以使用Vert.X支持的其他语言中的任意一种（来开发）。但这儿有一个很酷的点——它不强制您直接使用Java API，（也可以使用）JavaScript或Ruby——毕竟，不同的语言有不同的约定和风格，若让Ruby开发员强制使用Java编码风格将会变得很奇怪。相反，它会为每一种语言自动生成和核心Java API等价的符合语言习惯的（API）。
+您可以使用Vert.X支持的其他语言中的任意一种（来开发）。但这儿有一个很酷的点——我们不强制您直接使用Java API，（也可以使用）JavaScript或Ruby——毕竟，不同的语言有不同的约定和风格，若让Ruby开发员强制使用Java编码风格将会变得很奇怪。相反，我们会为每一种语言自动生成和核心Java API等价的符合语言习惯的（API）。
 
-从现在开始文中使用core代表**Vert.x Core**。
+从现在开始文中我们使用core代表**Vert.x Core**。
 
 如果您在使用Maven或Gradle \[2\]，将下列依赖项添加到您的项目描述（文件）中`dependencies`节点【section】来访问**Vert.x Core**的API：
 
@@ -117,7 +118,7 @@ response.end();
 
 ### 不要Call它，它会Call您 \[3\]
 
-Vert.x的API大部分都是事件驱动【Event Driven】，也就是说您对Vert.x中发生的事情感兴趣时它会通过给您发送事件的方式Call您。
+Vert.x的API大部分都是事件驱动，也就是说您对Vert.x中发生的事情感兴趣时它会通过给您发送事件的方式Call您。
 
 一些事件的例子如下：
 
@@ -126,6 +127,32 @@ Vert.x的API大部分都是事件驱动【Event Driven】，也就是说您对Ve
 * 从磁盘中读取了一些数据
 * 发生了一个异常
 * HTTP服务器收到了一个请求
+
+您可以使用Vert.x API提供的处理器来处理事件。例如每隔一秒收到一个计时器事件您可以这样做：
+
+```java
+vertx.setPeriodic(1000, id -> {
+  // This handler will get called every second
+  // 这个处理器将会每隔一秒被调用一次
+  System.out.println("timer fired!");
+});
+```
+
+又或者收到一个HTTP请求：
+
+```java
+server.requestHandler(request -> {
+  // This handler will be called every time an HTTP request is received at the server
+  // 服务器每次收到一个HTTP请求时这个处理器将被调用
+  request.response().end("hello world!");
+});
+```
+
+当Vert.x有一个事件要传给您的处理器时，一段时间后它会异步调用这个处理器。
+
+这一点主导了Vert.x中一些重要的概念。
+
+### 不要阻塞它
 
 
 
