@@ -202,7 +202,7 @@ Vert.x或应用程序块中没有任何阻塞，这个事件循环可以快速�
 
 我们将这种模式称为多反应堆模式【Multi-Reactor】，将它和单线程反应堆模式进行区分。
 
-_注意：即使一个Vertx实例维护了多个事件循环，任何_
+_注意：即使一个Vertx实例维护了多个事件循环，任何特殊的处理器也不会同时执行，大部分情况下（除开_[_Worker Verticle_](http://vertx.io/docs/vertx-core/java/#worker_verticles)之_外）_
 
 ## 引用
 
