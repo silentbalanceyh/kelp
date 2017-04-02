@@ -65,6 +65,12 @@ _注意：本文大部分内容专用于Java语言——若有需要可以切换
 
 那么您怎么去获取一个（Vert.x）实例呢？
 
+如果将Vert.x嵌入在应用中，您可以通过下边的方式简单创建一个实例：
+
+```java
+Vertx vertx = Vertx.vertx();
+```
+
 ## 引用
 
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
