@@ -270,9 +270,7 @@ vertx.executeBlocking(future -> {
 
 若您不需要关心您调用[executeBlocking](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#executeBlocking-io.vertx.core.Handler-boolean-io.vertx.core.Handler-)的顺序，可以将`ordered`参数的值设为false。这样任何executeBlocking都会在一个Worker Pool中并行执行。
 
-另外一种运行阻塞式代码的方法是使用Worker Verticle。
-
-
+另外一种运行阻塞式代码的方法是使用[Worker Verticle](http://vertx.io/docs/vertx-core/java/#worker_verticles)。
 
 ## 引用
 
