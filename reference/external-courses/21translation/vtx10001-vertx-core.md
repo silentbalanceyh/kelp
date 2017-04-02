@@ -9,9 +9,9 @@
 
 ## 正文
 
-Vert.X内部的Java API集合称为**Vert.X Core**，[文档地址](https://github.com/eclipse/vert.x)。
+Vert.x内部的Java API集合称为**Vert.x Core**，[文档地址](https://github.com/eclipse/vert.x)。
 
-Vert.X Core提供了下列功能
+Vert.x Core提供了下列功能
 
 * 开发TCP客户端和服务端
 * 开发HTTP客户端和支持WebSocket的服务端
@@ -25,7 +25,7 @@ Vert.X Core提供了下列功能
 * 高可用性
 * 集群
 
-Core中这些功能相当底层——您不会在这里找到类似数据库访问、授权或高层Web应用的材料，这些材料您可以在**Vert.X ext **\[1\]（扩展包）中找到。
+Core中这些功能相当底层——您不会在这里找到类似数据库访问、授权或高层Web应用的材料，这些材料您可以在**Vert.x ext** \[1\]（扩展包）中找到。
 
 **Vert.X Core**很小、很轻量级，您可以仅仅使用您想要的（功能），它可以完全嵌入在已存在的应用里——它不强制您使用特殊的方式构造【Structure】您的应用，所以您可以（随时）使用Vert.X。
 
