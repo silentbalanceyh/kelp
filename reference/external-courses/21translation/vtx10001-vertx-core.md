@@ -8,7 +8,7 @@
 * Event Bus：事件总线
 * Options：配置项
 
-_注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：`io.vertx.core.Vertx`。_
+_注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
 ## 正文
 
@@ -89,6 +89,8 @@ Vertx vertx = Vertx.vertx(new VertxOptions().setWorkerPoolSize(40));
 [VertxOptions](http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html)对象有很多设置，它允许您配置一些类似集群、高可用、池大小等其他各种设置，Javadoc中描述了所有设置的细节。
 
 #### 创建集群的Vert.x对象
+
+如果您想创建一个集群的Vert.x【Clustered Vert.x】（参考[event bus](http://vertx.io/docs/vertx-core/java/#event_bus)章节了解更多事件总线集群的细节），通常您将使用异步变体来创建一个Vertx对象。
 
 ## 引用
 
