@@ -509,7 +509,7 @@ public class MyVerticle extends AbstractVerticle {
 
   public void start(Future<Void> startFuture) {
     // Now deploy some other verticle:
-	// 现在部署其他的一些verticle
+    // 现在部署其他的一些verticle
     vertx.deployVerticle("com.foo.OtherVerticle", res -> {
       if (res.succeeded()) {
         startFuture.complete();
@@ -543,11 +543,9 @@ public class MyVerticle extends AbstractVerticle {
 }
 ```
 
-*注意：您不需要在一个Verticle的stop方法中手工去撤销启动时部署的子Verticle，当父Verticle在撤销时Vert.x会自动撤销任何子Verticle。*
+_注意：您不需要在一个Verticle的stop方法中手工去撤销启动时部署的子Verticle，当父Verticle在撤销时Vert.x会自动撤销任何子Verticle。_
 
 #### Verticle类型
-
-
 
 ## 引用
 
