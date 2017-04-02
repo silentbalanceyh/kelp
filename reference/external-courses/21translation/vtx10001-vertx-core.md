@@ -272,6 +272,10 @@ vertx.executeBlocking(future -> {
 
 另外一种运行阻塞式代码的方法是使用[Worker Verticle](http://vertx.io/docs/vertx-core/java/#worker_verticles)。
 
+一个Worker Verticle始终会使用Worker Pool中的某个线程来执行。
+
+
+
 ## 引用
 
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
