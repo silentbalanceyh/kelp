@@ -73,7 +73,7 @@ Vertx vertx = Vertx.vertx();
 
 如果您要使用Verticle——
 
-_注意：大部分应用将只会需要一个Vert.x实例，但_
+_注意：大部分应用将只会需要一个Vert.x实例，但如果您有需要也有可能创建多个Vert.x实例，如：_
 
 ## 引用
 
