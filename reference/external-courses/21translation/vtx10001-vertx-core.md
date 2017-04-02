@@ -182,7 +182,7 @@ server.requestHandler(request -> {
 
 我们前边提过Vert.x的API都是事件驱动的——当事件可用时Vert.x 将这个事件传给处理器。
 
-在多数情况下，Vert.x使用一个称为事件循环的线程来调用您的处理器。
+在多数情况下，Vert.x使用一个称为事件循环\[4\]的线程来调用您的处理器。
 
 Vert.x或应用程序块中没有任何阻塞，这个事件循环线程可以快速地运行，以便在事件到达时向不同的处理器成功传递事件。
 
@@ -201,6 +201,7 @@ Vert.x或应用程序块中没有任何阻塞，这个事件循环线程可以�
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
 2. 两种常用的项目构建工具。
 3. Don't call us, we'll call you，Call斟酌了很久是翻译还是不翻译，”调用“在这个标题中听起来过于生硬，为了辅助理解没有翻译。
+4. Event Loop在文中翻译成事件循环，一般用事件循环线程代替名词概念。
 
 ## 注释
 
