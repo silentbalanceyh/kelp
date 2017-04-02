@@ -27,13 +27,13 @@ Vert.x Core提供了下列功能
 
 Core中这些功能相当底层——您不会在这里找到类似数据库访问、授权或高层Web应用的材料，这些材料您可以在**Vert.x ext** \[1\]（扩展包）中找到。
 
-**Vert.X Core**很小、很轻量级，您可以仅仅使用您想要的（功能），它可以完全嵌入在已存在的应用里——它不强制您使用特殊的方式构造【Structure】您的应用，所以您可以（随时）使用Vert.X。
+**Vert.x Core**很小、很轻量级，您可以仅仅使用您想要的（功能），它可以完全嵌入在已存在的应用里——它不强制您使用特殊的方式构造【Structure】您的应用，所以您可以（随时）使用Vert.x。
 
 您可以使用Vert.X支持的其他语言中的任意一种（来开发）。但这儿有一个很酷的点——它不强制您直接使用Java API，（也可以使用）JavaScript或Ruby——毕竟，不同的语言有不同的约定和风格，若让Ruby开发员强制使用Java编码风格将会变得很奇怪。相反，它会为每一种语言自动生成和核心Java API等价的符合语言习惯的（API）。
 
-从现在开始文中使用core代表**Vert.X Core**。
+从现在开始文中使用core代表**Vert.x Core**。
 
-如果您在使用Maven或Gradle \[2\]，将下列依赖项添加到您的项目描述（文件）中`dependencies`节点【section】来访问**Vert.X Core**的API：
+如果您在使用Maven或Gradle \[2\]，将下列依赖项添加到您的项目描述（文件）中`dependencies`节点【section】来访问**Vert.x Core**的API：
 
 * Maven（您的`pom.xml`中）
 
