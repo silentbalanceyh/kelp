@@ -274,7 +274,7 @@ vertx.executeBlocking(future -> {
 
 一个Worker Verticle始终会使用Worker Pool中的某个线程来执行。
 
-默认的阻塞式代码会在Vert.x的阻塞代码池【blocking code pool】中执行，通过setWorkerPoolSize配置
+默认的阻塞式代码会在Vert.x的阻塞代码池【blocking code pool】中执行，通过[setWorkerPoolSize](http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html#setWorkerPoolSize-int-)配置
 
 ## 引用
 
