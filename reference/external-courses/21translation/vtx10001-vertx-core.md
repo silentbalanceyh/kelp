@@ -8,6 +8,8 @@
 * Reactor：反应堆
 * Options：配置项
 * Context：上下文环境
+* Undeploy：撤销（对应发布/部署）
+* Destroyed：销毁
 * Handler/Handle：处理器/处理
 * Block：阻塞
 * Out of Box：标准环境（开箱即用）
@@ -462,7 +464,37 @@ Verticle是由Vert.x部署和运行的代码块，默认情况一个Vert.x实例
 
 Verticle类必须实现[Verticle](http://vertx.io/docs/apidocs/io/vertx/core/Verticle.html)接口。
 
-如果你喜欢可以直接实现该接口，但是通常直接从抽象类[AbstractVerticle](http://vertx.io/docs/apidocs/io/vertx/core/AbstractVerticle.html)中继承更简单。
+如果你喜欢可以直接实现该接口，但是通常直接从抽象类[AbstractVerticle](http://vertx.io/docs/apidocs/io/vertx/core/AbstractVerticle.html)继承更简单。
+
+这儿有一个例子：
+
+```java
+public class MyVerticle extends AbstractVerticle {
+
+  // Called when verticle is deployed
+  // Verticle部署时调用
+  public void start() {
+  }
+
+  // Optional - called when verticle is undeployed
+  // 可选 - Verticle撤销时调用
+  public void stop() {
+  }
+
+}
+```
+
+通常您需要像上边例子一样重写start方法。
+
+当Vert.x部署一个Verticle时，它的start方法将被调用，这个方法执行完成后Verticle会是started（的状态）。
+
+您同样可以重写stop方法，当Vert.x撤销一个Verticle时它会被调用，这个方法执行完成后Verticle会是stopped（的状态）。
+
+#### Verticle异步启动和停止
+
+有些时候您的Verticle启动会耗费一些时间，您想要在这个过程做一些事，并且您做的这些事并不想等到Verticle发布完成过后再发生。如：您想在start方法中发布其他的Verticle。
+
+您不能在您的start方法中阻塞等待其他的Verticle发布完成，这样做会破坏黄金法则。
 
 ## 引用
 
