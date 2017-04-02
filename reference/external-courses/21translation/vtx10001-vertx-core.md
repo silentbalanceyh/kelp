@@ -2682,6 +2682,40 @@ request.handler(buffer -> {
 });
 ```
 
+传递给处理器的对象是一个[Buffer](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html)，当数据从网络到达时，处理器可以多次被调用，这取决于请求体的大小。
+
+在某些情况下（例：若请求体很小），您将需要将这个请求体聚合到内存中，以便您可以按照下边的方式进行聚合：
+
+
+```java
+Buffer totalBuffer = Buffer.buffer();
+
+request.handler(buffer -> {
+  System.out.println("I have received a chunk of the body of length " + buffer.length());
+  totalBuffer.appendBuffer(buffer);
+});
+
+request.endHandler(v -> {
+  System.out.println("Full body received, length = " + totalBuffer.length());
+});
+```
+
+这是一个常见的情况，Vert.x为您提供了一个[bodyHandler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#bodyHandler-io.vertx.core.Handler-)来执行此操作，当所有请求体被收到时，bodyHandler处理器程序会被调用一次：
+
+```java
+request.bodyHandler(totalBuffer -> {
+  System.out.println("Full body received, length = " + totalBuffer.length());
+});
+```
+
+#### Pumping请求
+
+请求对象是一个[ReadStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html)，因此您可以将请求体引导到任何[WriteStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html)实例中。
+
+有关详细的说明，请参阅[流和泵](http://vertx.io/docs/vertx-core/java/#streams)的章节。
+
+#### 处理HTML表单
+
 
 
 ## 引用
