@@ -6,10 +6,10 @@
 * Server：服务端
 * Writing：编写（有些地方译为开发）
 * Event Bus：事件总线
-* Event Loop：事件轮询（线程）
+* Event Loop：事件循环
 * Reactor：反应堆
 * Options：配置项
-* Handler/Handle：处理器/处理
+* Handler/Handle：处理程序/处理
 * Block：阻塞
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
@@ -182,15 +182,17 @@ server.requestHandler(request -> {
 
 我们前边提过Vert.x的API都是事件驱动的——当事件可用时Vert.x 将这个事件传给处理器。
 
-在多数情况下，Vert.x使用一个称为事件轮询的线程来调用您的处理器。
+在多数情况下，Vert.x使用一个称为事件循环的线程来调用您的处理器。
 
-Vert.x或应用程序块中没有任何阻塞，这个事件轮询线程可以快速地运行，以便在事件到达时向不同的处理器成功传递事件。
+Vert.x或应用程序块中没有任何阻塞，这个事件循环线程可以快速地运行，以便在事件到达时向不同的处理器成功传递事件。
 
-因为没有阻塞，一个事件轮询线程可以在短时间内传递大量的事件。例如，单个事件轮询线程可以很快处理数千个HTTP请求。
+因为没有阻塞，一个单事件循环线程可以在短时间内传递大量的事件。例如，一个单事件循环线程可以很快处理数千个HTTP请求。
 
-我们称之为[Reactor模式](https://en.wikipedia.org/wiki/Reactor_pattern)。
+我们称之为[反应堆【Reactor】模式](https://en.wikipedia.org/wiki/Reactor_pattern)。
 
 您之前也许听说过它——例如Node.js实现了这种模式。
+
+一个标准的反应堆实现中，有一个单事件循环线程在一个Loop中循环执行，当所有事件到达时将这些事件传递给所有处理程序。
 
 ## 引用
 
