@@ -396,6 +396,56 @@ CompositeFuture.join(future1, future2, future3).setHandler(ar -> {
 CompositeFuture.join(Arrays.asList(future1, future2, future3));
 ```
 
+#### 顺序组合【Sequential Composition】
+
+**1.compose**
+
+和`all`以及`any`实现的并发组合不同，[compose](http://vertx.io/docs/apidocs/io/vertx/core/Future.html#compose-io.vertx.core.Handler-io.vertx.core.Future-)用于链式化【chaining】future（顺序组合）。
+
+```java
+FileSystem fs = vertx.fileSystem();
+Future<Void> startFuture = Future.future();
+
+Future<Void> fut1 = Future.future();
+fs.createFile("/foo", fut1.completer());
+
+fut1.compose(v -> {
+  // When the file is created (fut1), execute this:
+  // fut1中文件创建完成后执行
+  Future<Void> fut2 = Future.future();
+  fs.writeFile("/foo", Buffer.buffer(), fut2.completer());
+  return fut2;
+}).compose(v -> {
+          // When the file is written (fut2), execute this:
+		  // fut2文件写入完成后执行
+          fs.move("/foo", "/bar", startFuture.completer());
+        },
+        // mark startFuture it as failed if any step fails.
+		// 如果任何一步失败，将startFuture标记成failed
+        startFuture);
+```
+
+这里例子中，有三个操作被链式化：
+
+1. 一个文件被创建（`fut1`）
+2. 一些东西被写入到文件（`fut2`）
+3. 文件被移走（`startFuture`）
+
+如果这三个步骤全部成功，则最终的future（`startFuture`）返回*succeeded*，然而任何一步失败，则最终future返回*failed*。
+
+使用例子：
+
+* [compose](http://vertx.io/docs/apidocs/io/vertx/core/Future.html#compose-io.vertx.core.Handler-io.vertx.core.Future-)：当前future完成时，执行返回future的函数。当返回的future完成时，它会完成该组合。
+* [compose](http://vertx.io/docs/apidocs/io/vertx/core/Future.html#compose-io.vertx.core.Handler-io.vertx.core.Future-)：当前future完成时，执行完成下一个future的处理器。
+
+在第二个例子中，处理器（[Handler](http://vertx.io/docs/apidocs/io/vertx/core/Handler.html)）应该完成下一个（`next`）future过后来报告成功或者失败。
+
+您可以使用[completer](http://vertx.io/docs/apidocs/io/vertx/core/Future.html#completer--)来完成一个带操作结果（自定义）或失败的future，它避免使用传统方式编写：如果成功则完成future，否则就失败【if success then complete the future else fail the future】。
+
+### Verticles
+
+
+
 ## 引用
 
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
