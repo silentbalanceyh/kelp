@@ -268,13 +268,41 @@ vertx.executeBlocking(future -> {
 
 默认情况，如果executeBlocking在同一个上下文环境中（如：同一个Verticle实例）被调用了多次，那么这些不同的executeBlocking代码块会顺序执行（一个接一个）。
 
-若您不需要关心您调用[executeBlocking](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#executeBlocking-io.vertx.core.Handler-boolean-io.vertx.core.Handler-)的顺序，可以将`ordered`参数的值设为false。这样任何executeBlocking都会在一个Worker Pool中并行执行。
+若您不需要关心您调用[executeBlocking](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#executeBlocking-io.vertx.core.Handler-boolean-io.vertx.core.Handler-)的顺序，可以将`ordered`参数的值设为false。这样任何executeBlocking都会在一个worker Pool (1)中并行执行。
 
 另外一种运行阻塞式代码的方法是使用[Worker Verticle](http://vertx.io/docs/vertx-core/java/#worker_verticles)。
 
-一个Worker Verticle始终会使用Worker Pool中的某个线程来执行。
+一个Worker Verticle始终会使用worker Pool中的某个线程来执行。
 
-默认的阻塞式代码会在Vert.x的阻塞代码池【blocking code pool】中执行，通过[setWorkerPoolSize](http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html#setWorkerPoolSize-int-)配置
+默认的阻塞式代码会在Vert.x的blocking code pool中执行，通过[setWorkerPoolSize](http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html#setWorkerPoolSize-int-)配置。
+
+若有不同的目的，可以创建额外的pool：
+
+```java
+WorkerExecutor executor = vertx.createSharedWorkerExecutor("my-worker-pool");
+executor.executeBlocking(future -> {
+  // Call some blocking API that takes a significant amount of time to return
+  // 调用一些需要耗费大量可用时间返回结果的阻塞式API
+  String result = someAPI.blockingMethod("hello");
+  future.complete(result);
+}, res -> {
+  System.out.println("The result is: " + res.result());
+});
+```
+
+这个`worker executor` (2)在不需要的时候必须被关闭：
+
+```java
+executor.close();
+```
+
+当使用同一个名字创建了许多worker时，它们将共享同一个pool，所有的worker executor调用了`closed()`被关闭过后，这个worker pool会被销毁。
+
+在一个Verticle中创建了一个`executor`时，Verticle实例被销毁的时候Vert.x也会自动关闭这个`executor`。
+
+
+
+
 
 ## 引用
 
@@ -283,6 +311,9 @@ vertx.executeBlocking(future -> {
 3. Don't call us, we'll call you，Call斟酌了很久是翻译还是不翻译，”调用“在这个标题中听起来过于生硬，为了辅助理解没有翻译。
 
 ## 注释
+
+1. 在这个章节中worker pool和blocking code pool应该是等价概念，就是工作线程池，专用于执行阻塞式代码的线程集合。
+2. worker executor和executor在这个章节也就是等价概念，创建一个执行器创建额外的工作线程池，执行器用来管理这个额外的线程池。
 
 ## 结语
 
