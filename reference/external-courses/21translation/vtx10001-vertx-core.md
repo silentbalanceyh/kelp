@@ -119,6 +119,16 @@ response.end();
 
 Vert.x的API大部分都是事件驱动【Event Driven】，也就是说您对Vert.x中发生的事情感兴趣时它会通过给您发送事件的方式Call您。
 
+一些事件的例子如下：
+
+* 触发一个计时器
+* 一个Socket收到了一些数据
+* 从磁盘中读取了一些数据
+* 发生了一个异常
+* HTTP服务器收到了一个请求
+
+
+
 ## 引用
 
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
