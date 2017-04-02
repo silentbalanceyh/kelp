@@ -8,7 +8,7 @@
 * Reactor：反应堆
 * Options：配置项
 * Context：上下文环境
-* Undeploy：撤销（对应发布/部署）
+* Undeploy：撤销（部署）
 * Destroyed：销毁
 * Handler/Handle：处理器/处理
 * Block：阻塞
@@ -492,9 +492,62 @@ public class MyVerticle extends AbstractVerticle {
 
 #### Verticle异步启动和停止
 
-有些时候您的Verticle启动会耗费一些时间，您想要在这个过程做一些事，并且您做的这些事并不想等到Verticle发布完成过后再发生。如：您想在start方法中发布其他的Verticle。
+有些时候您的Verticle启动会耗费一些时间，您想要在这个过程做一些事，并且您做的这些事并不想等到Verticle部署完成过后再发生。如：您想在start方法中部署其他的Verticle。
 
-您不能在您的start方法中阻塞等待其他的Verticle发布完成，这样做会破坏[黄金法则](http://vertx.io/docs/vertx-core/java/#golden_rule)。
+您不能在您的start方法中阻塞等待其他的Verticle部署完成，这样做会破坏[黄金法则](http://vertx.io/docs/vertx-core/java/#golden_rule)。
+
+所以您要怎么做？
+
+您可以实现异步版本的start方法来做这个事。这个版本的方法需要一个Future作参数，方法执行完时，Verticle实例并没有部署好（状态不是deployed）。
+
+稍后，您完成了所有您需要做的事（如：启动其他Verticle），您可以调用Future的complete（或fails）方法来示意您完成了。
+
+这儿有一个例子：
+
+```java
+public class MyVerticle extends AbstractVerticle {
+
+  public void start(Future<Void> startFuture) {
+    // Now deploy some other verticle:
+	// 现在部署其他的一些verticle
+    vertx.deployVerticle("com.foo.OtherVerticle", res -> {
+      if (res.succeeded()) {
+        startFuture.complete();
+      } else {
+        startFuture.fail(res.cause());
+      }
+    });
+  }
+}
+```
+
+同样的，这儿也有一个异步版本的stop方法，如果您想做一些耗时的Verticle清理工作，您可以使用它。
+
+```java
+public class MyVerticle extends AbstractVerticle {
+
+  public void start() {
+    // Do something
+    // 做一些事
+  }
+
+  public void stop(Future<Void> stopFuture) {
+    obj.doSomethingThatTakesTime(res -> {
+      if (res.succeeded()) {
+        stopFuture.complete();
+      } else {
+        stopFuture.fail();
+      }
+    });
+  }
+}
+```
+
+*注意：您不需要在一个Verticle的stop方法中手工去撤销启动时部署的子Verticle，当父Verticle在撤销时Vert.x会自动撤销任何子Verticle。*
+
+#### Verticle类型
+
+
 
 ## 引用
 
