@@ -567,7 +567,27 @@ _注意：您不需要在一个Verticle的stop方法中手工去撤销启动时�
 
 Worker Verticle被设计来调用阻塞式代码，但它不会阻塞任何Event Loop。
 
-如果您不想使用Worker Verticle来运行阻塞式代码，您还可以在一个Event Loop中直接使用[内联阻塞式代码](http://vertx.io/docs/vertx-core/java/#blocking_code)。
+如果您不想使用Worker Verticle来运行阻塞式代码，您还可以在一个Event Loop中直接使用[内联阻塞式代码](http://vertx.io/docs/vertx-core/java/#blocking_code)（前文中executeBlocking）。
+
+若您想要将Verticle部署成一个Worker Verticle，用[setWorker](http://vertx.io/docs/apidocs/io/vertx/core/DeploymentOptions.html#setWorker-boolean-)来做：
+
+```java
+DeploymentOptions options = new DeploymentOptions().setWorker(true);
+vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", options);
+```
+
+Worker Verticle实例绝对不会在Vert.x中被多个线程同时执行，但它可以在不同时间由不同线程执行。
+
+**Multi-threaded worker verticles**
+
+一个multi-threaded worker verticle近似于普通的Worker Verticle，但是它可以由不同的线程同时执行。
+
+*警告：Multi-threaded worker verticle是一个高级功能，大部分应用程序不会需要它。由于在这些Verticle中的并发性，您必须非常小心和使用Java技术中多线程编程方式保持状态一致性。*
+
+#### 编程方式部署Verticle
+
+
+
 
 ## 引用
 
