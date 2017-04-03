@@ -30,6 +30,7 @@
 * Header：请求/响应头
 * Body：请求/响应体（有些地方翻译成请求/响应正文）
 * Pipe：管道
+* Round-Robin：轮询
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
@@ -3588,7 +3589,7 @@ String contentLength = response.headers().get("content-lengh");
 
 当从报文【Wire】中读取到响应头时，响应处理器就会被调用。
 
-如果响应有响应体，它可能会在响应头被读取后的某个时间以分片的方式到达。 在调用响应处理程序之前，我们不要等待所有的响应体到达，因为它可能非常大而要等待很长时间、又或者会花费大量内存。
+如果响应有响应体，它可能会在响应头被读取后的某个时间以分片的方式到达。 在调用响应处理器之前，我们不要等待所有的响应体到达，因为它可能非常大而要等待很长时间、又或者会花费大量内存。
 
 当响应体的某部分（数据）到达时，[handler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html#handler-io.vertx.core.Handler-)将会被调用，而且传入的[Buffer](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html)中包含了响应体的这一分片（部分）内容，
 
@@ -3908,11 +3909,472 @@ HTTP的Keep alive允许HTTP连接用于多个请求，当您向同一台服务�
 
 Keep Alive的连接将不会被客户端自动关闭，要关闭它们您可以关闭客户端实例。
 
-或者，您可使用[setIdleTimeout](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setIdleTimeout-int-)设置超时时间——在设置的时间内然后没使用的连接将被关闭。请注意空闲超时值以秒为单位而不是毫秒。
+或者，您可使用[setIdleTimeout](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setIdleTimeout-int-)设置空闲时间——在设置的时间内然后没使用的连接将被关闭。请注意空闲超时值以秒为单位而不是毫秒。
 
 #### HTTP/1.1 Pipe-lining
 
 客户端还支持连接上的请求管道。
+
+管道意味着在返回一个响应之前，在同一个连接上发送另一个请求，管道不适合所有请求。
+
+若要启用管道，必须调用[setPipelining](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setPipelining-boolean-)方法，默认管道是禁止的。
+
+当启用管道时，请求可以不等待以前的响应返回而写入到连接。
+
+单个连接的管道请求限制数由[setPipeliningLimite](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setPipeliningLimit-int-)设置，此选项定义了发送到服务器的等待响应的最大请求数。这个限制可以确保和同一个服务器的连接分发到客户端的公平性。
+
+#### HTTP/2 多路复用【Multiplexing】
+
+HTTP/2提倡使用服务器的单一连接，默认情况下，HTTP客户端针对每个服务器都使用单一连接，同样服务器上的所有流都会复用到对应连接中。
+
+当客户端需要使用连接池并使用超过一个连接时，则可使用[setHttp2MaxPoolSize](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setHttp2MaxPoolSize-int-)。
+
+当您希望限制每个连接的多路复用流数量而使用连接池而不是单个连接时，可使用[setHttp2MultiplexingLimit](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setHttp2MultiplexingLimit-int-)。
+
+```java
+HttpClientOptions clientOptions = new HttpClientOptions().
+    setHttp2MultiplexingLimit(10).
+    setHttp2MaxPoolSize(3);
+
+// Uses up to 3 connections and up to 10 streams per connection
+// 每个连接最多可用三个连接，可连接10个流
+HttpClient client = vertx.createHttpClient(clientOptions);
+```
+
+连接的复用限制是在客户端上设置限制单个连接的流数量，如果服务器使用[SETTINGS_MAX_CONCURRENT_STREAMS](http://vertx.io/docs/apidocs/io/vertx/core/http/Http2Settings.html#setMaxConcurrentStreams-long-)设置了下限，则有效值可以更低。
+
+HTTP/2连接不会被客户端自动关闭，若要关闭它们，可以调用[close](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpConnection.html#close--)来关闭客户端实例。
+
+或者，您可以使用[setIdleTimeout](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setIdleTimeout-int-)设置空闲时间——这个时间内没有使用的任何连接将被关闭，注意，空闲时间以秒为单位，不是毫秒。
+
+#### HTTP连接
+
+[HttpConnection](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpConnection.html)提供了处理HTTP连接事件、生命周期、设置的API。
+
+HTTP/2实现了完整[HttpConnection](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpConnection.html)的API。
+
+HTTP/1.x实现了部分[HttpConnection](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpConnection.html)的API：仅关闭操作，实现了关闭处理器和异常处理器。该协议并不提供其他操作的语义。
+
+**服务器连接**
+
+[connection](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#connection--)方法会返回服务器上的请求连接：
+
+```java
+HttpConnection connection = request.connection();
+```
+
+可以在服务器上设置连接处理器【connection handler】，任意连接传入时可得到通知：
+
+```java
+HttpServer server = vertx.createHttpServer(http2Options);
+
+server.connectionHandler(connection -> {
+  System.out.println("A client connected");
+});
+```
+
+**客户端连接**
+
+[connection](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#connection--)方法会返回客户端上的连接请求：
+
+```java
+HttpConnection connection = request.connection();
+```
+
+可以在请求上设置连接处理器在连接发生时通知：
+
+```java
+request.connectionHandler(connection -> {
+  System.out.println("Connected to the server");
+});
+```
+
+**连接设置**
+
+HTTP/2的配置由[Http2Settings](http://vertx.io/docs/apidocs/io/vertx/core/http/Http2Settings.html)数据对象来配置。
+
+每个Endpoint都必须遵守连接另一端的发送设置。
+
+当建立连接时，客户端和服务器交换（各自的）初始配置，初始设置由客户端上的[setInitialSettings](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setInitialSettings-io.vertx.core.http.Http2Settings-)和服务器上的[setInitialSettings](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerOptions.html#setInitialSettings-io.vertx.core.http.Http2Settings-)配置。
+
+连接建立后可随时更改设置：
+
+```java
+connection.updateSettings(new Http2Settings().setMaxConcurrentStreams(100));
+```
+
+由于远程方应该确认接收者的配置更新，也有可能在回调中接收确认通知：
+
+```java
+connection.updateSettings(new Http2Settings().setMaxConcurrentStreams(100), ar -> {
+  if (ar.succeeded()) {
+    System.out.println("The settings update has been acknowledged ");
+  }
+});
+```
+
+相反，在收到新的远程设置时会通知[remoteSettingsHandler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpConnection.html#remoteSettingsHandler-io.vertx.core.Handler-)：
+
+```java
+connection.remoteSettingsHandler(settings -> {
+  System.out.println("Received new settings");
+});
+```
+
+*注意：这仅适用于HTTP/2协议。*
+
+**连接ping**
+
+HTTP/2连接ping对于确定连接往返时间或检查连接有效性很有用：[ping](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpConnection.html#ping-io.vertx.core.buffer.Buffer-io.vertx.core.Handler-)发送`PING`帧到远程Endpoint：
+
+```java
+Buffer data = Buffer.buffer();
+for (byte i = 0;i < 8;i++) {
+  data.appendByte(i);
+}
+connection.ping(data, pong -> {
+  System.out.println("Remote side replied");
+});
+```
+
+当接收到`PING`帧时，Vert.x将自动发送确认，可设置处理器当收到ping帧时发送通知调用处理器：
+
+```java
+connection.pingHandler(ping -> {
+  System.out.println("Got pinged by remote side");
+});
+```
+
+处理器只是接到通知，确认被发送，这个功能旨在基于HTTP/2协议之上实现。
+
+*注意：这仅适用于HTTP/2协议。*
+
+**连接关闭/离开**
+
+调用[shutdown](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpConnection.html#shutdown--)将发送`GOAWAY`帧到远程的连接，要求其停止创建流：客户端将停止执行新请求，并且服务器将停止推送响应。发送`GOAWAY`帧后，连接将等待一段时间（默认为30秒），直到所有当前流关闭和连接关闭：
+
+```java
+connection.shutdown();
+```
+
+[shutdownHandler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpConnection.html#shutdownHandler-io.vertx.core.Handler-)通知何时关闭流，连接尚未关闭。
+
+有可能只需发送`GOAWAY`帧，和关闭主要的区别在于它将只是告诉远程连接停止创建新流，并没有计划关闭连接：
+
+```java
+connection.goAway(0);
+```
+
+相反，也可以在收到`GOAWAY`时收到通知：
+
+```java
+connection.goAwayHandler(goAway -> {
+  System.out.println("Received a go away frame");
+});
+```
+
+当所有当前流已经关闭并且可关闭连接时，[shutdownHandler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpConnection.html#shutdownHandler-io.vertx.core.Handler-)将被调用：
+
+```java
+connection.goAway(0);
+connection.shutdownHandler(v -> {
+
+  // All streams are closed, close the connection
+  // 所有流被关闭，连接也关闭
+  connection.close();
+});
+```
+
+当接收到`GOAWAY`时也适用。
+
+*注意：这仅适用于HTTP/2协议。*
+
+**连接关闭**
+
+连接[close](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpConnection.html#close--)方法可关闭连接：
+
+* 它会关闭HTTP/1.x的Socket
+* HTTP/2中不延迟关闭，`GOAWAY`将会在连接关闭之前被发送
+
+连接关闭时[closeHandler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpConnection.html#closeHandler-io.vertx.core.Handler-)将发出通知。
+
+#### HttpClient使用
+
+HttpClient可以在一个Verticle中使用或者嵌入使用。
+
+在Verticle中使用时，Verticle应该使用自己的客户端实例。
+
+一般来说，不应该在不同的Vert.x上下文环境之间共享客户端，因为它可能导致意外行为。
+
+例如：保持活动连接将在打开连接的请求上下文环境调用客户端处理器，后续请求将使用相同上下文环境。
+
+当这种情况发生时，Vert.x会检测到并记录下边警告：
+
+```
+Reusing a connection with a different context: an HttpClient is probably shared between different Verticles
+```
+
+HttpClient可以嵌套在非Vert.x线程中，如单元测试或纯Java的`main`：客户端处理器将被不同的Vert.x线程和上下文调用，这样的上下文会根据需要创建。对于生产环境，不推荐这样使用。
+
+#### Server sharing
+
+当几个HTTP服务器在同一个端口上监听时，vert.x使用轮询策略来管理请求处理。
+
+我们用一个Verticle来创建一个HTTP服务器如：
+
+**io.vertx.examples.http.sharing.HttpServerVerticle**
+
+```java
+vertx.createHttpServer().requestHandler(request -> {
+  request.response().end("Hello from server " + this);
+}).listen(8080);
+```
+
+这个服务正在监听`8080`端口，所以，当这个Verticle被实例化多次，如：vertx运行：
+
+```
+vertx run io.vertx.examples.http.sharing.HttpServerVerticle -instances 2
+```
+
+将会发生什么？如果两个Verticle都绑定到同一个端口，您将收到一个Socket异常；幸运的是，vert.x正在为你处理这种情况。在与现有服务器相同的主机和端口上部署另一个服务器时，实际上并不会尝试创建在同一主机/端口上监听的新服务器，它只绑定一次到Socket，当接收到请求时，会按照轮询策略调用服务器处理器。
+
+我们现在想象一个客户端如：
+
+```java
+vertx.setPeriodic(100, (l) -> {
+  vertx.createHttpClient().getNow(8080, "localhost", "/", resp -> {
+    resp.bodyHandler(body -> {
+      System.out.println(body.toString("ISO-8859-1"));
+    });
+  });
+});
+```
+
+Vert.x将请求顺序委托给其中一个服务器：
+
+```
+Hello from i.v.e.h.s.HttpServerVerticle@1
+Hello from i.v.e.h.s.HttpServerVerticle@2
+Hello from i.v.e.h.s.HttpServerVerticle@1
+Hello from i.v.e.h.s.HttpServerVerticle@2
+...
+```
+
+因此，服务器可直接扩展可用的核，而每个Vert.x中的Verticle实例仍然严格使用单线程，您不需要像编写负载均衡器【Load-Balancers】那样使用任何特殊技巧去编写，以便在多核机器上扩展服务器。
+
+#### Vert.x中使用HTTPS
+
+Vert.x的HTTP服务器和客户端可以配置成和网络服务器完全相同的方式使用HTTPS。
+
+有关详细信息，请参阅配置网络服务器以使用[SSL](http://vertx.io/docs/vertx-core/java/#ssl)。
+
+SSL可以通过每个请求的[RequestOptions](http://vertx.io/docs/apidocs/io/vertx/core/http/RequestOptions.html)来启用/禁用，或在指定模式时调用[requestAbs](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClient.html#requestAbs-io.vertx.core.http.HttpMethod-java.lang.String-)：
+
+```java
+client.getNow(new RequestOptions()
+    .setHost("localhost")
+    .setPort(8080)
+    .setURI("/")
+    .setSsl(true), response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+});
+```
+
+[setSsl](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setSsl-boolean-)设置将用作客户端默认配置。
+
+[setSsl](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setSsl-boolean-)将覆盖默认客户端设置：
+
+* 即使客户端配置成使用SSL/TLS，该值设置成`false`将禁用SSL/TLS
+* 即使客户端配置成不适用SSL/TLS，该值设置成`true`将启用SSL/TLS，实际的客户端SSL/TLS（如受信、密钥/证书、密码、ALPN、……）将被重用。
+
+同样：[requestAbs](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClient.html#requestAbs-io.vertx.core.http.HttpMethod-java.lang.String-)同样也会（在调用时）覆盖默认客户端设置。
+
+#### WebSocket
+
+[WebSocket](http://en.wikipedia.org/wiki/WebSocket)是一种Web技术，可以在HTTP服务器和HTTP客户端（通常是浏览器）之间实现全双工Socket连接。
+
+Vert.x在客户端和服务器端都支持WebSocket。
+
+**服务器端WebSocket**
+
+在服务器端处理WebSocket有两种方法。
+
+1).*WebSocket处理器*
+
+第一种方法涉及在服务器实例上提供一个[websocketHandler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServer.html#websocketHandler-io.vertx.core.Handler-)。
+
+当对服务器创建WebSocket连接时，将传入一个[ServerWebSocket](http://vertx.io/docs/apidocs/io/vertx/core/http/ServerWebSocket.html)的一个实例给该处理器并调用它。
+
+```java
+server.websocketHandler(websocket -> {
+  System.out.println("Connected!");
+});
+```
+
+你可以调用[reject](http://vertx.io/docs/apidocs/io/vertx/core/http/ServerWebSocket.html#reject--)来拒绝一个WebSocket。
+
+```java
+server.websocketHandler(websocket -> {
+  if (websocket.path().equals("/myapi")) {
+    websocket.reject();
+  } else {
+    // Do something
+    // 做一些事
+  }
+});
+```
+
+2).*更新到WebSocket*
+
+处理WebSocket的第二种方法是处理从客户端发送的HTTP升级请求，调用服务器请求对象的[upgrade](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#upgrade--)方法。
+
+```java
+server.requestHandler(request -> {
+  if (request.path().equals("/myapi")) {
+
+    ServerWebSocket websocket = request.upgrade();
+    // Do something
+    // 做一些事
+  } else {
+    // Reject
+    // 拒绝
+    request.response().setStatusCode(400).end();
+  }
+});
+```
+
+3).*服务器WebSocket*
+
+[ServerWebSocket](http://vertx.io/docs/apidocs/io/vertx/core/http/ServerWebSocket.html)实例能够让您读取在WebSocket握手中的HTTP请求的[headers](http://vertx.io/docs/apidocs/io/vertx/core/http/ServerWebSocket.html#headers--)，[path](http://vertx.io/docs/apidocs/io/vertx/core/http/ServerWebSocket.html#path--)，[query](http://vertx.io/docs/apidocs/io/vertx/core/http/ServerWebSocket.html#query--)和[URI](http://vertx.io/docs/apidocs/io/vertx/core/http/ServerWebSocket.html#uri--)。
+
+**客户端WebSocket**
+
+Vert.x的[HttpClient](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClient.html)支持WebSocket。
+
+您可以调用[websocket](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClient.html#websocket-io.vertx.core.http.RequestOptions-io.vertx.core.Handler-)操作之一的创建WebSocket连接到服务器，并提供处理器。
+
+当连接建立时，处理器将被调用并且使用[WebSocket](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html)实例：
+
+```java
+client.websocket("/some-uri", websocket -> {
+  System.out.println("Connected!");
+});
+```
+
+**写入消息到WebSocket**
+
+若你想将一个WebSocket消息写入WebSocket，可使用[writeBinaryMessage](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html#writeBinaryMessage-io.vertx.core.buffer.Buffer-)或[writeTextMessage](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html#writeTextMessage-java.lang.String-)来执行该操作：
+
+```java
+Buffer buffer = Buffer.buffer().appendInt(123).appendFloat(1.23f);
+websocket.writeBinaryMessage(buffer);
+
+// Write a simple text message
+// 写一个简单文本消息
+String message = "hello";
+websocket.writeTextMessage(message);
+```
+
+若WebSocket消息大于使用[setMaxWebsocketFrameSize](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setMaxWebsocketFrameSize-int-)设置的WebSocket的帧的最大值，则Vert.x在将其发送到报文之前将其拆分为多个WebSocket帧。
+
+**写入帧到WebSocket**
+
+WebSocket消息可以由多个帧组成，在这种情况下，第一帧是二进制或文本帧（text|binary），后边跟着零个或多个连续帧。
+
+消息中的最后一帧标记成final。
+
+要发送多个帧组成的消息，请使用[WebSocketFrame.binaryFrame](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocketFrame.html#binaryFrame-io.vertx.core.buffer.Buffer-boolean-)，[WebSocketFrame.textFrame](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocketFrame.html#textFrame-java.lang.String-boolean-)或[WebSocketFrame.continuationFrame](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocketFrame.html#continuationFrame-io.vertx.core.buffer.Buffer-boolean-)创建帧，并使用[writeFrame](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html#writeFrame-io.vertx.core.http.WebSocketFrame-)将其写入WebSocket。
+
+以下是二进制帧的示例：
+
+```java
+WebSocketFrame frame1 = WebSocketFrame.binaryFrame(buffer1, false);
+websocket.writeFrame(frame1);
+
+WebSocketFrame frame2 = WebSocketFrame.continuationFrame(buffer2, false);
+websocket.writeFrame(frame2);
+
+// Write the final frame
+// 写最终帧
+WebSocketFrame frame3 = WebSocketFrame.continuationFrame(buffer2, true);
+websocket.writeFrame(frame3);
+```
+
+许多情况下，您只需要发送一个包含了单个最终帧的WebSocket消息，因此我们提供了一些使用[writeFinalBinaryFrame](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html#writeFinalBinaryFrame-io.vertx.core.buffer.Buffer-)和[writeFinalTextFrame](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html#writeFinalTextFrame-java.lang.String-)的快捷方法。
+
+下边是示例：
+
+```java
+websocket.writeFinalTextFrame("Geronimo!");
+
+// Send a websocket messages consisting of a single final binary frame:
+// 发送由单个最终二进制帧组成的websocket消息：
+Buffer buff = Buffer.buffer().appendInt(12).appendString("foo");
+
+websocket.writeFinalBinaryFrame(buff);
+```
+
+**从WebSocket读取帧**
+
+要从WebSocket读取帧，您可以使用[frameHandler](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html#frameHandler-io.vertx.core.Handler-)。
+
+当帧到达时，会传入一个[WebSocketFrame](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocketFrame.html)实例给帧处理器，并调用它，例如：
+
+```java
+websocket.frameHandler(frame -> {
+  System.out.println("Received a frame of size!");
+});
+```
+
+**关闭WebSocket**
+
+完成之后，请使用[close](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocketBase.html#close--)方法关闭Socket连接。
+
+**流式WebSocket**
+
+[WebSocket](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html)实例也是[ReadStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html)和[WriteStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html)，因此可以和泵一起使用。
+
+当使用WebSocket作为写入流或读取流时，它只能用于不分割多个帧的二进制帧一起使用的WebSocket连接。
+
+#### 使用HTTP/HTTPS连接代理
+
+HTTP客户端支持通过HTTP代理（如Squid）或*SOCKS4a*或*SOCKS5*代理访问HTTP/HTTPS的URL。CONNECT协议使用HTTP/1.x但可以连接到HTTP/1.x和HTTP/2服务器。
+
+连接到h2c（未加密HTTP/2服务器）可能不受HTTP代理支持，因为它们仅支持HTTP/1.1。
+
+可以通过[HttpClientOptions](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html)中的[ProxyOptions](http://vertx.io/docs/apidocs/io/vertx/core/net/ProxyOptions.html)对象配置来配置代理（包括代理类型、主机名、端口和可选用户名和密码）。
+
+以下是使用HTTP代理的例子：
+
+```java
+HttpClientOptions options = new HttpClientOptions()
+    .setProxyOptions(new ProxyOptions().setType(ProxyType.HTTP)
+        .setHost("localhost").setPort(3128)
+        .setUsername("username").setPassword("secret"));
+HttpClient client = vertx.createHttpClient(options);
+```
+
+当客户端连接到HTTP URL时，它连接到代理服务器，并在HTTP请求中提供完整URL（"GET http://www.somehost.com/path/file.html HTTP/1.1"）。
+
+当客户端连接到HTTPS URL时，它要求代理使用CONNECT方法创建到远程主机的通道【tunnel】。
+
+对于SOCKS5代理：
+
+```java
+HttpClientOptions options = new HttpClientOptions()
+    .setProxyOptions(new ProxyOptions().setType(ProxyType.SOCKS5)
+        .setHost("localhost").setPort(1080)
+        .setUsername("username").setPassword("secret"));
+HttpClient client = vertx.createHttpClient(options);
+```
+
+DNS解析会一直在代理服务器上执行，为了实现SOCKS4客户端的功能，需要先在本地解析DNS地址。
+
+**自动清理**
+
+如果您正在从Verticle内部创建HTTP服务器和客户端，则在撤销该Verticle时，这些服务器和客户端将自动关闭。
+
+### 使用Vert.x共享数据
 
 
 
