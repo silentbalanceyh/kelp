@@ -4,9 +4,10 @@
 
 * Client：客户端
 * Server：服务器
+* Primitive：基本（描述类型）
 * Writing：编写（有些地方译为开发）
 * Reactor：反应堆
-* Options：配置项
+* Options：配置项，作为参数时候翻译成选项
 * Context：上下文环境
 * Undeploy：撤销（对应部署）
 * Unregister：注销（对应注册）
@@ -35,6 +36,8 @@
 * Datagram：数据报
 * Socket：套接字（有些地方未翻译，直接用的Socket）
 * Multicast：多播（组播）
+* High Availability：高可用性
+* Fail-Over：故障转移
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
@@ -777,7 +780,7 @@ Verticle可以启用高可用方式（HA）部署，在上下文环境中，当�
 
 当启用高可用方式时，不需要追加`-cluster`参数。
 
-关于高可用的功能和配置可参考[高可用和故障切换](http://vertx.io/docs/vertx-core/java/#_high_availability_and_fail_over)
+关于高可用的功能和配置可参考[高可用和故障转移](http://vertx.io/docs/vertx-core/java/#_high_availability_and_fail_over)
 
 #### 从命令行运行Verticle
 
@@ -5470,13 +5473,958 @@ WriteStream的实现类包括：[HttpClientRequest](http://vertx.io/docs/apidocs
 
 当泵首次创建时，它不会启动，您需要调用start()方法来启动它。
 
+### 记录解析器【Record Parser】
+
+记录解析器允许您轻松解析由字节序列或固定尺寸带分隔符的记录的协议。
+
+它将输入缓冲区序列转换为已配置的缓冲区序列（固定大小或带分隔符的记录）。
+
+例如，若您使用`\n`分割的简单ASCII文本协议，并输入如下：
+
+```
+buffer1:HELLO\nHOW ARE Y
+buffer2:OU?\nI AM
+buffer3: DOING OK
+buffer4:\n
+```
+
+记录解析器将产生
+
+```
+buffer1:HELLO
+buffer2:HOW ARE YOU?
+buffer3:I AM DOING OK
+```
+
+我们来看看相关代码：
+
+```java
+final RecordParser parser = RecordParser.newDelimited("\n", h -> {
+  System.out.println(h.toString());
+});
+
+parser.handle(Buffer.buffer("HELLO\nHOW ARE Y"));
+parser.handle(Buffer.buffer("OU?\nI AM"));
+parser.handle(Buffer.buffer("DOING OK"));
+parser.handle(Buffer.buffer("\n"));
+```
+
+我们还可以生成固定尺寸的块，如下：
+
+```java
+RecordParser.newFixed(4, h -> {
+  System.out.println(h.toString());
+});
+```
+
+有关更多详细信息，请查看[RecordParser](http://vertx.io/docs/apidocs/io/vertx/core/parsetools/RecordParser.html)类。
+
+### 线程安全
+
+大多数Vert.x对象可以从不同的线程安全地访问，但是，当从相同的上下文访问它们时，性能会被优化。
+
+例如，若您部署了一个创建NetServer的Verticle，该NetServer在处理器中提供了NetSocket实例，则最好始终从该Verticle的Event Loop中访问Socket实例。
+
+若您坚持使用Vert.x中的Standard Verticle部署模型，可以避免在Verticle之间共享对象，那么您没有必要考虑这样的情况。
+
+### Metrics SPI
+
+默认情况下，Vert.x不会记录任何指标。相反，它为其他人提供了一个SPI，可以将其添加到类路径中。SPI是一项高级功能，允许实施者从Vert.x捕获事件以收集指标。有关详细信息，请参阅[API文档](http://vertx.io/docs/apidocs/io/vertx/core/spi/metrics/VertxMetrics.html)。
+
+若使用[setFactory](http://vertx.io/docs/apidocs/io/vertx/core/metrics/MetricsOptions.html#setFactory-io.vertx.core.spi.VertxMetricsFactory-)嵌入了Vert.x实例，也可以用编程方式指定度量工厂。
+
+### OSGi
+
+Vert.x Core被打包成了OSGi Bundle，因此可以在任何OSGi R4.2+环境中使用，如`Apache Felix`或`Eclipse Equinox`，（这个）Bundle导出`io.vertx.core*`。
+
+但是Bundle对Jackson和Netty有一些依赖，若部署Vert.x Core Bundle则需要：
+
+* Jackson Annotation [2.6.0,3)
+* Jackson Core [2.6.2,3)
+* Jackson Databind [2.6.2,3)
+* Netty Buffer [4.0.31,5)
+* Netty Codec [4.0.31,5)
+* Netty Codec/Socks [4.0.31,5)
+* Netty Codec/Common [4.0.31,5)
+* Netty Codec/Handler [4.0.31,5)
+* Netty Codec/Transport [4.0.31,5)
+
+下边是Apache Felix 5.2.0上的工作部署：
+
+```
+14|Active     |    1|Jackson-annotations (2.6.0)
+15|Active     |    1|Jackson-core (2.6.2)
+16|Active     |    1|jackson-databind (2.6.2)
+18|Active     |    1|Netty/Buffer (4.0.31.Final)
+19|Active     |    1|Netty/Codec (4.0.31.Final)
+20|Active     |    1|Netty/Codec/HTTP (4.0.31.Final)
+21|Active     |    1|Netty/Codec/Socks (4.0.31.Final)
+22|Active     |    1|Netty/Common (4.0.31.Final)
+23|Active     |    1|Netty/Handler (4.0.31.Final)
+24|Active     |    1|Netty/Transport (4.0.31.Final)
+25|Active     |    1|Netty/Transport/SCTP (4.0.31.Final)
+26|Active     |    1|Vert.x Core (3.1.0)
+```
+
+在Equinox上，您可能需要使用下边的框架属性禁用ContextFilter：`eclipse.bundle.setTCCL=false`。
+
+### 'vertx`命令行
+
+vertx命令用于和命令行中的Vert.x进行交互，主要用于运行Vert.x Verticle。为此，您需要下载并安装Vert.x发行版，并将安装目录中的`bin`添加到`PATH`环境变量中，还要确保您的`PATH`上有一个Java 8的JDK。
+
+*注意：JDK需要支持Java代码的快速编译。*
+
+#### 运行Verticle
+
+您可以使用`vertx run`从命令行直接运行Vert.x的Verticle，以下是`run`命令的几个实例：
+
+```
+vertx run my-verticle.js                                 (1)
+vertx run my-verticle.groovy                             (2)
+vertx run my-verticle.rb                                 (3)
+
+vertx run io.vertx.example.MyVerticle                    (4)
+vertx run io.vertx.example.MVerticle -cp my-verticle.jar (5)
+
+vertx run MyVerticle.java                                (6)
+```
+
+1. 部署一个JavaScript的Verticle
+2. 部署一个Groovy的Verticle
+3. 部署一个Ruby的Verticle
+4. 部署一个已经编译好的Java的Verticle，类的根路径是当前目录
+5. 部署一个已经打包成jar的Verticle，这个jar需要在类路径中
+6. 编译Java源代码并进行部署
+
+正如您在Java中可看到的，该Verticle的名称要么是Java完全限定类名，也可以指定Java源文件，Vert.x会为你编译它。
+
+您可以用其他语言的前缀来指定Verticle的名称进行部署。例如：若Verticle是一个编译的Groovy类，您可以使用语言前缀`groovy:`，因此Vert.x知道它是一个Groovy类而不是Java类。
+
+```
+vertx run groovy:io.vertx.example.MyGroovyVerticle
+```
+
+`vertx run`命令可以使用几个可选参数，它们是：
+
+* `-conf <config_file>`：提供了Verticle的一些配置，`config_file`是包含描述Verticle配置的JSON对象的文本文件的名称，该参数是可选的。
+* `-cp <path>`：搜索Verticle和它使用的其他任何资源的路径，默认为`.`（当前目录）。若您的Verticle引用了其他脚本、类或其他资源（例如jar文件），请确保这些脚本、其他资源存在此路径上。该路径可以包含由以下内容分隔的多个路径条目：`:`（冒号）或`;`（分号）——这取决于操作系统。每个路径条目可以是包含脚本的目录的绝对路径或相对路径，也可以是`jar`或`zip`文件的绝对或相对文件名。一个示例路径可能是`-cp classes:lib/otherscripts:jars/myjar.jar:jars/otherjar.jar`。始终使用路径引用您的Verticle需要的任何资源，不要将它们放在系统类路径【System Classpath】上，因为这会导致部署的Verticle之间的隔离问题。
+* `-instances <instances>`：要实例化的Verticle实例的数目，每个Verticle实例都是严格单线程（运行）的，以便在可用的核上扩展应用程序，您可能需要部署多个实例。若省略，则部署单个实例。
+* `-worker`：此选项可确定一个Verticle是否为Worker Verticle。
+* `-cluster`：此选项确定Vert.x实例是否尝试与网络上的其他Vert.x实例形成集群，集群Vert.x实例允许Vert.x与其他节点形成分布式Event Bus。默认为false（非集群模式）。
+* `-cluster-port`：若指定了`cluster`选项，则可以确定哪个端口将用于与其他Vert.x实例进行集群通信。默认为0——这意味着“选择一个空闲的随机端口”。除非您帧需要绑定特定端口，您通常不需要指定此参数。
+* `-cluster-host`：若指定了`cluster`选项，则可以确定哪个主机地址将用于其他Vert.x实例进行集群通信。默认情况下，它将尝试从可用的接口中选一个。若您有多个接口而您想要使用指定的一个，就在这里指定。
+* `-ha`：若指定，该Verticle将部署为（支持）高可用性（HA）。有关详细信息，请参阅相关章节。
+* `-quorum`：该参数需要和`-ha`一起使用，它指定集群中所有HA部署ID处于活动状态的最小节点数，默认为0。
+* `-hagroup`：该参数需要和`-ha`一起使用，它指定此节点将加入的HA组。集群中可以有多个HA组，节点只会故障转移到同一组中的其他节点。默认为`__DEFAULT__`。
+
+您还可以使用下边方式设置系统属性：`-Dkey=value`。
+
+这里有更多的例子：
+
+使用默认设置运行JavaScript的Verticle：server.js：
+
+```
+vertx run server.js
+```
+
+运行指定类路径的预编译好的10个Java Verticle实例
+
+```
+vertx run com.acme.MyVerticle -cp "classes:lib/myjar.jar" -instances 10
+```
+
+通过源文件运行10个Java Verticle的实例
+
+```
+vertx run MyVerticle.java -instances 10
+```
+
+运行20个Ruby语言的Worker Verticle实例
+
+```
+vertx run order_worker.rb -instances 20 -worker
+```
+
+在同一台计算机上运行两个JavaScript Verticle，并让它们彼此在网络上的其他任何服务器上集群在一起：
+
+```
+vertx run handler.js -cluster
+vertx run sender.js -cluster
+```
+
+运行一个Ruby Verticle并传入一些配置：
+
+```
+vertx run my_verticle.rb -conf my_verticle.conf
+```
+
+其中`my_verticle.conf`也许会包含以下配置：
+
+```json
+{
+ "name": "foo",
+ "num_widgets": 46
+}
+```
+
+该配置可通过Core API在Verticle内部可用。
+
+当使用Vert.x的高可用功能时，您可能需要创建一个Vert.x的裸实例。此实例在启动时未部署任何Verticle，但它若接收到若集群中的另一个节点死亡，则会创建一个新的裸实例，并且启动：
+
+```
+vertx bare
+```
+
+根据您的集群配置，您可能需要添加`cluster-host`和`cluster-port`参数。
+
+#### 执行打包成fat-jar的Vert.x应用
+
+一个fat-jar是一个包含了所有依赖项jar的可执行的jar，这意味着您不必在执行jar的机器上预先安装Vert.x。它像任何可执行的Java jar一样可直接执行：
+
+```
+java -jar my-application-fat.jar
+```
+
+对于这点，Vert.x没什么特别的，您可以使用任何Java应用程序。
+
+您可以创建自己的主类并在MANIFEST中指定，单建议您将代码编写成Verticle，并使用Vert.x中的[Launcher](http://vertx.io/docs/apidocs/io/vertx/core/Launcher.html)类（`io.vertx.core.Launcher`）作为您的主类。这是在命令行中运行Vert.x使用的主类，因此允许您指定命令行参数，如`-instances`以便更轻松地扩展应用程序。
+
+要将您的Verticle全部部署在这个`fatjar`中时，您必须将下边信息写入MANIFEST：
+
+* `Main-Class`设置为`io.vertx.core.Launcher`
+* `Main-Verticle`指定主要Verticle（Java完全限定类名或脚本文件名）
+
+您还可以提供您将传递给`vertx run`的常用命令行参数：
+
+```
+java -jar my-verticle-fat.jar -cluster -conf myconf.json
+java -jar my-verticle-fat.jar -cluster -conf myconf.json -cp path/to/dir/conf/cluster_xml
+```
+
+*注意：请参阅示例存Repository中的Maven/Gradle最简单的Maven/Gradle的Verticle示例了解如何构造fatjar的应用。*
+
+一个fat jar默认会执行`run`命令。
+
+#### 显示Vert.x的版本
+
+若想显示Vert.x的版本，则：
+
+```
+vertx version
+```
+
+#### 其他命令
+
+除了`run`和`version`以外，`vertx`命令行和`Launcher`还提供了其他命令：
+
+您可以使用下边命令创建一个`bare`实例：
+
+```
+vertx bare
+# or
+java -jar my-verticle-fat.jar bare
+```
+
+您还可以在后台启动应用程序：
+
+```
+java -jar my-verticle-fat.jar start -Dvertx-id=my-app-name
+```
+
+若`my-app-name`未设置，将生成一个随机的id，并在命令提示符中打印。您可以将`run`选项传递给`start`命令：
+
+```
+java -jar my-verticle-fat.jar start -Dvertx-id=my-app-name -cluster
+```
+
+一旦在后台启动，可以使用`stop`命令停止它：
+
+```
+java -jar my-verticle-fat.jar stop my-app-name
+```
+
+您还可以使用一下方式列出后台启动的Vert.x应用程序：
+
+```
+java -jar my-verticle-fat.jar list
+```
+
+`vertx`工具也可以使用`start`、`stop`和`list`命令，`start`命令支持几个选项：
+
+* `vertx-id`：应用程序ID，若未设置，则使用随机UUID
+* `java-opts`：Java虚拟机选项，若未设置，则使用`JAVA_OPTS`环境变量
+* `redirect-output`：重定向生成的进程输出和错误流到父进程流
+
+若选项值包含空白，请不要忘记在“”（双引号）之间包装值。
+
+由于`start`命令产生一个新的进程，传递给JVM的java选项不会被传播，所以您必须使用`java-opts`来配置JVM（`-X`，`-D`...）。若您使用`CLASSPATH`环境变量，请确保路径下包含所有需要的jar（vertx-core、您的jar和所有依赖项）。
+
+该命令集是可扩展的，请参考[Extending the vert.x Launcher](http://vertx.io/docs/vertx-core/java/#_extending_the_vert_x_launcher)部分。
+
+#### 实时重部署【Live Redeploy】
+
+在开发时，可以方便在文件更改时实时重新部署应用程序。`vertx`命令行工具和更普通`Launcher`类提供了这个功能，这里有些例子：
+
+```
+vertx run MyVerticle.groovy --redeploy="**/*.groovy" --launcher-class=io.vertx.core.Launcher
+vertx run MyVerticle.groovy --redeploy="**/*.groovy,**/*.rb"  --launcher-class=io.vertx.core.Launcher
+java io.vertx.core.Launcher run org.acme.MyVerticle --redeploy="**/*.class"  --launcher-class=io.vertx.core
+.Launcher -cp ...
+```
+
+重新部署过程如下执行。首先，您的应用程序作为后台应用程序启动（使用`start`命令）。当发现文件更改时，该进程将停止并重新启动该应用、这样可避免泄露。
+
+要启用实时重新部署，请将`--redeploy`选项传递给`run`命令。`--redeploy`表示要监视的文件集，这个集合可使用`Ant`样式模式（使用**，*和?），您也可以使用逗号（,）分隔它们来指定多个集合。模式相当于当前工作目录。
+
+传递给`run`命令的参数最终会传递给应用程序，可使用`--java-opts`配置JVM虚拟机选项。
+
+`--launcher-class`选项确定应用程序的主类启动器。它通常是一个[Launcher](http://vertx.io/docs/apidocs/io/vertx/core/Launcher.html)，单您已使用了您自己的主类。
+
+也可以在IDE中使用重部署功能：
+
+* **Eclipse**：创建一个运行配置，使用`io.vertx.core.Launcher`类作为主类。在*Program Arguments*区域（参数选项卡中），写入`run your-verticle-fully-qualified-name --redeploy=**/*.java --launcher-class=io.vertx.core.Launcher`，您还可以添加其他参数。随着Eclipse在保存时会增量编译您的文件，重部署工作会顺利进行。
+* **IntelliJ**：创建一个运行配置（应用）,将Main类设置为`io.vertx.core.Launcher`。在程序参数中写：`run your-verticle-fully-qualified-name --redeploy=**/*.class --launcher-class=io.vertx.core.Launcher`。要触发重新部署，您需要显示构造项目或模块（Build -> Make project）。
+
+要调试应用程序，请将运行配置创建为远程应用程序，并使用`--java-opts`配置调试器。每次重新部署后，请勿忘记重新插入【`re-plug`】调试器，因为它每次都会创建一个新进程。
+
+您还可以在重新部署周期中挂接构建过程：
+
+```
+java -jar target/my-fat-jar.jar --redeploy="**/*.java" --on-redeploy="mvn package"
+java -jar build/libs/my-fat-jar.jar --redeploy="src/**/*.java" --on-redeploy='./gradlew shadowJar'
+```
+
+"on-redeploy"选项指定在应用程序关闭后和重新启动之前调用的命令。因此，如果更新某些运行时工作，则可以钩住构建工具。例如，您可以启动`gulp`或`grunt`来更新您的资源。
+
+重新部署功能还支持以下设置：
+
+* `redeploy-scan-period`：文件系统检查周期（以毫秒为单位），默认为250ms
+* `redeploy-grace-period`：在2次重新部署之间等待的时间（以毫秒为单位），默认为1000ms
+* `redeploy-termination-period`：停止应用程序后等待的时间（在启动用户命令之前）。这个在Windows上非常有用，因为这个进程并没立即被杀死。时间以毫秒为单位，默认20ms
+
+### 集群管理器
+
+在Vert.x中，集群管理器可用于各种功能，包括：
+
+* 对集群中Vert.x节点发现和分组
+* 维护集群范围中的主题订阅者列表（所以我们可知道哪些节点对哪个Event Bus地址感兴趣）
+* 分布式Map的支持
+* 分布式锁
+* 分布式计数器
+
+集群管理器不处理Event Bus节点之间的传输，这是由Vert.x直接通过TCP连接完成。
+
+Vert.x发行版中使用的默认集群管理器是使用的[Hazelcast](http://hazelcast.com/)集群管理器，但是它可以轻松被替换成实现了Vert.x集群管理器接口的不同实现，因为Vert.x集群管理器可插拔的。
+
+集群管理器必须实现[ClusterManager](http://vertx.io/docs/apidocs/io/vertx/core/spi/cluster/ClusterManager.html)接口，Vert.x在运行时使用Java的服务加载器【[Service Loader](https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html)】功能查找集群管理器，以便在类路径中查找[ClusterManager](http://vertx.io/docs/apidocs/io/vertx/core/spi/cluster/ClusterManager.html)的实例。
+
+若您在命令行中使用Vert.x并要使用集群，则应确保Vert.x安装的`lib`目录包含您的集群管理器jar。
+
+若您在Maven/Gradle项目使用Vert.x，则只需将集群管理器jar作为项目依赖添加。
+
+您也可以以编程的方式在嵌入Vert.x时使用[setClusterManager](http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html#setClusterManager-io.vertx.core.spi.cluster.ClusterManager-)指定集群管理器。
+
+### 日志记录
+
+Vert.x使用内置的日志记录API进行日志记录，默认实现使用JDK（JUL）日志记录，因此不需要额外的依赖项。
+
+#### 配置JUL日志记录
+
+一个JUL日志记录配置文件可以使用普通的JUL方式指定——通过提供一个名为`java.util.logging.config.file`的系统属性、值为您的配置文件（位置）。有关此更多信息和JUL配置文件的结构，请参阅JUL日志记录文档。
+
+Vert.x还提供了一种更方便的方式指定配置文件，而无需设置系统属性。您只需在您的类路径中提供名为`vertx-default-jul-logging.properties`的JUL配置文件（如，您的fatjar），Vert.x将使用该配置文件配置JUL。
+
+#### 使用另一个日志框架
+
+如果您不希望Vert.x使用JUL自己的日志记录，您可以为其配置另一个日志记录框架，例如Log4J或SLF4J。
+
+为此，您应该设置一个名为`vertx.logger-delegate-factory-class-name`的系统属性，该名称是一个实现了[LogDelegateFactory](http://vertx.io/docs/apidocs/io/vertx/core/spi/logging/LogDelegateFactory.html)接口的Java类名称。我们为Log4J（版本1）、Log4J（版本2）和SLF4J提供了预构建的实现，类名（分别）为：`io.vertx.core.logging.Log4jLogDelegateFactory`，`io.vertx.core.logging.Log4j2LogDelegateFactory`和`io.vertx.core.logging.SLF4JLogDelegateFactory`。如果要使用这些实现，您还应确保相关的Log4J或SLF4J的jar位于您的类路径上。
+
+请注意，提供的Log4J（版本1）代理不支持参数化消息。Log4J（版本2）的代理使用了像SLF4J代理这样的`{}`语法，JUL代理使用如`{x}`语法。
+
+#### 应用中记录日志
+
+Vert.x本身只是一个库，您可以在自己的应用程序使用任何日志库的API来记录日志。
+
+但是，若您愿意，可以使用上述的Vert.x日志记录工具为应用程序提供日志记录。
+
+为此，您可以使用[LoggerFactory](http://vertx.io/docs/apidocs/io/vertx/core/logging/LoggerFactory.html)获取一个[Logger](http://vertx.io/docs/apidocs/io/vertx/core/logging/Logger.html)实例用来记录日志：
+
+```
+Logger logger = LoggerFactory.getLogger(className);
+
+logger.info("something happened");
+logger.error("oops!", exception);
+```
+
+#### Netty日志记录
+
+配置日志记录时，您还应该关心（如何）配置Netty日志记录。
+
+Netty不依赖于外部日志配置（例如系统属性），而是根据Netty类可见的日志记录库来实现日志记录配置：
+
+* 如果可见，先使用`SLF4J`库
+* 否则若可见，再使用`Log4j`库
+* 否则退回使用`java.util.logging`
+
+通过直接在`io.netty.util.internal.logging.InternalLoggerFactory`上设置Netty的内部记录器实现，强制执行日志记录器实现。
+
+```
+// Force logging to Log4j
+// 强制使用Log4j日志记录
+InternalLoggerFactory.setDefaultFactory(Log4JLoggerFactory.INSTANCE);
+```
+
+#### 排除故障
+
+**SLF4J启动警告**
+
+若您在启动应用程序时看到以下信息：
+
+```
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+```
+
+这意味着您的类路径中有`SLF4J-API`却没有实际的绑定。使用`SLF4J`记录的消息将被删除，则您应该添加绑定到您的类路径。检查[https://www.slf4j.org/manual.html#swapping](https://www.slf4j.org/manual.html#swapping)选择绑定并进行配置。
+
+请注意，Netty会寻找`SLF4-API`的jar，并在默认情况下使用它。
+
+**对等连接重置**
+
+若您的日志显示一堆：
+
+```
+io.vertx.core.net.impl.ConnectionBase
+SEVERE: java.io.IOException: Connection reset by peer
+```
+这意味着客户端正在重置HTTP连接，而不是关闭它。此消息还表示您可能没有使用完整有效的内容（连接在您访问之前被切断）。
+
+### 主机名解析
+
+Vert.x使用地址解析器将主机名解析为IP地址，而不是JVM内置的阻塞解析器。
+
+主机名使用一下方式解析为IP地址：
+
+* 操作系统的hosts文件
+* DNS查询服务器列表
+
+默认情况下，它将使用环境中系统DNS服务器地址的列表，若该列表无法检索，将使用Google的公共DNS服务器"8.8.8.8"和"8.8.4.4"。
+
+创建[Vertx](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html)实例时也可配置DNS服务器：
+
+```java
+Vertx vertx = Vertx.vertx(new VertxOptions().
+    setAddressResolverOptions(
+        new AddressResolverOptions().
+            addServer("192.168.0.1").
+            addServer("192.168.0.2:40000"))
+);
+```
+
+DNS服务器的默认端口为`53`，当服务器使用不同的端口时，可以使用冒号分隔符设置该端口：`192.168.0.2:40000`。
+
+*注意：有时可能需要使用JVM内置解析器，JVM系统属性`-Dvertx.disableDnsResolver=true`激活该行为*
+
+#### 故障转移【Failover】
+
+当服务器没有及时回复时，尝试从列表中选择下一个解析器，搜索（数量）的限制由[setMaxQueries](http://vertx.io/docs/apidocs/io/vertx/core/dns/AddressResolverOptions.html#setMaxQueries-int-)设置（默认值是4个查询）
+
+若解析器在[getQueryTimeout](http://vertx.io/docs/apidocs/io/vertx/core/dns/AddressResolverOptions.html#getQueryTimeout--)毫秒内没有收到正确答案（默认为5秒），DNS查询被视为失败。
+
+#### 服务器列表轮询
+
+默认情况下，DNS服务器选择使用第一个，其余的服务器用于故障转移。
+
+您可以配置[setRotateServers](http://vertx.io/docs/apidocs/io/vertx/core/dns/AddressResolverOptions.html#setRotateServers-boolean-)为true，让解析器使用轮询选择。它会在服务器之间传播查询负载并避免所有的查找都找到列表中的第一个服务器。
+
+故障转移仍然适用，并将使用列表中的下一个服务器。
+
+#### 主机映射
+
+操作系统的hosts文件用于对ipaddress执行主机名查找。
+
+可替换主机文件：
+
+```java
+Vertx vertx = Vertx.vertx(new VertxOptions().
+    setAddressResolverOptions(
+        new AddressResolverOptions().
+            setHostsPath("/path/to/hosts"))
+);
+```
+
+#### 搜索域名
+
+默认情况下，解析器将使用环境中的系统DNS搜索域，或者，可提供明确的显示搜索域列表：
+
+```java
+Vertx vertx = Vertx.vertx(new VertxOptions().
+    setAddressResolverOptions(
+        new AddressResolverOptions().addSearchDomain("foo.com").addSearchDomain("bar.com"))
+);
+```
+
+当使用搜索域列表时，点数的阀值为1或从Linux上的`/etc/resolv.conf`加载，也可使用[setNdots](http://vertx.io/docs/apidocs/io/vertx/core/dns/AddressResolverOptions.html#setNdots-int-)配置特定值。
+
+### 高可用/故障转移
+
+Vert.x允许您运行支持高可用（HA——High Availability）的Verticle，这种情况下，当运行Verticle的Vert.x实例突然死亡时，该Veritlce将迁移到另一个Vert.x实例。这个Vert.x实例必须在同一个集群中。
+
+#### 自动故障转移
+
+当Vert.x启用HA运行时，若一个运行了Verticle的Vert.x实例失败或死亡，则Verticle将自动重新部署到集群中的另一个Vert.x实例中。我们称这个为Verticle故障转移。
+
+若要启用HA运行Vert.x，需要添加`-ha`参数到命令行：
+
+```
+vertx run my-verticle.js -ha
+```
+
+现在开启了HA环境，在集群中需要多添加一个Vert.x实例，所以假设您已经有另一个已经启动的Vert.x实例，例如：
+
+```
+vertx run my-other-verticle.js -ha
+```
+
+如果运行了`my-verticle.js`的Vert.x实例现在死了（您可以通过执行`kill -9`杀死进程来测试），运行`my-other-verticle.js`的Vert.x实例将自动重新部署`my-verticle.js`，现在这个Vert.x实例正在运行两个Verticle。
+
+*注意：只有当第二个Vert.x实例可访问verticle文件（这里是my-verticle.js）时，迁移才是可能的。*
+*重要：请注意，干净地关闭Vert.x实例不会导致故障转移发生：**CTRL-C**或**kill -SIGNINT***
+
+您也可以启动裸的Vert.x实例——即最初不运行任何Verticle的实例，它们也将为集群中的节点进行故障转移。要启动一个裸实例，您只需做：
+
+```
+vertx run -ha
+```
+
+当使用`-ha`开关时，您不需要提供`-cluster`开关，因为若要使用HA就假定是集群。
+
+*注意：根据您的集群配置，可能需要自定义集群管理器配置（默认为Hazelcast）和/或添加集群主机cluster-host和集群端口cluster-port参数。*
+
+#### HA组
+
+当使用Vert.x运行实例时，还可以选择指定的HA组。HA组表示集群中的逻辑节点组。只有具有相同HA组的节点能执行故障转移。若不指定HA组，则使用默认组`__DEFAULT__`。
+
+要指定一个HA组，您可以在运行该Verticle时使用`-hagroup`开关。
+
+```
+vertx run my-verticle.js -ha -hagroup my-group
+```
+
+我们来看一个例子：
+
+在第一个终端运行：
+
+```
+vertx run my-verticle.js -ha -hagroup g1
+```
+
+在第二个终端中，让我们使用相同组运行另一个Verticle：
+
+```
+vertx run my-other-verticle.js -ha -hagroup g1
+```
+
+最后，在第三个终端中，使用不同组启动另一个Verticle：
+
+```
+vertx run yet-another-verticle.js -ha -hagroup g2
+```
+
+如果终端1中的实例被杀掉，则它将故障转移到终端2中的实例，而不是具有不同组的终端3中的实例。
+
+若终端3中的实例被杀掉，因为这个组中没有其他Vert.x实例，则它不会故障转移。
+
+#### 处理网络分区——Quora
+
+高可用HA实现支持Quora，Quorum是分布式事务必须获得的最小票数才能被允许在分布式系统中执行操作的一个参数。
+
+在启动Vert.x实例时，您可以指示它在部署任何HA部署之前需要一个`quorum`。该上下文环境中，一个quorum是集群中特定组的最小节点数。通常您选择quorum大小为`Q = 1 + N / 2`，其中N是组中节点数。若集群中的Q节点少于HA节点，HA部署将被撤销。如果/当quorum重新获取时，他们将重新部署。通过这样做您可以防止网络分区，a.k.a. *split brain*
+
+这里有更多关于quora的[信息](http://en.wikipedia.org/wiki/Quorum_(distributed_computing)。
+
+若要使用quorum运行Vert.x实例，您可以在命令行中指定`-quorum`，例如：
+
+在第一个终端：
+
+```
+vertx run my-verticle.js -ha -quorum 3
+```
+此时，Vert.x实例将启动但不部署模块（尚未）因为目前集群中只有1个节点，而不是3个。
+
+在第二个终端：
+
+```
+vertx run my-other-verticle.js -ha -quorum 3
+```
+此时，Vert.x实例将启动不部署模块（还），因为集群中只有两个节点，而不是3个。
+
+在第三个控制台，您可以启动另一个Vert.x的实例：
+
+```
+vertx run yet-another-verticle.js -ha -quorum 3
+```
+
+妙极！——我们有三个节点，这是quorum设置的值，此时，模块将自动部署在所有实例上。
+
+若我们现在关闭或杀死其中一个节点，那么这些模块将在其他节点上自动撤销，因为不再满足quorum（法定人数）。
+
+Quora也可以与HA组合使用，在这种情况下，每个特定组会解决Quora。
+
+### 安全注意事项
+
+Vert.x是一个工具包，而不是一个舆论框架来强迫您以某种方式做事情。这会给开发人员巨大的力量，同时也承担了很大责任。
+
+与任何工具包一样，可以编写不安全的应用程序，因此在开发应用时应特别注意（如通过互联网）。
+
+#### Web应用
+
+如果编写Web应用程序，强烈建议您直接使用Vert.x Web而不是Vert.x Core来提供资源和处理文件上传。
+
+Vert.x Web对请求中的路径进行了规范，以防止恶意客户端伪造URL来访问Web根目录外部的资源。
+
+类似地，对于文件上传Vert.x Web提供上传到磁盘上已知位置的功能，并且不依赖上传中客户端提供的文件名，可以将其上传到磁盘的其他位置。
+
+Vert.x Core本身不提供这样的检查，因此作为一个开发人员自己实现它将取决于您。
+
+#### 集群Event Bus流量
+
+当在网络上的不同Vert.x节点之间创建集群Event Bus时，流量将通过未加密报文【Wire】发送，因此若您有要发送的机密数据，而您的Vert.x节点不在受信的网络上，则不要使用。
+
+#### 标准安全最佳实践
+
+任何服务都可能存在潜在的漏洞，无论是使用Vert.x还是任何其他工具包，因此始终遵循安全最佳实践，特别是当您的服务面向公众。
+
+如，您应该始终在DMZ中运行它们，并使用具有受限权限的用户账户，以限制服务受到损害的程度。
+
+### Vert.x命令行接口API
+
+Vert.x Core提供了一个用于解析传递给程序命令行参数的API。
+
+它还可以打印详细说明可用于命令行工具的选项帮助消息。即使这些功能远离Vert.x Core主题，该API也可在[Launcher](http://vertx.io/docs/apidocs/io/vertx/core/Launcher.html)类中使用，也可在fat-jar和`vertx`命令行工具中使用。另外，它是polyglot（可用于任何支持的语言），并在Vert.x Shell中使用。
+
+Vert.x CLI提供了一个描述命令行界面的模型，也是一个解析器，这个解析器可支持不同的语法：
+
+* 类似POSIX选项（即`tar -zxvf foo.tar.gz`）
+* 类似GNU选项（即`du --human-readable --max-depth=1`）
+* 类似Java属性（即`java -Djava.awt.headless=true -Djava.net.useSystemProxies=true Foo`）
+* 具有附加值的短选项（即`gcc -O2 foo.c`）
+* 单个连字符的长选项（即`ant -projecthelp`）
+
+使用CLI API的三个步骤如下：
+
+1. 命令行接口的定义
+2. 解析用户命令行
+3. 查询/询问
+
+#### 定义阶段
+
+每个命令行界面必须定义将要使用的选项和参数集合。它也需要一个名字。CLI API使用[Option](http://vertx.io/docs/apidocs/io/vertx/core/cli/Option.html)和[Argument](http://vertx.io/docs/apidocs/io/vertx/core/cli/Argument.html)类来描述选项和参数：
+
+```java
+CLI cli = CLI.create("copy")
+    .setSummary("A command line interface to copy files.")
+    .addOption(new Option()
+        .setLongName("directory")
+        .setShortName("R")
+        .setDescription("enables directory support")
+        .setFlag(true))
+    .addArgument(new Argument()
+        .setIndex(0)
+        .setDescription("The source")
+        .setArgName("source"))
+    .addArgument(new Argument()
+        .setIndex(1)
+        .setDescription("The destination")
+        .setArgName("target"));
+```
+
+您可以看到，您可以使用[CLI.create](http://vertx.io/docs/apidocs/io/vertx/core/cli/CLI.html#create-java.lang.String-)创建一个新的[CLI](http://vertx.io/docs/apidocs/io/vertx/core/cli/CLI.html)。传递的字符串是CLI的名称。创建后，您可以设置摘要和描述，摘要的目的是简短（一行），而描述可以包含更多细节。每个选项和参数也使用[addArgument](http://vertx.io/docs/apidocs/io/vertx/core/cli/CLI.html#addArgument-io.vertx.core.cli.Argument-)和[addOption](http://vertx.io/docs/apidocs/io/vertx/core/cli/CLI.html#addOption-io.vertx.core.cli.Option-)方法添加到CLI对象上。
+
+**选项**
+
+[Option](http://vertx.io/docs/apidocs/io/vertx/core/cli/Option.html)是由用户命令行中存在的键【key】标识的命令行参数。选项至少必须有一个长名或一个短命，长名称通常使用`--`前缀，而短名称与单个`-`一起使用。选项可以获取用法中显示的描述（见下文）。选项可以接受0、1或几个值。接受0值的选项是一个标志，必须使用[setFlag](http://vertx.io/docs/apidocs/io/vertx/core/cli/Option.html#setFlag-boolean-)声明。默认情况下，选项会接受一个值，但是您可以使用[setMultiValued](http://vertx.io/docs/apidocs/io/vertx/core/cli/Option.html#setMultiValued-boolean-)配置该选项接收多个值：
+
+```java
+CLI cli = CLI.create("some-name")
+    .setSummary("A command line interface illustrating the options valuation.")
+    .addOption(new Option()
+        .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+    .addOption(new Option()
+        .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+    .addOption(new Option()
+        .setLongName("multiple").setShortName("m").setMultiValued(true)
+        .setDescription("a multi-valued option"));
+```
+
+选项可以标记为必填项，在用户命令行中未设置必填选项在解析阶段会引发异常：
+
+```java
+CLI cli = CLI.create("some-name")
+    .addOption(new Option()
+        .setLongName("mandatory")
+        .setRequired(true)
+        .setDescription("a mandatory option"));
+```
+
+非必填选项可以具有默认值，如果用户没有在命令行中设置该选项，即将使用该值：
+
+```java
+CLI cli = CLI.create("some-name")
+    .addOption(new Option()
+        .setLongName("optional")
+        .setDefaultValue("hello")
+        .setDescription("an optional option with a default value"));
+```
+
+可以使用[setHidden](http://vertx.io/docs/apidocs/io/vertx/core/cli/Option.html#setHidden-boolean-)方法隐藏选项，隐藏选项不在用法中列出，但仍可在用户命令行中使用（对于高级用户）。
+
+如果选项值与固定值相违背，则可以设置不同的可接受选项：
+
+```java
+CLI cli = CLI.create("some-name")
+    .addOption(new Option()
+        .setLongName("color")
+        .setDefaultValue("green")
+        .addChoice("blue").addChoice("red").addChoice("green")
+        .setDescription("a color"));
+```
+
+也可以从JSON表单中实例化选项。
+
+**参数**
+和选项不同，参数不具有键【key】标识并由其索引标识。例如，在`java com.acme.Foo`中，`com.acme.Foo`是一个参数。
+
+参数没有名称，使用基于0的索引进行标识，第一个参数的索引为0：
+
+```java
+CLI cli = CLI.create("some-name")
+    .addArgument(new Argument()
+        .setIndex(0)
+        .setDescription("the first argument")
+        .setArgName("arg1"))
+    .addArgument(new Argument()
+        .setIndex(1)
+        .setDescription("the second argument")
+        .setArgName("arg2"));
+```
+
+如果不设置参数索引，则基于声明顺序会自动计算。
+
+```java
+CLI cli = CLI.create("some-name")
+    // will have the index 0
+	// 索引为0
+    .addArgument(new Argument()
+        .setDescription("the first argument")
+        .setArgName("arg1"))
+    // will have the index 1
+	// 索引为1
+    .addArgument(new Argument()
+        .setDescription("the second argument")
+        .setArgName("arg2"));
+```
+
+`argName`是可选的，并在消息中使用。
+
+相比选项，[Argument](http://vertx.io/docs/apidocs/io/vertx/core/cli/Argument.html)可以：
+
+* 使用[setHidden](http://vertx.io/docs/apidocs/io/vertx/core/cli/Argument.html#setHidden-boolean-)隐藏
+* 使用[setRequired](http://vertx.io/docs/apidocs/io/vertx/core/cli/Argument.html#setRequired-boolean-)设置必填
+* 使用[setDefaultValue](http://vertx.io/docs/apidocs/io/vertx/core/cli/Argument.html#setDefaultValue-java.lang.String-)设置默认值
+* 使用[setMultiValued](http://vertx.io/docs/apidocs/io/vertx/core/cli/Argument.html#setMultiValued-boolean-)设置接收多个值——只有最后一个参数可以是多值的。
+
+参数也可以从JSON表单中实例化。
+
+**生成Usage**
+
+一旦您的[CLI](http://vertx.io/docs/apidocs/io/vertx/core/cli/CLI.html)实例配置好后，您可以生成Usage信息：
+
+```java
+CLI cli = CLI.create("copy")
+    .setSummary("A command line interface to copy files.")
+    .addOption(new Option()
+        .setLongName("directory")
+        .setShortName("R")
+        .setDescription("enables directory support")
+        .setFlag(true))
+    .addArgument(new Argument()
+        .setIndex(0)
+        .setDescription("The source")
+        .setArgName("source"))
+    .addArgument(new Argument()
+        .setIndex(0)
+        .setDescription("The destination")
+        .setArgName("target"));
+
+StringBuilder builder = new StringBuilder();
+cli.usage(builder);
+```
+
+上边生成的Usage信息如下：
+
+```
+Usage: copy [-R] source target
+
+A command line interface to copy files.
+
+  -R,--directory   enables directory support
+```
+
+若需要调整使用消息（的格式），请检查[UsageMessageFormatter](http://vertx.io/docs/apidocs/io/vertx/core/cli/UsageMessageFormatter.html)类
+
+#### 解析阶段【1.Parsing】
+
+一旦您的[CLI](http://vertx.io/docs/apidocs/io/vertx/core/cli/CLI.html)实例配置好后，您可以解析用户命令行来评估【Evaluate】每个选项和参数：
+
+```java
+CommandLine commandLine = cli.parse(userCommandLineArguments);
+```
+
+[parse](http://vertx.io/docs/apidocs/io/vertx/core/cli/CLI.html#parse-java.util.List-)解析方法返回包含值的[CommandLine](http://vertx.io/docs/apidocs/io/vertx/core/cli/CommandLine.html)对象。默认情况下，它验证用户命令行，并检查每个必填选项和参数的设置以及每个选项接收的值的数量。您可以通过传递false作为[parse](http://vertx.io/docs/apidocs/io/vertx/core/cli/CLI.html#parse-java.util.List-)的第二个参数来禁用验证。如果要检查参数或选项，即使解析的命令行无效，这也是有用的。
+
+您可以使用[isValid](http://vertx.io/docs/apidocs/io/vertx/core/cli/CommandLine.html#isValid--)来检查[CommandLine](http://vertx.io/docs/apidocs/io/vertx/core/cli/CommandLine.html)是否有效。
+
+#### 查询/询问阶段【2.Query/Interrogation】
+
+解析后，您可以从解析方法返回的[CommandLine](http://vertx.io/docs/apidocs/io/vertx/core/cli/CommandLine.html)对象中读取选项和参数的值：
+
+```java
+CommandLine commandLine = cli.parse(userCommandLineArguments);
+String opt = commandLine.getOptionValue("my-option");
+boolean flag = commandLine.isFlagEnabled("my-flag");
+String arg0 = commandLine.getArgumentValue(0);
+```
+
+您的一个选项可以被标记为“帮助”，如果用户命令行启用“帮助”选项，验证将不会失败，但是可以让您有机会检查用户是否需要帮助：
+
+```java
+CLI cli = CLI.create("test")
+    .addOption(
+        new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+    .addOption(
+        new Option().setLongName("mandatory").setRequired(true));
+
+CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+// The parsing does not fail and let you do:
+// 解析不会失败，您可以做：
+if (!line.isValid() && line.isAskingForHelp()) {
+  StringBuilder builder = new StringBuilder();
+  cli.usage(builder);
+  stream.print(builder.toString());
+}
+```
+
+#### 有类型选项和参数
+
+描述[Option](http://vertx.io/docs/apidocs/io/vertx/core/cli/Option.html)和[Argument](http://vertx.io/docs/apidocs/io/vertx/core/cli/Argument.html)类是无类型的，这意味着仅读取String值。
+
+[TypedOption](http://vertx.io/docs/apidocs/io/vertx/core/cli/TypedOption.html)和[TypedArgument](http://vertx.io/docs/apidocs/io/vertx/core/cli/TypedArgument.html)可以指定一个类型，因此（String）原始值将转换为指定的类型。
+
+在[CLI](http://vertx.io/docs/apidocs/io/vertx/core/cli/CLI.html)定义中使用[TypedOption](http://vertx.io/docs/apidocs/io/vertx/core/cli/TypedOption.html)和[TypedArgument](http://vertx.io/docs/apidocs/io/vertx/core/cli/TypedArgument.html)，而不是[Option](http://vertx.io/docs/apidocs/io/vertx/core/cli/Option.html)和[Argument](http://vertx.io/docs/apidocs/io/vertx/core/cli/Argument.html)。
+
+```java
+CLI cli = CLI.create("copy")
+    .setSummary("A command line interface to copy files.")
+    .addOption(new TypedOption<Boolean>()
+        .setType(Boolean.class)
+        .setLongName("directory")
+        .setShortName("R")
+        .setDescription("enables directory support")
+        .setFlag(true))
+    .addArgument(new TypedArgument<File>()
+        .setType(File.class)
+        .setIndex(0)
+        .setDescription("The source")
+        .setArgName("source"))
+    .addArgument(new TypedArgument<File>()
+        .setType(File.class)
+        .setIndex(0)
+        .setDescription("The destination")
+        .setArgName("target"));
+```
+
+然后，您可以按下边方式获取转换的值：
+
+```java
+CommandLine commandLine = cli.parse(userCommandLineArguments);
+boolean flag = commandLine.getOptionValue("R");
+File source = commandLine.getArgumentValue("source");
+File target = commandLine.getArgumentValue("target");
+```
+
+Vert.x CLI可以转换的类：
+
+* 具有单个[String](http://vertx.io/docs/apidocs/java/lang/String.html)参数的构造函数，例如[File](http://vertx.io/docs/apidocs/java/io/File.html)或[JsonObject](http://vertx.io/docs/apidocs/io/vertx/core/json/JsonObject.html)
+* 使用静态的`from`或`fromString`方法
+* 使用静态`valueOf`方法，如基础类型和枚举
+
+此外，您可以实现自己的转换器并指定CLI使用此转换器：
+
+```java
+CLI cli = CLI.create("some-name")
+    .addOption(new TypedOption<Person>()
+        .setType(Person.class)
+        .setConverter(new PersonConverter())
+        .setLongName("person"));
+```
+
+对于布尔值，布尔值将被计算为`true`:`on`，`yes`，`1`，`true`。
+
+若您的一个选项是`enum`类型，则（系统）会自动计算一组选项。
+
+#### 使用Annotation
+
+您还可以使用Annotation定义CLI，定义使用类和setter方法上的Annotation来完成：
+
+```java
+@Name("some-name")
+@Summary("some short summary.")
+@Description("some long description")
+public class AnnotatedCli {
+
+  private boolean flag;
+  private String name;
+  private String arg;
+
+ @Option(shortName = "f", flag = true)
+ public void setFlag(boolean flag) {
+   this.flag = flag;
+ }
+
+ @Option(longName = "name")
+ public void setName(String name) {
+   this.name = name;
+ }
+
+ @Argument(index = 0)
+ public void setArg(String arg) {
+  this.arg = arg;
+ }
+}
+```
+
+一旦被注解，您可以定义[CLI](http://vertx.io/docs/apidocs/io/vertx/core/cli/CLI.html)并使用以下命令注入值：
+
+```java
+CLI cli = CLI.create(AnnotatedCli.class);
+CommandLine commandLine = cli.parse(userCommandLineArguments);
+AnnotatedCli instance = new AnnotatedCli();
+CLIConfigurator.inject(commandLine, instance);
+```
+
+### Vert.x启动器
+
 
 
 ## 引用
 
 1. Vert.x的扩展包是Vert.x的子项目集合，类似[Web](http://vertx.io/docs/#web)、[Web Client](http://vertx.io/docs/#web-client)、[Data Access](http://vertx.io/docs/#data_access)等。
 2. 两种常用的项目构建工具。
-3. Don't call us, we'll call you，Call斟酌了很久是翻译还是不翻译，”调用“在这个标题中听起来过于生硬，为了辅助理解没有翻译。
+3. Don't call us, we'll call you，Call斟酌了很久是翻译还是不翻译，“调用”在这个标题中听起来过于生硬，为了辅助理解没有翻译。
 
 ## 注释
 
@@ -5484,3 +6432,4 @@ WriteStream的实现类包括：[HttpClientRequest](http://vertx.io/docs/apidocs
 2. worker executor和executor在这个章节也就是等价概念，创建一个执行器创建额外的工作线程池，执行器用来管理这个额外的线程池。
 
 ## 结语
+
