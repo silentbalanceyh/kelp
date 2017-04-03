@@ -6418,7 +6418,100 @@ CLIConfigurator.inject(commandLine, instance);
 
 ### Vert.x启动器
 
+Vert.x [Launcher](http://vertx.io/docs/apidocs/io/vertx/core/Launcher.html)在fat-jar中作为主类，由`vertx`命令行实用程序调用，它可执行一组命令，如`run`, `bare`, `start`...
 
+#### 扩展Vert.x启动器
+
+您可以通过实现自己的[Command](http://vertx.io/docs/apidocs/io/vertx/core/spi/launcher/Command.html)来扩展命令集（仅限于Java）：
+
+```java
+@Name("my-command")
+@Summary("A simple hello command.")
+public class MyCommand extends DefaultCommand {
+
+  private String name;
+
+  @Option(longName = "name", required = true)
+  public void setName(String n) {
+    this.name = n;
+  }
+
+  @Override
+  public void run() throws CLIException {
+    System.out.println("Hello " + name);
+  }
+}
+```
+
+您还需要实现一个[CommandFactory](http://vertx.io/docs/apidocs/io/vertx/core/spi/launcher/CommandFactory.html)：
+
+```java
+public class HelloCommandFactory extends DefaultCommandFactory<HelloCommand> {
+  public HelloCommandFactory() {
+   super(HelloCommand.class);
+  }
+}
+```
+
+然后创建`src/main/resources/META-INF/services/io.vertx.core.spi.launcher.CommandFactory`并且添加一行表示工厂类的完全限定名称：
+
+```
+io.vertx.core.launcher.example.HelloCommandFactory
+```
+
+构建包含命令的jar，确保包含了SPI文件（`META-INF/services/io.vertx.core.spi.launcher.CommandFactory`）。
+
+然后，将包含该命令的jar放入fat-jar（或包含在其中）的类路径中，或放在Vert.x发行版的`lib`目录中，您将可以执行：
+
+```java
+vertx hello vert.x
+java -jar my-fat-jar.jar hello vert.x
+```
+#### 使用fat-jar中的启动器【Launcher】
+
+要在fat-jar中使用[Launcher](http://vertx.io/docs/apidocs/io/vertx/core/Launcher.html)类，只需要将*MANIFEST*的`Main-Class`设置为`io.vertx.core.Launcher`。另外，将*MANIFEST*中`Main-Verticle`条目设置为您的主Verticle的名称。
+
+默认情况下，它执行了`run`命令。但是，您可以通过设置*MANIFEST*的`Main-Command`条目来配置默认命令。若在没有命令的情况下启动fat-jar，则使用默认命令。
+
+#### 子分类启动器
+
+您还可以创建[Launcher](http://vertx.io/docs/apidocs/io/vertx/core/Launcher.html)来启动子应用程序的子类，这个类被设计成易于扩展的。
+
+一个[Launcher](http://vertx.io/docs/apidocs/io/vertx/core/Launcher.html)子类可以：
+
+* 在[beforeStartingVertx](http://vertx.io/docs/apidocs/io/vertx/core/Launcher.html#beforeStartingVertx-io.vertx.core.VertxOptions-)中自定义Vert.x配置
+* 通过覆盖[afterStartingVertx](http://vertx.io/docs/apidocs/io/vertx/core/Launcher.html#afterStartingVertx-io.vertx.core.Vertx-)来读取由“run”或“bare”命令创建的Vert.x实例
+* 使用[getMainVerticle](http://vertx.io/docs/apidocs/io/vertx/core/impl/launcher/VertxCommandLauncher.html#getMainVerticle--)和[getDefaultCommand](http://vertx.io/docs/apidocs/io/vertx/core/impl/launcher/VertxCommandLauncher.html#getDefaultCommand--)配置默认的Verticle和命令
+* 使用[register](http://vertx.io/docs/apidocs/io/vertx/core/impl/launcher/VertxCommandLauncher.html#register-java.lang.Class-)和[unregister](http://vertx.io/docs/apidocs/io/vertx/core/impl/launcher/VertxCommandLauncher.html#unregister-java.lang.String-)添加/删除命令
+
+#### 启动器和退出代码
+
+当您使用[Launcher](http://vertx.io/docs/apidocs/io/vertx/core/Launcher.html)类作为主类时，它使用以下退出代码：
+
+* 若进程顺利结束，或抛出未捕获的错误：`0`
+* 用于通用错误：`1`
+* 若Vert.x无法初始化：`11`
+* 若生成的进程无法启动、发现或停止：`12`，该错误代码一般由`start`和`stop`命令使用
+* 若系统配置不符合系统要求（如java命令找不到）：`14`
+* 若主Verticle不能被部署：`15`
+
+### 配置Vert.x缓存
+
+当Vert.x需要从类路径中读取文件（嵌入在fat-jar中，类路径中jar文件或其他文件）时，将其复制到缓存目录。背后原因很简单：从jar或从输入流读取文件是阻塞的，所以为了避免每次都付出代价，Vert.x会将文件复制到其缓存目录中，并随后读取该文件。这个行为也可配置。
+
+首先，默认情况下，Vert.x使用`$CWD/.vertx`作为缓存目录，它在此之间创建一个唯一的目录，以避免冲突。可以使用`vertx.cacheDirBase`系统属性配置该位置。如，若当前工作目录不可写（例如在不可变容器上下文环境中），请使用以下命令启动应用程序：
+
+```java
+vertx run my.Verticle -Dvertx.cacheDirBase=/tmp/vertx-cache
+# 或者
+java -jar my-fat.jar vertx.cacheDirBase=/tmp/vertx-cache
+```
+
+*重要：该目录必须是可写的。*
+
+当您编辑资源（如HTML、CSS或JavaScript）时，这种缓存机制可能令人讨厌，因为它仅仅提供文件的第一个版本（因此，若您想重新加载页面，则不会看到您的编辑改变）。要避免此行为，请使用`-Dvertx.disableFileCaching=true`启动应用程序。使用此设置，Vert.x仍然使用缓存，单始终使用原始源刷新存储在缓存中的版本。因此，如果您编辑从类路径提供的文件并刷新浏览器，Vert.x会从类路径读取它，将其复制到缓存目录并从中提供。不要在生产环境使用这个设置，它很有可能影响性能。
+
+最后，您可以使用`-Dvertx.disableFileCPResolving=true`完全禁用高速缓存，这个设置不是没有后果的。Vert.x将无法从类路径中读取任何文件（仅从文件系统）。使用此设置时要非常小心。
 
 ## 引用
 
