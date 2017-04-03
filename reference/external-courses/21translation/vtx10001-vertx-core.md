@@ -2710,7 +2710,7 @@ request.bodyHandler(totalBuffer -> {
 
 **Pumping请求**
 
-请求对象是一个[ReadStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html)，因此您可以将请求体引导到任何[WriteStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html)实例中。
+请求对象是一个[ReadStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html)，因此您可以将请求体读取到任何[WriteStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html)实例中。
 
 有关详细的说明，请参阅[流和泵](http://vertx.io/docs/vertx-core/java/#streams)的章节。
 
@@ -2718,7 +2718,73 @@ request.bodyHandler(totalBuffer -> {
 
 您可使用内容类型为`application/x-www-form-urlencoded`或`multipart/form-data`提交HTML表单。
 
+对于使用URL编码过的表单，表单属性会被URL编码，如同普通查询参数一样。
 
+对于multi-part表单它会在请求体中被编码，而且在整个请求体被完全读取之前它是不可用的。
+
+multi-part表单还可以包含文件上传。
+
+若您想要读取multi-part表单的属性，您应该告诉Vert.x你会在读取任何正文之前调用[setExpectMultipart(true)](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#setExpectMultipart-boolean-)，然后在整个请求体都被阅读后，您可以使用[formAttributes](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#formAttributes--)来读取实际的表单属性。
+
+```java
+server.requestHandler(request -> {
+  request.setExpectMultipart(true);
+  request.endHandler(v -> {
+    // The body has now been fully read, so retrieve the form attributes
+    // 请求体被完全读取，所以直接读取表单属性
+    MultiMap formAttributes = request.formAttributes();
+  });
+});
+```
+
+**处理表单文件上传**
+
+Vert.x可以在处理编码过的multi-part请求体中处理文件上传。
+
+要接收文件，您可以告诉Vert.x系统使用multi-part表单，并根据请求设置[uploadHandler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#uploadHandler-io.vertx.core.Handler-)。
+
+当服务器每次接收到上传请求时，该处理器将被调用一次。
+
+传递给处理器的对象是一个[HttpServerFileUpload](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerFileUpload.html)实例。
+
+```java
+server.requestHandler(request -> {
+  request.setExpectMultipart(true);
+  request.uploadHandler(upload -> {
+    System.out.println("Got a file upload " + upload.name());
+  });
+});
+```
+
+文件上传可能很大，我们不会在单个缓冲区中提供（包含）整个上传（数据），因为这样会导致内存耗尽，相反上传数据是以块【Chunk】的形式被接收的：
+
+```java
+request.uploadHandler(upload -> {
+  upload.handler(chunk -> {
+    System.out.println("Received a chunk of the upload of length " + chunk.length());
+  });
+});
+```
+
+上传对象是一个[ReadStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html)，因此您可以将请求体读取到任何[WriteStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html)实例中。有关详细的说明，请参阅[流和泵](http://vertx.io/docs/vertx-core/java/#streams)的章节。
+
+若您只是想将文件上传到服务器的某个磁盘，可以使用[streamToFileSystem](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerFileUpload.html#streamToFileSystem-java.lang.String-)：
+
+```java
+request.uploadHandler(upload -> {
+  upload.streamToFileSystem("myuploads_directory/" + upload.filename());
+});
+```
+
+*警告：确保您检查了生产系统的文件名，以避免恶意客户将文件上传到文件系统中的任意位置。有关详细信息，参阅[安全说明](http://vertx.io/docs/vertx-core/java/#_security_notes)。*
+
+**处理压缩体**
+
+Vert.x可以处理在客户端通过deflate或gzip算法压缩过的请求体信息。
+
+若要启用解压缩功能则您要在创建服务器时调用[setDecompressionSupported](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerOptions.html#setDecompressionSupported-boolean-)设置配置项。
+
+默认请求下解压缩是被禁用的。
 
 ## 引用
 
