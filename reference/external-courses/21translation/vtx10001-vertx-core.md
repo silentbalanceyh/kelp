@@ -34,6 +34,7 @@
 * Flush：刷新
 * Datagram：数据报
 * Socket：套接字（有些地方未翻译，直接用的Socket）
+* Multicast：多播（组播）
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
@@ -4187,7 +4188,7 @@ client.getNow(new RequestOptions()
 
 [setSsl](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setSsl-boolean-)将覆盖默认客户端设置：
 
-* 即使客户端配置成使用SSL/TLS，该值设置成`false`将禁用SSL/TLS
+* 即使客户端配置成使用SSL/TLS，该值设置成`false`将禁用SSL/TLS。
 * 即使客户端配置成不适用SSL/TLS，该值设置成`true`将启用SSL/TLS，实际的客户端SSL/TLS（如受信、密钥/证书、密码、ALPN、……）将被重用。
 
 同样：[requestAbs](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClient.html#requestAbs-io.vertx.core.http.HttpMethod-java.lang.String-)同样也会（在调用时）覆盖默认客户端设置。
@@ -4880,6 +4881,594 @@ socket.listen(1234, "0.0.0.0", asyncResult -> {
 #### 多播【Multicast】
 
 **发送多播数据包**
+
+多播允许多个Socket接收相同的数据包，该任务可以通过加入可发送数据包的相同多播组完成。
+
+我们将在下一节中介绍如何加入多播组，从而接收数据包。
+
+现在让我们专注于如何发送这些（数据），发送多播报文与发送普通数据报报文没什么不同。
+
+唯一的区别是您可以将多播组的地址传递给send方法发送出去。
+
+这里显示：
+
+```java
+DatagramSocket socket = vertx.createDatagramSocket(new DatagramSocketOptions());
+Buffer buffer = Buffer.buffer("content");
+// Send a Buffer to a multicast address
+// 发送Buffer到多播地址
+socket.send(buffer, 1234, "230.0.0.1", asyncResult -> {
+  System.out.println("Send succeeded? " + asyncResult.succeeded());
+});
+```
+
+加入多播组`230.0.0.1`的所有Socket都将收到该报文。
+
+**接收多播数据包**
+
+若要接收特定多播组的数据包，则需要通过在其上调用`listen(...)`来绑定一个[DatagramSocket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocket.html)，并加入多播组。
+
+这样，您将能够接收发送到[DatagramSocket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocket.html)监听的地址和端口的DatagramPacket，也可以接受发送到多播组的数据报。
+
+除此之外，您可设置一个处理器，每次接收到DatagramPacket时会被调用。
+
+[DatagramPacket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramPacket.html)有以下方法：
+
+* sender()：表示数据报发送方的InetSocketAddress
+* data()：保存接收数据的Buffer
+
+因此，要监听指定的地址和端口、并且接收多播组`230.0.0.1`的数据报，您将执行如下操作：
+
+```java
+DatagramSocket socket = vertx.createDatagramSocket(new DatagramSocketOptions());
+socket.listen(1234, "0.0.0.0", asyncResult -> {
+  if (asyncResult.succeeded()) {
+    socket.handler(packet -> {
+      // Do something with the packet
+	  // 用数据报做些事
+    });
+
+    // join the multicast group
+	// 加入多播组
+    socket.listenMulticastGroup("230.0.0.1", asyncResult2 -> {
+        System.out.println("Listen succeeded? " + asyncResult2.succeeded());
+    });
+  } else {
+    System.out.println("Listen failed" + asyncResult.cause());
+  }
+});
+```
+
+**取消/离开多播组**
+
+有时候您想在有限时间内为多播组接收数据包。
+
+这种情况下，您可以先监听他们，之后unlisten。
+
+这里显示：
+
+```java
+DatagramSocket socket = vertx.createDatagramSocket(new DatagramSocketOptions());
+socket.listen(1234, "0.0.0.0", asyncResult -> {
+    if (asyncResult.succeeded()) {
+      socket.handler(packet -> {
+        // Do something with the packet
+		// 用数据报做些事
+      });
+
+      // join the multicast group
+	  // 加入多播组
+      socket.listenMulticastGroup("230.0.0.1", asyncResult2 -> {
+          if (asyncResult2.succeeded()) {
+            // will now receive packets for group
+			// 现在将接收组的数据包
+            // do some work
+			// 做一些工作
+            socket.unlistenMulticastGroup("230.0.0.1", asyncResult3 -> {
+              System.out.println("Unlisten succeeded? " + asyncResult3.succeeded());
+            });
+          } else {
+            System.out.println("Listen failed" + asyncResult2.cause());
+          }
+      });
+    } else {
+      System.out.println("Listen failed" + asyncResult.cause());
+    }
+});
+```
+
+**阻塞多播**
+
+除了unlisten一个多播地址以外，也有可能阻塞指定发送者地址的多播。
+
+注意：这仅适用于某些操作系统和内核版本，所以请检查操作系统文档看是它是否支持（该功能）。
+
+这是一个专家功能。
+
+要阻塞来自特定地址的多播，您可以在DatagramSocket上调用`blockMulticastGroup(...)`，如下所示：
+
+```java
+DatagramSocket socket = vertx.createDatagramSocket(new DatagramSocketOptions());
+
+// Some code
+// 一些代码
+
+// This would block packets which are send from 10.0.0.2
+// 这将阻止从10.0.0.2发送的数据包
+socket.blockMulticastGroup("230.0.0.1", "10.0.0.2", asyncResult -> {
+  System.out.println("block succeeded? " + asyncResult.succeeded());
+});
+```
+
+**DatagramSocket属性**
+
+当创建[DatagramSocket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocket.html)时，您可以通过[DatagramSocketOptions](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocketOptions.html)对象设置多个属性来更改它的行为。这些（属性）列在这儿：
+
+* [setSendBufferSize](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocketOptions.html#setSendBufferSize-int-)以字节为单位设置发送缓冲区的大小。
+* [setReceiveBufferSize](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocketOptions.html#setReceiveBufferSize-int-)设置TCP接收缓冲区大小（以字节为单位）。
+* [setReuseAddress](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocketOptions.html#setReuseAddress-boolean-)若为true，则`TIME_WAIT`状态中的地址在关闭后可重用。
+* [setTrafficClass](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocketOptions.html#setTrafficClass-int-)
+* [setBroadcast](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocketOptions.html#setBroadcast-boolean-)设置或清除`SO_BROADCAST`套接字选项，设置此选项时，数据报（UDP）数据包可能会发送到本地接口的广播地址。
+* [setMulticastNetworkInterface](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocketOptions.html#setMulticastNetworkInterface-java.lang.String-)设置或清除`IP_MULTICAST_LOOP`套接字选项，设置此选项时，多播数据包也将在本地接口上接收。
+* [setMulticastTimeToLive](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocketOptions.html#setMulticastTimeToLive-int-)设置`IP_MULTICAST_TTL`套接字选项。TTL表示“活动时间【Time To Live】”，单这种情况下，它指定允许数据包经过的IP跳数【Hops】，特别是用于多播流量。转发数据包的每个路由器或网管会递减TTL，如果路由器将TTL递减为0，则不会再转发。
+
+**DatagramSocket本地地址**
+
+您可以通过调用[localAddress](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocket.html#localAddress--)来查找套接字的本地地址（即UDP Socket这边的地址）。若您之前调用`listen(...)`绑定了[DatagramSocket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocket.html)则将返回一个InetSocketAddress，否则返回null。
+
+**关闭DatagramSocket**
+
+您可以通过调用[close](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocket.html#close-io.vertx.core.Handler-)方法来关闭Socket，它将关闭Socket并释放所有资源。
+
+
+### DNS客户端
+
+通常情况下，您将需要以异步方式来获取DNS信息。
+
+不幸的是，Java虚拟机本身附带的API是不可能的，因此Vert.x提供了它自己的完全异步解析DNS的API。
+
+若要获取DnsClient实例，您将通过Vertx实例创建一个新的。
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+```
+
+请注意，您可以传入InetSocketAddress参数的变量，以指定更多的DNS服务器来尝试查询解析DNS。它将按照此处指定的相同顺序查询DNS服务器，若头一个在第一次使用时产生了错误下一个将（在产生错误的地方）使用。
+
+#### lookup
+
+尝试查找给定名称的A（ipv4）或AAAA（ipv6）记录。第一个返回的（记录）将会被使用，因此它的操作方式和操作系统上使用`nslookup`类似。
+
+要查找`vertx.io`的A/AAAA记录，您通常会使用它：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.lookup("vertx.io", ar -> {
+  if (ar.succeeded()) {
+    System.out.println(ar.result());
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+#### lookup4
+
+尝试查找给定名称的A（ipv4）记录。第一个返回的（记录）将会被使用，因此它的操作方式与操作系统上使用`nslookup`类似。
+
+要查找`vertx.io`的A记录，您通常会使用它：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.lookup4("vertx.io", ar -> {
+  if (ar.succeeded()) {
+    System.out.println(ar.result());
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+#### lookup6
+
+尝试查找给定名称的AAAA（ipv6）记录。第一返回的（记录）将会被使用，因此它的操作方式与在操作系统上使用`nslookup`类似。
+
+要查找`vertx.io`的AAAA记录，您通常会使用它：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.lookup6("vertx.io", ar -> {
+  if (ar.succeeded()) {
+    System.out.println(ar.result());
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+#### resolveA
+
+尝试解析给定名称的所有A（ipv4）记录，这与在unix操作系统上使用`dig`类似。
+
+要查找`vertx.io`的所有A记录，您通常会执行以下操作：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.resolveA("vertx.io", ar -> {
+  if (ar.succeeded()) {
+    List<String> records = ar.result();
+    for (String record : records) {
+      System.out.println(record);
+    }
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+#### resolveAAAA
+
+尝试解析给定名称的所有AAAA（ipv6）记录，这与在unix操作系统上使用`dig`类似。
+
+要查找`vertx.io`的所有AAAA记录，您通常会执行以下操作：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.resolveAAAA("vertx.io", ar -> {
+  if (ar.succeeded()) {
+    List<String> records = ar.result();
+    for (String record : records) {
+      System.out.println(record);
+    }
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+#### resolveCNAME
+
+尝试解析给定名称的所有CNAME记录，这与在unix操作系统上使用`dig`类似。
+
+要查找`vertx.io`的所有CNAME记录，您通常会执行以下操作：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.resolveCNAME("vertx.io", ar -> {
+  if (ar.succeeded()) {
+    List<String> records = ar.result();
+    for (String record : records) {
+      System.out.println(record);
+    }
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+#### resolveMX
+
+尝试解析给定名称的所有MX记录，MX记录用于定义哪个邮件服务器接受给定域的电子邮件。
+
+要查找您常用执行的`vertx.io`的所有MX记录：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.resolveMX("vertx.io", ar -> {
+  if (ar.succeeded()) {
+    List<MxRecord> records = ar.result();
+    for (MxRecord record: records) {
+      System.out.println(record);
+    }
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+请注意，列表将包含按照它们优先级排序的[MxRecord](http://vertx.io/docs/apidocs/io/vertx/core/dns/MxRecord.html)，这意味着列表中优先级低的MX记录会第一个优先出现在列表中。
+
+[MxRecord](http://vertx.io/docs/apidocs/io/vertx/core/dns/MxRecord.html)允许您通过下边提供的方法访问MX记录的优先级和名称：
+
+```java
+record.priority();
+record.name();
+```
+
+#### resolveTXT
+
+尝试解析给定名称的所有TXT记录，TXT记录通常用于定义域的额外信息。
+
+要解析`vertx.io`的所有TXT记录，您可以使用下边几行：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.resolveTXT("vertx.io", ar -> {
+  if (ar.succeeded()) {
+    List<String> records = ar.result();
+    for (String record: records) {
+      System.out.println(record);
+    }
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+#### resolveNS
+
+尝试解析给定名称的所有NS记录，NS记录指定哪个DNS服务器托管给定域的DNS信息。
+
+要解析`vertx.io`的所有NS记录，您可以使用下边几行：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.resolveNS("vertx.io", ar -> {
+  if (ar.succeeded()) {
+    List<String> records = ar.result();
+    for (String record: records) {
+      System.out.println(record);
+    }
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+#### resolveSRV
+
+尝试解析给定名称的所有SRV记录，SRV记录用于定义服务端口和主机名等额外信息。一些协议需要这个额外信息。
+
+要查找`vertx.io`的所有SRV记录，您通常会执行以下操作：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.resolveSRV("vertx.io", ar -> {
+  if (ar.succeeded()) {
+    List<SrvRecord> records = ar.result();
+    for (SrvRecord record: records) {
+      System.out.println(record);
+    }
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+请注意，列表将包含按照它们优先级排序的[SrvRecord](http://vertx.io/docs/apidocs/io/vertx/core/dns/SrvRecord.html)，这意味着优先级低的记录会第一个优先出现在列表中。
+
+[SrvRecord](http://vertx.io/docs/apidocs/io/vertx/core/dns/SrvRecord.html)允许您访问SRV记录本身中包含的所有信息：
+
+```java
+record.priority();
+record.name();
+record.weight();
+record.port();
+record.protocol();
+record.service();
+record.target();
+```
+
+有关详细信息，请参阅API文档。
+
+#### resolvePTR
+
+尝试解析给定名称的PTR记录，PTR记录将`ipaddress`映射到名称。
+
+要解析IP地址`10.0.0.1`的PTR记录，您将使用`1.0.0.10.in-addr.arpa`的PTR概念。
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+  if (ar.succeeded()) {
+    String record = ar.result();
+    System.out.println(record);
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+#### reverseLookup
+
+尝试对ipaddress进行反向查找，这与解析PTR记录类似，但是允许您只传递ipaddress，而不是有效的PTR查询字符串。
+
+要做ipaddress 10.0.0.1的反向查找类似的事：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.reverseLookup("10.0.0.1", ar -> {
+  if (ar.succeeded()) {
+    String record = ar.result();
+    System.out.println(record);
+  } else {
+    System.out.println("Failed to resolve entry" + ar.cause());
+  }
+});
+```
+
+#### 错误处理
+
+如前边部分所述，DnsClient允许您传递一个Handler，一旦查询完成将会传入一个AsyncResult给处理器并通知它。
+
+在出现错误的情况下，通知中将包含一个DnsException，该异常会打开一个[DnsResponseCode](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html)用于分辨为何失败。此DnsResponseCode可用于更详细检查原因。
+
+可能的DnsResponseCode值是：
+
+* [NOERROR](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#NOERROR)没有找到给定查询的记录
+* [FORMERROR](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#FORMERROR)格式错误
+* [SERVFAIL](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#SERVFAIL)服务器故障
+* [NXDOMAIN](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#NXDOMAIN)名称错误
+* [NOTIMPL](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#NOTIMPL)DNS服务器没实现
+* [REFUSED](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#REFUSED)DNS服务器拒绝查询
+* [YXDOMAIN](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#YXDOMAIN)域名不应该存在
+* [YXRESET](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#YXRRSET)资源记录不应该存在
+* [NXRRSET](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#NXRRSET)RRSET不存在
+* [NOTZONE](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#NOTZONE)名称不在区域内
+* [BADVERS](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#BADVERS)版本的扩展机制不好
+* [BADSIG](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#BADSIG)非法签名
+* [BADKEY](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#BADKEY)非法密钥
+* [BADTIME](http://vertx.io/docs/apidocs/io/vertx/core/dns/DnsResponseCode.html#BADTIME)错误时间戳
+
+所有这些错误都由DNS服务器本身“生成”，您可以从DnsException中获取DnsResponseCode，如：
+
+```java
+DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+client.lookup("nonexisting.vert.xio", ar -> {
+  if (ar.succeeded()) {
+    String record = ar.result();
+    System.out.println(record);
+  } else {
+    Throwable cause = ar.cause();
+    if (cause instanceof DnsException) {
+      DnsException exception = (DnsException) cause;
+      DnsResponseCode code = exception.code();
+      // ...
+    } else {
+      System.out.println("Failed to resolve entry" + ar.cause());
+    }
+  }
+});
+```
+
+### 流【Stream】
+
+Vert.x有几个对象可以让项【items】被读取和写入。
+
+在以前的版本中，`streams.adoc`软件包正在独占操作[Buffer](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html)对象。从现在开始，流不再与Buffer耦合，它们可以和任意类型的对象一起工作。
+
+在Vert.x中，写调用立即返回，并且内部排队写入。
+
+不难看出，若写入对象的速度比实际写入底层数据资源速度快，那么写入队列就会无限增长，最终导致内存耗尽。
+
+为了解决这个问题，Vert.x API中的一些对象提供了简单的流程控制（回压）功能。
+
+任何流程可感知的写入流对象都实现了[WriteStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html)，而任何流程可感知的读取流对象都实现了[ReadStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html)。
+
+让我们举个例子，我们要从ReadStream中读取数据，然后将数据写入WriteStream。
+
+一个非常简单的例子是从NetSocket读取然后写回到同一个NetSocket——因为NetSocket实现了ReadStream和WriteStream。请注意，这适用于任何符合ReadStream和WriteStream的对象，包括HTTP请求、HTTP响应、异步文件I/O、WebSocket等。
+
+这样做的一个原生的方法是直接获取已经读取的数据，并立即将其写入NetSocket：
+
+```java
+NetServer server = vertx.createNetServer(
+    new NetServerOptions().setPort(1234).setHost("localhost")
+);
+server.connectHandler(sock -> {
+  sock.handler(buffer -> {
+    // Write the data straight back
+	// 直接写入数据
+    sock.write(buffer);
+  });
+}).listen();
+```
+
+上面的例子有一个问题：如果数据从Socket读取的速度比可以写回Socket的速度快，那么它将在NetSocket的写队列中累计，最终用完RAM。这可能会发生，例如，若Socket另一端的客户端读取速度不够快，则有效地将连接回压。
+
+由于NetSocket实现了WriteStream，我们可以在写入之前检查WriteStream是否已满：
+
+```java
+NetServer server = vertx.createNetServer(
+    new NetServerOptions().setPort(1234).setHost("localhost")
+);
+server.connectHandler(sock -> {
+  sock.handler(buffer -> {
+    if (!sock.writeQueueFull()) {
+      sock.write(buffer);
+    }
+  });
+
+}).listen();
+```
+
+这个例子不会用完RAM，单如果写入队列已满，我们最终会丢失数据。我们真正想要做的是在写入队列已满时暂停NetSocket：
+
+```java
+NetServer server = vertx.createNetServer(
+    new NetServerOptions().setPort(1234).setHost("localhost")
+);
+server.connectHandler(sock -> {
+  sock.handler(buffer -> {
+    sock.write(buffer);
+    if (sock.writeQueueFull()) {
+      sock.pause();
+    }
+  });
+}).listen();
+```
+
+我们几乎在那儿，单不完全相同。NetSocket现在在文件已满时暂停，但是当写队列处理挤压时，我们依然要取消暂停：
+
+```java
+NetServer server = vertx.createNetServer(
+    new NetServerOptions().setPort(1234).setHost("localhost")
+);
+server.connectHandler(sock -> {
+  sock.handler(buffer -> {
+    sock.write(buffer);
+    if (sock.writeQueueFull()) {
+      sock.pause();
+      sock.drainHandler(done -> {
+        sock.resume();
+      });
+    }
+  });
+}).listen();
+```
+
+在那里我们有它。当写队列准备好接收更多的数据时，[drainHandler](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html#drainHandler-io.vertx.core.Handler-)事件处理器将被调用，它会恢复NetSocket，允许读取更多的数据。
+
+在编写Vert.x应用程序时，这样做是很常见的，因此我们提供了一个名为[Pump](http://vertx.io/docs/apidocs/io/vertx/core/streams/Pump.html)的帮助类，它为您完成所有这些艰苦的工作。您只需要给ReadStream追加上WriteStream，然后启动它：
+
+```java
+NetServer server = vertx.createNetServer(
+    new NetServerOptions().setPort(1234).setHost("localhost")
+);
+server.connectHandler(sock -> {
+  Pump.pump(sock, sock).start();
+}).listen();
+```
+
+这和更加详细的例子完全一样。
+
+现在我们来看看ReadStream和WriteStream的方法。
+
+#### ReadStream
+
+ReadStream的实现类包括：[HttpClientResponse](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html), [DatagramSocket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocket.html), [HttpClientRequest](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html), [HttpServerFileUpload](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerFileUpload.html), [HttpServerRequest](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html), [MessageConsumer](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/MessageConsumer.html), [NetSocket](http://vertx.io/docs/apidocs/io/vertx/core/net/NetSocket.html), [WebSocket](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html), [TimeoutStream](http://vertx.io/docs/apidocs/io/vertx/core/TimeoutStream.html), [AsyncFile](http://vertx.io/docs/apidocs/io/vertx/core/file/AsyncFile.html)。
+
+函数：
+
+* [handler](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html#handler-io.vertx.core.Handler-)：设置一个处理器，它将从ReadStream读取项【items】
+* [pause](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html#pause--)：暂停处理器，暂停时，处理器中将不会受到任何项【items】
+* [resume](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html#resume--)：恢复处理器，若任何项到达则处理器将被调用
+* [exceptionHandler](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html#exceptionHandler-io.vertx.core.Handler-)若ReadStream发生异常，将被调用
+* [endHandler](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html#endHandler-io.vertx.core.Handler-)：当流到达时将被调用。这有可能是到达了描述文件的EOF、达到HTTP请求的请求结束、或TCP Socket的连接被关闭
+
+#### WriteStream
+
+WriteStream的实现类包括：[HttpClientRequest](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html), [HttpServerResponse](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerResponse.html)，[WebSocket](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html), [NetSocket](http://vertx.io/docs/apidocs/io/vertx/core/net/NetSocket.html), [AsyncFile](http://vertx.io/docs/apidocs/io/vertx/core/file/AsyncFile.html), [MessageProducer](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/MessageProducer.html)
+
+函数：
+
+* [write](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html#write-java.lang.Object-)：写入一个对象到WriteStream，该方法将永远不会阻塞，内部是排队写入并且底层资源是异步写入。
+* [setWriteQueueMaxSize](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html#setWriteQueueMaxSize-int-)：设置写入队列被认为是*full*的对象的数量——方法writeQueueFull返回true。注意，当写队列被认为已满时，若写（操作）被调用则数据依然会被接收和排队。实际数量取决于流的实现，对于[Buffer](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html)，尺寸代表实际写入的字节数，而并非缓冲区的数量。
+* [writeQueueFull](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html#writeQueueFull--)：若写队列被认为已满，则返回true。
+* [exceptionHandler](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html#exceptionHandler-io.vertx.core.Handler-)：若WriteStream发生异常，则被调用。
+* [drainHandler](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html#drainHandler-io.vertx.core.Handler-)：若WriteStream被认为不再满，则处理器将被调用。
+
+#### Pump
+
+泵【Pump】的实例有以下几种方法：
+
+* [start](http://vertx.io/docs/apidocs/io/vertx/core/streams/Pump.html#start--)：启动泵。
+* [stop](http://vertx.io/docs/apidocs/io/vertx/core/streams/Pump.html#stop--)：停止泵，当泵启动时它要处于停止模式。
+* [setWriteQueueMaxSize](http://vertx.io/docs/apidocs/io/vertx/core/streams/Pump.html#setWriteQueueMaxSize-int-)：与WriteStream上的[setWriteQueueMaxSize](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html#setWriteQueueMaxSize-int-)相同。
+
+一个泵可以启动和停止多次。
+
+当泵首次创建时，它不会启动，您需要调用start()方法来启动它。
 
 
 
