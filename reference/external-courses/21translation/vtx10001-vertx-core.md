@@ -2561,15 +2561,15 @@ vertx.createHttpServer().requestHandler(request -> {
 }).listen(8080);
 ```
 
-#### 请求版本【version】
+**请求版本【version】**
 
 在请求中指定的HTTP版本可通过[version](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#version--)获取。
 
-#### 请求方法【method】
+**请求方法【method】**
 
 使用[method](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#method--)读取请求中的HTTP方法（即GET、POST、PUT、DELETE、HEAD、OPTIONS等）。
 
-#### 请求URI【uri】
+**请求URI【uri】**
 
 使用[uri](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#uri--)读取请求中的URI路径。
 
@@ -2577,7 +2577,7 @@ vertx.createHttpServer().requestHandler(request -> {
 
 这个URI是在[Section 5.1.2 of the HTTP specification - Request-URI](http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html)中定义的。
 
-#### 请求路径【path】
+**请求路径【path】**
 
 使用[path](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#path--)读取URI中的路径部分。
 
@@ -2593,7 +2593,7 @@ a/b/c/page.html?param1=abc&param2=xyz
 /a/b/c/page.html
 ```
 
-#### 请求查询【query】
+**请求查询【query】**
 
 使用[query](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#query--)读取URI中的查询部分。
 
@@ -2609,7 +2609,7 @@ a/b/c/page.html?param1=abc&param2=xyz
 param1=abc&param2=xyz
 ```
 
-#### 请求头【headers】
+**请求头【headers】**
 
 使用[headers](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#headers--)获取HTTP请求中的请求头信息。
 
@@ -2629,13 +2629,13 @@ System.out.println("User agent is " + headers.get("user-agent"));
 System.out.println("User agent is " + headers.get("User-Agent"));
 ```
 
-#### 请求主机【host】
+**请求主机【host】**
 
 使用[host](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#host--)返回HTTP请求中的主机名。
 
 对于HTTP/1.x请求返回请求头中的`host`值，对于HTTP/1请求则返回伪头中的`:authority`的值。
 
-#### 请求参数【Parameters】
+**请求参数【Parameters】**
 
 使用[params](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#params--)返回HTTP请求中的参数信息。
 
@@ -2656,19 +2656,19 @@ param2: 'xyz'
 
 请注意，这些请求参数是从请求的URI中解析读取的，若您已经将表单属性作为在`multi-part/form-data`请求正文中提交的HTML表单的一部分发送，那么它们将不会显示在此处的参数中。
 
-#### 远程地址
+**远程地址**
 
 可以使用[remoteAddress](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#remoteAddress--)读取请求发送者的地址。
 
-#### 绝对URI
+**绝对URI**
 
 HTTP请求中传递的URI通常是相对的，若您想要读取请求中和相对URI对应的绝对URI，可调用[absoluteURI](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#absoluteURI--)
 
-#### 结束处理器【End Handler】
+**结束处理器【End Handler】**
 
 当整个请求（包括任何正文）已经被完全读取时，请求中的[endHandler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#endHandler-io.vertx.core.Handler-)会被调用。
 
-#### 请求体中读取数据
+**请求体中读取数据**
 
 HTTP请求通常包含我们需要读取的主体。如前所述，当请求头部达到时，请求处理器会被调用，因此请求对象在此时没有请求体。
 
@@ -2708,13 +2708,15 @@ request.bodyHandler(totalBuffer -> {
 });
 ```
 
-#### Pumping请求
+**Pumping请求**
 
 请求对象是一个[ReadStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html)，因此您可以将请求体引导到任何[WriteStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html)实例中。
 
 有关详细的说明，请参阅[流和泵](http://vertx.io/docs/vertx-core/java/#streams)的章节。
 
-#### 处理HTML表单
+**处理HTML表单**
+
+您可使用内容类型为`application/x-www-form-urlencoded`或`multipart/form-data`提交HTML表单。
 
 
 
@@ -2730,6 +2732,3 @@ request.bodyHandler(totalBuffer -> {
 2. worker executor和executor在这个章节也就是等价概念，创建一个执行器创建额外的工作线程池，执行器用来管理这个额外的线程池。
 
 ## 结语
-
-
-
