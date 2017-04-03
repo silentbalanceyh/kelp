@@ -31,6 +31,9 @@
 * Body：请求/响应体（有些地方翻译成请求/响应正文）
 * Pipe：管道
 * Round-Robin：轮询
+* Flush：刷新
+* Datagram：数据报
+* Socket：套接字（有些地方未翻译，直接用的Socket）
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
@@ -46,7 +49,7 @@ Vert.x Core提供了下列功能
 * 共享数据——本地的Map和分布式集群Map
 * 周期性、延迟性行为
 * 部署和撤销Verticle实例
-* 数据报路【Datagram Sockets】
+* 数据报套接字【Datagram Sockets】
 * DNS客户端
 * 文件系统访问
 * 高可用性
@@ -1071,7 +1074,7 @@ consumer.completionHandler(res -> {
 
 要撤销处理器，请调用[unregister](http://vertx.io/docs/apidocs/io/vertx/core/eventbus/MessageConsumer.html#unregister--)。
 
-若你位于一个集群的Event Bus中，撤销处理器同样会花费一些时间跨节点传播，若您想在完成后收到通知：
+若您位于一个集群的Event Bus中，撤销处理器同样会花费一些时间跨节点传播，若您想在完成后收到通知：
 
 ```java
 consumer.unregister(res -> {
@@ -1762,9 +1765,9 @@ DeploymentOptions options = new DeploymentOptions().setInstances(10);
 vertx.deployVerticle("com.mycompany.MyVerticle", options);
 ```
 
-一旦你这样做，你将发现echo服务器在功能上与之前相同，但是服务器上的所有核都可以被利用，并且可以处理更多的工作。
+一旦您这样做，您将发现echo服务器在功能上与之前相同，但是服务器上的所有核都可以被利用，并且可以处理更多的工作。
 
-在这一点上，您可能会问自己：如何让多台服务器在同一主机和端口上侦听？当你尝试部署一个以上的实例时，您是否会遇到端口冲突？
+在这一点上，您可能会问自己：如何让多台服务器在同一主机和端口上侦听？当您尝试部署一个以上的实例时，您是否会遇到端口冲突？
 
 *Vert.x在这里有一点魔法。*
 
@@ -2047,7 +2050,7 @@ NetServer server = vertx.createNetServer(options);
 
 ##### 受信客户端配置
 
-若客户端使[trustAll](http://vertx.io/docs/apidocs/io/vertx/core/net/ClientOptionsBase.html#setTrustAll-boolean-)设置为true，则客户端将信任所有服务端证书。连接仍然会被加密，但这种模式很容易受到“中间人”的攻击。即你无法确定你正连接到谁，请谨慎使用。默认值为false。
+若客户端使[trustAll](http://vertx.io/docs/apidocs/io/vertx/core/net/ClientOptionsBase.html#setTrustAll-boolean-)设置为true，则客户端将信任所有服务端证书。连接仍然会被加密，但这种模式很容易受到“中间人”的攻击。即您无法确定您正连接到谁，请谨慎使用。默认值为false。
 
 ```java
 NetClientOptions options = new NetClientOptions().
@@ -2732,7 +2735,7 @@ request.bodyHandler(totalBuffer -> {
 
 multi-part表单还可以包含文件上传。
 
-若您想要读取multi-part表单的属性，您应该告诉Vert.x你会在读取任何正文之前调用[setExpectMultipart(true)](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#setExpectMultipart-boolean-)，然后在整个请求体都被阅读后，您可以使用[formAttributes](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#formAttributes--)来读取实际的表单属性。
+若您想要读取multi-part表单的属性，您应该告诉Vert.x您会在读取任何正文之前调用[setExpectMultipart(true)](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#setExpectMultipart-boolean-)，然后在整个请求体都被阅读后，您可以使用[formAttributes](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#formAttributes--)来读取实际的表单属性。
 
 ```java
 server.requestHandler(request -> {
@@ -2834,7 +2837,7 @@ HTTP/2帧不受流程控制——当接收到自定义帧时，不论请求（�
 
 **编写HTTP响应**
 
-想要将数据写入HTTP响应，你可使用任意一个[write](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerResponse.html#write-io.vertx.core.buffer.Buffer-)方法。
+想要将数据写入HTTP响应，您可使用任意一个[write](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerResponse.html#write-io.vertx.core.buffer.Buffer-)方法。
 
 它们可以在响应结束之前（ended)被多次调用，它们也可以通过以下几种方式调用：
 
@@ -3754,7 +3757,7 @@ request.continueHandler(v -> {
 
 这个可通过调用[setHandle100ContinueAutomatically](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerOptions.html#setHandle100ContinueAutomatically-boolean-)来设置。
 
-若你想要决定是否手动发送持续响应，则此属性可设置成false（默认值），那么您可以检查头信息并且调用[writeContinue](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerResponse.html#writeContinue--)以使（告诉）客户端持续发送请求体：
+若您想要决定是否手动发送持续响应，则此属性可设置成false（默认值），那么您可以检查头信息并且调用[writeContinue](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerResponse.html#writeContinue--)以使（告诉）客户端持续发送请求体：
 
 ```java
 httpServer.requestHandler(request -> {
@@ -4136,7 +4139,7 @@ vertx.createHttpServer().requestHandler(request -> {
 vertx run io.vertx.examples.http.sharing.HttpServerVerticle -instances 2
 ```
 
-将会发生什么？如果两个Verticle都绑定到同一个端口，您将收到一个Socket异常；幸运的是，vert.x正在为你处理这种情况。在与现有服务器相同的主机和端口上部署另一个服务器时，实际上并不会尝试创建在同一主机/端口上监听的新服务器，它只绑定一次到Socket，当接收到请求时，会按照轮询策略调用服务器处理器。
+将会发生什么？如果两个Verticle都绑定到同一个端口，您将收到一个Socket异常；幸运的是，vert.x正在为您处理这种情况。在与现有服务器相同的主机和端口上部署另一个服务器时，实际上并不会尝试创建在同一主机/端口上监听的新服务器，它只绑定一次到Socket，当接收到请求时，会按照轮询策略调用服务器处理器。
 
 我们现在想象一个客户端如：
 
@@ -4211,7 +4214,7 @@ server.websocketHandler(websocket -> {
 });
 ```
 
-你可以调用[reject](http://vertx.io/docs/apidocs/io/vertx/core/http/ServerWebSocket.html#reject--)来拒绝一个WebSocket。
+您可以调用[reject](http://vertx.io/docs/apidocs/io/vertx/core/http/ServerWebSocket.html#reject--)来拒绝一个WebSocket。
 
 ```java
 server.websocketHandler(websocket -> {
@@ -4263,7 +4266,7 @@ client.websocket("/some-uri", websocket -> {
 
 **写入消息到WebSocket**
 
-若你想将一个WebSocket消息写入WebSocket，可使用[writeBinaryMessage](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html#writeBinaryMessage-io.vertx.core.buffer.Buffer-)或[writeTextMessage](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html#writeTextMessage-java.lang.String-)来执行该操作：
+若您想将一个WebSocket消息写入WebSocket，可使用[writeBinaryMessage](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html#writeBinaryMessage-io.vertx.core.buffer.Buffer-)或[writeTextMessage](http://vertx.io/docs/apidocs/io/vertx/core/http/WebSocket.html#writeTextMessage-java.lang.String-)来执行该操作：
 
 ```java
 Buffer buffer = Buffer.buffer().appendInt(123).appendFloat(1.23f);
@@ -4375,6 +4378,508 @@ DNS解析会一直在代理服务器上执行，为了实现SOCKS4客户端的�
 如果您正在从Verticle内部创建HTTP服务器和客户端，则在撤销该Verticle时，这些服务器和客户端将自动关闭。
 
 ### 使用Vert.x共享数据
+
+共享数据包含的功能允许您可以安全地在应用程序的不同部分之间、同一Vert.x实例中的不同应用程序之间或集群中的不同Vert.x实例之间安全地共享数据。
+
+共享数据包括本地共享Map、分布式、集群范围Map、异步集群范围锁和异步集群范围计数器【local shared maps, distributed, cluster-wide maps, asynchronous cluster-wide locks, asynchronous cluster-wide counters.】。
+
+*重要：分布式数据结构的行为取决于您使用的集群管理器，网络分区面临的备份（复制）和行为由集群管理器和它的配置来定义。请参阅集群管理器文档以及底层框架手册。*
+
+#### 本地共享Map【Local shared map】
+
+本地共享Map【[Local Shared Map](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/LocalMap.html)】允许您在同一个Vert.x实例中的不同Event Loop（如不同的Verticle中）之间安全共享数据。
+
+本地共享Map仅允许将某些数据类型作为键值和值，这些类型必须是不可变的，或可以像[Buffer](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html)那样复制某些其他类型。在后一种情况中，键/值将被复制，然后再放到Map中。
+
+这样，我们可以确保在Vert.x应用程序不同线程之间——无法共享访问可变状态【*Shared Access to Mutable State*】，因此您不必担心通过同步访问来保护该状态。
+
+以下是使用共享本地Map的示例：
+
+```java
+SharedData sd = vertx.sharedData();
+
+LocalMap<String, String> map1 = sd.getLocalMap("mymap1");
+
+// String是不可变的，所以不需要复制
+map1.put("foo", "bar"); // Strings are immutable so no need to copy
+
+LocalMap<String, Buffer> map2 = sd.getLocalMap("mymap2");
+
+// Buffer将会在添加到Map之前拷贝
+map2.put("eek", Buffer.buffer().appendInt(123)); // This buffer will be copied before adding to map
+
+// Then... in another part of your application:
+// 之后，您的应用另外一部分
+map1 = sd.getLocalMap("mymap1");
+
+String val = map1.get("foo");
+
+map2 = sd.getLocalMap("mymap2");
+
+Buffer buff = map2.get("eek");
+```
+
+#### 集群范围异步Map【Cluster-wide asynchronous map】
+
+集群范围异步Map允许从集群的任何节点将数据放到Map中，并从任何其他节点读取。
+
+这使得它们对于托管Vert.x Web应用程序的服务器场【farm】中的会话状态存储非常有用。
+
+您可以使用[getClusterWideMap](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/SharedData.html#getClusterWideMap-java.lang.String-io.vertx.core.Handler-)获取[AsyncMap](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/AsyncMap.html)的实例。
+
+获取Map是异步的，返回结果可以传给您指定的处理器中，以下是一个例子：
+
+```java
+SharedData sd = vertx.sharedData();
+
+sd.<String, String>getClusterWideMap("mymap", res -> {
+  if (res.succeeded()) {
+    AsyncMap<String, String> map = res.result();
+  } else {
+    // Something went wrong!
+    // 出现一些错误
+  }
+});
+```
+
+**将数据放入Map**
+
+您可以使用[put](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/AsyncMap.html#put-java.lang.Object-java.lang.Object-io.vertx.core.Handler-)将数据放入Map。
+
+实际上put方法是异步的，一旦完成它会通知处理器：
+
+```java
+map.put("foo", "bar", resPut -> {
+  if (resPut.succeeded()) {
+    // Successfully put the value
+    // 成功放入值
+  } else {
+    // Something went wrong!
+    // 出了些问题
+  }
+});
+```
+
+**从Map读取数据**
+
+您可以使用[get](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/AsyncMap.html#get-java.lang.Object-io.vertx.core.Handler-)从Map读取数据。
+
+实际的get也是异步的，一段时间过后它会通知处理器并传入结果。
+
+```java
+map.get("foo", resGet -> {
+  if (resGet.succeeded()) {
+    // Successfully got the value
+    // 成功读取值
+    Object val = resGet.result();
+  } else {
+    // Something went wrong!
+    // 出了些问题
+  }
+});
+```
+
+**其他Map操作**
+
+您还可以从异步Map中删除条目、清除Map、读取它的尺寸。
+
+有关更多信息，请参阅[API文档](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/AsyncMap.html)。
+
+#### 集群范围锁
+
+集群范围锁【[Cluster wide locks](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/Lock.html)】允许您在集群中获取独占锁——当您想要在任何时间只在集群一个节点上执行某些操作或访问资源时，这很有用。
+
+集群范围锁具有异步API，它和大多数等待锁释放的阻塞调用线程的API锁不相同。
+
+可使用[getLock](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/SharedData.html#getLock-java.lang.String-io.vertx.core.Handler-)获取锁。
+
+它不会阻塞，但当锁可用时，将[Lock](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/Lock.html)的实例传入处理器并调用它，表示您现在拥有该锁。
+
+若您拥有的锁没有其他调用者，集群上的任何地方都可以获得该锁。
+
+当您有用锁完成后，您可以调用[release](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/Lock.html#release--)来释放它，所以另一个调用者可获得它。
+
+```java
+sd.getLock("mylock", res -> {
+  if (res.succeeded()) {
+    // Got the lock!
+    // 获得锁
+    Lock lock = res.result();
+
+    // 5 seconds later we release the lock so someone else can get it
+	// 5秒后我们释放该锁其他人可以得到它
+    vertx.setTimer(5000, tid -> lock.release());
+
+  } else {
+    // Something went wrong
+	// 出了些问题
+  }
+});
+```
+
+您可以为锁设置一个超时，若在超时时间期间无法获取锁，处理器将被调用失败：
+
+```java
+sd.getLockWithTimeout("mylock", 10000, res -> {
+  if (res.succeeded()) {
+    // Got the lock!
+	// 获得锁
+    Lock lock = res.result();
+
+  } else {
+    // Failed to get lock
+	// 锁获取失败
+  }
+});
+```
+
+#### 集群范围计时器
+
+集群范围计时器【Cluster-wide counters】在应用程序不同节点之间维护原子计数器通常很有用。
+
+您可以用[Counter](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/Counter.html)来做到这一点。
+
+您可以通过[getCounter](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/SharedData.html#getCounter-java.lang.String-io.vertx.core.Handler-)获取一个实例：
+
+```java
+sd.getCounter("mycounter", res -> {
+  if (res.succeeded()) {
+    Counter counter = res.result();
+  } else {
+    // Something went wrong!
+	// 出了些问题
+  }
+});
+```
+
+一旦您有了一个实例，您可以获取当前的计数，以原子方式递增、递减，并使用各种方法添加一个值。
+
+有更多信息，请参阅[API文档](http://vertx.io/docs/apidocs/io/vertx/core/shareddata/Counter.html)。
+
+### Vert.x访问文件系统
+
+Vert.x中的[FileSystem](http://vertx.io/docs/apidocs/io/vertx/core/file/FileSystem.html)对象提供了许多操作文件系统的方法。
+
+每个Vert.x实例有一个文件系统对象，您可以使用[fileSystem](http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html#fileSystem--)获取它。
+
+（每个操作）都提供了阻塞和非阻塞版本，非阻塞版本采用处理器，当操作完成或发生错误时调用该处理器。
+
+以下是文件异步拷贝的示例：
+
+```java
+FileSystem fs = vertx.fileSystem();
+
+// Copy file from foo.txt to bar.txt
+// 从foo.txt拷贝到bar.txt
+fs.copy("foo.txt", "bar.txt", res -> {
+    if (res.succeeded()) {
+        // Copied ok!
+		// 拷贝完成
+    } else {
+        // Something went wrong
+		// 出了些问题
+    }
+});
+```
+
+阻塞的版本名为`xxxBlocking`，它要么返回结果或直接抛出异常。很多情况下，根据操作系统和文件系统，一些潜在的阻塞操作可以快速返回，这就是我们为什么提供它。但是强烈建议您在Event Loop中使用它之前测试使用它们究竟需要耗费多长时间，以避免使用黄金法则。
+
+以下是使用阻塞API的拷贝示例：
+
+```java
+FileSystem fs = vertx.fileSystem();
+
+// Copy file from foo.txt to bar.txt synchronously
+// 同步拷贝从foo.txt到bar.txt
+fs.copyBlocking("foo.txt", "bar.txt");
+```
+
+许多操作存在copy、move、truncate、chmod和许多其他文件操作，我们不会在这里列出所有内容，请参考[API文档](http://vertx.io/docs/apidocs/io/vertx/core/file/FileSystem.html)获取完整列表。
+
+让我们看看使用异步方法的几个例子：
+
+```java
+Vertx vertx = Vertx.vertx();
+
+// Read a file
+// 读取文件
+vertx.fileSystem().readFile("target/classes/readme.txt", result -> {
+    if (result.succeeded()) {
+        System.out.println(result.result());
+    } else {
+        System.err.println("Oh oh ..." + result.cause());
+    }
+});
+
+// Copy a file
+// 拷贝文件
+vertx.fileSystem().copy("target/classes/readme.txt", "target/classes/readme2.txt", result -> {
+    if (result.succeeded()) {
+        System.out.println("File copied");
+    } else {
+        System.err.println("Oh oh ..." + result.cause());
+    }
+});
+
+// Write a file
+// 写文件
+vertx.fileSystem().writeFile("target/classes/hello.txt", Buffer.buffer("Hello"), result -> {
+    if (result.succeeded()) {
+        System.out.println("File written");
+    } else {
+        System.err.println("Oh oh ..." + result.cause());
+    }
+});
+
+// Check existence and delete
+// 检测存在以及删除
+vertx.fileSystem().exists("target/classes/junk.txt", result -> {
+    if (result.succeeded() && result.result()) {
+        vertx.fileSystem().delete("target/classes/junk.txt", r -> {
+            System.out.println("File deleted");
+        });
+    } else {
+        System.err.println("Oh oh ... - cannot delete the file: " + result.cause());
+    }
+});
+```
+
+#### 异步文件
+
+Vert.x提供了异步文件抽象（对象），允许您操作文件系统上的文件。
+
+您可以像下边代码打开一个[AsyncFile](http://vertx.io/docs/apidocs/io/vertx/core/file/AsyncFile.html)：
+
+```java
+OpenOptions options = new OpenOptions();
+fileSystem.open("myfile.txt", options, res -> {
+    if (res.succeeded()) {
+        AsyncFile file = res.result();
+    } else {
+        // Something went wrong!
+		// 出了些问题
+    }
+});
+```
+
+AsyncFile实现了ReadStream和WriteStream，因此您可以将文件和其他流对象配合泵工作，如网络Socket、HTTP请求和响应、WebSocket。
+
+它们还允许您直接读写。
+
+**随机访问写**
+
+要使用AsyncFile进行随机访问写，请使用[write](http://vertx.io/docs/apidocs/io/vertx/core/file/AsyncFile.html#write-io.vertx.core.buffer.Buffer-long-io.vertx.core.Handler-)方法。
+
+这个方法的参数有：
+
+* buffer：要写入（数据）的（目标）Buffer
+* position：一个整数指定在文件中写入Buffer的位置，若位置大于或等于文件大小，文件将被扩展【放大】以适应偏移量
+* handler：结果处理器
+
+这是随机访问写的示例：
+
+```java
+Vertx vertx = Vertx.vertx();
+vertx.fileSystem().open("target/classes/hello.txt", new OpenOptions(), result -> {
+    if (result.succeeded()) {
+        AsyncFile file = result.result();
+        Buffer buff = Buffer.buffer("foo");
+        for (int i = 0; i < 5; i++) {
+            file.write(buff, buff.length() * i, ar -> {
+                if (ar.succeeded()) {
+                    System.out.println("Written ok!");
+                    // etc
+					// 等
+                } else {
+                    System.err.println("Failed to write: " + ar.cause());
+                }
+            });
+        }
+    } else {
+        System.err.println("Cannot open file " + result.cause());
+    }
+});
+```
+
+**随机访问读**
+
+要使用AsyncFile进行随机访问读，请使用[read](http://vertx.io/docs/apidocs/io/vertx/core/file/AsyncFile.html#read-io.vertx.core.buffer.Buffer-int-long-int-io.vertx.core.Handler-)方法。
+
+该方法的参数有：
+
+* buffer：读取数据的Buffer
+* offset：读取数据将被放到Buffer中的偏移量
+* position：从文件中读取数据的位置
+* length：要读取的数据的字节数
+* handler：结果处理器
+
+一下是随机访问读的示例：
+
+```java
+Vertx vertx = Vertx.vertx();
+vertx.fileSystem().open("target/classes/les_miserables.txt", new OpenOptions(), result -> {
+    if (result.succeeded()) {
+        AsyncFile file = result.result();
+        Buffer buff = Buffer.buffer(1000);
+        for (int i = 0; i < 10; i++) {
+            file.read(buff, i * 100, i * 100, 100, ar -> {
+                if (ar.succeeded()) {
+                    System.out.println("Read ok!");
+                } else {
+                    System.err.println("Failed to write: " + ar.cause());
+                }
+            });
+        }
+    } else {
+        System.err.println("Cannot open file " + result.cause());
+    }
+});
+```
+
+**打开选项**
+
+打开AsyncFile时，您可以传递一个[OpenOptions](http://vertx.io/docs/apidocs/io/vertx/core/file/OpenOptions.html)实例，这些选项描述了访问文件的行为。例如：您可使用[setRead](http://vertx.io/docs/apidocs/io/vertx/core/file/OpenOptions.html#setRead-boolean-)，[setWrite](http://vertx.io/docs/apidocs/io/vertx/core/file/OpenOptions.html#setWrite-boolean-)和[setPerm](http://vertx.io/docs/apidocs/io/vertx/core/file/OpenOptions.html#setPerms-java.lang.String-)方法配置文件访问权限。
+
+若打开的文件已经存在，则可以使用[setCreateNew](http://vertx.io/docs/apidocs/io/vertx/core/file/OpenOptions.html#setCreateNew-boolean-)和[setTruncateExisting](http://vertx.io/docs/apidocs/io/vertx/core/file/OpenOptions.html#setTruncateExisting-boolean-)配置对应行为。
+
+您可以使用[setDeleteOnClose](http://vertx.io/docs/apidocs/io/vertx/core/file/OpenOptions.html#setDeleteOnClose-boolean-)标记在关闭时或JVM停止时要删除的文件。
+
+**将数据刷新到底层存储**
+
+在OpenOptions中，您可以使用[setDsync](http://vertx.io/docs/apidocs/io/vertx/core/file/OpenOptions.html#setDsync-boolean-)在每次写入时启用/禁用内容的自动同步。这种情况下，您可以使用[flush](http://vertx.io/docs/apidocs/io/vertx/core/file/AsyncFile.html#flush--)方法手动刷新OS缓存中的数据写入。
+
+该方法也可使用一个处理器来调用，这个处理器在flush完成时被调用。
+
+**将AsyncFile作为ReadStream和WriteStream**
+
+AsyncFile实现了ReadStream和WriteStream。您可以使用泵将数据与其他读取和写入流进行数据泵送。例如，这会将内容复制到另外一个AsyncFile：
+
+```java
+Vertx vertx = Vertx.vertx();
+final AsyncFile output = vertx.fileSystem().openBlocking("target/classes/plagiary.txt", new OpenOptions());
+
+vertx.fileSystem().open("target/classes/les_miserables.txt", new OpenOptions(), result -> {
+    if (result.succeeded()) {
+        AsyncFile file = result.result();
+        Pump.pump(file, output).start();
+        file.endHandler((r) -> {
+            System.out.println("Copy done");
+        });
+    } else {
+        System.err.println("Cannot open file " + result.cause());
+    }
+});
+```
+
+您还可以使用泵将文件内容写入到HTTP响应中，或者写入任意WriteStream。
+
+**从类路径访问文件**
+
+当Vert.x找不到文件系统上的文件时，它尝试从类路径中解析该文件。请注意，类路径的资源路径不以`/`开头。
+
+由于Java不提供对类路径资源的异步方法，所以当类路径资源第一次被访问时，该文件将复制到工作线程中的文件系统。当第二次访问相同资源时，访问的文件直接从（工作线程的）文件系统提供。即使类路径资源发生变化（例如开发系统中），也会提供原始内容。
+
+您可以将系统属性`vertx.disableFileCaching`设置为true，禁用此（文件）缓存行为。文件缓存的路径默认为`.vertx`，它可以通过设置系统属性`vertx.cacheDirBase`进行自定义。
+
+您还可以通过系统属性`vertx.disableFileCPResolving`设置为true来禁用整个类路径解析功能。
+
+*注意：当加载`io.vertx.core.impl.FileResolver`类时，这些系统属性将被检查【Evaluate】一次，因此，在加载此类之前应该设置这些属性，或者在启动它时作为JVM系统属性来设置。*
+
+**关闭AsyncFile**
+
+您可调用[close](http://vertx.io/docs/apidocs/io/vertx/core/file/AsyncFile.html#close--)来关闭一个AsyncFile。关闭是异步的，如果希望在关闭过后收到通知，您可指定一个处理器作为函数（close）参数传入。
+
+### 数据报套接字（UDP）
+
+Vert.x中使用用户数据报协议（UDP）是一块蛋糕。
+
+UDP是无连接的传输，基本上意味着您没有与远程对等体的持续连接。
+
+相反您可以发送和接收包，并且每个包包含远程地址。
+
+UDP不像TCP的使用那样安全，这意味着不能保证发送的数据包会被对应的Endpoint接收。
+
+唯一的保证是，它将会完全接收或者不完全接收。
+
+您通常也不能发送大于网络接口MTU大小的数据，这是因为每一个数据包将会作为一个包发送。
+
+但是要注意，即使数据包尺寸小于MTU，它仍然可能会失败。
+
+它失败的尺寸取决于操作系统等（其他），所以经验法则是尝试发送小数据包。
+
+由于UDP的本质，最适合一些允许丢弃数据包的应用（如监视应用程序）。
+
+其优点是与TCP相比具有更少的开销，可以由NetServer和NetClient处理（参考前文）。
+
+#### 创建一个DatagramSocket
+
+要使用UDP，您首先要创建一个[DatagramSocket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocket.html)，若您只是想要发送数据、发送、接收，这并不重要。
+
+```java
+DatagramSocket socket = vertx.createDatagramSocket(new DatagramSocketOptions());
+```
+
+返回的[DatagramSocket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocket.html)实例不会绑定到特定端口，若您只想发送数据（如客户端）这不是一个问题，但更多的在下一节。
+
+#### 发送数据报包
+
+如前所述，用户数据报协议（UDP）将数据分组发送给远程对等体，但不以持续的方式连接到它们。
+
+这意味着每个数据包都可以发送到另一个远程对等体。
+
+发送数据包很容易，如下所示：
+
+```java
+DatagramSocket socket = vertx.createDatagramSocket(new DatagramSocketOptions());
+Buffer buffer = Buffer.buffer("content");
+// Send a Buffer
+// 发送Buffer
+socket.send(buffer, 1234, "10.0.0.1", asyncResult -> {
+  System.out.println("Send succeeded? " + asyncResult.succeeded());
+});
+// Send a String
+// 发送一个字符串
+socket.send("A string used as content", 1234, "10.0.0.1", asyncResult -> {
+  System.out.println("Send succeeded? " + asyncResult.succeeded());
+});
+```
+
+#### 接收数据报包
+
+若您想要接收数据包，则您需要调用`listen(...)`绑定一个[DatagramSocket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocket.html)。
+
+这样您就可以接收[DatagramPacket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramPacket.html)的数据，发送到[DatagramSocket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramSocket.html)监听的地址和端口。
+
+除此之外，您还要设置一个Handler，将在接收每个[DatagramPacket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramPacket.html)时被调用。
+
+[DatagramPacket](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramPacket.html)有以下方法：
+
+* [sender](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramPacket.html#sender--)：表示数据发送方的InetSocketAddress。
+* [data](http://vertx.io/docs/apidocs/io/vertx/core/datagram/DatagramPacket.html#data--)：保存接收数据的Buffer。
+
+所以要监听一个特定地址和端口，您可以像下边这样：
+
+```java
+DatagramSocket socket = vertx.createDatagramSocket(new DatagramSocketOptions());
+socket.listen(1234, "0.0.0.0", asyncResult -> {
+  if (asyncResult.succeeded()) {
+    socket.handler(packet -> {
+      // Do something with the packet
+	  // 使用包做些事
+    });
+  } else {
+    System.out.println("Listen failed" + asyncResult.cause());
+  }
+});
+```
+
+注意，即使AsyncResult成功，它只意味着它可能写入了网络堆栈，但不保证它已经到达或者将到达远程对等体。
+
+若您需要这样的保证，您可在TCP之上建立一些握手逻辑。
+
+#### 多播【Multicast】
+
+**发送多播数据包**
 
 
 
