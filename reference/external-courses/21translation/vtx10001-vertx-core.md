@@ -27,6 +27,9 @@
 * Buffer：缓冲区（一些地方使用的Vert.x类中的Buffer类则不翻译）
 * Chunk：块（HTTP数据块，分块传输、分块模式中会用到）
 * Pump：泵
+* Header：请求/响应头
+* Body：请求/响应体（有些地方翻译成请求/响应正文）
+* Pipe：管道
 
 _注意：Vert.x和Vertx的区别：文中所有Vert.x概念使用标准单词Vert.x，而Vertx通常表示Java中的类：_`io.vertx.core.Vertx`_。_
 
@@ -1621,7 +1624,7 @@ server.connectHandler(socket -> {
 
 #### 从Socket读取数据
 
-您可以在Socket中设置一个[handler](http://vertx.io/docs/apidocs/io/vertx/core/net/NetSocket.html#handler-io.vertx.core.Handler-)从Socket中读取数据。
+您可以在Socket中调用[handler](http://vertx.io/docs/apidocs/io/vertx/core/net/NetSocket.html#handler-io.vertx.core.Handler-)设置处理器从Socket中读取数据。
 
 每次当Socket接收到数据时，会传入一个[Buffer](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html)实例给处理器，并调用它。
 
@@ -1665,7 +1668,7 @@ socket.closeHandler(v -> {
 
 #### 处理异常
 
-当Socket发生异常时，您可以设置一个[exceptionHandler](http://vertx.io/docs/apidocs/io/vertx/core/net/NetSocket.html#exceptionHandler-io.vertx.core.Handler-)来接收任何异常信息。
+当Socket发生异常时，您可以设置一个[exceptionHandler](http://vertx.io/docs/apidocs/io/vertx/core/net/NetSocket.html#exceptionHandler-io.vertx.core.Handler-)来接收（捕捉）任何异常信息。
 
 #### Event Bus写处理器
 
@@ -2678,7 +2681,7 @@ HTTP请求通常包含我们需要读取的主体。如前所述，当请求头�
 
 这是因为请求体可能非常大（如文件上传），并且我们不会在内容发送给您之前将其全部缓冲存储在内存中，这可能会导致服务器耗尽可用内存。
 
-要接收请求体，您可在请求中设置一个处理器[handler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#handler-io.vertx.core.Handler-)，每次请求体的一小块达到时，该处理器都会被调用。以下是一个例子：
+要接收请求体，您可在请求中调用[handler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#handler-io.vertx.core.Handler-)设置一个处理器，每次请求体的一小块（数据）收到时，该处理器都会被调用。以下是一个例子：
 
 ```java
 request.handler(buffer -> {
@@ -2875,7 +2878,7 @@ response.write("hello world!");
 response.end();
 ```
 
-您也可以和调用write方法一样传string或buffer给end方法。这种情况，它和调用带string/buffer参数的write方法一样，之后和没有参数调用end时一样，例如：
+您也可以和调用write方法一样传string或buffer给end方法。这种情况，它和先调用带string/buffer参数的write方法，之后调用无参end方法一样，例如：
 
 ```java
 HttpServerResponse response = request.response();
@@ -3004,7 +3007,7 @@ vertx.createHttpServer().requestHandler(request -> {
 }).listen(8080);
 ```
 
-若您想要从偏移量开始发送文件直到结束，则不需要提供长度信息，这种情况下，您可以执行以下操作：
+若您想要从偏移量开始发送文件直到尾部，则不需要提供长度信息，这种情况下，您可以执行以下操作：
 
 ```java
 vertx.createHttpServer().requestHandler(request -> {
@@ -3214,6 +3217,702 @@ HttpClient client = vertx.createHttpClient(options);
 
 #### 发出请求
 
+HTTP客户端是很灵活的，您可以通过各种方式发出请求。
+
+通常您希望使用HTTP客户端向同一个主机/端口发送很多请求。为避免每次发送请求时重复设主机/端口，您可以为客户端配置默认主机/端口：
+
+```java
+HttpClientOptions options = new HttpClientOptions().setDefaultHost("wibble.com");
+// Can also set default port if you want...
+// 若您想可设置默认端口
+HttpClient client = vertx.createHttpClient(options);
+client.getNow("/some-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+});
+```
+
+或者您发现自己使用相同的客户端向不同主机的主机/端口发送大量请求，则可以在发出请求时简单指定主机/端口：
+
+```java
+HttpClient client = vertx.createHttpClient();
+
+// Specify both port and host name
+// 指定端口和主机名
+client.getNow(8080, "myserver.mycompany.com", "/some-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+});
+
+// This time use the default port 80 but specify the host name
+// 这次使用默认端口80和指定的主机名
+client.getNow("foo.othercompany.com", "/other-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+});
+```
+
+用客户端发出请求的所有不同方式都支持这两种指定主机/端口的方法。
+
+**无请求体简单请求**
+
+通常，您想发出没有请求体的HTTP请求，这种情况通常如HTTP GET、OPTIONS和HEAD请求。
+
+使用Vert.x客户端执行这种请求最简单的方式是使用加了前缀的`Now`方法，如[getNow](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClient.html#getNow-io.vertx.core.http.RequestOptions-io.vertx.core.Handler-)。
+
+这些方法会创建HTTP请求，并在单个方法调用中发送它，而且允许您提供一个处理器，当HTTP响应发送回来时调用该处理器。
+
+```java
+HttpClient client = vertx.createHttpClient();
+
+// Send a GET request
+// 发送GET请求
+client.getNow("/some-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+});
+
+// Send a GET request
+// 发送HEAD请求
+client.headNow("/other-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+});
+```
+
+**写通用请求**
+
+在有些时候您在运行时【run-time】之前不知道发送请求的HTTP方法，对于该用例，我们提供通用请求方法[request](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClient.html#request-io.vertx.core.http.HttpMethod-io.vertx.core.http.RequestOptions-)，允许您在运行时指定HTTP方法：
+
+```java
+HttpClient client = vertx.createHttpClient();
+
+client.request(HttpMethod.GET, "some-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+}).end();
+
+client.request(HttpMethod.POST, "foo-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+}).end("some-data");
+```
+
+**写请求体**
+
+有时您想要写入一个包含了请求体的请求，或者也许您想要在发送请求之前写入（数据到）请求头。
+
+为此，您可以调用其中一个指定的请求方法如[post](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClient.html#post-io.vertx.core.http.RequestOptions-)或一个其他通用请求方法如[request](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClient.html#request-io.vertx.core.http.HttpMethod-io.vertx.core.http.RequestOptions-)。
+
+这些方法都不会立即发送请求，而是返回一个[HttpClientRequest](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html)实例，它可以用来写数据到请求体和请求头。
+
+这儿有一些写包含m的请求体的POST请求例子：
+
+```java
+HttpClient client = vertx.createHttpClient();
+
+HttpClientRequest request = client.post("some-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+});
+
+// Now do stuff with the request
+// 现在准备请求的一些东西
+request.putHeader("content-length", "1000");
+request.putHeader("content-type", "text/plain");
+request.write(body);
+
+// Make sure the request is ended when you're done with it
+// 确保请求完成后结束
+request.end();
+
+// Or fluently:
+// 或使用Fluent的API
+client.post("some-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+}).putHeader("content-length", "1000").putHeader("content-type", "text/plain").write(body).end();
+
+// Or event more simply:
+// 或事情更简单
+client.post("some-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+}).putHeader("content-type", "text/plain").end(body);
+```
+
+可使用存在的写方法写入UTF-8编码的字符串、指定编码的字符串、或写Buffer：
+
+```java
+// 写UTF-8编码的字符串
+request.write("some data");
+
+// Write string encoded in specific encoding
+// 写指定编码的字符串
+request.write("some other data", "UTF-16");
+
+// Write a buffer
+// 写Buffer
+Buffer buffer = Buffer.buffer();
+buffer.appendInt(123).appendLong(245l);
+request.write(buffer);
+```
+
+若您仅需要写单个字符串或Buffer到HTTP请求中，您可以在写入后调用end函数结束单次调用的请求。
+
+```java
+request.end("some simple data");
+
+// Write buffer and end the request (send it) in a single call
+// 在单次调用中写Buffer并结束请求（直接发送）
+Buffer buffer = Buffer.buffer().appendDouble(12.34d).appendLong(432l);
+request.end(buffer);
+```
+
+当您写入请求时，第一次调用write方法将先将请求头写入到（请求）报文中。
+
+实际写入操作是异步的，它在调用返回一段时间后才发生。
+
+带请求体的非分块HTTP请求需要提供Content-Length头。
+
+因此，若您不使用HTTP分块，则必须在写入请求之前设置Content-Length头，否则会太迟。
+
+若您在调用其中一个end方法处理string或buffer，在写入请求体之前，Vert.x将自动计算并设置Content-Length。
+
+若您在使用HTTP分块模式，则不需要Content-Length头，因此您不必先计算大小。
+
+
+#### 写请求头
+
+您可以直接使用multi-map结构的[headers](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#headers--)来设置请求头：
+
+```java
+MultiMap headers = request.headers();
+headers.set("content-type", "application/json").set("other-header", "foo");
+```
+
+这个headers是一个[MultiMap](http://vertx.io/docs/apidocs/io/vertx/core/MultiMap.html)的实例，它提供了添加、设置、删除条目的操作，HTTP头允许一个特定的键包含多个值。
+
+您也可以使用[putHeader](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#putHeader-java.lang.String-java.lang.String-)编写头文件：
+
+```java
+request.putHeader("content-type", "application/json").putHeader("other-header", "foo");
+```
+
+若您想写入（数据）请求头，则您必须在写入任何请求体之前这样做来设置请求头。
+
+**非标准的HTTP方法**
+
+[OTHER](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpMethod.html#OTHER)的HTTP方法用于非标准HTTP方法，当使用此方法时，必须使用[setRawMethod](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#setRawMethod-java.lang.String-)来设置需要发送到服务器的raw方法。
+
+**结束HTTP请求**
+
+一旦完成了HTTP请求，您必须调用其中一个[end](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#end-java.lang.String-)操作来结束该请求。
+
+结束一个请求时，若请求头尚未被写入，会导致它们被写入，并且请求被标记成完成的。
+
+请求可以通过多种方式结束。无参简单结束请求的方式如：
+
+```java
+request.end();
+```
+
+或可以在调用end时提供string或buffer，这个和先调用带string/buffer参数的write方法之后再调用无参end一样。
+
+```java
+request.end("some-data");
+
+// End it with a buffer
+// 使用buffer结束
+Buffer buffer = Buffer.buffer().appendFloat(12.3f).appendInt(321);
+request.end(buffer);
+```
+
+**分块HTTP请求**
+
+Vert.x支持[HTTP Chunked Transfer Encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)的请求。
+
+这允许使用块方式写入HTTP请求体，这个在请求体比较大需要流式发送到服务器，或预先不知道大小时很常用。
+
+您可使用[setChuncked](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#setChunked-boolean-)将HTTP请求转成分块模式。
+
+在分块模式下，每次调用write方法将导致新的块被写入到报文，这种模式中，无需先设置请求头中的Content-Length。
+
+```java
+request.setChunked(true);
+
+// Write some chunks
+// 写一些块
+for (int i = 0; i < 10; i++) {
+  request.write("this-is-chunk-" + i);
+}
+
+request.end();
+```
+
+**请求超时**
+
+您可使用[setTimeout](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#setTimeout-long-)设置一个特定HTTP请求的超时时间。
+
+若请求在超时期限内未返回任何数据，则异常将会被传给异常处理器【exception handler】（若提供），并且请求将会被关闭。
+
+**处理异常**
+
+您可以通过在[HttpClientRequest](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html)实例上设置异常处理器来处理（捕捉）和请求对应的异常：
+
+```java
+HttpClientRequest request = client.post("some-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+});
+request.exceptionHandler(e -> {
+  System.out.println("Received exception: " + e.getMessage());
+  e.printStackTrace();
+});
+```
+
+这种处理器不处理需要在[HttpClientResponse](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html)中应处理的非2xx响应：
+
+```java
+HttpClientRequest request = client.post("some-uri", response -> {
+  if (response.statusCode() == 200) {
+    System.out.println("Everything fine");
+    return;
+  }
+  if (response.statusCode() == 500) {
+    System.out.println("Unexpected behavior on the server side");
+    return;
+  }
+});
+request.end();
+```
+
+*重要：XXXNow方法不接收异常处理器（做参数）*
+
+**客户端请求中指定处理器**
+
+不像在调用中提供响应处理器来创建客户端请求对象，相反您可以当请求创建时不提供处理器、稍后在请求对象中调用[handler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#handler-io.vertx.core.Handler-)来设置。如：
+
+```java
+HttpClientRequest request = client.post("some-uri");
+request.handler(response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+});
+```
+
+**使用流式请求**
+
+[HttpClientRequest](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html)实例也是一个[WriteStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html)，这意味着您可以从任何[ReadStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html)实例读取数据。
+
+例如，您可以将磁盘上的文件直接泵送【Pump】到HTTP请求体中，如下所示：
+
+```java
+request.setChunked(true);
+Pump pump = Pump.pump(file, request);
+file.endHandler(v -> request.end());
+pump.start();
+```
+
+**写HTTP/2帧**
+
+HTTP/2是用于HTTP请求/响应模型的具有各种帧的一个帧协议，该协议允许发送和接收其他类型的帧。
+
+要发送这样的帧，您可以使用[write](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#write-io.vertx.core.buffer.Buffer-)写入请求，以下是一个例子：
+
+```java
+int frameType = 40;
+int frameStatus = 10;
+Buffer payload = Buffer.buffer("some data");
+
+// Sending a frame to the server
+// 发送一帧到服务器
+request.writeCustomFrame(frameType, frameStatus, payload);
+```
+
+**流重置**
+
+HTTP/1.x不允许请求或响应流进行重置，如当客户端上传了服务器上存在的资源时，服务器依然要接收整个响应。
+
+HTTP/2在请求/响应期间随时支持流重置：
+
+```java
+request.reset();
+```
+
+默认情况，发送`NO_ERROR(0)`错误代码，可发送另一个代码：
+
+```java
+request.reset(8);
+```
+
+HTTP/2规范定义了可使用的[错误代码](http://httpwg.org/specs/rfc7540.html#ErrorCodes)列表。
+
+若使用了[request handler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerRequest.html#exceptionHandler-io.vertx.core.Handler-)和[response handler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerResponse.html#exceptionHandler-io.vertx.core.Handler-)两个处理器过后，在流重置完成时您将会收到通知。
+
+```java
+request.exceptionHandler(err -> {
+  if (err instanceof StreamResetException) {
+    StreamResetException reset = (StreamResetException) err;
+    System.out.println("Stream reset " + reset.getCode());
+  }
+});
+```
+
+#### 处理HTTP响应
+
+您可以在请求方法中指定处理器或通过[HttpClientRequest](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html)对象直接设置处理器来接收到[HttpClientResponse](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html)的实例。
+
+您可以调用[statusCode](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html#statusCode--)和[statusMessage](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html#statusMessage--)从响应中查询响应的状态代码和状态消息。
+
+```java
+client.getNow("some-uri", response -> {
+  // the status code - e.g. 200 or 404
+  // 状态代码：200、404
+  System.out.println("Status code is " + response.statusCode());
+
+  // the status message e.g. "OK" or "Not Found".
+  // 状态消息：OK、Not Found
+  System.out.println("Status message is " + response.statusMessage());
+});
+```
+
+**使用流式响应**
+
+[HttpClientResponse](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html)实例也是一个[ReadStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/ReadStream.html)实例，这意味着您可以泵送数据到任何[WriteStream](http://vertx.io/docs/apidocs/io/vertx/core/streams/WriteStream.html)实例。
+
+**响应头和尾**
+
+HTTP响应可包含头信息，使用[headers](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html#headers--)来读取响应头。
+
+（该方法）返回的对象是[MultiMap](http://vertx.io/docs/apidocs/io/vertx/core/MultiMap.html)，因为HTTP响应头中单个键也可关联多个值。
+
+```java
+String contentType = response.headers().get("content-type");
+String contentLength = response.headers().get("content-lengh");
+```
+
+分块HTTP响应还可以包含响应尾——这实际上是在发送响应体的最后一个（数据）块。
+
+您可使用[trailers](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html#trailers--)方法读取响应尾，尾数据也是一个[MultiMap](http://vertx.io/docs/apidocs/io/vertx/core/MultiMap.html)。
+
+**读取请求体**
+
+当从报文【Wire】中读取到响应头时，响应处理器就会被调用。
+
+如果响应有响应体，它可能会在响应头被读取后的某个时间以分片的方式到达。 在调用响应处理程序之前，我们不要等待所有的响应体到达，因为它可能非常大而要等待很长时间、又或者会花费大量内存。
+
+当响应体的某部分（数据）到达时，[handler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html#handler-io.vertx.core.Handler-)将会被调用，而且传入的[Buffer](http://vertx.io/docs/apidocs/io/vertx/core/buffer/Buffer.html)中包含了响应体的这一分片（部分）内容，
+
+```java
+client.getNow("some-uri", response -> {
+
+  response.handler(buffer -> {
+    System.out.println("Received a part of the response body: " + buffer);
+  });
+});
+```
+
+若您知道响应体不是很大，并想在处理之前在所有内存中聚合，那么您可以自己聚合：
+
+```java
+client.getNow("some-uri", response -> {
+
+  // Create an empty buffer
+  // 创建空的缓冲区
+  Buffer totalBuffer = Buffer.buffer();
+
+  response.handler(buffer -> {
+    System.out.println("Received a part of the response body: " + buffer.length());
+
+    totalBuffer.appendBuffer(buffer);
+  });
+
+  response.endHandler(v -> {
+    // Now all the body has been read
+    // 现在所有的响应体都读取了
+    System.out.println("Total response body length is " + totalBuffer.length());
+  });
+});
+```
+
+或者当响应已被完全读取时，您可以使用bodyHandler以便读取整个响应体：
+
+```java
+client.getNow("some-uri", response -> {
+
+  response.bodyHandler(totalBuffer -> {
+    // Now all the body has been read
+    // 现在所有的响应体都读取了
+    System.out.println("Total response body length is " + totalBuffer.length());
+  });
+});
+```
+
+**结束响应处理器**
+
+整个响应体被读取时或者没有响应体而响应头被读取时，响应中的[endHandler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html#endHandler-io.vertx.core.Handler-)会被调用。
+
+**从响应中读取Cookie**
+
+您可以用[cookies](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html#cookies--)方法从响应中读取一个cookie的列表。
+
+或者，您可以在响应中自己解析Set-Cookie头。
+
+**30x重定向处理器**
+
+客户端可配置成遵循HTTP重定向的：当客户端接收到301、302、303或307状态代码时，它遵循由Location响应头提供的重定向，并且响应处理器将传递重定向响应代替原始响应。
+
+这儿有个例子：
+
+```java
+client.get("some-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+}).setFollowRedirects(true).end();
+```
+
+重定向策略如下：
+
+* 当接收到301、302或303状态代码时，使用GET方法执行重定向
+* 当接收到307状态代码时，使用相同的HTTP方法和缓存的请求体执行重定向
+
+*警告：遵循重定向会缓存请求体。*
+
+默认情况最大的重定向数为`16`，您可使用[setMaxRedirects](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setMaxRedirects-int-)设置。
+
+```java
+HttpClient client = vertx.createHttpClient(
+    new HttpClientOptions()
+        .setMaxRedirects(32));
+
+client.get("some-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+}).setFollowRedirects(true).end();
+```
+
+一个尺寸不适合所有情况并且默认重定向策略不适合您的需要。
+
+默认重定向策略可使用自定义实现更改：
+
+```java
+client.redirectHandler(response -> {
+
+  // Only follow 301 code
+  // 仅仅遵循301状态代码
+  if (response.statusCode() == 301 && response.getHeader("Location") != null) {
+
+    // Compute the redirect URI
+    // 计算重定向URI
+    String absoluteURI = resolveURI(response.request().absoluteURI(), response.getHeader("Location"));
+
+    // Create a new ready to use request that the client will use
+    // 创建客户端将使用的新的可用请求
+    return Future.succeededFuture(client.getAbs(absoluteURI));
+  }
+
+  // We don't redirect
+  // 我们不需要重定向
+  return null;
+});
+```
+这个策略会接收到原始[HttpClientResponse](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientResponse.html)，并返回`null`或`Future<HttpClientRequest>`。
+
+* 当返回null时，处理原始响应
+* 当一个Future返回时，请求将在它成功完成后发送
+* 当一个Future返回时，请求失败时调用设置的异常处理器
+
+返回的请求必须是未发送的，这样原始请求处理器才会被发送而且客户端之后才能发送请求。大多数原始请求设置将会传播（拷贝）到新请求中：
+
+* 请求头，除非您已经设置了一些头（包括[setHost](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#setHost-java.lang.String-)）
+* 请求体，除非返回的请求使用了GET方法
+* 响应处理器
+* 请求异常处理器
+* 请求超时
+
+**100-持续处理【Continue Handling】**
+
+根据[HTTP 1.1规范](http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html)，一个客户端可以设置请求头`Expect: 100-Continue`，并且在发送剩余请求体之前发送请求头。
+
+然后服务器可以通过回复临时响应状态`Status: 100 (Continue)`来告诉客户端可以发送请求的剩余部分。
+
+这里的想法是允许服务器在发送大量数据之前授权、接收/拒绝请求，若请求不能被接收，则发送大量数据信息会浪费带宽，并将服务器绑定在读取刚刚丢失的无用数据中。
+
+Vert.x允许您在客户端请求对象中设置一个[continueHandler](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#continueHandler-io.vertx.core.Handler-)。
+
+如果服务器发回一个状态`Status: 100 (Continue)`则表示（客户端）可以发送请求的剩余部分。
+
+这和[sendHead](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientRequest.html#sendHead--)结合起来发送请求的头信息。
+
+以下是一个例子：
+
+```java
+HttpClientRequest request = client.put("some-uri", response -> {
+  System.out.println("Received response with status code " + response.statusCode());
+});
+
+request.putHeader("Expect", "100-Continue");
+
+request.continueHandler(v -> {
+  // OK to send rest of body
+  // 可发送请求体剩余部分
+  request.write("Some data");
+  request.write("Some more data");
+  request.end();
+});
+```
+
+在服务端，一个Vert.x的HTTP服务器可配置成接收到`Expect: 100-Continue`头时自动发回100 Continue临时响应信息。
+
+这个可通过调用[setHandle100ContinueAutomatically](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerOptions.html#setHandle100ContinueAutomatically-boolean-)来设置。
+
+若你想要决定是否手动发送持续响应，则此属性可设置成false（默认值），那么您可以检查头信息并且调用[writeContinue](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerResponse.html#writeContinue--)以使（告诉）客户端持续发送请求体：
+
+```java
+httpServer.requestHandler(request -> {
+  if (request.getHeader("Expect").equalsIgnoreCase("100-Continue")) {
+
+    // Send a 100 continue response
+    // 发送100 Continue持续响应
+    request.response().writeContinue();
+
+    // The client should send the body when it receives the 100 response
+    // 当客户端收到100响应代码则可以发送剩余请求体
+    request.bodyHandler(body -> {
+      // Do something with body
+    });
+
+    request.endHandler(v -> {
+      request.response().end();
+    });
+  }
+});
+```
+
+您也可以通过直接发送故障状态代码来拒绝该请求：这种情况下，请求体应该被忽略或连接应该被关闭（100-Continue是一个性能提示，并不是逻辑协议约束）：
+
+```java
+httpServer.requestHandler(request -> {
+  if (request.getHeader("Expect").equalsIgnoreCase("100-Continue")) {
+
+    //
+    boolean rejectAndClose = true;
+    if (rejectAndClose) {
+
+      // Reject with a failure code and close the connection
+      // this is probably best with persistent connection
+      // 使用失败代码拒绝，并关闭这个连接，这可能是持久连接最好的
+      request.response()
+          .setStatusCode(405)
+          .putHeader("Connection", "close")
+          .end();
+    } else {
+
+      // Reject with a failure code and ignore the body
+      // this may be appropriate if the body is small
+      // 使用失败代码拒绝，忽略请求体，若体很小，这是适用的
+      request.response()
+          .setStatusCode(405)
+          .end();
+    }
+  }
+});
+```
+
+**客户端端推送**
+
+服务器推送是一个HTTP/2的新功能，它可以为单个客户端并行发送多个响应。
+
+可以在接受服务器推送的请求/响应的请求上设置推送处理器：
+
+```java
+HttpClientRequest request = client.get("/index.html", response -> {
+  // Process index.html response
+  // 处理index.html响应
+});
+
+// Set a push handler to be aware of any resource pushed by the server
+request.pushHandler(pushedRequest -> {
+
+  // A resource is pushed for this request
+  // 为当前请求推送资源
+  System.out.println("Server pushed " + pushedRequest.path());
+
+  // Set an handler for the response
+  // 为响应设置处理器
+  pushedRequest.handler(pushedResponse -> {
+    System.out.println("The response for the pushed request");
+  });
+});
+
+// End the request
+// 结束请求
+request.end();
+```
+
+若客户端不想收到推送请求，它可重置流：
+
+```java
+request.pushHandler(pushedRequest -> {
+  if (pushedRequest.path().equals("/main.js")) {
+    pushedRequest.reset();
+  } else {
+    // Handle it
+    // 处理它
+  }
+});
+```
+
+若没有设置任何处理器时，任何被推送的流将被客户端自动重置流（错误代码`8`）。
+
+**接收自定义HTTP/2帧**
+
+HTTP/2是用于HTTP请求/响应模型的具有各种帧的一个帧协议，该协议允许发送和接收其他类型的帧。
+
+要接收自定义帧，您可以在请求中使用customFrameHandler，每次自定义帧到达时就会调用它。以下是一个例子：
+
+```java
+response.customFrameHandler(frame -> {
+
+  System.out.println("Received a frame type=" + frame.type() +
+      " payload" + frame.payload().toString());
+});
+```
+
+#### 客户端启用压缩
+
+标准的HTTP客户端支持HTTP压缩。
+
+这意味着客户端可以让远程服务器知道它支持压缩，并且能处理压缩过的响应体（数据）。
+
+HTTP服务器可以自由地使用自己支持的压缩算法之一进行压缩，也可以在不压缩的情况下将响应体发回。所以这仅仅是一个HTTP服务器的提示，将来可能被忽略。
+
+要告诉服务器当前客户端支持哪种压缩，则它（请求头）将包含一个`Accept-Encoding`头，其值为可支持的压缩算法，（该值可）支持多种压缩算法。这种情况Vert.x将添加以下头：
+
+```java
+Accept-Encoding: gzip, deflate
+```
+
+服务器将从其中（算法）选择一个，您可以通过服务器发回的响应中响应头`Content-Encoding`来检测服务器是否适应这个正文。
+
+若响应体通过gzip压缩，它将包含例如下边的头：
+
+```java
+Content-Encoding: gzip
+```
+
+创建客户端时可使用[setTryUseCompression](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setTryUseCompression-boolean-)设置配置项启用压缩。
+
+默认情况压缩被禁用。
+
+#### HTTP/1.x Pooling和Keep alive
+
+HTTP的Keep alive允许HTTP连接用于多个请求，当您向同一台服务器发送多个请求时，可以更加有效使用连接。
+
+对于HTTP/1.x版本，HTTP客户端支持连接池，它允许您重用请求之间的连接。
+
+为了连接池（能）工作，配置客户端时，keep alive必须通过[setKeepAlive](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setKeepAlive-boolean-)设置成true，默认值为true。
+
+当keep alive启用时，Vert.x将为每一个发送的HTTP/1.0请求添加一个`Connection: Keep-Alive`头。当keep alive禁用时，Vert.x将为每一个HTTP/1.1请求添加一个`Connection: Close`头——表示在响应完成后连接将被关闭。
+
+可使用[setMaxPoolSize](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setMaxPoolSize-int-)为每个服务器配置连接池的最大连接数。
+
+当启用连接池创建请求时，若存在少于已经为服务器创建的最大连接数，Vert.x将创建一个新连接，否则直接将请求添加到队列中。
+
+Keep Alive的连接将不会被客户端自动关闭，要关闭它们您可以关闭客户端实例。
+
+或者，您可使用[setIdleTimeout](http://vertx.io/docs/apidocs/io/vertx/core/http/HttpClientOptions.html#setIdleTimeout-int-)设置超时时间——在设置的时间内然后没使用的连接将被关闭。请注意空闲超时值以秒为单位而不是毫秒。
+
+#### HTTP/1.1 Pipe-lining
+
+客户端还支持连接上的请求管道。
 
 
 
