@@ -96,8 +96,9 @@
 
 ## Training
 
-* KT100 - IDE
+* [KT100 - IDE](training/kt100-ide.md)
   * [VSCode](training/vscode.md)
+    * Front-End
 * KT101 - Web Service
 
 ## History
