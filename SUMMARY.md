@@ -71,6 +71,8 @@
     * [1.6.2.Browserify](reference/basic-knowledge/162browserify.md)
     * [1.6.3.Grunt](reference/basic-knowledge/163grunt.md)
     * [1.6.4.Gulp](reference/basic-knowledge/164gulp.md)
+    * [1.6.5.Maven](reference/basic-knowledge/165maven.md)
+      * [KM10003 - Maven运行Java程序](reference/basic-knowledge/165maven/km10003-mavenyun-xing-java-cheng-xu.md)
 * [2. Vert.X Works](reference/external-courses.md)
   * [2.1.Translation](reference/external-courses/21translation.md)
     * [VTX10001 - Vert.X Core](reference/external-courses/21translation/vtx10001-vertx-core.md)
