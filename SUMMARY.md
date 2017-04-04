@@ -98,7 +98,7 @@
 
 * [KT100 - IDE](training/kt100-ide.md)
   * [VSCode](training/vscode.md)
-    * Front-End
+    * [KT10001 - VSCode搭建Vie/Rtv环境](training/vscode/kt10001-vscodeda-jian-vie-rtv-huan-jing.md)
 * KT101 - Web Service
 
 ## History
