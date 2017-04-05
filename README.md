@@ -40,6 +40,8 @@
 |  | STE | Script Engine | 脚本引擎专用文档 |
 |  | DEV | Development | 开发调试技巧工具文档 |
 | Reference | KM | Knowledge Management | 知识整理专用文档 |
+|  | EXP | Exception List | 异常文档专用集合 |
+|  | KTS | Tradeshift KM | 公司专用文档集 |
 |  | VTX | Vert.x | Vert.X社区工作专用文档 |
 | Training | KT | Knowledge Transfer | 培训专用文档 |
 | History | HIS | History | 历史文档 |
