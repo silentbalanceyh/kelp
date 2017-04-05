@@ -95,6 +95,7 @@
   * rxjs 5.2.0
 * [5. Exception Hits](reference/exception-hits.md)
   * [5.1.MySQL](reference/exception-hits/51mysql.md)
+    * EXP10001 - 
 
 ## Training
 
