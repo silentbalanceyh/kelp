@@ -93,6 +93,7 @@
   * redux-orm 0.9.0-rc.3
   * redux-orm-proptypes 0.1.0
   * rxjs 5.2.0
+* [Exception List](reference/exception-list.md)
 
 ## Training
 
