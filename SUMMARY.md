@@ -71,6 +71,8 @@
     * [1.6.2.Browserify](reference/basic-knowledge/162browserify.md)
     * [1.6.3.Grunt](reference/basic-knowledge/163grunt.md)
     * [1.6.4.Gulp](reference/basic-knowledge/164gulp.md)
+    * [1.6.5.Maven](reference/basic-knowledge/165maven.md)
+      * [KM10003 - Maven运行Java程序](reference/basic-knowledge/165maven/km10003-mavenyun-xing-java-cheng-xu.md)
 * [2. Vert.X Works](reference/external-courses.md)
   * [2.1.Translation](reference/external-courses/21translation.md)
     * [VTX10001 - Vert.X Core](reference/external-courses/21translation/vtx10001-vertx-core.md)
@@ -93,12 +95,13 @@
   * redux-orm 0.9.0-rc.3
   * redux-orm-proptypes 0.1.0
   * rxjs 5.2.0
-* [5. Exception Hits](reference/exception-hits.md)
-  * [5.1.MySQL](reference/exception-hits/51mysql.md)
-    * EXP10001 - 
+* [5. Exception List](reference/exception-list.md)
 
 ## Training
 
+* [KT100 - IDE](training/kt100-ide.md)
+  * [VSCode](training/vscode.md)
+    * [KT10001 - VSCode搭建Vie/Rtv环境](training/vscode/kt10001-vscodeda-jian-vie-rtv-huan-jing.md)
 * KT101 - Web Service
 
 ## History
