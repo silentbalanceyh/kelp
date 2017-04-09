@@ -26,9 +26,13 @@ ts.ui.ready(function() {
 
 ```js
 ts.ui.ready(function() {
-	boostrap_everything();
+    boostrap_everything();
 });
 ```
+
+## 2.Layout
+
+
 
 
 
