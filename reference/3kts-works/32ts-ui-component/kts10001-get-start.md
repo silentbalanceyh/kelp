@@ -112,10 +112,14 @@ Component中一些复杂的行为通常使用纯JavaScript API来处理，它不
 
 ```js
 ts.ui.DatePicker({
-	title: "Your Birthday",
-	value: '1973-03-26',
+    title: "Your Birthday",
+    value: '1973-03-26',
 }).open();
 ```
+
+## 4. Basic Rules
+
+
 
 
 
