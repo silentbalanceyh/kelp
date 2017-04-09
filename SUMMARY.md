@@ -105,8 +105,8 @@
 * [KT101 - Web Service](training/kt101-web-service.md)
   * [KT10101 - SOAP](training/kt101-web-service/kt10101-soap.md)
   * [KT10102 - WSDL](training/kt101-web-service/kt10102-wsdl.md)
-  * [KT10103 - XML](training/kt101-web-service/kt10103-xml.md)
-  * [KT10104 - SOA](training/kt101-web-service/kt10104-soa.md)
+  * [KT10103 - XML知识](training/kt101-web-service/kt10103-xml.md)
+  * [KT10104 - SOA面向服务架构](training/kt101-web-service/kt10104-soa.md)
 
 ## History
 
