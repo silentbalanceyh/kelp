@@ -89,7 +89,22 @@ ts.ui.ready(function() {
 
 ### Config Attributes
 
+一些额外属性可直接在component中配置，根据约定，这些属性都使用**data-ts.**前缀（包括点），如**data-ts.open**属性用于打开Aside：
 
+```html
+<aside data-ts="Aside" data-ts.open="true"> ... </aside>
+```
+
+### JS Interface
+
+这些组件也会暴露【expose】JavaScript API，如**Aside**的打开行为也可以通过调用某个属性来完成，您可通过调用**ts.ui.get**来实现。
+
+```js
+var myelement = document.querySelector('#myaside');
+var component = ts.ui.get(myelement);
+console.log(component); // [object ts.ui.AsideSpirit]
+component.open();
+```
 
 
 
