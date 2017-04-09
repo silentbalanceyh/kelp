@@ -119,7 +119,7 @@ ts.ui.DatePicker({
 
 ## 4. Basic Rules
 
-
+UI Component遵循以下简单的基本规则：
 
 
 
