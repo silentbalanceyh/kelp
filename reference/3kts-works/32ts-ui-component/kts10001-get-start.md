@@ -87,5 +87,9 @@ ts.ui.ready(function() {
 <aside data-ts="Aside"> ... </aside>
 ```
 
+### Config Attributes
+
+
+
 
 
