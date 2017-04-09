@@ -34,5 +34,3 @@ ts.ui.ready(function() {
 
 
 
-
-
