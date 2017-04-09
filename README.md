@@ -16,7 +16,7 @@
 
 ## 3. Training Courses
 
-* KTM101 - Web Service
+* [KT101 - Web Service](/training/kt101-web-service.md)
 
 ## 4. History Reference
 
