@@ -106,5 +106,16 @@ console.log(component); // [object ts.ui.AsideSpirit]
 component.open();
 ```
 
+### API-Only Components
+
+Component中一些复杂的行为通常使用纯JavaScript API来处理，它不包含标记，若想要在下一个阶段去处理组件复杂行为就可以这样做。
+
+```js
+ts.ui.DatePicker({
+	title: "Your Birthday",
+	value: '1973-03-26',
+}).open();
+```
+
 
 
