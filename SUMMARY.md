@@ -107,7 +107,7 @@
   * [KT10102 - WSDL](training/kt101-web-service/kt10102-wsdl.md)
   * [KT10103 - XML知识](training/kt101-web-service/kt10103-xml.md)
   * [KT10104 - SOA面向服务架构](training/kt101-web-service/kt10104-soa.md)
-  * [KT10105 - JAX/WS-Metadata](training/kt101-web-service/kt10105-jaxws-metadata.md)
+  * [KT10105 - Java中的Web Service](training/kt101-web-service/kt10105-javazhong-deweb-service.md)
 
 ## History
 
