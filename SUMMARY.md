@@ -108,6 +108,7 @@
   * [KT10103 - XML知识](training/kt101-web-service/kt10103-xml.md)
   * [KT10104 - SOA面向服务架构](training/kt101-web-service/kt10104-soa.md)
   * [KT10105 - Java中的Web Service](training/kt101-web-service/kt10105-javazhong-deweb-service.md)
+  * [KT10106 - Restful](training/kt101-web-service/kt10106-restful.md)
 
 ## History
 
