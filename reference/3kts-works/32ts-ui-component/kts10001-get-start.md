@@ -121,5 +121,11 @@ ts.ui.DatePicker({
 
 UI Component遵循以下简单的基本规则：
 
+* HTML属性：**data-ts**
+* 所有HTML的属性都以**data-ts.**开始
+* 所有HTML的属性都以**data-ts-**开始
+* 所有CSS的类名都使用**ts-**开始
+* 全局名空间对象使用**ts.ui**
+
 
 
