@@ -70,14 +70,18 @@ ts.ui.ready(function() {
 
 ```html
 <main data-ts="Main">
-	<h1>Main content</h1>
+    <h1>Main content</h1>
 </main>
 <aside ts-aside>
-	<div ts-panel>
-		<p>Aside content</p>
-	</div>
+    <div ts-panel>
+        <p>Aside content</p>
+    </div>
 </aside>
 ```
+
+## 3. Usage
+
+
 
 
 
