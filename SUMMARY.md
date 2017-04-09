@@ -114,6 +114,7 @@
   * [9.JAX-WS 2.0](training/kt101-web-service/9jax-ws-20.md)
   * [10.SOA-J](training/kt101-web-service/10soa-j.md)
   * [11.JSR 181/JSR 109](training/kt101-web-service/11jsr-181jsr-109.md)
+  * [12.Richardson Maturity](training/kt101-web-service/12richardson-maturity.md)
 
 ## History
 
