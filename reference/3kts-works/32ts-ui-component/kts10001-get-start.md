@@ -22,5 +22,13 @@ ts.ui.ready(function() {
 * 在`DOMContentLoaded`之前上边回调函数会延迟执行
 * 在`DOMContentLoaded`之后上边回调函数会立即执行
 
-将
+将启动代码全部放到上述代码中：
+
+```js
+ts.ui.ready(function() {
+	boostrap_everything();
+});
+```
+
+
 
