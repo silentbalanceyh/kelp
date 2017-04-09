@@ -105,6 +105,7 @@
 * [KT101 - Web Service](training/kt101-web-service.md)
   * [KT10101 - SOAP](training/kt101-web-service/kt10101-soap.md)
   * [KT10102 - WSDL](training/kt101-web-service/kt10102-wsdl.md)
+  * [KT10103 - XML](training/kt101-web-service/kt10103-xml.md)
 
 ## History
 
