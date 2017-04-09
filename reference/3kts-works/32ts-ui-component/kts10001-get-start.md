@@ -32,5 +32,7 @@ ts.ui.ready(function() {
 
 ## 2.Layout
 
+您需要在使用过程微调HTML中的meta\( name = viewport \)。
+
 
 
