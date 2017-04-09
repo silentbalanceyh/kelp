@@ -99,8 +99,6 @@
 
 ## Training
 
-* [KT100 - IDE](training/kt100-ide.md)
-  * [VSCode](training/vscode.md)
 * [KT101 - Web Service](training/kt101-web-service.md)
   * [1.SOAP](training/kt101-web-service/soap.md)
     * [KT10101 - SOAP 1.1解析](training/kt101-web-service/soap/kt10101-soap-11jie-xi.md)
