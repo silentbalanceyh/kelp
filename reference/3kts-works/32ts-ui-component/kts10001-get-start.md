@@ -81,7 +81,11 @@ ts.ui.ready(function() {
 
 ## 3. Usage
 
+所有的组件在使用的时候都会在元素中添加**data-ts**属性，这个框架会去识别这个属性并附上对应的行为和风格。
 
+```html
+<aside data-ts="Aside"> ... </aside>
+```
 
 
 
