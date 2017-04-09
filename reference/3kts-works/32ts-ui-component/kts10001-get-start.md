@@ -1,5 +1,7 @@
 # Get Started
 
+## 1.Basic
+
 Lastest Version: 7.2.0-alpha.1
 
 若要使用该脚本，直接在页面中引用：
@@ -20,7 +22,5 @@ ts.ui.ready(function() {
 * 在`DOMContentLoaded`之前上边回调函数会延迟执行
 * 在`DOMContentLoaded`之后上边回调函数会立即执行
 
-
-
-
+将
 
