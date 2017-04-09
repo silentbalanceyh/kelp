@@ -103,12 +103,6 @@
   * [VSCode](training/vscode.md)
     * [KT10001 - VSCode搭建Vie/Rtv环境](training/vscode/kt10001-vscodeda-jian-vie-rtv-huan-jing.md)
 * [KT101 - Web Service](training/kt101-web-service.md)
-  * [KT10101 - SOAP](training/kt101-web-service/kt10101-soap.md)
-  * [KT10102 - WSDL](training/kt101-web-service/kt10102-wsdl.md)
-  * [KT10103 - XML知识](training/kt101-web-service/kt10103-xml.md)
-  * [KT10104 - SOA面向服务架构](training/kt101-web-service/kt10104-soa.md)
-  * [KT10105 - Java中的Web Service](training/kt101-web-service/kt10105-javazhong-deweb-service.md)
-  * [KT10106 - Restful](training/kt101-web-service/kt10106-restful.md)
 
 ## History
 
