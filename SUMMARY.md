@@ -109,6 +109,11 @@
   * [4.XML Schema](training/kt101-web-service/4xml-schema.md)
   * [5.XML](training/kt101-web-service/5xml.md)
   * [6.SOA面向服务架构](training/kt101-web-service/6soa.md)
+  * [7.JAX 2.0](training/kt101-web-service/7jax-20.md)
+  * [8.JAXB 2.0](training/kt101-web-service/8jaxb-20.md)
+  * [9.JAX-WS 2.0](training/kt101-web-service/9jax-ws-20.md)
+  * [10.SOA-J](training/kt101-web-service/10soa-j.md)
+  * [11.JSR 181/JSR 109](training/kt101-web-service/11jsr-181jsr-109.md)
 
 ## History
 
