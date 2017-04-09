@@ -32,7 +32,25 @@ ts.ui.ready(function() {
 
 ## 2.Layout
 
-您需要在使用过程微调HTML中的meta\( name = viewport \)。
+您需要在使用过程微调HTML中的meta\( name = viewport \)：
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Layout</title>
+		<meta name="viewport" content="width=device-width"/>
+	</head>
+	<body>
+		<header data-ts="TopBar"></header>
+		<main data-ts="Main">
+			<div data-ts="MainContent">
+				<h1>Main content</h1>
+			</div>
+		</main>
+	</body>
+</html>
+```
 
 
 
