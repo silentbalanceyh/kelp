@@ -108,6 +108,7 @@
   * [3.DTD](training/kt101-web-service/3dtd.md)
   * [4.XML Schema](training/kt101-web-service/4xml-schema.md)
   * [5.XML](training/kt101-web-service/5xml.md)
+  * [6.SOA](training/kt101-web-service/6soa.md)
 
 ## History
 
