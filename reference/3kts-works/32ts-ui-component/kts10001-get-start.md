@@ -52,7 +52,9 @@ ts.ui.ready(function() {
 </html>
 ```
 
-### Topbar
+### TopBar
+
+即使你没有计划要使用TopBar，一个页面也需要有一个TopBar，因为它通常会在移动布局中作为主导航呈现。
 
 
 
