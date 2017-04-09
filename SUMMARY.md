@@ -103,8 +103,7 @@
   * [VSCode](training/vscode.md)
     * [KT10001 - VSCode搭建Vie/Rtv环境](training/vscode/kt10001-vscodeda-jian-vie-rtv-huan-jing.md)
 * [KT101 - Web Service](training/kt101-web-service.md)
-  * [KT10101 - SOAP](training/kt101-web-service/kt10101-soap.md)
-  * [KT10102 - WSDL](training/kt101-web-service/kt10102-wsdl.md)
+  * [SOAP](training/kt101-web-service/soap.md)
 
 ## History
 
