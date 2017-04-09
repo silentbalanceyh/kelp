@@ -1,6 +1,20 @@
 # Web Service Training Plan
 
-1. [KT10101 - SOAP](/training/kt101-web-service/kt10101-soap.md)
+## 1. SOAP
+
+
+
+## 2. WSDL
+
+
+
+## 3. DTD
+
+
+
+## 4. XML Schema
+
+
 
 
 
