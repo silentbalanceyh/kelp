@@ -80,6 +80,7 @@
 * [3. KTS Works](reference/3kts-works.md)
   * [3.1.Training](reference/3kts-works/31training.md)
   * [3.2.TS UI Component](reference/3kts-works/32ts-ui-component.md)
+    * [KTS10001 - Get Start](reference/3kts-works/32ts-ui-component/kts10001-get-start.md)
   * [3.3.Server \( sco-server \)](reference/3kts-works/33server-sco-server.md)
   * [3.4.Client \( sco-portal \)](reference/3kts-works/34client-sco-portal.md)
 * [4. Library](reference/library.md)
