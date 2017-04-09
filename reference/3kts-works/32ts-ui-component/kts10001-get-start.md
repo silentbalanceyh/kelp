@@ -54,13 +54,17 @@ ts.ui.ready(function() {
 
 ### TopBar
 
-即使你没有计划要使用TopBar，一个页面也需要有一个TopBar，因为它通常会在移动布局中作为主导航呈现。
+即使你没有计划要使用**TopBar**，一个页面也需要有一个TopBar，因为它通常会在移动布局中作为主导航呈现。
 
 ### Main
 
-Main会在Body部分越界时（hidden）绘制滚动条，这个设置会让你使用绝对定位设置设备固定位置——在Mobile设备中iframe里是不可用的。
+**Main**会在Body部分越界时（hidden）绘制滚动条，这个设置会让你使用绝对定位设置设备固定位置——在Mobile设备中iframe里是不可用的。
 
 ### Main Content
+
+**MainContent**元素应该包含需要呈现的所有一切。
+
+### Aside
 
 
 
