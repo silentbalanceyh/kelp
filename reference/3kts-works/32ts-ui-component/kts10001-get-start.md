@@ -12,10 +12,13 @@ UI组件在`DOMContentLoaded` 事件中初始化，在使用它之前确保所�
 
 ```js
 ts.ui.ready(function() {
-	var component = ts.ui.get(element);
-	component.dosomething();
+    var component = ts.ui.get(element);
+    component.dosomething();
 });
 ```
+
+* 在`DOMContentLoaded`之前上边回调函数会延迟执行
+* 在`DOMContentLoaded`之后上边回调函数会立即执行
 
 
 
