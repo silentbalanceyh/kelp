@@ -58,6 +58,10 @@ ts.ui.ready(function() {
 
 ### Main
 
+Main会在Body部分越界时（hidden）绘制滚动条，这个设置会让你使用绝对定位设置设备固定位置——在Mobile设备中iframe里是不可用的。
+
+### Main Content
+
 
 
 
