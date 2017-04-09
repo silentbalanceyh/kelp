@@ -3,6 +3,7 @@
 ## 1. SOAP
 
 * [KT10101 - SOAP 1.1解析](/training/kt101-web-service/soap/kt10101-soap-11jie-xi.md)
+* [KT10102 - SOAP 1.2解析](/training/kt101-web-service/soap/kt10102-soap-12jie-xi.md)
 
 ## 2. WSDL
 
