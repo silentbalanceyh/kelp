@@ -66,7 +66,18 @@ ts.ui.ready(function() {
 
 ### Aside
 
+若您想要使用Aside菜单，必须将它放到Main之外，参考下边代码：
 
+```html
+<main data-ts="Main">
+	<h1>Main content</h1>
+</main>
+<aside ts-aside>
+	<div ts-panel>
+		<p>Aside content</p>
+	</div>
+</aside>
+```
 
 
 
