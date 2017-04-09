@@ -5,6 +5,7 @@
 ## UI Component
 
 * [KTS10001 - Get Start](/reference/3kts-works/32ts-ui-component/kts10001-get-start.md)
+* [KTS10002 - Design Principles](/reference/3kts-works/32ts-ui-component/kts10002-design-principles.md)
 
 ## Project: sco-server
 
