@@ -144,7 +144,17 @@ docker import - test/xxxx
 docker images                    // 查看镜像
 ```
 
-直接导入镜像
+直接导入镜像，使用URL地址或直接使用相对路径
+
+```
+E:\KTS\Docker>docker import postgres
+sha256:37d2f46bf0aae375d85d0df235712579929a31a48c9d094871c2968ca9cd7796
+
+E:\KTS\Docker>docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+<none>              <none>              37d2f46bf0aa        About a minute ago   276 MB
+hello-world         latest              48b5124b2768        2 months ago         1.84 kB
+```
 
 
 
