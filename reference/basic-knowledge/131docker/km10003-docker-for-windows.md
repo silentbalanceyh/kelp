@@ -13,5 +13,18 @@
 
 安装完成过后，打开命令提示符（`cmd.exe`）或者PowerShell，通过调用`docker`和`docker-compose`来检查版本信息：
 
+```
+C:\Users\Lang>docker --version
+Docker version 17.03.1-ce, build c6d412e
+
+C:\Users\Lang>docker-compose --version
+docker-compose version 1.11.2, build f963d76f
+
+C:\Users\Lang>docker-machine --version
+docker-machine version 0.10.0, build 76ed2a6
+```
+
+
+
 
 
