@@ -24,6 +24,8 @@ C:\Users\Lang>docker-machine --version
 docker-machine version 0.10.0, build 76ed2a6
 ```
 
+## 2. Explore the application & Run examples
+
 
 
 
