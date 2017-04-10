@@ -135,7 +135,7 @@ For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
 ```
 
-### 2.3.Import
+### 2.3.Import/Start
 
 从快照文件中导入为镜像，例如：
 
@@ -155,6 +155,8 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 <none>              <none>              37d2f46bf0aa        About a minute ago   276 MB
 hello-world         latest              48b5124b2768        2 months ago         1.84 kB
 ```
+
+导入过后可知道IMAGE ID，直接启动：
 
 
 
