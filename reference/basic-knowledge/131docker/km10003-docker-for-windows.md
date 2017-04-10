@@ -30,7 +30,8 @@ docker-machine version 0.10.0, build 76ed2a6
 
 ```
 PS C:\Users\Lang> docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+CONTAINER ID        IMAGE               COMMAND             CREATED             \n
+        STATUS              PORTS               NAMES
 
 PS C:\Users\Lang> docker version
 Client:
