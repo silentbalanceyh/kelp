@@ -7,7 +7,7 @@
   * 而CoreOS将Docker进一步提升，在CoreOS中，Docker是用户要运行其他软件的核心平台，否则别无他法。
   * Docker Machine的出现将Docker地位再次提升，用户创建Docker Machine时就只关心Docker，不关心其他组件。
 * Docker Swarm——（A Docker-Native Clustering System），CoreOS主战场是集群环境，可对比Docker Swarm和CoreOS Fleet对比，二者都用于构建集群工具。
-* Docker Compose
+* Docker Compose——这个特性中规中矩，是Docker应用场景的自然衍生，就Docker设计准则来说，他的目标是足够轻量、只运行一个应用，做一个应用容器，而不是变成一个OS容器。
 
 ## 1. Versions
 
