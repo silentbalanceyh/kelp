@@ -135,7 +135,7 @@ For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
 ```
 
-### 2.3.Import/Start
+### 2.3.Import
 
 从快照文件中导入为镜像，例如：
 
@@ -189,6 +189,10 @@ Loaded image: postgres:latest
 Error response from daemon: conflict: unable to delete 0e24dd8079dc (must be forced)
    - image is being used by stopped container f7b07cca1e77
 ```
+
+### 2.5.Start
+
+上边步骤完成了
 
 
 
