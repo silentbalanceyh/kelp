@@ -11,5 +11,7 @@
 
 ## 1. Versions
 
+安装完成过后，打开命令提示符（`cmd.exe`）或者PowerShell，通过调用`docker`和`docker-compose`来检查版本信息：
+
 
 
