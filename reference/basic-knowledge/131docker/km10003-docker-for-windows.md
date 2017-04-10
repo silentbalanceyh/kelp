@@ -26,7 +26,11 @@ docker-machine version 0.10.0, build 76ed2a6
 
 ## 2. Explore the application & Run examples
 
-确认您安装了最新的docker，且命令可用，使用`docker ps` 、`docker version` 、`docker info`命令查看Docker信息
+确认您安装了最新的docker，且命令可用，使用`docker ps` 、`docker version` 、`docker info`命令查看Docker信息：
+
+```
+
+```
 
 
 
