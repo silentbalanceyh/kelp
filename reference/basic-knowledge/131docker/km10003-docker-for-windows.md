@@ -160,14 +160,19 @@ hello-world         latest              48b5124b2768        2 months ago        
 
 #### docker load
 
+
+
 ### 2.4.Remote
 
-* docker rmi：删除镜像images
-* docker rm：删除容器containers
+* **docker rmi**：删除镜像images，参数：ImageID
+* **docker rm**：删除容器containers，参数：ContainerID
 
+删除镜像之前，需要先删除容器，否则会报类似下边的错误信息：
 
-
-
+```
+Error response from daemon: conflict: unable to delete 0e24dd8079dc (must be forced)
+   - image is being used by stopped container f7b07cca1e77
+```
 
 
 
