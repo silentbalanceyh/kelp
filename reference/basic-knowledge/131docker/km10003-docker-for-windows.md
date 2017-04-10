@@ -190,9 +190,5 @@ Error response from daemon: conflict: unable to delete 0e24dd8079dc (must be for
    - image is being used by stopped container f7b07cca1e77
 ```
 
-### 2.5.Start
-
-上边步骤完成了
-
 
 
