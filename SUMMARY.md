@@ -104,6 +104,7 @@
 
 * [KT101 - Web Service](training/kt101-web-service.md)
   * [0.Basic Hits](training/kt101-web-service/0basic-hits.md)
+    * [KT10100 - Web Service基础](training/kt101-web-service/0basic-hits/kt10100-web-serviceji-chu.md)
   * [1.SOAP](training/kt101-web-service/soap.md)
     * [KT10101 - SOAP 1.1解析](training/kt101-web-service/soap/kt10101-soap-11jie-xi.md)
     * [KT10102 - SOAP 1.2解析](training/kt101-web-service/soap/kt10102-soap-12jie-xi.md)

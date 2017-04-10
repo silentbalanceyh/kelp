@@ -2,7 +2,7 @@
 
 ## 0. Basic Hits
 
-* KT10100 - Web Service基础
+* [KT10100 - Web Service基础](/training/kt101-web-service/0basic-hits/kt10100-web-serviceji-chu.md)
 
 ## 1. SOAP
 
