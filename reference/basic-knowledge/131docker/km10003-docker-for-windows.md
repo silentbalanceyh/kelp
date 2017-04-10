@@ -178,7 +178,7 @@ Loaded image: postgres:latest
 
 \*注：用户既可以使用 docker load 来导入镜像存储文件到本地镜像库，也可以使用 docker import 来导入一个容器快照到本地镜像库。这两者的区别在于容器快照文件将丢弃所有的历史记录和元数据信息（即仅保存容器当时的快照状态），而镜像存储文件将保存完整记录，体积也要大。此外，从容器快照文件导入时可以重新指定标签等元数据信息
 
-### 2.4.Remote
+### 2.4.Remove
 
 * **docker rmi**：删除镜像images，参数：ImageID
 * **docker rm**：删除容器containers，参数：ContainerID
