@@ -106,6 +106,7 @@
   * [1.SOAP](training/kt101-web-service/soap.md)
     * [KT10101 - SOAP 1.1解析](training/kt101-web-service/soap/kt10101-soap-11jie-xi.md)
     * [KT10102 - SOAP 1.2解析](training/kt101-web-service/soap/kt10102-soap-12jie-xi.md)
+  * [0.Basic Hits](training/kt101-web-service/0basic-hits.md)
   * [2.WSDL](training/kt101-web-service/2wsdl.md)
   * [3.DTD](training/kt101-web-service/3dtd.md)
   * [4.XML Schema](training/kt101-web-service/4xml-schema.md)
@@ -118,8 +119,6 @@
   * [11.JSR 181/JSR 109](training/kt101-web-service/11jsr-181jsr-109.md)
   * [12.REST](training/kt101-web-service/12richardson-maturity.md)
   * [13.JAX-RS 2.0](training/kt101-web-service/13jax-rs-20.md)
-  * [0.Basic Hits](training/kt101-web-service/0basic-hits.md)
-  * [14.Jersey](training/kt101-web-service/14jersey.md)
 
 ## History
 
