@@ -119,6 +119,7 @@
   * [12.REST](training/kt101-web-service/12richardson-maturity.md)
   * [13.JAX-RS 2.0](training/kt101-web-service/13jax-rs-20.md)
   * [0.Basic Hits](training/kt101-web-service/0basic-hits.md)
+  * [14.Jersey](training/kt101-web-service/14jersey.md)
 
 ## History
 
