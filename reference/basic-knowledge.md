@@ -10,11 +10,8 @@
 
 ## 3. Cloud Computing
 
-* KM10003 - Docker for Windows
-
+* 
 ## 6. Building
-
-
 
 
 
