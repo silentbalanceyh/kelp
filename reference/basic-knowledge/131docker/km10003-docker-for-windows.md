@@ -29,7 +29,62 @@ docker-machine version 0.10.0, build 76ed2a6
 确认您安装了最新的docker，且命令可用，使用`docker ps` 、`docker version` 、`docker info`命令查看Docker信息：
 
 ```
+PS C:\Users\Lang> docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 
+PS C:\Users\Lang> docker version
+Client:
+ Version:      17.03.1-ce
+ API version:  1.27
+ Go version:   go1.7.5
+ Git commit:   c6d412e
+ Built:        Tue Mar 28 00:40:02 2017
+ OS/Arch:      windows/amd64
+
+Server:
+ Version:      17.03.1-ce
+ API version:  1.27 (minimum version 1.24)
+ Go version:   go1.7.5
+ Git commit:   c6d412e
+ Built:        Tue Mar 28 00:40:02 2017
+ OS/Arch:      windows/amd64
+ Experimental: true
+
+PS C:\Users\Lang> docker info
+Containers: 0
+ Running: 0
+ Paused: 0
+ Stopped: 0
+Images: 0
+Server Version: 17.03.1-ce
+Storage Driver: windowsfilter
+ Windows:
+Logging Driver: json-file
+Plugins:
+ Volume: local
+ Network: l2bridge l2tunnel nat null overlay transparent
+Swarm: inactive
+Default Isolation: hyperv
+Kernel Version: 10.0 16170 (16170.1000.amd64fre.rs_prerelease.170331-1532)
+Operating System: Windows 10 Enterprise
+OSType: windows
+Architecture: x86_64
+CPUs: 8
+Total Memory: 15.95 GiB
+Name: LANGW520
+ID: T2ER:WVIS:7BHW:CYH2:5IY6:4FN4:QPGV:PHQA:JSM6:HM6Q:P7X3:P4PQ
+Docker Root Dir: C:\ProgramData\Docker
+Debug Mode (client): false
+Debug Mode (server): true
+ File Descriptors: -1
+ Goroutines: 17
+ System Time: 2017-04-10T12:43:14.0966205+08:00
+ EventsListeners: 0
+Registry: https://index.docker.io/v1/
+Experimental: true
+Insecure Registries:
+ 127.0.0.0/8
+Live Restore Enabled: false
 ```
 
 
