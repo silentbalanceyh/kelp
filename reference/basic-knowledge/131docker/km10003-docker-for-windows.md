@@ -153,10 +153,8 @@ sha256:37d2f46bf0aae375d85d0df235712579929a31a48c9d094871c2968ca9cd7796
 E:\KTS\Docker>docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 <none>              <none>              37d2f46bf0aa        About a minute ago   276 MB
-hello-world         latest              48b5124b2768        2 months ago         1.84 kB
+hello-world         latest              48b5124b2768        2 months ago         1.84 
 ```
-
-导入过后可知道IMAGE ID，直接启动：
 
 
 
