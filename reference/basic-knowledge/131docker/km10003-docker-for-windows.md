@@ -137,7 +137,11 @@ For more examples and ideas, visit:
 
 ### 2.3.Import
 
+从快照文件中导入为镜像，例如：
 
+```
+
+```
 
 
 
