@@ -160,6 +160,13 @@ hello-world         latest              48b5124b2768        2 months ago        
 
 #### docker load
 
+### 2.4.Remote
+
+* docker rmi：删除镜像images
+* docker rm：删除容器containers
+
+
+
 
 
 
