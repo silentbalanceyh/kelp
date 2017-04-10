@@ -88,5 +88,11 @@ Insecure Registries:
 Live Restore Enabled: false
 ```
 
+运行实例程序`docker run hello-world`来测试从Docker Hub中下载镜像并启动该容器（_下边测试在Windows中不生效_）：
+
+```
+
+```
+
 
 
