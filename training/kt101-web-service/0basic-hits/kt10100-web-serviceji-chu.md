@@ -6,5 +6,6 @@ Web Service是一个平台独立的、低耦合的、自包含的、基于可编
 
 Web Service实际上是基于Internet互联网的一种通讯技术，它涉及的规范如下：
 
+* 
 
 
