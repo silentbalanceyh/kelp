@@ -140,8 +140,11 @@ For more examples and ideas, visit:
 从快照文件中导入为镜像，例如：
 
 ```
-
+docker import - test/xxxx
+docker images                    // 查看镜像
 ```
+
+直接导入镜像
 
 
 
