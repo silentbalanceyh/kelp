@@ -11,6 +11,7 @@
 
 * [1. Basic Knowledge](/reference/basic-knowledge.md)
 * [2. Vert.X Works](/reference/external-courses.md)
+* [3. KTS Works](/reference/3kts-works.md)
 * [4. Library](/reference/library.md)
 
 ## 3. Training Courses
@@ -23,7 +24,7 @@
 * 2015 Big Data大数据培训资料
 * 2016 Software Skills培训资料
 
-## 5. Document Rules
+## 6. Document Rules
 
 文档前缀以及对应的含义，所有文档编号从10001开始，有些部分文档会进行分区，但不重复，文档索引参考下边：
 
