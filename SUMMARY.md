@@ -59,9 +59,11 @@
   * 1.3.Cloud Computing
     * [1.3.1.Docker](reference/basic-knowledge/131docker.md)
       * [KM10003 - Docker for Windows](reference/basic-knowledge/131docker/km10003-docker-for-windows.md)
-  * 1.4.Develop Skills
+  * [1.4.Develop Skills](reference/basic-knowledge/14develop-skills.md)
     * [1.4.1.Spring Boot](reference/basic-knowledge/141spring-boot.md)
     * [1.4.2.Adom IDE](reference/basic-knowledge/142adom-ide.md)
+    * [1.4.3.Jersey](reference/basic-knowledge/143jersey.md)
+      * [KM10004 - JSR330](reference/basic-knowledge/143jersey/km10004-jsr330.md)
   * [1.5.Testing](reference/basic-knowledge/15testing.md)
     * [1.5.1.Mockito](reference/basic-knowledge/15testing/151mockito.md)
     * [1.5.2.Jacoco](reference/basic-knowledge/15testing/152jacoco.md)
