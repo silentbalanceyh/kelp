@@ -37,5 +37,28 @@ TopBar可以包含分割流程的TAB页，一般如：Step1 -&gt; Step2 -&gt; St
 * **Tertiary Button**：大部分用户不常用的按钮（删除、查看文档、导出文档等）
 * **Kill Button**：删除和拒绝行为的专用按钮
 
+### Option List & Pickers
+
+[http://ui.tradeshift.com/\#design/patterns/pickers.html](http://ui.tradeshift.com/#design/patterns/pickers.html "Reference")
+
+### Tables
+
+表格使用中考虑下边几个概念：
+
+* Line-wrapping：单元格中文字自动换行
+* Row-selection：可直接执行行选择，除了第一个Checkbox还可通过选中行的方式来处理
+* Clickable rows：行点击事件
+* Responsive column handling：响应式列处理
+
+### Switches
+
+开关控件，用于选择”是/否“选项。
+
+### Email
+
+[http://ui.tradeshift.com/\#design/patterns/emails.html](http://ui.tradeshift.com/#design/patterns/emails.html "Reference")
+
+
+
 
 
