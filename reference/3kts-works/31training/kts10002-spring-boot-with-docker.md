@@ -26,5 +26,5 @@ code-parent
   * Spring Tool Suite \( STS \)
   * IntelliJ IDEA
 
-如果您不是使用的Linux机器，怎需要创建一个虚拟服务器。
+如果您不是使用的Linux机器，则需要创建一个虚拟机、安装VirtualBox、或者直接使用Mac上的boot2docker，用来管理您的镜像。
 
