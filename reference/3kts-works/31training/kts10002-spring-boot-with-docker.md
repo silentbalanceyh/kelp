@@ -171,9 +171,13 @@ Dockerfile很简单，但是您需要运行Spring Boot仅仅需要Java和一个�
 
 **Notes部分不翻译：**
 
-_We added a`VOLUME`pointing to "/tmp" because that is where a Spring Boot application creates working directories for Tomcat by default. The effect is to create a temporary file on your host under "/var/lib/docker" and link it to the container under "/tmp". This step is optional for the simple app that we wrote here, but can be necessary for other Spring Boot applications if they need to actually write in the filesystem._
+_We added a_`VOLUME`_pointing to "/tmp" because that is where a Spring Boot application creates working directories for Tomcat by default. The effect is to create a temporary file on your host under "/var/lib/docker" and link it to the container under "/tmp". This step is optional for the simple app that we wrote here, but can be necessary for other Spring Boot applications if they need to actually write in the filesystem._
 
-_You can use a`RUN`command to "touch" the jar file so that it has a file modification time \(Docker creates all container files in an "unmodified" state by default\). This actually isn’t important for the simple app that we wrote, but any static content \(e.g. "index.html"\) would require the file to have a modification time._
+_You can use a_`RUN`_command to "touch" the jar file so that it has a file modification time \(Docker creates all container files in an "unmodified" state by default\). This actually isn’t important for the simple app that we wrote, but any static content \(e.g. "index.html"\) would require the file to have a modification time._
+
+_To reduce _[_Tomcat startup time_](https://wiki.apache.org/tomcat/HowTo/FasterStartUp#Entropy_Source)_ we added a system property pointing to "/dev/urandom" as a source of entropy._
+
+_if you are using boot2docker you need to run it **first **before you do anything with the Docker command line or with the build tools \(it runs a daemon process that handles the work for you in a virtual machine\)._
 
 
 
