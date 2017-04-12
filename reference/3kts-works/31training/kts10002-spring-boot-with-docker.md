@@ -30,5 +30,18 @@ code-parent
 
 **如何使用当前的Guide**
 
+* 从起跑线开始：参考[https://spring.io/guides/gs/spring-boot-docker/\#scratch](https://spring.io/guides/gs/spring-boot-docker/#scratch)
+* 跳过基础：使用下边命令拉取Guide中的代码：
+  ```
+  git clone https://github.com/spring-guides/gs-spring-boot-docker.git
+  ```
+
+* 使用命令：`cd into gs-spring-boot-docker/initial`
+* 查看最上边：[构造Spring Boot应用环境](https://spring.io/guides/gs/spring-boot-docker/#initial)
+
+
+
+
+
 
 
