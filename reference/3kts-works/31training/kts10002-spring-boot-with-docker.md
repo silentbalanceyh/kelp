@@ -137,7 +137,7 @@ public class Application {
 }
 ```
 
-这个类使用了`@SpringBootApplication` 和` @RestController` ，它表示使用Spring MVC处理该请求。`@RequestMapping` 将路径`/` 映射到方法`home()` 方法中，仅仅发送”Hello Docker World“的响应，`main()` 方法使用了Spring Boot中的`SpringApplication.run()` 方法运行一个应用。
+这个类使用了`@SpringBootApplication` 和`@RestController` ，它表示使用Spring MVC处理该请求。`@RequestMapping` 将路径`/` 映射到方法`home()` 方法中，仅仅发送”Hello Docker World“的响应，`main()` 方法使用了Spring Boot中的`SpringApplication.run()` 方法运行一个应用。
 
 处理完成过后，则可在非`Docker` 容器中构建该程序：
 
@@ -157,13 +157,14 @@ src/main/docker/Dockerfile
 
 内容如下：
 
-```Dockerfile
+```shell
 FROM frolvlad/alpine-oraclejdk8:slim
 VOLUME /tmp
 ADD gs-spring-boot-docker-0.1.0.jar app.jar
 RUN sh -c 'touch /app.jar'
 ENV JAVA_OPTS=""
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+ENTRYPOINT [ "sh", "-c", \ 
+    "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
 ```
 
 
