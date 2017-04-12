@@ -179,5 +179,35 @@ _To reduce _[_Tomcat startup time_](https://wiki.apache.org/tomcat/HowTo/FasterS
 
 _if you are using boot2docker you need to run it **first **before you do anything with the Docker command line or with the build tools \(it runs a daemon process that handles the work for you in a virtual machine\)._
 
+**使用Maven构建Docker Image：**
+
+pom.xml
+
+```xml
+<properties>
+   <docker.image.prefix>springio</docker.image.prefix>
+</properties>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.4.11</version>
+            <configuration>
+                <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                <dockerDirectory>src/main/docker</dockerDirectory>
+                <resources>
+                    <resource>
+                        <targetPath>/</targetPath>
+                        <directory>${project.build.directory}</directory>
+                        <include>${project.build.finalName}.jar</include>
+                    </resource>
+                </resources>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
 
 
