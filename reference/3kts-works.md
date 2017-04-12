@@ -5,7 +5,8 @@
 ## UI Component
 
 * [KTS10001 - Get Start](/reference/3kts-works/32ts-ui-component/kts10001-get-start.md)
-* [KTS10002 - Design Principles](/reference/3kts-works/32ts-ui-component/kts10002-design-principles.md)
+* [KTS10002 - Design Patterns](/reference/3kts-works/32ts-ui-component/kts10002-design-principles.md)
+* [KTS10003 - \( Code \) Inline Components](/reference/3kts-works/32ts-ui-component/kts10003-inline-components.md)
 
 ## Project: sco-server
 
