@@ -22,5 +22,16 @@
 
 该命令允许您在文件中设置作者信息。
 
+## RUN
+
+用法：
+
+* `RUN <command>` （shell格式，command命令将在shell中运行，Linux中默认使用`/bin/sh -c` ，在Windows中默认使用`cmd /S /C` ）
+* `RUN ["<executable>","<param1>","<param2>"]`exec格式
+
+信息：
+
+exec格式可防止shell中的
+
 
 
