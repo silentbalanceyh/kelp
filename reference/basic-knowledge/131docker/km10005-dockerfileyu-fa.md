@@ -118,5 +118,109 @@
 * `COPY <src> [<src> ...] <dest>`
 * `COPY ["<src>", ... "<dest"]`（这种格式用于解析包含了空白字符参数的情况）
 
+信息：
+
+* 拷贝`<src>`指定的新文件、目录或者远程URLs，并且将它添加到镜像中`<dest>`指定的文件系统里。
+* `<src>`中可以包含通配符，使用Go语言中的`filepath.Match`规则匹配。
+* 如果`<src>`是一个文件或目录，则它们必须是和目录源相关（build的上下文环境）。
+* `<dest>`是一个绝对路径，或相当于`WORKDIR`的相对路径。
+* 如果`<dest>`不存在，则创建丢失的目录路径。
+
+## ENTRYPOINT
+
+用法：
+
+* `ENTRYPOINT ["<executable>","<param1>","<param2>"]`（前文提到的exec格式）
+* `ENTRYPOINT <command> <param1> <param2>`（shell格式）
+
+信息：
+
+* 运行您配置可执行的容器。
+* `docker run <image>`中的命令行参数将会追加到`ENTRYPOINT`中的`exec`格式后，并且会覆盖使用CMD时的元素。
+* shell格式将会阻止任何`CMD`或者命令行使用的其他参数，但是`ENTRYPOINT`将会从shell启动。也就是说可执行容器不会是PID 1，也不会收到Unix信号，预处理`exec`解决了这个问题。
+* Dockerfile中仅仅只有最后一个`ENTRYPOINT`会生效。
+
+## VOLUME
+
+用法：
+
+* `VOLUME ["<path>",...]`
+* `VOLUME <path> [<path> ...]`
+
+使用特殊名字创建一个挂载点使得它可以从本机主机和其他容器访问该卷。
+
+## USER
+
+用法：
+
+* `USER <username | UID>`
+
+使用`USER`指令可设置运行镜像的用户名和UID，该信息会在`RUN`，`CMD`和`ENTRYPOINT`中使用。
+
+## WORKDIR
+
+用法：
+
+* `WORKDIR </path/to/workdir>`
+
+信息：
+
+* 设置命令（如`RUN`，`CMD`，`ENTRYPOINT`，`COPY`，`ADD`）的工作目录。
+* 在一个文件中可使用多次，若相对路径提供了，它将使使用前一次`WORKDIR`指令设置的工作目录。
+
+## ARG
+
+用法：
+
+* `ARG <name> [=<default value>]`
+
+信息：
+
+* 定义用户可以传给`docker build`命令的build-time变量信息，直接使用`--build-arg <varname>=<value>`格式。
+* 可使用`ARG`多次来设置多个变量的信息。
+* 不推荐使用build-time变量传递一些密码如github中的keys, credentials等，build-time变量对任何镜像中的历史用户都是可见的。
+* 如果同时使用了`ENV`指令设置了环境变量，则`ENV`中的变量会覆盖`ARG`指定的变量。
+* Docker设置了预定义的`ARG`变量，您可以不适用ARG定义直接使用：
+  * `HTTP_PROXY`
+  * `HTTPS_PROXY`
+  * `FTP_PROXY`
+  * `NO_PROXY`
+
+## ONBUILD
+
+用法：
+
+* `ONBUILD <Dockerfile INSTRUCTION>`
+
+信息：
+
+* 当一个镜像是基于另一个镜像在使用时，为镜像添加一个触发指令让它之后触发。如果在downstream镜像的Dockerfile的`FROM`指令后边添加了它，这个触发器将在downstream构建的上下文环境中执行。
+* 任何build指令都可以注册成一个触发器。
+* 触发器只能被"child"构建继承，换句话说，它不能被”grand-children"继承。
+* `ONBUILD`指令不会触发`FROM`，`MAINTAINER`或`ONBUILD`指令。
+
+## STOPSIGNAL
+
+用法：
+
+* `STOPSIGNAL <signal>`
+
+`STOPSIGNAL`指令可设置系统调用的signal，它将在退出时发送给容器。这个signal可以是一个合法的无符号正整数，它的位置可以在内核syscall调用中，如9，或者使用signal名称（用`SIGNAME`指定），如`SIGKILL`。
+
+## HEALTHCHECK
+
+用法：
+
+* `HEALTHCHECK [<options>] CMD <command>`（在容器内部执行命令检查容器运行状况）
+* `HEALTHCHECK NONE`（关闭任何从base镜像中继承的healthcheck）
+
+信息：
+
+* 告诉Docker如何测试一个容器并指导它仍然在工作。
+* 
+
+
+
+
 
 
