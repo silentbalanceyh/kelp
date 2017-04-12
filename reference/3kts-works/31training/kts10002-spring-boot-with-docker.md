@@ -32,14 +32,17 @@ code-parent
 
 * 从起跑线开始：参考[https://spring.io/guides/gs/spring-boot-docker/\#scratch](https://spring.io/guides/gs/spring-boot-docker/#scratch)
 * 跳过基础：使用下边命令拉取Guide中的代码：
-
   ```
   git clone https://github.com/spring-guides/gs-spring-boot-docker.git
   ```
-
 * 使用命令：`cd into gs-spring-boot-docker/initial`
-
 * 查看最上边：[构造Spring Boot应用环境](https://spring.io/guides/gs/spring-boot-docker/#initial)
+
+如果完成了，则可以查看`gs-spring-boot-dokcer/complete`目录中的结果。
+
+**使用Maven构建**
+
+
 
 
 
