@@ -216,9 +216,33 @@
 
 信息：
 
-* 告诉Docker如何测试一个容器并指导它仍然在工作。
-* 
+* 告诉Docker如何测试一个容器并知道它仍然在工作。
+* 每当一个检查通过，容器变成`healthy`，经过一定数量的连续故障，容器变成`unhealthy`。
+* 这里`<options>`可表示：
+  * `--interval=<duration>`（默认：30s）
+  * `--timeout=<duration>`（默认：30s）
+  * `--retries=<number>`（默认：3）
+* 容器启动过后Health check将首先运行`interval`秒，然后前一次检查结束后过了`interval`秒执行第二次检查。如果单次检查超过了`timeout`的时间（秒）则检查并定义为失败。若在`retries`的次数的连续故障后，则标记成`unhealthy`。
+* 一个Dockerfile中只能包含一个`HEALTHCHECK`指令，若您列举了多个该指令，只有最后一个会生效。
+* `<command>`可以是一个shell命令，也可以是一个JSON数组。
+* 命令退出状态可标识容器状况：
+  * `0`：success——容器健康，使用就绪
+  * `1`：unhealthy——容器未正常工作
+  * `2`：reserved——不要使用该退出代码
+* `<command>`命令中若使用了stdout和stderr则前4096个字节会被保存，然后调用`docker inspect`可查看。
+* 当一个容器的健康状况发生改变时，一个`health_status`事件将会产生。
 
+## SHELL
+
+使用：
+
+* `SHELL ["<executable>","<param1>","<param2>"]`
+
+信息：
+
+* 允许使用默认的shell，并覆盖最初的shell。
+* 每个SHELL指令将会覆盖之前所有SHELL指令，并影响后续指令。
+* 允许使用其他shell如：zsh、csh、tcsh、powershell等。
 
 
 
