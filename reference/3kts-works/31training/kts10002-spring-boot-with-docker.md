@@ -238,8 +238,9 @@ $ docker run -p 8080:8080 -t springio/gs-spring-boot-docker
     : Tomcat started on port(s): 8080 (http)
 2015-03-31 13:25:48.037  INFO 1 --- [           main] hello.Application                        
     : Started Application in 5.613 seconds (JVM running for 7.293)
-
 ```
+
+该应用可直接通过：`http://localhost:8080` 访问。
 
 
 
