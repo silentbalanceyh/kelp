@@ -28,7 +28,7 @@ code-parent
 
 如果您不是使用的Linux机器，则需要创建一个虚拟机、安装VirtualBox、或者直接使用Mac上的boot2docker，用来管理您的镜像。同样您需要使用Docker——它仅仅只能运行在64bit机器上。参考：[https://docs.docker.com/installation/\#installatio](https://docs.docker.com/installation/#installation)获取安装细节，安装完成过后保证`docker`命令可直接从shell中使用。
 
-**如何使用当前的Guide**
+**如何使用当前的教程**
 
 * 从起跑线开始：参考[https://spring.io/guides/gs/spring-boot-docker/\#scratch](https://spring.io/guides/gs/spring-boot-docker/#scratch)
 * 跳过基础：使用下边命令拉取Guide中的代码：
@@ -40,7 +40,7 @@ code-parent
 
 如果完成了，则可以查看`gs-spring-boot-dokcer/complete`目录中的结果。
 
-**使用Maven构建**
+**使用Maven构建（关于Gradle部分参考开始的Reference）**
 
 首先您需要设置构建脚本，Maven的构建脚本在这个章节说明。先创建目录结构：在上边创建的目录结构中，使用下边命令创建子目录：
 
@@ -98,6 +98,44 @@ mkdir -p src/main/java/hello
 ```
 
 Spring Boot Maven Plugin提供了很多方便的功能：
+
+* 它收集所有的类路径的`jars` 来构造可运行的单个jar，这样很方便执行以及传递相关服务。
+* 它会搜索`public static void main()` 作为jar运行的主函数。
+* 它提供了内置的依赖解决器【Dependency Resolver】来处理不同版本的Spring依赖项，您可以覆盖任何您想要的版本，但默认的Spring相关版本由Spring Boot来设置。
+
+**使用IDE构建：**
+
+设置Spring Boot App，您可以创建简单的Spring Boot应用了：
+
+```
+src/main/java/hello/Application.java
+```
+
+代码内容如下：
+
+```java
+package hello;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+@RestController
+public class Application {
+
+    @RequestMapping("/")
+    public String home() {
+        return "Hello Docker World";
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+}
+```
 
 
 
