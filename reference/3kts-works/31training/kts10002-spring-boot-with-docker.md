@@ -18,6 +18,14 @@ code-parent
 
 您需要：
 
+* 15分钟
+* 一个IDE文本编辑器
+* JDK 1.8+
+* Gradle 2.3+或Maven 3.0+
+* 开发IDE：
+  * Spring Tool Suite \( STS \)
+  * IntelliJ IDEA
+
 
 
 
