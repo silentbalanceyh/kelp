@@ -16,7 +16,7 @@ code-parent
 
 [Docker](https://docker.com/)是一个“社交化”的Linux容器管理工具，它允许用户发布镜像到社区并且从上边下载使用镜像信息。
 
-**您需要**
+## **您需要**
 
 * 15分钟
 * 一个IDE文本编辑器
@@ -28,7 +28,7 @@ code-parent
 
 如果您不是使用的Linux机器，则需要创建一个虚拟机、安装VirtualBox、或者直接使用Mac上的boot2docker，用来管理您的镜像。同样您需要使用Docker——它仅仅只能运行在64bit机器上。参考：[https://docs.docker.com/installation/\#installatio](https://docs.docker.com/installation/#installation)获取安装细节，安装完成过后保证`docker`命令可直接从shell中使用。
 
-**如何使用当前的教程**
+## **如何使用当前的教程**
 
 * 从起跑线开始：参考[https://spring.io/guides/gs/spring-boot-docker/\#scratch](https://spring.io/guides/gs/spring-boot-docker/#scratch)
 * 跳过基础：使用下边命令拉取Guide中的代码：
@@ -40,7 +40,7 @@ code-parent
 
 如果完成了，则可以查看`gs-spring-boot-dokcer/complete`目录中的结果。
 
-**使用Maven构建（关于Gradle部分参考开始的Reference）**
+## **使用Maven构建（关于Gradle部分参考开始的Reference）**
 
 首先您需要设置构建脚本，Maven的构建脚本在这个章节说明。先创建目录结构：在上边创建的目录结构中，使用下边命令创建子目录：
 
@@ -103,7 +103,7 @@ Spring Boot Maven Plugin提供了很多方便的功能：
 * 它会搜索`public static void main()` 作为jar运行的主函数。
 * 它提供了内置的依赖解决器【Dependency Resolver】来处理不同版本的Spring依赖项，您可以覆盖任何您想要的版本，但默认的Spring相关版本由Spring Boot来设置。
 
-**使用IDE构建：**
+## **使用IDE构建：**
 
 设置Spring Boot App，您可以创建简单的Spring Boot应用了：
 
@@ -147,7 +147,7 @@ mvn package && java -jar target/gs-spring-boot-docker-0.1.0.jar
 
 浏览器打开`localhost:8080`则可以看到输出信息。
 
-**集装箱**
+## **集装箱**
 
 Docker的运行需要一个Dockerfile（语法参考：[KM10005 - Dockerfile语法](/reference/basic-knowledge/131docker/km10005-dockerfileyu-fa.md)），它提供了镜像所需要的层。我们例子中的Dockerfile位置如下：
 
@@ -179,7 +179,7 @@ _To reduce _[_Tomcat startup time_](https://wiki.apache.org/tomcat/HowTo/FasterS
 
 _if you are using boot2docker you need to run it **first **before you do anything with the Docker command line or with the build tools \(it runs a daemon process that handles the work for you in a virtual machine\)._
 
-**使用Maven构建Docker Image（Gradle参考开始Reference）：**
+## **使用Maven构建Docker Image（Gradle参考开始Reference）：**
 
 pom.xml
 
@@ -226,6 +226,10 @@ mvn package docker:build -DpushImage
 _You don’t have to push your newly minted Docker image to actually run it. Moreover the "push" command will fail if you aren’t a member of the "springio" organization on Dockerhub. Change the build configuration and the command line to your own username instead of "springio" to make it actually work._
 
 `package`必须在`docker:build`之前运行，否则会失败。
+
+## Push之后
+
+“docker push”对你而言会失败（除非你是Dockerhub中“springio"组织中的一员），若您修改您的配置以及docker ID则它应该会成功。即使没有发布成功，您仍然可以使用下边命令运行本地容器：
 
 
 
