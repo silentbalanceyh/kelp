@@ -11,6 +11,7 @@ code-parent
 |-- code-api                 // Restful Api，Spring Boot启动程序
 |-- code-lib                 // Java库：Service、Dao、Utility、Model层
 构建工具：Maven
+开发工具：IntelliJ IDEA
 ```
 
 
