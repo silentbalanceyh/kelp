@@ -16,7 +16,7 @@ code-parent
 
 [Docker](https://docker.com/)是一个“社交化”的Linux容器管理工具，它允许用户发布镜像到社区并且从上边下载使用镜像信息。
 
-您需要：
+**您需要**
 
 * 15分钟
 * 一个IDE文本编辑器
@@ -26,7 +26,5 @@ code-parent
   * Spring Tool Suite \( STS \)
   * IntelliJ IDEA
 
-
-
-
+如果您不是使用的Linux机器，怎需要创建一个虚拟服务器。
 
