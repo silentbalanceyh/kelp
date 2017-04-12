@@ -259,5 +259,32 @@ CONTAINER ID        IMAGE                             COMMAND                \
     34 seconds ago      Up 33 seconds       0.0.0.0:8080->8080/tcp   goofy_brown
 ```
 
+同样可直接使用命令`docker stop`来停止容器
+
+```
+$ docker stop 81c723d22865
+81c723d22865
+```
+
+若您想删除该容器，则可使用下边命令：
+
+```
+docker rm 81c723d22865
+```
+
+## 使用Spring Profiles
+
+使用Spring的Profile信息有两种方式：
+
+```
+$ docker run -e "SPRING_PROFILES_ACTIVE=prod" -p 8080:8080 -t springio/gs-spring-boot-docker
+```
+
+或
+
+```
+$ docker run -e "SPRING_PROFILES_ACTIVE=dev" -p 8080:8080 -t springio/gs-spring-boot-docker
+```
+
 
 
