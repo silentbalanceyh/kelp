@@ -215,7 +215,7 @@ pom.xml
 * 查找Dockerfile的路径
 * 从构建的目标目录拷贝到Docker中的资源文件：这个例子中只需要单个jar
 
-
+_Before proceeding with the following steps \(which use Docker’s CLI tools\), make sure Docker is properly running by typing`docker ps`. If you get an error message, something may not be set up correctly. Using a Mac? Add`$(boot2docker shellinit 2 > /dev/null)`to the bottom of your`.bash_profile`\(or similar env-setting configuration file\) and refresh your shell to ensure proper environment variables are configured._
 
 
 
