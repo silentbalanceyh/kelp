@@ -240,7 +240,24 @@ $ docker run -p 8080:8080 -t springio/gs-spring-boot-docker
     : Started Application in 5.613 seconds (JVM running for 7.293)
 ```
 
-该应用可直接通过：`http://localhost:8080` 访问。
+该应用可直接通过：`http://localhost:8080` 访问。如果是在Mac中使用boot2docker，则使用下边命令：
+
+```
+Docker client to the Docker daemon, please set:
+    export DOCKER_CERT_PATH=/Users/gturnquist/.boot2docker/certs/boot2docker-vm
+    export DOCKER_TLS_VERIFY=1
+    export DOCKER_HOST=tcp://192.168.59.103:2376
+```
+
+当该镜像运行时，使用下边命令可查看运行的容器：
+
+```
+$ docker ps
+CONTAINER ID        IMAGE                             COMMAND                \ 
+    CREATED             STATUS              PORTS                    NAMES
+81c723d22865        springio/gs-spring-boot-docker:latest   "java -jar /app.jar"   \
+    34 seconds ago      Up 33 seconds       0.0.0.0:8080->8080/tcp   goofy_brown
+```
 
 
 
