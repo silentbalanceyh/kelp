@@ -241,10 +241,8 @@
 信息：
 
 * 允许使用默认的shell，并覆盖最初的shell。
-* 每个SHELL指令将会覆盖之前所有SHELL指令，并影响后续指令。
-* 允许使用其他shell如：zsh、csh、tcsh、powershell等。
-
-
+* 每个`SHELL`指令将会覆盖之前所有`SHELL`指令，并影响后续指令。
+* 允许使用其他shell如：`zsh`、`csh`、`tcsh`、`powershell`等。
 
 
 
