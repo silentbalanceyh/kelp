@@ -209,5 +209,13 @@ pom.xml
 </build>
 ```
 
+这个配置指定了3个事：
+
+* 镜像名称（or标记），它以下边方式结束：`springio/gs-spring-boot-docker` 
+* 查找Dockerfile的路径
+* 从构建的目标目录拷贝到Docker中的资源文件：这个例子中只需要单个jar
+
+
+
 
 
