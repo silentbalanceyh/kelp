@@ -179,7 +179,7 @@ _To reduce _[_Tomcat startup time_](https://wiki.apache.org/tomcat/HowTo/FasterS
 
 _if you are using boot2docker you need to run it **first **before you do anything with the Docker command line or with the build tools \(it runs a daemon process that handles the work for you in a virtual machine\)._
 
-**使用Maven构建Docker Image：**
+**使用Maven构建Docker Image（Gradle参考开始Reference）：**
 
 pom.xml
 
@@ -215,7 +215,15 @@ pom.xml
 * 查找Dockerfile的路径
 * 从构建的目标目录拷贝到Docker中的资源文件：这个例子中只需要单个jar
 
-_Before proceeding with the following steps \(which use Docker’s CLI tools\), make sure Docker is properly running by typing`docker ps`. If you get an error message, something may not be set up correctly. Using a Mac? Add`$(boot2docker shellinit 2 > /dev/null)`to the bottom of your`.bash_profile`\(or similar env-setting configuration file\) and refresh your shell to ensure proper environment variables are configured._
+_Before proceeding with the following steps \(which use Docker’s CLI tools\), make sure Docker is properly running by typing_`docker ps`_. If you get an error message, something may not be set up correctly. Using a Mac? Add_`$(boot2docker shellinit 2 > /dev/null)`_to the bottom of your_`.bash_profile`_\(or similar env-setting configuration file\) and refresh your shell to ensure proper environment variables are configured._
+
+您可以编译一个带标签的docker镜像，然后使用”docker“命令发布到远程仓库中：
+
+```
+mvn package docker:build -DpushImage
+```
+
+
 
 
 
