@@ -91,6 +91,8 @@
   * [3.4.Client \( sco-portal \)](reference/3kts-works/34client-sco-portal.md)
   * 3.5.Business
     * [KTS10501 - 产品站点图](reference/3kts-works/kts10501-chan-pin-zhan-dian-tu.md)
+  * 3.6.Restful - Api
+    * [KTS10601 - Restful Api Introduction](reference/3kts-works/kts10601-restful-api-introduction.md)
 * [4. Library](reference/library.md)
   * react 15.4.2
   * react-dom 15.4.2
