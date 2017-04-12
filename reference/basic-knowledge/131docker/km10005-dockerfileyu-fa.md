@@ -16,7 +16,11 @@
 
 ## MAINTAINER
 
+用法：
 
+* `MAINTAINER <name>`
+
+该命令允许您在文件中设置作者信息。
 
 
 
