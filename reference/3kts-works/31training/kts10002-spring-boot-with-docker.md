@@ -223,7 +223,9 @@ _Before proceeding with the following steps \(which use Docker’s CLI tools\), 
 mvn package docker:build -DpushImage
 ```
 
+_You don’t have to push your newly minted Docker image to actually run it. Moreover the "push" command will fail if you aren’t a member of the "springio" organization on Dockerhub. Change the build configuration and the command line to your own username instead of "springio" to make it actually work._
 
+`package`必须在`docker:build`之前运行，否则会失败。
 
 
 
