@@ -167,5 +167,7 @@ ENTRYPOINT [ "sh", "-c", \
     "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
 ```
 
+Dockerfile很简单，但是您需要运行Spring Boot仅仅需要Java和一个编译好的jar，项目JAR是通过`ADD` 命令添加到容器中作为"app.jar"，然后执行`ENTRYPOINT` 。
+
 
 
