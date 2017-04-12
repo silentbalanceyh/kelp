@@ -88,6 +88,8 @@
     * [KTS10002 - Design Principles](reference/3kts-works/32ts-ui-component/kts10002-design-principles.md)
   * [3.3.Server \( sco-server \)](reference/3kts-works/33server-sco-server.md)
   * [3.4.Client \( sco-portal \)](reference/3kts-works/34client-sco-portal.md)
+  * 3.5.Business
+    * [KTS10501 - 产品站点图](reference/3kts-works/kts10501-chan-pin-zhan-dian-tu.md)
 * [4. Library](reference/library.md)
   * react 15.4.2
   * react-dom 15.4.2
