@@ -231,5 +231,15 @@ _You don’t have to push your newly minted Docker image to actually run it. Mor
 
 “docker push”对你而言会失败（除非你是Dockerhub中“springio"组织中的一员），若您修改您的配置以及docker ID则它应该会成功。即使没有发布成功，您仍然可以使用下边命令运行本地容器：
 
+```
+$ docker run -p 8080:8080 -t springio/gs-spring-boot-docker
+....
+2015-03-31 13:25:48.035  INFO 1 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer 
+    : Tomcat started on port(s): 8080 (http)
+2015-03-31 13:25:48.037  INFO 1 --- [           main] hello.Application                        
+    : Started Application in 5.613 seconds (JVM running for 7.293)
+
+```
+
 
 
