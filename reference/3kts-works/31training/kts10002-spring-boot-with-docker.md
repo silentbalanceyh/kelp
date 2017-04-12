@@ -97,5 +97,9 @@ mkdir -p src/main/java/hello
 </project>
 ```
 
+Spring Boot Maven Plugin提供了很多方便的功能：
+
+
+
 
 
