@@ -82,7 +82,7 @@
     * [VTX10002 - Vert.X Web](reference/external-courses/21translation/vtx10002-vertx-web.md)
 * [3. KTS Works](reference/3kts-works.md)
   * [3.1.Training](reference/3kts-works/31training.md)
-    * [KTS10101 - Spring Boot \( IntelliJ \)](reference/3kts-works/31training/kts10101-spring-boothuan-jing-da-jian.md)
+    * [KTS10101 - Spring Boot with Docker](reference/3kts-works/31training/kts10002-spring-boot-with-docker.md)
   * [3.2.TS UI Component](reference/3kts-works/32ts-ui-component.md)
     * [KTS10001 - Get Start](reference/3kts-works/32ts-ui-component/kts10001-get-start.md)
     * [KTS10002 - Design Patterns](reference/3kts-works/32ts-ui-component/kts10002-design-principles.md)

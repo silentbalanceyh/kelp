@@ -2,6 +2,8 @@
 
 ## Training
 
+* [KTS10101 - Spring Boot with Docker](/reference/3kts-works/31training/kts10002-spring-boot-with-docker.md)
+
 ## UI Component
 
 * [KTS10001 - Get Start](/reference/3kts-works/32ts-ui-component/kts10001-get-start.md)
