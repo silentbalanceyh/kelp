@@ -169,5 +169,7 @@ ENTRYPOINT [ "sh", "-c", \
 
 Dockerfile很简单，但是您需要运行Spring Boot仅仅需要Java和一个编译好的jar，项目JAR是通过`ADD` 命令添加到容器中作为"app.jar"，然后执行`ENTRYPOINT` 。
 
+**Notes部分不翻译：**
+
 
 
