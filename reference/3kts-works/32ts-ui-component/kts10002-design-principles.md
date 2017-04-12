@@ -1,6 +1,4 @@
-# KTS10002 - Design Principles
-
-
+# KTS10002 - Design Patterns
 
 
 

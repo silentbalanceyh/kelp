@@ -86,6 +86,7 @@
   * [3.2.TS UI Component](reference/3kts-works/32ts-ui-component.md)
     * [KTS10001 - Get Start](reference/3kts-works/32ts-ui-component/kts10001-get-start.md)
     * [KTS10002 - Design Principles](reference/3kts-works/32ts-ui-component/kts10002-design-principles.md)
+    * [KTS10003 - Design Patterns](reference/3kts-works/32ts-ui-component/kts10003-design-patterns.md)
   * [3.3.Server \( sco-server \)](reference/3kts-works/33server-sco-server.md)
   * [3.4.Client \( sco-portal \)](reference/3kts-works/34client-sco-portal.md)
   * 3.5.Business
