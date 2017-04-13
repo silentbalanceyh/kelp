@@ -202,7 +202,7 @@ public interface CityRepository extends Repository<City, Long> {
 spring.jpa.hibernate.ddl-auto=create-drop
 ```
 
-_**NOTES**：Hibernate自己拥有支持该功能的属性`hibernate.hbm2ddl.auto`，您可直接使用`spring.jpa.properties.*` 来设置Hibernate原生配置。_
+_**NOTES**：Hibernate自己拥有支持该功能的属性_`hibernate.hbm2ddl.auto`_，您可直接使用_`spring.jpa.properties.*`_ 来设置Hibernate原生配置。_
 
 ```
 spring.jpa.properties.hibernate.globally_quoted_identifiers=true
@@ -218,7 +218,33 @@ spring.jpa.properties.hibernate.globally_quoted_identifiers=true
 spring.jpa.open-in-view=false
 ```
 
+## 4. 使用H2的Web Console
+
+H2 Database提供了基于浏览器的控制台，Spring Boot可以自动配置，若下边条件满足的话则它可以自动配置：
+
+* 您在开发一个Web应用
+* `com.h2database:h2` 在类路径中
+* 您在使用[Spring Boot's Developer Tools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html)
+
+_**NOTES**：若您没有使用Spring Boot开发工具，但想要使用H2 Web Console，则您可以配置`spring.h2.console.enabled`为true，但是这个控制台仅用于开发环境，生产环境中记得关闭Console。_
+
+### 4.1. 改变H2控制台路径
+
+默认H2的Console使用路径`/h2-console` ，您可通过属性`spring.h2.console.path`自己定义。
+
+### 4.2. H2控制台安全性
+
+若类路径中启用了Basic的安全认证，H2 Console将会自动配置成Basic认证，下边的属性可定义相关元数据信息。
+
+* security.user.role
+* security.basic.authorize-mode
+* security.basic.enabled
+
+## 5. 使用jOOQ
+
+jOOQ——Java Object Oriented Querying是很流行的一个产品，它可以让您从数据库生成Java代码，而让您基于Fluent API使用安全的SQL查询。
 
 
- 
+
+
 
