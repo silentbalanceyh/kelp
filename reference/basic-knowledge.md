@@ -11,7 +11,7 @@
 ## 3. Cloud Computing
 
 * [KM10003 - Docker for Windows](/reference/basic-knowledge/131docker/km10003-docker-for-windows.md)（Docker在Windows中的安装流程）
-* [KM10005 - Dockerfile语法](/reference/basic-knowledge/131docker/km10005-dockerfileyu-fa.md)
+* [KM10005 - Dockerfile语法](/reference/basic-knowledge/131docker/km10005-dockerfileyu-fa.md)（Dockerfile文件规范说明）
 
 ## 4. Jersey
 
