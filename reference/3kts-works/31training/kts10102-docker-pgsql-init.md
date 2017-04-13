@@ -39,7 +39,7 @@ CREATE INDEX IDX_TST_MESSAGE ON TST_MESSAGE (postedAt)
 
 ### db-install.sh
 
-```
+```bash
 #!/usr/bin/env bash
 
 cd ../docker
