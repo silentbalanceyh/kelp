@@ -148,7 +148,5 @@ LOG:  database system is ready to accept connections
 
 ## 3. Connection Checking
 
-![](/_images/kts/training/KTS10102-002.png)
-
-
+![](/_images/kts/training/KTS10102-002.png)经过上述步骤一个Docker模式的PgSQL就启动完成了，接下来就可以直接访问了。
 
