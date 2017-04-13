@@ -306,5 +306,22 @@ public List<GregorianCalendar> authorsBornAfter1980() {
 
 您可以在`application.properties`中配置`spring.jooq.sql-dialect`定制jOOQ中的SQL方言：
 
+```
+spring.jooq.sql-dialect=Postgres
+```
+
+更多深入的自定义配置可在`@Bean` 定义中，这些配置将会在jOOQ的`Configuration` 创建时使用，您同样可以定义下边的jOOQ类型：
+
+* ConnectionProvider
+* TransactionProvider
+* RecordMapperProvider
+* RecordListenerProvider
+* ExecuteListenerProvider
+* VisitListenerProvider
+
+您同样可创建自己的`org.jooq.Configuration` 的`@Bean` 来控制jOOQ的配置。
+
+
+
 
 
