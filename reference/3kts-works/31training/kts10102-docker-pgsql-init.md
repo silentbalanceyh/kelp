@@ -30,7 +30,7 @@ CREATE DATABASE db_ts_training WITH ENCODING = 'UTF8';
 CREATE TABLE TST_MESSAGE(
   id               uuid PRIMARY KEY,
   "user"           VARCHAR(200) NOT NULL,
-  message          TEXT NOT NULL,
+  message          TEXT(4096) NOT NULL,
   postedAt         TIMESTAMP
 );
 
@@ -147,8 +147,6 @@ LOG:  database system is ready to accept connections
 注意最后一行：database system is ready to accept connections的信息出来过后就可等待客户端连接了。
 
 ## 3. Connection Checking
-
-
 
 
 
