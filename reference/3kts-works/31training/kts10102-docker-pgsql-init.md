@@ -73,6 +73,8 @@ docker rmi ${img_name}:latest
 cd -
 ```
 
+## 2.Execute/Start Container
+
 准备好上述文件过后，从终端进入到dev\_tool/shell/目录中执行db-install.sh
 
 ![](/_images/kts/training/KTS10102-001.png)上述输出后，使用下边命令查看docker启动日志，注意最后的`CONTAINER_ID`
@@ -140,8 +142,9 @@ LOG:  database system was shut down at 2017-04-13 02:28:44 UTC
 LOG:  MultiXact member wraparound protections are now enabled
 LOG:  autovacuum launcher started
 LOG:  database system is ready to accept connections
-
 ```
+
+注意最后一行：database system is ready to accept connections的信息出来过后就可等待客户端连接了。
 
 
 
