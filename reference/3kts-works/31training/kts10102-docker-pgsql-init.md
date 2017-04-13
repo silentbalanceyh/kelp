@@ -15,6 +15,8 @@ dev_tool/shell/db-uninstall.sh
 
 ### Dockerfile\_postgres\_training
 
+Dockerfile语法参考：
+
 ```
 FROM postgres
 ADD training.sql /docker-entrypoint-initdb.d/
