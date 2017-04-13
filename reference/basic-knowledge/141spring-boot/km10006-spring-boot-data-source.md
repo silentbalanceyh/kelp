@@ -302,5 +302,9 @@ public List<GregorianCalendar> authorsBornAfter1980() {
 }
 ```
 
+### 5.3. 定义jOOQ
+
+您可以在`application.properties`中配置`spring.jooq.sql-dialect`定制jOOQ中的SQL方言：
+
 
 
