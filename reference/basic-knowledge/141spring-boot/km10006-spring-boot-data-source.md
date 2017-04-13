@@ -121,7 +121,53 @@ _**NOTES**：Spring Boot默认使用了Hibernate 5.0.x，但是您也可以自�
 
 ### 3.1. 实体类
 
-传统
+传统的，JPA”实体“类是在`persistence.xml` 中配置的，而在Spring Boot中这个文件可忽略（它可以扫描实体类），默认所有标记了`@EnableAutoConfiguration` 和`@SpringBootApplication` 包中的主类都会被扫描。
+
+其他的标记了`@Entity` ，`@Embeddable` 或`@MappedSuperclass`类也会被扫描。
+
+```java
+package com.example.myapp.domain;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+@Entity
+public class City implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String state;
+
+    // ... additional members, often include @OneToMany mappings
+
+    protected City() {
+        // no-args constructor required by JPA spec
+        // this one is protected since it shouldn't be used directly
+    }
+
+    public City(String name, String state) {
+        this.name = name;
+        this.country = country;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getState() {
+        return this.state;
+    }
+
+    // ... etc
+
+}
+```
 
 
 
