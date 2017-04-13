@@ -246,7 +246,51 @@ jOOQ——Java Object Oriented Querying是很流行的一个产品，它可以�
 
 ### 5.1. 代码生成
 
-若要使用jOOQ安全类型查询，您需要从数据库Schema中生成Java类，您可参考[jOOQ User Manual](http://www.jooq.org/doc/3.6/manual-single-page/#jooq-in-7-steps-step3)查看详情。
+若要使用jOOQ安全类型查询，您需要从数据库Schema中生成Java类，您可参考[jOOQ User Manual](http://www.jooq.org/doc/3.6/manual-single-page/#jooq-in-7-steps-step3)查看详情。若您使用了`jooq-codegen-maven` 插件（您同样使用了`spring-boot-starter-parent` 父POM项目），您可忽略`<version>` 标记。您同样可以使用Spring Boot定义版本变量（如`h2.version`）定义数据库依赖插件的版本。下边是一个例子：
+
+```xml
+<plugin>
+    <groupId>org.jooq</groupId>
+    <artifactId>jooq-codegen-maven</artifactId>
+    <executions>
+        ...
+    </executions>
+    <dependencies>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+        </dependency>
+    </dependencies>
+    <configuration>
+        <jdbc>
+            <driver>org.h2.Driver</driver>
+            <url>jdbc:h2:~/yourdatabase</url>
+        </jdbc>
+        <generator>
+            ...
+        </generator>
+    </configuration>
+</plugin>
+```
+
+### 5.2. 使用DSLContext
+
+jOOQ中的接口`org.jooq.DSLContext`提供的Fluent API，Spring Boot将会自动配置`DSLContext` 为一个Spring Bean来连接您的`DataSource`。若要使用`DSLContext`则您仅仅需要使用`@Autowire`:
+
+```java
+@Component
+public class JooqExample implements CommandLineRunner {
+
+    private final DSLContext create;
+
+    @Autowired
+    public JooqExample(DSLContext dslContext) {
+        this.create = dslContext;
+    }
+
+}
+```
 
 
 
