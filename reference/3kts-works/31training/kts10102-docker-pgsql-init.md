@@ -37,7 +37,39 @@ CREATE INDEX IDX_TST_MESSAGE ON TST_MESSAGE (postedAt)
 
 ### db-install.sh
 
+```
+#!/usr/bin/env bash
 
+cd ../docker
+img_name="tst_db_training"
+container_name=${img_name}_container
+
+docker stop ${container_name}
+docker rm ${container_name}
+docker rmi ${img_name}:latest
+
+docker build -t ${img_name}:latest -f Dockerfile_postgres_training .
+docker run -d -e POSTGRES_PASSWORD=training -d -p 5432:5432 --name ${container_name} ${img_name}
+docker images
+docker ps -a
+cd -
+```
+
+### db-unistall.sh
+
+```
+#!/usr/bin/env bash
+
+cd ../docker
+img_name="tst_db_training"
+container_name=${img_name}_container
+
+docker stop ${container_name}
+docker rm ${container_name}
+docker rmi ${img_name}:latest
+
+cd -
+```
 
 
 
