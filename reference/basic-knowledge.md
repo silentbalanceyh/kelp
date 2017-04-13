@@ -12,6 +12,7 @@
 
 * [KM10003 - Docker for Windows](/reference/basic-knowledge/131docker/km10003-docker-for-windows.md)
 * [KM10005 - Dockerfile语法](/reference/basic-knowledge/131docker/km10005-dockerfileyu-fa.md)
+* [KM10006 - Spring Boot Data Source](/reference/basic-knowledge/141spring-boot/km10006-spring-boot-data-source.md)
 
 ## 4. Jersey
 

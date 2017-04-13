@@ -62,6 +62,7 @@
       * [KM10005 - Dockerfile语法](reference/basic-knowledge/131docker/km10005-dockerfileyu-fa.md)
   * [1.4.Develop Skills](reference/basic-knowledge/14develop-skills.md)
     * [1.4.1.Spring Boot](reference/basic-knowledge/141spring-boot.md)
+      * [KM10006 - Spring Boot Data Source](reference/basic-knowledge/141spring-boot/km10006-spring-boot-data-source.md)
     * [1.4.2.Adom IDE](reference/basic-knowledge/142adom-ide.md)
     * [1.4.3.Jersey](reference/basic-knowledge/143jersey.md)
       * [KM10004 - JSR330](reference/basic-knowledge/143jersey/km10004-jsr330.md)
