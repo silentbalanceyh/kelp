@@ -73,5 +73,11 @@ cd -
 
 准备好上述文件过后，从终端进入到dev\_tool/shell/目录中执行db-install.sh
 
-![](/_images/kts/training/KTS10102-001.png)
+![](/_images/kts/training/KTS10102-001.png)上述输出后，使用下边命令查看docker启动日志，注意最后的`CONTAINER_ID`
+
+```
+docker logs 6e629fe1d4af
+```
+
+启动过程中遇到的postgresql的问题参考（）。
 
