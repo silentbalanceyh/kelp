@@ -108,6 +108,7 @@
   * redux-orm-proptypes 0.1.0
   * rxjs 5.2.0
 * [5. Exception List](reference/exception-list.md)
+  * 5.1.Database
 
 ## Training
 
