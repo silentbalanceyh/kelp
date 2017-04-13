@@ -226,7 +226,7 @@ H2 Database提供了基于浏览器的控制台，Spring Boot可以自动配置�
 * `com.h2database:h2` 在类路径中
 * 您在使用[Spring Boot's Developer Tools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html)
 
-_**NOTES**：若您没有使用Spring Boot开发工具，但想要使用H2 Web Console，则您可以配置`spring.h2.console.enabled`为true，但是这个控制台仅用于开发环境，生产环境中记得关闭Console。_
+_**NOTES**：若您没有使用Spring Boot开发工具，但想要使用H2 Web Console，则您可以配置_`spring.h2.console.enabled`_为true，但是这个控制台仅用于开发环境，生产环境中记得关闭Console。_
 
 ### 4.1. 改变H2控制台路径
 
@@ -244,7 +244,9 @@ _**NOTES**：若您没有使用Spring Boot开发工具，但想要使用H2 Web C
 
 jOOQ——Java Object Oriented Querying是很流行的一个产品，它可以让您从数据库生成Java代码，而让您基于Fluent API使用安全的SQL查询。
 
+### 5.1. 代码生成
 
+若要使用jOOQ安全类型查询，您需要从数据库Schema中生成Java类，您可参考[jOOQ User Manual](http://www.jooq.org/doc/3.6/manual-single-page/#jooq-in-7-steps-step3)查看详情。
 
 
 
