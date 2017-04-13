@@ -81,5 +81,7 @@ cd -
 docker logs 6e629fe1d4af
 ```
 
-启动过程中遇到的postgresql的问题参考（）。
+看到下边日志就表示启动成功了：
+
+
 
