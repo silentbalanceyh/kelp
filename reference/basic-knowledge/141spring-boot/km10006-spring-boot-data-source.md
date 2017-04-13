@@ -169,11 +169,30 @@ public class City implements Serializable {
 }
 ```
 
-_**NOTES**：您可以在您的实体扫描位置使用`@EntityScan` 标记，参考：_[_Separate @Entity definitions from Spring configuration_](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-data-access.html#howto-separate-entity-definitions-from-spring-configuration)
+_**NOTES**：您可以在您的实体扫描位置使用_`@EntityScan`_ 标记，参考：_[_Separate @Entity definitions from Spring configuration_](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-data-access.html#howto-separate-entity-definitions-from-spring-configuration)
 
-### 3.2. Spring Data JPA
+### 3.2. Spring Data JPA Repositories
 
+Spring Data JPA Repositories定义了一套访问数据的接口，JPA查询将会从您的方法名中自动创建。例如一个`CityRepository` 接口定义了`findAllByState(String state)` 方法来根据state查找所有城市。对于更多f谁阿查询，您可以参考注解[`@Query` ](http://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Query.html)。
 
+您定义的接口通常从`Repository` 和`CrudRepository` 接口继承，若您想使用自动配置，这些Repository将会搜索注解了`@EnableAutoConfiguration` 和`@SpringBootApplication` 的类。
+
+下边是一个接口定义：
+
+```java
+package com.example.myapp.domain;
+
+import org.springframework.data.domain.*;
+import org.springframework.data.repository.*;
+
+public interface CityRepository extends Repository<City, Long> {
+
+    Page<City> findAll(Pageable pageable);
+
+    City findByNameAndCountryAllIgnoringCase(String name, String country);
+
+}
+```
 
 
 
