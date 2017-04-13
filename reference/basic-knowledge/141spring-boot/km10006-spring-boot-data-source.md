@@ -169,5 +169,11 @@ public class City implements Serializable {
 }
 ```
 
+_**NOTES**：您可以在您的实体扫描位置使用`@EntityScan` 标记，参考：_[_Separate @Entity definitions from Spring configuration_](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-data-access.html#howto-separate-entity-definitions-from-spring-configuration)
+
+### 3.2. Spring Data JPA
+
+
+
 
 
