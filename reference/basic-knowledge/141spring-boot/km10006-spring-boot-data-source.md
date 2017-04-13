@@ -58,7 +58,7 @@ spring.datasource.password=dbpass
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 ```
 
-_**NOTES**：您至少应该指定`spring.datasource.url` 属性，否则Spring Boot将会自动配置嵌入式数据库。通常您也需要指定`driver-class-name` ，因为Spring Boot将会根据`url` 中的属性来推断该值。若要创建一个`DataSource` 则您需要验证`Driver` 是否可用，而且它在做其他事前会验证完成。若您设置`spring.datasource.driver-class-name=com.mysql.jdbc.Driver` ，之后这个类将会被载入。_
+_**NOTES**：您至少应该指定_`spring.datasource.url`_ 属性，否则Spring Boot将会自动配置嵌入式数据库。通常您也需要指定_`driver-class-name`_ ，因为Spring Boot将会根据_`url`_ 中的属性来推断该值。若要创建一个_`DataSource`_ 则您需要验证_`Driver`_ 是否可用，而且它在做其他事前会验证完成。若您设置_`spring.datasource.driver-class-name=com.mysql.jdbc.Driver`_ ，之后这个类将会被载入。_
 
 您可参考`DataSourceProperties` 去查找更多支持选项，无论实际选项如何，都可以根据具体实现使用各自的前缀：`spring.datasource.tocmat.*` ，`spring.datasource.hikari.*` 和`spring.datasource.dbcp2.*` ，这些前缀需要参考特殊连接池实现文档指定细节。
 
@@ -76,6 +76,16 @@ spring.datasource.tomcat.test-on-borrow=true
 ```
 
 ### 1.3. 连接JNDI DataSource
+
+若您将Spring Boot应用部署到应用程序服务器中，您则想要使用应用程序服务器内置的方式来管理连接池如JNDI。
+
+`spring.datasource.jndi-name` 属性可以用来替换`spring.datasource.url` ，`spring.datasource.username` 和`spring.datasource.password` 而指定JNDI位置访问`DataSource` 。如下边的`application.properties` 片段演示了在JBoss中访问JNDI。
+
+```
+spring.datasource.jndi-name=java:jboss/datasources/customers
+```
+
+## 2. 使用JdbcTemplate
 
 
 
