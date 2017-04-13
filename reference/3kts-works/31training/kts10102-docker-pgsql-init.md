@@ -15,7 +15,7 @@ dev_tool/shell/db-uninstall.sh
 
 ### Dockerfile\_postgres\_training
 
-Dockerfile语法参考：
+Dockerfile语法参考：[KM10005 - Dockerfile语法](/reference/basic-knowledge/131docker/km10005-dockerfileyu-fa.md)
 
 ```
 FROM postgres
