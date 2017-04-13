@@ -196,7 +196,29 @@ public interface CityRepository extends Repository<City, Long> {
 
 ### 3.3. 创建/销毁JPA数据库
 
+默认的，若您使用了H2，HSQL，Derby时，JPA数据库将会自动创建，您也可以使用`spring.jpa.*` 属性显示指定JPA配置。例：您可以在`application.properties` 中添加下边配置：
+
+```
+spring.jpa.hibernate.ddl-auto=create-drop
+```
+
+_**NOTES**：Hibernate自己拥有支持该功能的属性`hibernate.hbm2ddl.auto`，您可直接使用`spring.jpa.properties.*` 来设置Hibernate原生配置。_
+
+```
+spring.jpa.properties.hibernate.globally_quoted_identifiers=true
+```
+
+这样就可以传递`hibernate.globallyguotedidentifiers` 给Hibernate中的Entity Manager，默认的DDL执行（或验证）是不会执行的，它会在`ApplicationContext` 启动完成后执行。这儿有一个`spring.jpa.generate-ddl` 标记，但如果Hibernate自动配置激活了，它就没有用了——会使用原生的`ddl-auto` 配置。
+
+### 3.4. 在视图中开启EntityManager
+
+如果您运行的是一个Web应用，Spring Boot将默认注册[`OpenEntityManagerInViewInterceptor`](http://docs.spring.io/spring/docs/4.3.7.RELEASE/javadoc-api/org/springframework/orm/jpa/support/OpenEntityManagerInViewInterceptor.html) 到当前模式。为了延迟加载Web视图，若您不想要这些行为，您应该在`application.properties` 中设置：
+
+```
+spring.jpa.open-in-view=false
+```
 
 
 
+ 
 
