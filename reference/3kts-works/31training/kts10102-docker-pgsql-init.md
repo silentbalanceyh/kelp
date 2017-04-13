@@ -35,5 +35,9 @@ CREATE TABLE TST_MESSAGE(
 CREATE INDEX IDX_TST_MESSAGE ON TST_MESSAGE (postedAt)
 ```
 
+### db-install.sh
+
+
+
 
 
