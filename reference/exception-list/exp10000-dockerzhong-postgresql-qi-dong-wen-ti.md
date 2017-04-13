@@ -1,4 +1,4 @@
-# EXP10001 - Docker中PostgreSQL启动问题
+# EXP10001 - Docker中PostgreSQL启动日志解析
 
 ## 1.日志记录
 
@@ -70,6 +70,4 @@ LOG:  database system is ready to accept connections
 ```
 
 \*：最终数据库启动起来了，但启动模式不对，通过账号以及提供的密码无法看到表信息。
-
-
 
