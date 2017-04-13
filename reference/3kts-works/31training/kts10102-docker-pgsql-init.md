@@ -71,5 +71,7 @@ docker rmi ${img_name}:latest
 cd -
 ```
 
+准备好上述文件过后，从终端进入到dev\_tool/shell/目录中执行db-install.sh
 
+![](/_images/kts/training/KTS10102-001.png)
 
