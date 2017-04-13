@@ -30,5 +30,7 @@ _**NOTES**：若您想要在测试中使用该功能，您需要在您使用的�
 </dependency>
 ```
 
+_**NOTES**：您需要为每个嵌入式数据库配置`spring-jdbc` 的依赖项，这个例子中使用了`spring-boot-starter-data-jpa` 来实现。_
 
+_**NOTES**：不论什么原因，您都需要配置嵌入式数据库中的链接URL，而且必须注意数据库的自动关闭功能被禁用。若您使用了H2，需要设置`DB_CLOSE_ON_EXIT=FALSE` ；若您使用了HSQLDB，则您需要保证`shutdown=true` 没使用。禁用数据库的自动关闭功能可以让Spring Boot在数据库关闭时控制数据库，因此确保数据库关闭时没有这种情况（自动关闭）发生。_
 
