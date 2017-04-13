@@ -60,6 +60,7 @@
     * [1.3.1.Docker](reference/basic-knowledge/131docker.md)
       * [KM10003 - Docker for Windows](reference/basic-knowledge/131docker/km10003-docker-for-windows.md)
       * [KM10005 - Dockerfile语法](reference/basic-knowledge/131docker/km10005-dockerfileyu-fa.md)
+      * [KM10007 - Docker 15 Tips](reference/basic-knowledge/131docker/km10007-docker-15-tips.md)
   * [1.4.Develop Skills](reference/basic-knowledge/14develop-skills.md)
     * [1.4.1.Spring Boot](reference/basic-knowledge/141spring-boot.md)
       * [KM10006 - Spring Boot Data Source](reference/basic-knowledge/141spring-boot/km10006-spring-boot-data-source.md)
