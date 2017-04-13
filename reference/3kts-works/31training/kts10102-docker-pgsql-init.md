@@ -26,7 +26,7 @@ ADD training.sql /docker-entrypoint-initdb.d/
 
 ```sql
 CREATE DATABASE db_ts_training WITH ENCODING = 'UTF8';
-\c db_ts_training
+\c db_ts_training          --PostgreSQL中切换数据库命令
 CREATE TABLE TST_MESSAGE(
   id               uuid PRIMARY KEY,
   "user"           VARCHAR(200) NOT NULL,
