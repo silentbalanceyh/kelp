@@ -45,13 +45,13 @@ _**NOTES**：不论什么原因，您都需要配置嵌入式数据库中的链�
 
 若您使用`spring-boot-starter-jdbc` 或`spring-boot-starter-data-jpa` 时，您会自动获取`tomcat-jdbc` 的依赖项。
 
-_**NOTES**：您可以略过完全的选择算法，而直接使用属性`spring.datasource.type` 来配置，特别是当您的应用在Tomcat容器中使用了`tomcat-jdbc` 作为默认连接池使用时这个配置特别重要。_
+_**NOTES**：您可以略过完全的选择算法，而直接使用属性_`spring.datasource.type`_ 来配置，特别是当您的应用在Tomcat容器中使用了_`tomcat-jdbc`_ 作为默认连接池使用时这个配置特别重要。_
 
-_**NOTES**：您也可以手动配置额外的连接池，若您定义了自己的`DataSource` ，自动配置将不会发生。_
+_**NOTES**：您也可以手动配置额外的连接池，若您定义了自己的_`DataSource`_ ，自动配置将不会发生。_
 
 DataSource配置主要依赖外部配置`spring.datasource.*` 来控制，如：您在配置文件`application.properties` 中配置了下边代码片段：
 
-```bash
+```
 spring.datasource.url=jdbc:mysql://localhost/test
 spring.datasource.username=dbuser
 spring.datasource.password=dbpass
