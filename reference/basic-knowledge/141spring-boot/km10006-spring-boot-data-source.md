@@ -36,7 +36,27 @@ _**NOTES**：不论什么原因，您都需要配置嵌入式数据库中的链�
 
 ### 1.2. 连接生产环境数据库
 
+生产环境数据库连接可直接通过`DataSource` 自动配置，这是选择连接的实现算法：
 
+* 考虑到性能和并发，我们倾向于使用Tomcat中的`DataSource` ，所以它是一直选择的方案。
+* 其次，若可以使用HikariCP，则优先选择。
+* 其次选择Commons DBCP，但是我们不推荐在生产环境使用它，因为Commons DBCP已经是Deprecated的。
+* 最后，若Commons DBCP2可用，则使用它。
+
+若您使用`spring-boot-starter-jdbc` 或`spring-boot-starter-data-jpa` 时，您会自动获取`tomcat-jdbc` 的依赖项。
+
+_**NOTES**：您可以略过完全的选择算法，而直接使用属性`spring.datasource.type` 来配置，特别是当您的应用在Tomcat容器中使用了`tomcat-jdbc` 作为默认连接池使用时这个配置特别重要。_
+
+_**NOTES**：您也可以手动配置额外的连接池，若您定义了自己的`DataSource` ，自动配置将不会发生。_
+
+DataSource配置主要依赖外部配置`spring.datasource.*` 来控制，如：您在配置文件`application.properties` 中配置了下边代码片段：
+
+```bash
+spring.datasource.url=jdbc:mysql://localhost/test
+spring.datasource.username=dbuser
+spring.datasource.password=dbpass
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+```
 
 
 
