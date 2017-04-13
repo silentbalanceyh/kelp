@@ -148,5 +148,7 @@ LOG:  database system is ready to accept connections
 
 ## 3. Connection Checking
 
+![](/_images/kts/training/KTS10102-002.png)
+
 
 
