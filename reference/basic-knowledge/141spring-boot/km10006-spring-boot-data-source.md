@@ -14,9 +14,9 @@ Java中的`javax.sql.DataSource` 接口提供了标准的数据连接池对应�
 
 Spring Boot中支持的自动配置嵌入式数据库包括：H2、HSQL、Derby，您不需要提供任何链接URL，仅仅将您使用的依赖项构建到您使用的数据库中即可。
 
-_NOTES：若您想要在测试中使用该功能，您需要在您使用的数据库中实现链接重用，针对不同的测试套件使用统一的上下文环境。若您想要在每一个上下文环境中使用分开的嵌入式数据库环境，则您需要设置：`spring.datasource.generate-unique-name = true`_
+_**NOTES**：若您想要在测试中使用该功能，您需要在您使用的数据库中实现链接重用，针对不同的测试套件使用统一的上下文环境。若您想要在每一个上下文环境中使用分开的嵌入式数据库环境，则您需要设置：_`spring.datasource.generate-unique-name = true`
 
-例如，您的POM文件如下：
+**例如**：您的POM文件如下：
 
 ```xml
 <dependency>
