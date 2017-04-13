@@ -1,6 +1,6 @@
 # KM10006 - Spring Boot Data Source
 
-[Reference: Working with SQL database](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html)
+[Reference: 29. Working with SQL database](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html)
 
 Spring中提供了SQL数据库的扩展，根据JDBC的方言【Direct】模板，使用`JdbcTemplate` 来完成关系数据库映射，如Hibernate；Spring Data中提供了额外的数据访问层功能，通过创建一个`Repository` 实现将Query转换成所需要的方法名。
 
@@ -86,8 +86,6 @@ spring.datasource.jndi-name=java:jboss/datasources/customers
 ```
 
 ## 2. 使用JdbcTemplate
-
-
 
 
 
