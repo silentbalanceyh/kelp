@@ -69,7 +69,7 @@ LOG:  autovacuum launcher started
 LOG:  database system is ready to accept connections
 ```
 
-\*：最终数据库
+\*：最终数据库启动起来了，但启动模式不对，通过账号以及提供的密码无法看到表信息。
 
 
 
