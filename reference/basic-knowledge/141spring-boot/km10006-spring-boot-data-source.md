@@ -113,7 +113,9 @@ public class MyBean {
 
 Java持久化API是一种标准技术用来映射对象到关系数据库，属性`spring-boot-starter-data-jpa` POM中提供了快速使用方法，它提供了下边的关键依赖项：
 
-* Hibernate：
+* **Hibernate**：比较流行的一个JPA实现
+* **Spring Data JPA**：更加简单实现基于JPA的Repository
+* **Spring ORMs**：
 
 
 
