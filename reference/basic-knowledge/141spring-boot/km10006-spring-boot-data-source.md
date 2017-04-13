@@ -115,7 +115,13 @@ Java持久化API是一种标准技术用来映射对象到关系数据库，属�
 
 * **Hibernate**：比较流行的一个JPA实现
 * **Spring Data JPA**：更加简单实现基于JPA的Repository
-* **Spring ORMs**：
+* **Spring ORMs**：Spring框架支持的核心ORM
+
+_**NOTES**：Spring Boot默认使用了Hibernate 5.0.x，但是您也可以自己来配置其他版本如4.3.x或5.2.x。_
+
+### 3.1. 实体类
+
+传统
 
 
 
