@@ -146,5 +146,9 @@ LOG:  database system is ready to accept connections
 
 注意最后一行：database system is ready to accept connections的信息出来过后就可等待客户端连接了。
 
+## 3. Connection Checking
+
+
+
 
 
