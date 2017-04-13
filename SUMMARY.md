@@ -109,7 +109,6 @@
   * rxjs 5.2.0
 * [5. Exception List](reference/exception-list.md)
   * 5.1.Database
-    * [EXP10000 - Docker中PostgreSQL启动问题](reference/exception-list/exp10000-dockerzhong-postgresql-qi-dong-wen-ti.md)
 
 ## Training
 
