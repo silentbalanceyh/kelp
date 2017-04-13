@@ -58,5 +58,26 @@ spring.datasource.password=dbpass
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 ```
 
+_**NOTES**：您至少应该指定`spring.datasource.url` 属性，否则Spring Boot将会自动配置嵌入式数据库。通常您也需要指定`driver-class-name` ，因为Spring Boot将会根据`url` 中的属性来推断该值。若要创建一个`DataSource` 则您需要验证`Driver` 是否可用，而且它在做其他事前会验证完成。若您设置`spring.datasource.driver-class-name=com.mysql.jdbc.Driver` ，之后这个类将会被载入。_
+
+您可参考`DataSourceProperties` 去查找更多支持选项，无论实际选项如何，都可以根据具体实现使用各自的前缀：`spring.datasource.tocmat.*` ，`spring.datasource.hikari.*` 和`spring.datasource.dbcp2.*` ，这些前缀需要参考特殊连接池实现文档指定细节。
+
+如下边是Tomcat连接池的自定义配置：
+
+```
+# Number of ms to wait before throwing an exception if no connection is available.
+spring.datasource.tomcat.max-wait=10000
+
+# Maximum number of active connections that can be allocated from this pool at the same time.
+spring.datasource.tomcat.max-active=50
+
+# Validate the connection before borrowing it from the pool.
+spring.datasource.tomcat.test-on-borrow=true
+```
+
+### 1.3. 连接JNDI DataSource
+
+
+
 
 
