@@ -292,5 +292,15 @@ public class JooqExample implements CommandLineRunner {
 }
 ```
 
+您同样可以使用`DSLContext`来构造您的查询：
+
+```java
+public List<GregorianCalendar> authorsBornAfter1980() {
+    return this.create.selectFrom(AUTHOR)
+        .where(AUTHOR.DATE_OF_BIRTH.greaterThan(new GregorianCalendar(1980, 0, 1)))
+        .fetch(AUTHOR.DATE_OF_BIRTH);
+}
+```
+
 
 
