@@ -1,5 +1,7 @@
 # KM10009 - Mockito的使用
 
+\*：关于方法的模拟限制，不可被Mock的方法：**final/private/equals\(\)/hashCode\(\)**。
+
 ## 模拟对象
 
 ```java
