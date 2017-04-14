@@ -100,7 +100,42 @@ verify(mockedList).add(someString -> someString.length() > 5);
 
 ## 校验方法调用次数
 
+```java
+// 使用mock
+mockedList.add("once");
 
+mockedList.add("twice");
+mockedList.add("twice");
+
+mockedList.add("three times");
+mockedList.add("three times");
+mockedList.add("three times");
+// 下边两个验证工作是一样的，看默认是否调用了一次
+verify(mockedList).add("once");
+verify(mockedList, times(1)).add("once");
+// 确切调用次数验证
+verify(mockedList, times(2)).add("twice");
+verify(mockedList, times(3)).add("three times);
+// 这里调用了never表示未调用，效果同times(0)
+verify(mockedList, atLeastOnce()).add("three times");
+verify(mockedList, atLeast(2)).add("five times");
+verify(mockedList, atMost(5)).add("three times");
+```
+
+## 模拟无返回方法抛出异常
+
+```java
+doThrow(new RuntimeException()).when(mockedList).clear();
+// 下边抛出RuntimeException
+mockedList.clear();
+```
+
+## 校验方法调用顺序
+
+```java
+// 单独Mock特殊调用顺序的一堆方法
+
+```
 
 
 
