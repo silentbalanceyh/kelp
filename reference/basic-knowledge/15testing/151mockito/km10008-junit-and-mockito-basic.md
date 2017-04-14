@@ -10,7 +10,11 @@ Mac最大的功能是帮你把单元测试的耦合分解开，如果您的代�
 
 比如代码中有这样的依赖：
 
+![](/_images/km/testing/KM10008-001.jpg)
+
 当我们需要测试A类的时候，如果没有Mock，则我们需要把整个依赖树都构建出来，而使用Mock的话就可以将结构分解开，像下面这样：
+
+![](/_images/km/testing/KM10008-002.jpg)
 
 ## Mock测试介绍
 
@@ -34,7 +38,7 @@ Mockito是一个很美味的单元测试Mock框架。
 
 Mockito拥有很少的API，所有开始使用Mockito，几乎没有时间成本，因为只有一种创造Mock的方式。只要记住，在执行前sbub，而在交互中验证，您很快就会发现这样的TDD java代码很自然。
 
-类似EasyMock的语法来的，所以您可以放心地重构，Mockito并不需要"expectation"（期望）的概念，只有stub和验证。Mockito实现了[Gerard Meszaros](http://xunitpatterns.com/Mocks,%20Fakes,%20Stubs%20and%20Dummies.html)所谓的Test Spy.
+类似EasyMock的语法来的，所以您可以放心地重构，Mockito并不需要"expectation"（期望）的概念，只有stub和验证。Mockito实现了[Gerard Meszaros](http://xunitpatterns.com/Mocks, Fakes, Stubs and Dummies.html)所谓的Test Spy.
 
 ### 其他特点：
 
