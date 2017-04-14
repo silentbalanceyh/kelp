@@ -92,5 +92,5 @@ Mockito拥有很少的API，所有开始使用Mockito，几乎没有时间成本
 
 有时，你希望在没有系统其他部分的影响下测试系统单独的一部分。由于其他系统部分会给测试数据造成干扰，影响根据数据收集得到的测试结论。使用mock你可以移除掉除了需要测试部分的系统依赖的模拟。当隔离这些mocks后，mocks就变得非常简单可靠，快速可预见。这为你提供了一个移除了随机行为，有重复模式并且可以监控特殊系统的测试环境。
 
-
+Mockito的使用参考：[KM10009 - Mockito Using](/reference/basic-knowledge/15testing/151mockito/km10009-mock-using.md)
 
