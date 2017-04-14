@@ -55,9 +55,18 @@ verify(mockedList, times(1)).add("once");
 
 ## 校验行为
 
+```java
+// 模拟创建
+List mockedList = mock(List.class);
+// 使用mock对象
+mockedList.add("one");
+mockedList.clear();
+// 验证
+verify(mockedList).add("one");
+verify(mockedList).clear();
 ```
 
-```
+
 
 
 
