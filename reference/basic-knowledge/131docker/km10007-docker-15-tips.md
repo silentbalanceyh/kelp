@@ -35,5 +35,12 @@ ts_demo             latest              c6c11f1147e2        15 hours ago        
 
 ## 1. 得到最后执行的容器ID
 
+```
+$ ID = $(docker run ts_demo echo Lang)
+Lang
+$ docker commit $ID ts_demo_lang
+$ docker images
+```
+
 
 
