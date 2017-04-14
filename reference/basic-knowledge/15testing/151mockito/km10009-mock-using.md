@@ -34,7 +34,12 @@ doThrow(new RuntimeException("clear exception")).when(mockedList).clear();
 mockedList.clear();
 ```
 
+## 模拟调用方法时的参数匹配
 
+```java
+// anyInt()匹配任何int参数，这意味着参数为任意值，其返回值均是element
+
+```
 
 
 
