@@ -70,6 +70,7 @@
   * [1.5.Testing](reference/basic-knowledge/15testing.md)
     * [1.5.1.Mockito](reference/basic-knowledge/15testing/151mockito.md)
       * [KM10008 - Mockito Basic](reference/basic-knowledge/15testing/151mockito/km10008-junit-and-mockito-basic.md)
+      * [KM10009 - Mockito Using](reference/basic-knowledge/15testing/151mockito/km10009-mock-using.md)
     * [1.5.2.Jacoco](reference/basic-knowledge/15testing/152jacoco.md)
     * [1.5.3.Jasmine](reference/basic-knowledge/15testing/153jasmine.md)
     * [1.5.4.JUnit](reference/basic-knowledge/15testing/154junit.md)
