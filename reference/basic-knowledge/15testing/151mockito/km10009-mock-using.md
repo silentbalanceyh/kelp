@@ -158,7 +158,60 @@ inOrder.verify(secondMock).add("was called second");
 // A + B将来可直接合并到一起
 ```
 
+## 校验方法是否从未调用
 
+```java
+// 使用Mock - 仅仅使用一个mockOne交互
+mockOne.add("one");
+// 验证ordinary
+verify(mockOne).add("one");
+// 验证方法从未在mock中调用过
+verify(mockOne, never()).add("two");
+// 验证其他Mock是否未交互过
+verifyZeroInteractions(mockTwo, mockThree);
+```
+
+## 快速创建Mock对象
+
+```java
+public class ArticleManagerTest {
+      @Mock private ArticleCalculator calculator;
+      @Mock private ArticleDatabase database;
+      @Mock private UserProvider userProvider;
+      @Before
+      public void before(){
+          MockitoAnnotations.initMocks(this);
+      }
+}
+```
+
+## 自定义返回不同结果
+
+```java
+when(mock.someMethod("some arg"))
+   .thenThrow(new RuntimeException())     // 第一次会抛出异常
+   .thenReturn("foo");                    // 第二次会返回这个结果
+// 第一次调用抛出异常
+mock.someMethod("some arg"); 
+// 第二次调用，打印"foo"
+System.out.println(mock.someMethod("some arg")); 
+// 最后一个桩设置，打印“foo"
+System.out.println(mock.someMethod("some arg")); // 第n次(n> 2)，依旧以最后返回最后一个配置
+```
+
+## 对返回结果进行拦截
+
+```java
+when(mock.someMethod(anyString())).thenAnswer(new Answer() {
+    Object answer(InvocationOnMock invocation) {
+        Object[] args = invocation.getArguments();
+        Object mock = invocation.getMock();
+        return "called with arguments: " + args;
+    }
+});
+// 下图打印："called with arguments: foo"
+System.out.println(mock.someMethod("foo"));
+```
 
 
 
