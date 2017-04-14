@@ -219,7 +219,92 @@ System.out.println(mock.someMethod("foo"));
 
 ## 暗中调用真实对象
 
+```java
+List list = new LinkedList();
+List spy = spy(list);
+// 可选的，你可在一些方法外设置桩:
+when(spy.size()).thenReturn(100);
+// 使用spy调用真实方法
+spy.add("one");
+spy.add("two");
+// 打印one - List的第一个元素
+System.out.println(spy.get(0));
+// size()方法被调用 - 100会被打印
+System.out.println(spy.size());
+// 之后您可以自己验证
+verify(spy).add("one");
+verify(spy).add("two");
+```
 
+## 改变默认返回值
+
+```java
+Foo mock = mock(Foo.class, Mockito.RETURNS_SMART_NULLS);
+Foo mockTwo = mock(Foo.class, new YourOwnAnswer());
+```
+
+## 捕获函数的参数值
+
+```java
+ArgumentCaptor<Person> argument = ArgumentCaptor.forClass(Person.class);
+verify(mock).doSomething(argument.capture());
+assertEquals("John", argument.getValue().getName());
+```
+
+## 部分Mock
+
+```java
+// 您可以创建spy()方法的部分Mock
+List list = spy(new LinkedList());
+// 启用Mock的选择
+Foo mock = mock(Foo.class);
+// 保证真实实现是”安全“的
+// 如果真实实现抛出异常或者依赖特定的对待状态，则您就麻烦了
+when(mock.someMethod()).thenCallRealMethod();
+```
+
+## 重置Mock
+
+```java
+List mock = mock(List.class);
+when(mock.size()).thenReturn(10);
+mock.add(1);
+reset(mock);
+// Mock这时候忘记了interactions & stubbing
+```
+
+## 序列化
+
+```java
+List<Object> list = new ArrayList<Object>();
+List<Object> spy = mock(ArrayList.class, withSettings()
+                 .spiedInstance(list)
+                 .defaultAnswer(CALLS_REAL_METHODS)
+                 .serializable());
+```
+
+## 检查超时
+
+```java
+// 在给定时间内执行完someMethod()
+verify(mock, timeout(100)).someMethod();
+// 上边的匿名用法是：
+verify(mock, timeout(100).times(1)).someMethod();
+// someMethod给定时间内执行了两次
+verify(mock, timeout(100).times(2)).someMethod();
+// someMethod在给定时间内至少执行了两次
+verify(mock, timeout(100).atLeast(2)).someMethod();
+// 验证someMethod的调用
+// 若有自己验证模型就很有用
+verify(mock, new Timeout(100, yourOwnVerificationMode)).someMethod();
+```
+
+## Mock详情
+
+```java
+Mockito.mockingDetails(someObject).isMock();
+Mockito.mockingDetails(someObject).isSpy();
+```
 
 
 
