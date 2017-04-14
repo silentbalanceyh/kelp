@@ -36,11 +36,7 @@ ts_demo             latest              c6c11f1147e2        15 hours ago        
 ## 1. 得到最后执行的容器ID
 
 ```
-## 等号后边不可以有空白，有空白会报错！
-$ cid=$(docker run ts_demo echo Lang)
-Lang
-$ docker commit $cid ts_demo_lang
-$ docker images
+
 ```
 
 
