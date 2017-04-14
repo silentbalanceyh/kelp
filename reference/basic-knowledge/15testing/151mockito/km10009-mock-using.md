@@ -27,5 +27,14 @@ when(mockedList.get(1)).thenThrow(new RuntimeException());
 System.out.println(mockedList.get(1));
 ```
 
+如果一个函数没有返回值类型，那么可以使用该方法模拟异常抛出
+
+```java
+doThrow(new RuntimeException("clear exception")).when(mockedList).clear();
+mockedList.clear();
+```
+
+
+
 
 
