@@ -10,11 +10,11 @@ Mac最大的功能是帮你把单元测试的耦合分解开，如果您的代�
 
 比如代码中有这样的依赖：
 
-![](/_images/km/testing/KM10008-001.jpg)
+
 
 当我们需要测试A类的时候，如果没有Mock，则我们需要把整个依赖树都构建出来，而使用Mock的话就可以将结构分解开，像下面这样：
 
-![](/_images/km/testing/KM10008-002.jpg)
+
 
 ## Mock测试介绍
 
@@ -91,6 +91,40 @@ Mockito拥有很少的API，所有开始使用Mockito，几乎没有时间成本
 ### 隔离系统
 
 有时，你希望在没有系统其他部分的影响下测试系统单独的一部分。由于其他系统部分会给测试数据造成干扰，影响根据数据收集得到的测试结论。使用mock你可以移除掉除了需要测试部分的系统依赖的模拟。当隔离这些mocks后，mocks就变得非常简单可靠，快速可预见。这为你提供了一个移除了随机行为，有重复模式并且可以监控特殊系统的测试环境。
+
+## Spy
+
+最后介绍一个Spy的东西，前边讲了Mock对象的两大功能，对于第二大功能：指定方法的特定行为——如果不指定怎么办？现在补充一下，若不指定的情况，一个mock对象的所有非void方法都将返回默认值：int、long类型方法将返回0，boolean方法将返回false，对象方法将返回null等，而void方法将什么都不做。
+
+然后很多时候，您希望达到这样的效果：除非指定，否则调用这个对象的默认实现，同时又能拥有验证方法调用的功能。这正好是spy对象送实现的效果。创建一个spy对象以及spy对象d额用法介绍如下：
+
+```java
+//假设目标类的实现是这样的
+public class PasswordValidator {
+    public boolean verifyPassword(String password) {
+        return "xiaochuang_is_handsome".equals(password);
+    }
+}
+
+@Test
+public void testSpy() {
+    //跟创建mock类似，只不过调用的是spy方法，而不是mock方法。spy的用法
+    PasswordValidator spyValidator = Mockito.spy(PasswordValidator.class);
+
+    //在默认情况下，spy对象会调用这个类的真实逻辑，并返回相应的返回值，这可以对照上面的真实逻辑
+    spyValidator.verifyPassword("xiaochuang_is_handsome"); //true
+    spyValidator.verifyPassword("xiaochuang_is_not_handsome"); //false
+
+    //spy对象的方法也可以指定特定的行为
+    Mockito.when(spyValidator.verifyPassword(anyString())).thenReturn(true);
+
+    //同样的，可以验证spy对象的方法调用情况
+    spyValidator.verifyPassword("xiaochuang_is_handsome");
+    Mockito.verify(spyValidator).verifyPassword("xiaochuang_is_handsome"); //pass
+}
+```
+
+总之，spy和mock对象唯一的区别就是默认行为不一样：spy对象的方法默认调用真实的逻辑，mock对象的方法默认什么都不做，或直接返回默认值。
 
 Mockito的使用参考：[KM10009 - Mockito Using](/reference/basic-knowledge/15testing/151mockito/km10009-mock-using.md)
 
