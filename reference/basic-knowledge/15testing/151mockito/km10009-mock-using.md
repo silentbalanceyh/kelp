@@ -43,5 +43,17 @@ when(mockedList.get(anyInt())).thenReturn("element");
 System.out.println(mockedList.get(999));
 ```
 
+## 模拟方法调用次数
+
+```java
+// 调用add一次
+mockedList.add("now");
+// 下面两个写法验证效果一样，均验证add方法是否被调用了一次
+verify(mockedList).add("once");
+verify(mockedList, times(1)).add("once");
+```
+
+
+
 
 
