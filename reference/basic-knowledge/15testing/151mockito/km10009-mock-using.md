@@ -66,7 +66,22 @@ verify(mockedList).add("one");
 verify(mockedList).clear();
 ```
 
+## 模拟方法调用（Stubbing）
 
+```java
+// 您可以模拟对象的创建，不仅仅是接口模式
+LinkedList mockedList = mock(LinkedList.class)
+// 桩（Stubbing）
+when(mockedList.get(0)).thenReturn("first");
+when(mockedList.get(1)).thenThrow(new RuntimeException());
+// 下边会打印“first”
+System.out.println(mockedList.get(0));
+// 下边抛出运行时异常
+System.out.println(mockedList.get(1));
+// 下边打印“null"，因为get(999)没有被模拟
+System.out.println(mockedList.get(999));
+verify(mockedList).get(0);
+```
 
 
 
