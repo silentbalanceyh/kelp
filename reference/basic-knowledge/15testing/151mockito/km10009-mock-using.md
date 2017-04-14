@@ -11,11 +11,20 @@ System.out.println(mockedList.get(0));
 
 ## 模拟方法调用的返回值
 
-```
+```java
 // 模拟获取第一个元素时，返回字符串first，给特定的方法调用返回固定值在官方说法中称为stub。
 when(mockedList.get(0)).thenReturn("first");
 // 此时打印输出first
 System.out.println(mockedList.get(0));
+```
+
+## 模拟方法调用抛出异常
+
+```java
+// 模拟获取第二个元素时，抛出RuntimeException
+when(mockedList.get(1)).thenThrow(new RuntimeException());
+// 此时将会抛出RuntimeException
+System.out.println(mockedList.get(1));
 ```
 
 
