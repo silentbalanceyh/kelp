@@ -213,5 +213,13 @@ when(mock.someMethod(anyString())).thenAnswer(new Answer() {
 System.out.println(mock.someMethod("foo"));
 ```
 
+## Mock函数操作
+
+可通过`doThrow()，doAnswer()，doNothing()，doReturn()，doCallRealMethod()`自定义函数操作。
+
+## 暗中调用真实对象
+
+
+
 
 
