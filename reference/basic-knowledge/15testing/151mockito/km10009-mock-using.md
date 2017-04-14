@@ -83,7 +83,17 @@ System.out.println(mockedList.get(999));
 verify(mockedList).get(0);
 ```
 
+## 参数匹配
 
+```java
+// 使用内置anyInt()构造桩（Stubbing）进行参数匹配
+when(mockedList.get(anyInt())).thenReturn("element");
+// 使用自定义的匹配桩（根据自定义实现来校验isValid()）
+when(mockedList.contains(argThat(isValid()))).thenReturn("element");
+// 下边将会打印"element"
+System.out.println(mockedList.get(999));
+
+```
 
 
 
