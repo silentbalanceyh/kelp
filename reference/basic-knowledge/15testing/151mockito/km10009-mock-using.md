@@ -133,9 +133,32 @@ mockedList.clear();
 ## 校验方法调用顺序
 
 ```java
-// 单独Mock特殊调用顺序的一堆方法
+// A. 单独Mock特殊调用顺序的一堆方法
+List singleMock = mock(List.class);
+//    使用单个Mock
+singleMock.add("was added first");
+singleMock.add("was added second");
+//    创建一个inOrder验证这个Mock
+InOrder inOrder = inOrder(singleMock);
+//    下边的行为将会先调用"was added first"，其次调用"was added second"
+inOrder.verify(singleMock).add("was added first");
+inOrder.verify(singleMock).add("was added second");
 
+// B. 多个Mock按照t额定顺序执行
+List firstMock = mock(List.class);
+List secondMock = mock(List.class);
+//    使用Mock
+firstMock.add("was called first");
+secondMock.add("was called second");
+//    创建inOrder对象给任何需要验证顺序的Mock
+InOrder inOrder = inOrder(firstMock,secondMock);
+//    下边的顺序验证firstMock先调用，其次secondMock
+inOrder.verify(firstMock).add("was called first");
+inOrder.verify(secondMock).add("was called second");
+// A + B将来可直接合并到一起
 ```
+
+
 
 
 
