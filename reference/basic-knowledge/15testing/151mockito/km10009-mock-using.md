@@ -9,5 +9,14 @@ LinkedList mockedList = mock(LinkedList.class);
 System.out.println(mockedList.get(0));
 ```
 
+## 模拟方法调用的返回值
+
+```
+// 模拟获取第一个元素时，返回字符串first，给特定的方法调用返回固定值在官方说法中称为stub。
+when(mockedList.get(0)).thenReturn("first");
+// 此时打印输出first
+System.out.println(mockedList.get(0));
+```
+
 
 
