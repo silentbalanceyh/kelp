@@ -69,6 +69,7 @@
       * [KM10004 - JSR330](reference/basic-knowledge/143jersey/km10004-jsr330.md)
   * [1.5.Testing](reference/basic-knowledge/15testing.md)
     * [1.5.1.Mockito](reference/basic-knowledge/15testing/151mockito.md)
+      * [KM10008 - Junit & Mockito Basic](reference/basic-knowledge/15testing/151mockito/km10008-junit-and-mockito-basic.md)
     * [1.5.2.Jacoco](reference/basic-knowledge/15testing/152jacoco.md)
     * [1.5.3.Jasmine](reference/basic-knowledge/15testing/153jasmine.md)
     * [1.5.4.JUnit](reference/basic-knowledge/15testing/154junit.md)
