@@ -21,7 +21,7 @@
 
 ## Restful Api
 
-* [KTS10601 - Restful Api Introduction](/reference/3kts-works/kts10601-restful-api-introduction.md)（Restful API专用文档）
+* [KTS10601 - Restful Api Introduction](/reference/3kts-works/kts10601-restful-api-introduction.md)（Restful API基本介绍/测试）
 
 
 
