@@ -38,7 +38,9 @@ mockedList.clear();
 
 ```java
 // anyInt()匹配任何int参数，这意味着参数为任意值，其返回值均是element
-
+when(mockedList.get(anyInt())).thenReturn("element");
+// 此时打印的是element
+System.out.println(mockedList.get(999));
 ```
 
 
