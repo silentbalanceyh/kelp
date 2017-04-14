@@ -53,7 +53,11 @@ verify(mockedList).add("once");
 verify(mockedList, times(1)).add("once");
 ```
 
+## 校验行为
 
+```
+
+```
 
 
 
