@@ -92,8 +92,13 @@ when(mockedList.get(anyInt())).thenReturn("element");
 when(mockedList.contains(argThat(isValid()))).thenReturn("element");
 // 下边将会打印"element"
 System.out.println(mockedList.get(999));
-
+// 您同样可以验证参数匹配器
+verify(mockedList).get(anyInt());
+// 参数匹配器也可以使用Java 8的Lambdas
+verify(mockedList).add(someString -> someString.length() > 5);
 ```
+
+
 
 
 
