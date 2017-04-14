@@ -98,6 +98,8 @@ verify(mockedList).get(anyInt());
 verify(mockedList).add(someString -> someString.length() > 5);
 ```
 
+## 校验方法调用次数
+
 
 
 
