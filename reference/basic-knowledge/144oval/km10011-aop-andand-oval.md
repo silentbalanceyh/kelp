@@ -55,6 +55,9 @@
 ```
 验证约束的用法，使用：`net.sf.oval.Validator`中的方法`public validate(Object validatedObject)`
 
+
+```java
+
 	Validator validator = new Validator();
 	BusinessObject bo = new BusinessObject(); // name is null
 	// collect the constraint violations
@@ -64,11 +67,15 @@
 		LOG.severe("Object " + bo + " is invalid.");
 		throw new BussinessException(violations);
 	}
+```
+
+
 
 ### 3.2 定义一个类中的`getter`方法返回值约束
 针对`getter`方法，需要保证这个方法不会修改对象的状态，一般可使用`Annotation`——`@net.sf.oval.configuration.annotation.IsInvariant`
 类中的定义：
 
+```java
 	public class BusinessObject
 	{
 		private String name = null;
@@ -81,8 +88,10 @@
 		}
 		...
 	}
+```
 验证约束的使用代码：
 
+```java
 	Validator validator = new Validator();
 	BusinessObject bo = new BusinessObject("blabla");
 	// collect the constraint violations
@@ -92,9 +101,10 @@
 		LOG.severe("Object " + bo + " is invalid.");
 		throw new BussinessException(violations);
 	}
+```
 ### 3.3 使用表达式语法定制条件约束
 如果需要在约束的字段或者方法中使用代码逻辑，则需要使用`@net.sf.oval.constraint.Assert`采用表达式语法：
-
+```java
 	public class BusinessObject
 	{
 		@NotNull
@@ -105,6 +115,7 @@
 		@Assert(expr = "_value ==_this.deliveryAddress || _value == _this.invoiceAddress", lang = "groovy")
 		public String mailingAddress;
 	}
+```
 在检查这个约束的时候，__expr__属性中的表达式会被执行，如果返回__true__则约束满足，OVal中提供了两个特殊的变量：
 
 * __\_value__：用约束验证对应的值（字段值或`getter`的返回值）
