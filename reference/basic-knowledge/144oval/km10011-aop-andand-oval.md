@@ -182,6 +182,7 @@ OVal的机制是可支持定制的，使用`net.sf.oval.configuration.Configurer
 
 定义：
 
+```java
 	@Entity
 	public class MyEntity
 	{
@@ -193,6 +194,7 @@ OVal的机制是可支持定制的，使用`net.sf.oval.configuration.Configurer
 		@ManyToOne(optional = false)
 		public MyEntity parent;
 	}
+```
 上边没有使用OVal的Annotation，但OVal中的配置器可直接验证EJB3中的Annotation：
 
 	// configure OVal to interprete OVal constraint annotations as well as EJB3 JPA annotations
