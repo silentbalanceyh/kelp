@@ -31,7 +31,11 @@ _**NOTES**：默认的Spring Boot使用了Mockito 1.x，当然您也可以直接
 
 ## 3. 测试Spring Boot应用
 
+Spring Boot应用仅仅是一个Spring的`ApplicationContext`，所以并不需要在测试时做什么特殊处理，仅仅和使用普通Spring环境一致。若您默认使用`SpringApplication`来创建它，有一点需要关注的就是关于外部资源属性、日志、以及默认没有安装在Spring Boot的上下文环境中的功能。
 
+若您想要使用Spring Boot功能，它提供了`@SpringBootTest`注解，可用来替换标准的`spring-test`项目中`@ContextConfiguration`注解。这个注解会在测试`SpringApplication`时创建一个`ApplicationContext`上下文对象。
+
+您可设置`@SpringBootTest`中的`webEnvironment`属性来测试下边功能：
 
 
 
