@@ -25,6 +25,12 @@ _**NOTES**：默认的Spring Boot使用了Mockito 1.x，当然您也可以直接
 
 ## 2. 测试Spring应用
 
+依赖注入的一个很大的优势就是可以让您的代码变得更加容易测试，您可以使用`new`简单实例化一个对象，当然您也可以直接模拟一个真实依赖对象。通常除了“单元测试”，您还需要转移到“集成测试”中（可直接使用Spring中的`ApplicationContext`），这个功能可以在不需要部署您的应用情况下进行集成测试。Spring Framework中包含了专注于集成测试的模块，您可以直接定义一个`org.springframework:spring-test`的依赖、或者使用`spring-boot-starter-test`依赖项。
+
+若您没有使用`spring-test`的模块，则您需要阅读官方文档来处理。
+
+## 3. 测试Spring Boot应用
+
 
 
 
