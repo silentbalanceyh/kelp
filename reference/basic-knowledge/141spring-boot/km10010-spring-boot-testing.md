@@ -9,7 +9,7 @@ Spring Boot提供了一批Annotation注解帮助您测试应用，有两个模�
 
 大部分开发者仅仅需要使用`spring-boot-starter-test`项目，这个项目导入了上边两个项目：JUnit，AssertJ，Hamcrest等。
 
-## 1. 测试依赖
+## 1. 测试依赖库
 
 若您在测试范围（scope = test）中使用了`spring-boot-starter-test`，下边的库是已经提供的：
 
@@ -20,6 +20,12 @@ Spring Boot提供了一批Annotation注解帮助您测试应用，有两个模�
 * Mockito——一个Java模拟框架
 * JSONassert——针对JSON的断言库
 * JsonPath——支持XPath语法的JSON功能
+
+_**NOTES**：默认的Spring Boot使用了Mockito 1.x，当然您也可以直接使用2.x。_
+
+## 2. 测试Spring应用
+
+
 
 
 
