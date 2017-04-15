@@ -15,6 +15,11 @@ Spring Boot提供了一批Annotation注解帮助您测试应用，有两个模�
 
 * JUnit——标准Java应用单元测试框架
 * Spring Test & Spring Boot Test——和Spring Boot应用集成的测试功能包
-* 
+* AssertJ——一个Fluent验证框架
+* Hamcrest——用来匹配对象专用库
+* Mockito——一个Java模拟框架
+* JSONassert——针对JSON的断言库
+* JsonPath——支持XPath语法的JSON功能
+
 
 
