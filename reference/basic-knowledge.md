@@ -19,6 +19,7 @@
 * [KM10004 - JSR330](/reference/basic-knowledge/143jersey/km10004-jsr330.md)（JavaEE中的依赖注入规范）
 * [KM10006 - Spring Boot Data Source](/reference/basic-knowledge/141spring-boot/km10006-spring-boot-data-source.md) \( Spring Boot中配置SQL数据库连接池）
 * [KM10010 - Spring Boot Testing](/reference/basic-knowledge/141spring-boot/km10010-spring-boot-testing.md)（Spring Boot中的测试）
+* [KM10011 - AOP && OVal](/reference/basic-knowledge/144oval/km10011-aop-andand-oval.md)（AOP & OVal进行防御式编程）
 
 ## 5. Testing
 
