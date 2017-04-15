@@ -104,6 +104,7 @@
 ```
 ### 3.3 使用表达式语法定制条件约束
 如果需要在约束的字段或者方法中使用代码逻辑，则需要使用`@net.sf.oval.constraint.Assert`采用表达式语法：
+
 ```java
 	public class BusinessObject
 	{
@@ -135,38 +136,46 @@ __lang__属性表示使用的表达式种类，OVal支持的种类如下：
 ### 3.4 表达式中定义约束的激活条件
 表达式不仅仅可以定义约束，并且可以通过：__when__属性，这种情况下可以设置在某种条件下启用该约束
 
+```java
 	public class BusinessObject
 	{
 		private String fieldA;
 		@NotNull(when = "groovy:_this.fieldA != null")
 		private String fieldB;
 	}
+```
 ### 3.5 定义嵌套属性约束
 除了__when__属性以外，还可以使用__target__属性设置对象中的嵌套属性的约束，例如：
 
+```java
 	public class BusinessObject
 	{
 		@AssertValid
 		@NotNull(target="homeAddress.street")
 		private Customer customer;
 	}
+```
 上边的代码表示约束的对象是：`customer.homeAddress.street`，如果ClassPath中包含了JXPath的库，还可以使用XPath的语法来指定嵌套属性：
 
+```java
 	public class BusinessObject
 	{
 		@AssertValid
 		@NotNull(target="jxpath:addresses[0]/street")
 		private Customer customer;
 	}
+```
 ### 3.6 递归验证
 看看下边的代码：
 
+```java
 	public class BusinessObject
 	{
 		@NotNull
 		@AssertValid
 		private Address address;
 	}
+```
 上边的`@AssertValid`表示引用的`Address`类型的对象中的所有的验证约束都必须满足才行。
 ### 3.7 EJB3的验证
 OVal的机制是可支持定制的，使用`net.sf.oval.configuration.Configurer`接口可基于XML Schemas写自己的约束逻辑。官方实现了一个基于EJB3 JPA的配置器：`net.sf.oval.configuration.annotation.JPAAnnotationsConfigurer`，里边包含了下边的约束映射：
@@ -197,6 +206,7 @@ OVal的机制是可支持定制的，使用`net.sf.oval.configuration.Configurer
 ```
 上边没有使用OVal的Annotation，但OVal中的配置器可直接验证EJB3中的Annotation：
 
+```java
 	// configure OVal to interprete OVal constraint annotations as well as EJB3 JPA annotations
 	Validator validator = new Validator(new AnnotationsConfigurer(), new JPAAnnotationsConfigurer());
 	MyEntity entity = new MyEntity();
@@ -205,7 +215,7 @@ OVal的机制是可支持定制的，使用`net.sf.oval.configuration.Configurer
 	entity.parent = null; // violation - cannot be null
 	// collect the constraint violations
 	List<ConstraintViolation> violations = validator.validate(entity);
-
+```
 ### 3.8 Interpreting Bean Validation（JSR303）依赖注入
 JSR303的实现方式和JPA的实现方式一致:
 
@@ -230,6 +240,7 @@ JSR303的实现方式和JPA的实现方式一致:
 
 定义：
 
+```java
 	public class MyEntity
 	{
 		@javax.validation.constraints.NotNull
@@ -240,8 +251,10 @@ JSR303的实现方式和JPA的实现方式一致:
 		@javax.validation.constraints.NotNull
 		public MyEntity parent;
 	}
+```
 使用流程：
 
+```java
 	// configure OVal to interprete OVal constraint annotations as well as built-in JSR303 annotations
 	Validator validator = new Validator(new AnnotationsConfigurer(), new BeanValidationAnnotationsConfigurer());
 	MyEntity entity = new MyEntity();
@@ -250,6 +263,7 @@ JSR303的实现方式和JPA的实现方式一致:
 	entity.parent = null; // violation - cannot be null
 	// collect the constraint violations
 	List<ConstraintViolation> violations = validator.validate(entity);
+```
 
 ## 4 使用OVal基于契约的编程方法
 如果结合AspectJ OVal则可以实现基于契约的编程：
@@ -264,21 +278,23 @@ JSR303的实现方式和JPA的实现方式一致:
 1. 点击项目右键：__Configure -> Convert To AspectJ Project__【依赖AJDT插件】;
 2. 将**net.sf.oval_x.x.jar**放到类路径中；
 3. 创建一个新的Aspect：**File -> New -> Aspect**，这个切面类从__net.sf.oval.guard.GuardAspect__中继承过来，如：
-
+	```java
 		public aspect DefaultGuardAspect extends GuardAspect{
 			public DefaultGuardAspect(){
 				super();
 			}
 		}
+	```
 4. 在创建了上边的类过后，就可以使用自定义约束了，直接在Class中使用`@net.sf.oval.guard.Guarded`的标记都会被识别并且被Aspect的切面代码执行。
 
-<font style="color:red">这种方式主要用于自定义的约束逻辑放到AOP切面的时候使用，实际上直接使用`@net.sf.oval.guard.Guarded`也可以完成，但实现的都是默认逻辑！</font>
+这种方式主要用于自定义的约束逻辑放到AOP切面的时候使用，实际上直接使用`@net.sf.oval.guard.Guarded`也可以完成，但实现的都是默认逻辑！
 
 ### 4.1 前置条件【Preconditions】
 
 #### （1）构造函数约束
 构造函数的参数会在被调用的时候自动检查，如果不满足约束条件的话会产生异常：`net.sf.oval.exception.ConstraintsViolatedException`；
 
+```java
 	@Guarded
 	public class BusinessObject
 	{
@@ -288,13 +304,17 @@ JSR303的实现方式和JPA的实现方式一致:
 		}
 		...
 	}
+```
 下边的代码段会抛出异常：
 
+```java
 	// throws a ConstraintsViolatedException because parameter name is null
 	BusinessObject bo = new  BusinessObject(null);
+```
 #### （2）方法参数约束
 方法参数抛出的异常和构造函数的异常一样：`net.sf.oval.exception.ConstraintsViolatedException`；
 
+```java
 	@Guarded
 	public class BusinessObject
 	{
@@ -304,10 +324,13 @@ JSR303的实现方式和JPA的实现方式一致:
 		}
 		...
 	}
+```
 下边的代码会抛出异常：
 
+```java
 	BusinessObject bo = new BusinessObject();
 	bo.setName(null); // throws a ConstraintsViolatedException because parameter name is null
+```
 #### （3）统一约束
 在一个类中，若多个属性的约束性质一致的话，可将这种字段约束性质引用到对应的`setter`方法中统一约束规则，使用Annotation：`@net.sf.oval.constraint.AssertFieldConstraints`。
 
@@ -316,6 +339,7 @@ JSR303的实现方式和JPA的实现方式一致:
 
 使用：
 
+```java
 	@Guarded
 	public class BusinessObject
 	{
@@ -333,14 +357,17 @@ JSR303的实现方式和JPA的实现方式一致:
 		}
 		...
 	}
-
+```
 下边的代码会报错：
 
+```java
 	BusinessObject bo = new BusinessObject();
 	bo.setName(""); // throws a ConstraintsViolatedException because parameter is empty
 	bo.setAlternativeName(null); // throws a ConstraintsViolatedException because parameter is null
+```
 如果要在这个类中将所有的字段的`setter`方法都统一约束，可以使用`@Guarded`标记的`applyFieldConstraintsToSetters`设置成__true__，这种方式比较适合`setter`方法特别多的时候：
 
+```java
 	@Guarded(applyFieldConstraintsToSetters=true)
 	public class BusinessObject
 	{
@@ -354,6 +381,7 @@ JSR303的实现方式和JPA的实现方式一致:
 		}
 		...
 	}
+```
 这个标记包含了两个选项：
 
 * __applyFieldConstraintsToSetters__：针对所有的`setter`方法参数；
@@ -363,6 +391,7 @@ JSR303的实现方式和JPA的实现方式一致:
 
 和上边的的用法一样，使用表达式主要使用：`@net.sf.constraint.Assert`标记在字段上，同样可以使用`@net.sf.constraint.Pre`用于方法的前置条件：
 
+```java
 	@Guarded
 	public class Transaction
 	{
@@ -374,6 +403,7 @@ JSR303的实现方式和JPA的实现方式一致:
 			amount = amount.add(amount2add);
 		}
 	}
+```
 在方法调用之前：__expr__属性中的表达式会被执行，返回__true__的情况下约束满足则执行该方法：
 
 * __\_args[]__：表示方法的参数表
@@ -393,7 +423,9 @@ __lang__属性表示使用的表达式种类，OVal支持的种类如下：
 #### （5）禁用前置条件
 OVal中提供了一种方法禁用前置条件检查：`Guard.setPreConditionsEnabled(boolean)`
 
+```java
 	MyAspect.aspectOf().getGuard().setPreConditionsEnabled(false);
+```
 
 ### 4.2 后置条件【Postconditions】
 
@@ -402,6 +434,7 @@ OVal中提供了一种方法禁用前置条件检查：`Guard.setPreConditionsEn
 <font style="color:red">*：注意这个约束虽然会抛出异常，但如果方法改动了数据，那么所有的改变都需要手动回滚。</font>
 如果一个带参数的返回值不为`void`的方法标记了`@IsInvariant`标记，则它会在`Validator.validate(Object)`的被验证。
 
+```java
 	@Guarded
 	public class BusinessObject
 	{
@@ -421,8 +454,10 @@ OVal中提供了一种方法禁用前置条件检查：`Guard.setPreConditionsEn
 		}
 		...
 	}
+```
 使用的时候用下边的方式：
 
+```java
 	BusinessObject bo = new BusinessObject();
 	// throws a ConstraintsViolatedException because field name is null
 	bo.getName();
@@ -433,10 +468,11 @@ OVal中提供了一种方法禁用前置条件检查：`Guard.setPreConditionsEn
 	// returns one ConstraintViolation because the getter method getName() is 
 	// declared as invariant and returns an invalid value (null)
 	List<ConstraintViolation> violations = validator.validate(bo);
-
+```
 #### （2）后置条件使用表达式
 后置条件使用表达式和前边的`@net.sf.guard.Pre`差不多，使用的Annotation是：`@net.sf.guard.Post`；
 
+```java
 	@Guarded
 	public class Transaction
 	{
@@ -448,7 +484,7 @@ OVal中提供了一种方法禁用前置条件检查：`Guard.setPreConditionsEn
 			amount = amount.add(amount2add);
 		}
 	}
-
+```
 在方法调用之后：__expr__属性中的表达式会被执行，返回__true__的情况下约束满足则执行该方法：
 
 * __\_args[]__：表示方法的参数表
@@ -470,7 +506,9 @@ __lang__属性表示使用的表达式种类，OVal支持的种类如下：
 #### （3）禁用后置表达式
 OVal中提供了一种方法禁用后置条件检查：`Guard.setPostConditionsEnabled(boolean)`
 
+```java
 	MyAspect.aspectOf().getGuard().setPostConditionsEnabled(false);
+```
 
 ### 4.3 不变量【Invariants】
 
@@ -482,13 +520,16 @@ OVal中提供了一种方法禁用后置条件检查：`Guard.setPostConditionsE
 
 示例代码如下：
 
+```java
 	MyAspect.aspectOf().getGuard().setInvariantsEnabled(false);
+```
 
 #### （2）强制执行方法调用前检查
 如果禁用了Global的自动检查过后，则可以使用`@net.sf.oval.guard.PreValidateThis`来进行方法前检查。
 
 定义代码：
 
+```java
 	@Guarded
 	public class BusinessObject
 	{
@@ -501,17 +542,21 @@ OVal中提供了一种方法禁用后置条件检查：`Guard.setPostConditionsE
 		}
 		...
 	}
+```
 
 使用例子：
 
+```java
 	// create a new business object and leaving the field name null 
 	BusinessObject bo = new  BusinessObject();
 	// the save() method will throw a ConstraintsViolatedException because field name is null
 	bo.save();
+```
 
 #### （3）强制执行构造函数执行后检查
 执行构造方法后检查使用：`@net.sf.oval.guard.PostValidateThis`，如果构造函数调用不成功或者对象状态不对则会抛出对应的异常。示例代码：
 
+```java
 	@Guarded
 	public class BusinessObject
 	{
@@ -525,15 +570,19 @@ OVal中提供了一种方法禁用后置条件检查：`Guard.setPostConditionsE
 		}
 		...
 	}
+```
 下边的代码会抛出期望异常：
 
+```java
 	// throws a ConstraintsViolatedException because the name field is null 
 	BusinessObject bo = new  BusinessObject();
+```
 *：因为构造函数并没有给属性`name`赋值，`name`的约束又不能为空，所以在构造函数调用完成过后因为name的值为null会抛出异常。
 
 #### （4）强制执行方法执行后检查
 方法执行后检查也是使用：`@net.sf.oval.guard.PostValidateThis`，用法和构造函数差不多：
 
+```java
 	@Guarded
 	public class BusinessObject
 	{
@@ -546,14 +595,18 @@ OVal中提供了一种方法禁用后置条件检查：`Guard.setPostConditionsE
 		}
 		...
 	}
+```
 下边的代码会抛出期望异常：
 
+```java
 	BusinessObject bo = new BusinessObject();
 	bo.appendToName("123456"); // throws a ConstraintsViolatedException because field name is now too long
+```
 ### 4.4 使用Probe模式进行简单的用户输入验证
 这种用法属于特殊用法，当用户从UI输入数据的时候如果和BusinessObject的`setter`方法的约束冲突则会抛出异常，这些对应的约束信息会被：`ConstraintsViolatedListener`，这个类会检查UI中对应的BusinessObject中的所有约束。
 定义中的用法：
 
+```java
 	@Guarded
 	public class Person
 	{
@@ -577,8 +630,10 @@ OVal中提供了一种方法禁用后置条件检查：`Guard.setPostConditionsE
 		}
 		...
 	}
+```
 使用方法如下：
 
+```java
 	/* *****************************************************
 	 * somewhere in the UI layer
 	 * *****************************************************/
@@ -615,9 +670,11 @@ OVal中提供了一种方法禁用后置条件检查：`Guard.setPostConditionsE
 			return person;
 		}
 	}
+```
 ### 4.5 转换异常`ConstraintsViolatedExceptions`
 如果不想使用OVal中定义的`ConstraintsViolatedExceptions`异常信息，则可使用JRE的标准异常替代：`IllegalArgumentException or IllegalStateException`，OVal允许注册异常转换器，例如下边的代码将异常进行了转换：
 
+```java
 	public aspect MyAspect extends GuardAspect
 	{
 		public MyAspect()
@@ -627,12 +684,12 @@ OVal中提供了一种方法禁用后置条件检查：`Guard.setPostConditionsE
 			getGuard().setExceptionTranslator(new net.sf.oval.exception.ExceptionTranslatorJDKExceptionsImpl());
 		}
 	}
-
+```
 ## 5 定义自定义约束
 OVal允许根据不同的需求开发自己的自定义约束，开发流程如下：
 
 1. 创建一个约束类，这个约束类必须实现接口：`net.sf.oval.AnnotationCheck`或从`net.sf.oval.AbstractAnnotationCheck`继承。
-
+	```java
 		public class UpperCaseCheck extends AbstractAnnotationCheck<UpperCase>
 		{
 			public boolean isSatisfied(Object validatedObject, Object valueToValidate, OValContext context, Validator validator)
@@ -642,8 +699,10 @@ OVal允许根据不同的需求开发自己的自定义约束，开发流程如�
 				return val.equals(val.toUpperCase());
 			}
 		}
+	```
 2. 创建一个约束用的Annotation，并且使用Annotation`@net.sf.oval.configuration.annotation.Constraint`进行标注，并且将上边定义的类设置到`check`属性中：
 
+	```java
 		Retention(RetentionPolicy.RUNTIME)
 		@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
 		@net.sf.oval.configuration.annotation.Constraint(checkWith = UpperCaseCheck.class)
@@ -656,19 +715,22 @@ OVal允许根据不同的需求开发自己的自定义约束，开发流程如�
 			*/
 			String message() default "must be upper case";
 		}
+	```
 3. 在代码中使用自定义的Annotation进行标记。
 
+	```java
 		public class BusinessObject 
 		{
 			@UpperCase 
 			private String userId;
 			...
 		}
-
+	```
 如果要针对自定义的Annotation实现国际化操作，则需要安装下边的步骤完成：
 
 1. 为约束使用的Annotation设置一个默认的消息Key值，这个Key必须是Unique的：
 
+	```java
 		@Retention(RetentionPolicy.RUNTIME)
 		@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
 		@net.sf.oval.configuration.annotation.Constraint(checkWith = UpperCaseCheck.class)
@@ -680,6 +742,7 @@ OVal允许根据不同的需求开发自己的自定义约束，开发流程如�
 			**/
 			String message() default "UpperCase.violated";
 		}
+	```
 2. 创建自定义的Message Bundles（每一种语言创建一个），设置下边的代码段：
 
 		UpperCase.violated={context} must be upper case
@@ -688,6 +751,7 @@ OVal允许根据不同的需求开发自己的自定义约束，开发流程如�
 
 	如果需要定义自己的值，则可以重写方法：`createMessageVariables`，比如添加：__{max}, {min}, {size}__等：
 
+	```java
 		@Override
 		public Map<String, String> createMessageVariables()
 		{
@@ -696,22 +760,28 @@ OVal允许根据不同的需求开发自己的自定义约束，开发流程如�
 			messageVariables.put("min", Integer.toString(min));
 			return messageVariables;
 		}
+	```
 	*：这个地方的方法`createMessageVariables`只会执行一次，OVal会将这个值缓存起来，如果需要销毁缓存中的变量并且重建这个值，可调用方法`requireMessageVariablesRecreation`：比如下边代码：
 
+	```java
 		public void setMax(final int max)
 		{
 			this.max = max;
 			requireMessageVariablesRecreation();
 		}
+	```
 3. 最后将不同语言的Bundle注册到OVal中：
 
+	```java
 		ResourceBundleMessageResolver resolver = (ResourceBundleMessageResolver) Validator.getMessageResolver();
 		resolver.addMessageBundle(ResourceBundle.getBundle("mypackage/CustomMessages"));
+	```
 
 ## 6 针对特殊约束的复杂表达式定义
 
 ### 6.1 使用@ValidateWithMethod
 
+```java
 	private static class TestEntity
 	{
 		@Min(1960)
@@ -735,11 +805,12 @@ OVal允许根据不同的需求开发自己的自定义约束，开发流程如�
 			return true;
 		}
 	}
-
+```
 ### 6.2 @CheckWith
 
 使用的Annotation：`@net.sf.oval.constraint.CheckWith`
 
+```java
 	private static class DayEntity
 	{
 		@Min(1960)
@@ -764,4 +835,4 @@ OVal允许根据不同的需求开发自己的自定义约束，开发流程如�
 			}
 		}
 	}
-
+```
