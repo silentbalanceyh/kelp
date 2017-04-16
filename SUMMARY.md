@@ -79,7 +79,7 @@
     * [1.5.3.Jasmine](reference/basic-knowledge/15testing/153jasmine.md)
     * [1.5.4.JUnit](reference/basic-knowledge/15testing/154junit.md)
   * [1.6.Building](reference/basic-knowledge/16building.md)
-    * 1.6.1.Webpack
+    * [1.6.1.Webpack 2.2](reference/basic-knowledge/161webpack.md)
     * [1.6.2.Browserify](reference/basic-knowledge/162browserify.md)
     * [1.6.3.Grunt](reference/basic-knowledge/163grunt.md)
     * [1.6.4.Gulp](reference/basic-knowledge/164gulp.md)
@@ -92,6 +92,7 @@
   * [3.1.Training](reference/3kts-works/31training.md)
     * [KTS10101 - Spring Boot with Docker](reference/3kts-works/31training/kts10002-spring-boot-with-docker.md)
     * [KTS10102 - Docker PgSQL Init](reference/3kts-works/31training/kts10102-docker-pgsql-init.md)
+    * [KTS10103 - Starter Kit Analyzing \( Upgrading \)](reference/3kts-works/31training/kts10103-starter-kit-analyzing-upgrading.md)
   * [3.2.TS UI Component](reference/3kts-works/32ts-ui-component.md)
     * [KTS10001 - Get Start](reference/3kts-works/32ts-ui-component/kts10001-get-start.md)
     * [KTS10002 - Design Patterns](reference/3kts-works/32ts-ui-component/kts10002-design-principles.md)
