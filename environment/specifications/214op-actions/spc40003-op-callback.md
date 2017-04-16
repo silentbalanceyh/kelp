@@ -27,5 +27,5 @@ OP的基础配置主要配在表`ui.op`中配置，配置在`callback`节点中�
 
 ## 2.EXECUTE节点说明
 
-EXECUTE节点配置的数据为Array类型，
+EXECUTE节点配置的数据为Array类型，每一个元素都是`callback`节点中的事件类型，且包含了当前事件的配置信息。
 
