@@ -6,16 +6,16 @@ OP的基础配置主要配在表`ui.op`中配置，配置在`callback`节点中�
 
 ```json
 "callback":{
-	"DIALOG":{
-		"success":"酒店信息更新成功，系统将重新加载酒店信息！"
-	},
-	"CACHE":{
-		"key":{
-			"api":"/htl/hotels/q/emp/{user.employeeId}",
-			"method":"GET"
-		}
-	},
-	"EXECUTE":["DIALOG","CACHE","FORMRELOAD"]
+    "DIALOG":{
+        "success":"酒店信息更新成功，系统将重新加载酒店信息！"
+    },
+    "CACHE":{
+        "key":{
+            "api":"/htl/hotels/q/emp/{user.employeeId}",
+            "method":"GET"
+        }
+    },
+    "EXECUTE":["DIALOG","CACHE","FORMRELOAD"]
 },
 ...
 ```
@@ -27,7 +27,5 @@ OP的基础配置主要配在表`ui.op`中配置，配置在`callback`节点中�
 
 ## 2.EXECUTE节点说明
 
-
-
-
+EXECUTE节点配置的数据为Array类型，
 
