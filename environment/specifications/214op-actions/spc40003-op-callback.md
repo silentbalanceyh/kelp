@@ -29,3 +29,18 @@ OP的基础配置主要配在表`ui.op`中配置，配置在`callback`节点中�
 
 EXECUTE节点配置的数据为Array类型，每一个元素都是`callback`节点中的事件类型，且包含了当前事件的配置信息。
 
+## 3.事件类型说明
+
+事件类型在脚本：`src/seed/op/Op.Callback.js`中开发，对应的事件类型包含下列几种：
+
+* LOCATE：重定向到另外一个新页面；
+* DIALOG：弹出对话框，对话框中可传入参数
+* TAB：处理Tab事件——关闭、移动某个Tab页；
+* RELOAD：重新加载某个列表；
+* HIDDENMASK：隐藏Mask
+* CACHE：清空缓存
+* PAGELOAD：页面重新加载，调用`window.location.reload()`
+* FORMRESET：表单重置并根据配置执行加载
+
+
+
