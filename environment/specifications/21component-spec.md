@@ -41,6 +41,7 @@
 
 * [SPC40001 - 配置添加Field为List的按钮](/environment/specifications/214op-actions/spc40001-list-button.md)
 * [SPC40002 - DataList中编辑/删除按钮专用配置](/environment/specifications/214op-actions/spc40002-linkbar.md)
+* [SPC40003 - Op Callback](/environment/specifications/214op-actions/spc40003-op-callback.md)（关于OP回调的配置）
 * [UCA40001 - List字段提交弹出验证](/environment/specifications/214op-actions/uca40001-list-validation.md)
 
 ### 1.5. Validation Rules
