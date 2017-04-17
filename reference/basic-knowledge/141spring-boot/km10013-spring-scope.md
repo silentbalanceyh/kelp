@@ -37,7 +37,7 @@ XML的配置文件如下：
 
 下边是prototype的XML配置片段：
 
-```
+```xml
 <bean id="accountService" class="com.foo.DefaultAccountService" scope="prototype"/>
 ```
 
