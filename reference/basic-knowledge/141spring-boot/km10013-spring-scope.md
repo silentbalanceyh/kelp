@@ -22,5 +22,14 @@ Spring中的singleton和GoF中的singleton模式有一定的区别，GoF的单�
 
 XML的配置文件如下：
 
+```xml
+<bean id="accountService" class="com.foo.DefaultAccountService"/>
+
+<!-- the following is equivalent, though redundant (singleton scope is the default) -->
+<bean id="accountService" class="com.foo.DefaultAccountService" scope="singleton"/>
+```
+
+## 2. 
+
 
 
