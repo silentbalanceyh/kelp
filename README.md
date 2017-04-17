@@ -43,6 +43,7 @@
 |  | EXP | Exception List | 异常文档专用集合 |
 |  | KTS | Tradeshift KM | 公司专用文档集 |
 |  | VTX | Vert.x | Vert.X社区工作专用文档 |
+|  | TPL | Third Part Library | 第三方库文档 |
 | Training | KT | Knowledge Transfer | 培训专用文档 |
 | History | HIS | History | 历史文档 |
 | Projects | HTL | Hotel System | HTL系统专用文档 |
