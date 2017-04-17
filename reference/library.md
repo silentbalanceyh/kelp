@@ -6,5 +6,9 @@
 
 ## 2. Library Version
 
+| Library | Version | Links |
+| :--- | :--- | :--- |
+| redux-orm |  | [Reference](https://github.com/tommikaikkonen/redux-orm/blob/master/README.md) |
+
 
 
