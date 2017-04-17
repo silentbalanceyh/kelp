@@ -4,5 +4,5 @@
 
 ## Tradeshift的基础
 
-Tradeshift Apps支持在公司网络、个人用户之间沟通以及交换文档信息，
+Tradeshift Apps支持在公司网络、个人用户之间沟通以及交换文档信息。账号（公司或用户）、网络、文档都属于Tradeshift App Platform的基础【Account、Network、Document】。
 
