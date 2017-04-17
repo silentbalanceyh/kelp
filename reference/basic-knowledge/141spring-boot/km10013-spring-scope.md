@@ -18,7 +18,9 @@ _**NOTES**_**：**在Spring 3.0中，还有一种域是线程级（Thread Scope�
 
 ## 1. Singleton
 
+Spring中的singleton和GoF中的singleton模式有一定的区别，GoF的单件模式是通过硬编码方式限定了这个对象实例的范围，它是类加载器级别的（每一个类加载器中只能创建这个类的一个对象）；Spring中的单件模式更好地描述了一个容器一个Bean，也就是说若您在单个Spring容器中定义了一个特殊类的单例，这个Spring容器仅仅会创建指定类的一个实例。——singleton是Spring容器中的默认范围。
 
+XML的配置文件如下：
 
 
 
