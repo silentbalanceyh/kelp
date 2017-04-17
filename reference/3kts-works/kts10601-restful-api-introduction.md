@@ -6,7 +6,11 @@
 
 Tradeshift Apps支持在公司网络、个人用户之间沟通以及交换文档信息。账号（公司或用户）、网络、文档都属于Tradeshift App Platform的基础【Account、Network、Document】。
 
-* **Account/Company**：
+* **Account/Company**：【账号／公司】账号描述了一个可以和其他公司交换业务文档的公司，账号同样也称为公司或者公司账号，它不同于单独的用户，一个账号可通过其他账户信息或分支机构来描述、也可以有多个用户。
+  * **Branches**：Tradeshift支持一个二级架构的账号（它可以包含子账号），当账号跟一些主账号（Master-Account）关联时，这些链接的账号称为分支。
+  * **Master Branch/Master Account**：一个管理员账号可用来组织同属于一个组织下的子账号信息，ABC Global Enterprise主分支。只要它不是另一个账户的子分支，技术上任何一个账户都可以是主分支。
+  * **Child Branch/Child Account**：若一个账号属于主分支，如：ABC Global Enterprise USA Division子分支。只要它不是另一个账户的子分支，技术上任何一个账号都可以是子分支。
+  * **Account Info**：
 
 
 
