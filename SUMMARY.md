@@ -114,7 +114,8 @@
   * redux-act 1.1.1
   * [redux-form 6.5.0](reference/library/redux-form-650.md)
   * redux-observable 0.14.1
-  * redux-orm 0.9.0-rc.3
+  * [redux-orm 0.9.0-rc.3](reference/library/redux-orm-090-rc3.md)
+    * [TP10000 - redux-orm](reference/library/redux-orm-090-rc3/tp10000-redux-orm.md)
   * redux-orm-proptypes 0.1.0
   * rxjs 5.2.0
 * [5. Exception List](reference/exception-list.md)
