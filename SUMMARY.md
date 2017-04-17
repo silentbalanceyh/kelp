@@ -106,7 +106,7 @@
     * [KTS10601 - Restful Api Introduction](reference/3kts-works/kts10601-restful-api-introduction.md)
 * [4. Library](reference/library.md)
   * react
-  * react-dom 15.4.2
+  * react-dom
   * react-redux 5.0.3
   * react-router 3.0.2
   * react-router-redux 4.0.8
