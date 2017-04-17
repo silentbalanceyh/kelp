@@ -31,7 +31,15 @@ XML的配置文件如下：
 
 ## 2. Prototype
 
+非单件模式，每次收到请求时都创建一个新的Bean，这个Bean可通过另外的一个Bean的`getBean()`方法在容器中获取，根据Spring最初的设计，所有带状态【Stateful】的对象使用prototype、而所有无状态【Stateless】的对象使用singleton。
 
+&gt;
+
+下边是prototype的XML配置片段：
+
+```
+<bean id="accountService" class="com.foo.DefaultAccountService" scope="prototype"/>
+```
 
 
 
