@@ -41,5 +41,9 @@ XML的配置文件如下：
 <bean id="accountService" class="com.foo.DefaultAccountService" scope="prototype"/>
 ```
 
+和其他范围的Bean对比，Spring本身并不管理Prototype的完整生命周期：容器实例化、配置一起其他方式原型对象，然后将其交给客户端，然后再不会有和当前prototype的Bean相关的记录。因此，尽管在所有对象上调用初始化生命周期回调方法，无论其范围如何，若使用了prototype时，配置的销毁生命周期回调将不会被调用。客户端代码必须清理prototype类型的对象并释放Bean所有的昂贵资源。若要使Spring容器释放prototype的Bean占用的资源，则尝试使用自定义的Post-Processor，这个可清除掉Bean的引用。
+
+
+
 
 
