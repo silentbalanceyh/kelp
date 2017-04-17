@@ -29,7 +29,9 @@ XML的配置文件如下：
 <bean id="accountService" class="com.foo.DefaultAccountService" scope="singleton"/>
 ```
 
-## 2. 
+## 2. Prototype
+
+
 
 
 
