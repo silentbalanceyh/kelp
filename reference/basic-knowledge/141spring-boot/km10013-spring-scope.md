@@ -14,5 +14,7 @@ Spring中的Scope是一个很关键的概念，简单说就是对象在Spring容
 | application | 可应用于整个ServletContext中的范围。 |
 | websocket | 可应用于WebSocket中范围内。 |
 
-_**NOTES**_**：**在Spring 3.0中，还有一种域是线程级（Thread Scope），但不是默认注册的，可查看SimpleThreadScoep的文档。若要创建自定义的Scope域，则可参考：
+_**NOTES**_**：**在Spring 3.0中，还有一种域是线程级（Thread Scope），但不是默认注册的，可查看SimpleThreadScoep的文档。若要创建自定义的Scope域，则可参考：[Custom Scope](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-scopes-custom-using)。
+
+
 
