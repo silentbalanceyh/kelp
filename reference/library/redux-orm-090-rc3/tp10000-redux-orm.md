@@ -1,4 +1,4 @@
-# TP10001 - （redux-orm）官方基础教程
+# TP10001 - （redux-orm）官方基础
 
 ## Installation
 
