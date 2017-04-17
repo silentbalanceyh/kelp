@@ -16,6 +16,7 @@
 | redux | [Reference](https://github.com/reactjs/redux) |
 | redux-form | [Reference](https://github.com/erikras/redux-form) |
 | redux-observable | [Reference](https://redux-observable.js.org/) |
+| rxjs | [Reference](https://github.com/ReactiveX/RxJS) |
 
 ## 3. Version
 
@@ -27,6 +28,7 @@
 * redux——[![](https://camo.githubusercontent.com/39acf6ce17ab483bca3f57a1273d47c687c01bf7/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f72656475782e7376673f7374796c653d666c61742d737175617265 "npm version")](https://www.npmjs.com/package/redux)
 * redux-form——[![](https://camo.githubusercontent.com/84fd4bc81e2f61602fc2acc83a6f9d33e91c524b/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f72656475782d666f726d2e7376673f7374796c653d666c6174 "NPM Version")](https://www.npmjs.com/package/redux-form)
 * redux-observable——[![](https://img.shields.io/npm/v/redux-observable.svg "npm version")](https://www.npmjs.com/package/redux-observable)
+* rxjs——[![](https://camo.githubusercontent.com/c82c57347a9ee27d18a534ea1d01475d85374a0c/68747470733a2f2f62616467652e667572792e696f2f6a732f25343072656163746976657825324672786a732e737667 "npm version")](http://badge.fury.io/js/%40reactivex%2Frxjs)
 
 
 
