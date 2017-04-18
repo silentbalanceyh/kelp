@@ -315,5 +315,18 @@ sess.state == dbState
 // true
 ```
 
+然后可执行更新：
+
+```javascript
+const book = sess.Book.withId(1)
+
+book.name // 'Refactoring'
+book.name = 'Clean Code'
+book.name // 'Clean Code'
+
+sess.state === dbState
+// false.
+```
+
 
 
