@@ -252,3 +252,44 @@ const authorSelector = schema.createSelector(session => {
 
 因为选择器内存化了（被记忆了），您可以在React使用纯渲染来获得性能。
 
+```javascript
+// components.js
+import PureComponent from 'react-pure-render/component';
+import { authorSelector } from './selectors';
+import { connect } from 'react-redux';
+
+class App extends PureComponent {
+    render() {
+        const authors = this.props.authors.map(author => {
+            return (
+                <li key={author.id}>
+                    {author.name} has written {author.books.join(', ')}
+                </li>
+            );
+        });
+
+        return (
+            <ul>
+                {authors}
+            </ul>
+        );
+    }
+}
+
+function mapStateToProps(state) {
+    return {
+        authors: authorSelector(state.orm),
+    };
+}
+
+export default connect(mapStateToProps)(App);
+```
+
+## 3.理解redux-orm
+
+### ORM？
+
+
+
+
+
