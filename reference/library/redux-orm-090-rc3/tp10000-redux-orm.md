@@ -328,5 +328,55 @@ sess.state === dbState
 // false.
 ```
 
+更新执行后，因为会话并不会修改原始状态，他是直接封装`sess.state`然后创建一个新状态，而更新原始状态可使用：
+
+```javascript
+// Save this reference so we can compare.
+const updatedState = sess.state;
+
+book.name = 'Patterns of Enterprise Application Architecture'
+
+sess.state === updatedState
+// true. If possible, future updates are applied with mutations. If you want
+// to avoid making mutations to a session state, take the session state
+// and start a new session with that state.
+```
+
+若有可能，会执行相关更新。这种情况，数据库已经被改过了，所以并不需要修改引用。若您想避免修改会话状态，则可以基于当前状态开启一个新状态。
+
+### Customizability
+
+和您继承`Model`一样，您可以针对`QuerySet`做同样的事（自定义Model实例的集合），您也可以自己实现整个数据库。
+
+### Caveats
+
+ORM抽象和手工编写的reducer相比，永远不会那么有效，并且增加了项目的构建总大小（最后检查过，最小化源文件，转换成gzip文件大小约8KB），若果您有非常简单的不包含关系的数据，则`redux-orm`就过度了，所以它大大提高了开发遍历。
+
+## 4. API
+
+### 4.1. ORM
+
+您可以查阅所有的ORM文档：[Document](http://tommikaikkonen.github.io/redux-orm/ORM.html)
+
+初始化
+
+```javascript
+const orm = new ORM();
+```
+
+实例化方法：
+
+* `register(...models: Array<Model>)`注册Model类到ORM实例；
+* `session(state: any)`开启一个带状态`state`的会话`Session`。
+
+### 4.2. Redux Integration
+
+* `createReducer(orm: ORM)`：返回一个可以插入Redux的reducer函数，这个reducer将会返回数据库的下一个状态，调用它之前您只需要注册您的Model类。
+* `createSelector(orm: ORM, [...inputSelectors], selectorFunc)`：返回一个可记忆的selector函数`selectorFunc`，它使用`session`作第一参数，接着使用任意`inputSelectors`作为第二参数。
+
+### 4.3. Model
+
+
+
 
 
