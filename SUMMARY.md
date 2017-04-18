@@ -104,6 +104,7 @@
     * [KTS10501 - 产品站点图](reference/3kts-works/kts10501-chan-pin-zhan-dian-tu.md)
   * 3.6.Restful - Api
     * [KTS10601 - Restful Api Introduction](reference/3kts-works/kts10601-restful-api-introduction.md)
+    * [KTS10602 - Build Tradeshift App](reference/3kts-works/kts10602-build-tradeshift-app.md)
 * [4. Library](reference/library.md)
   * react
   * react-dom
