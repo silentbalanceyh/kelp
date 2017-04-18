@@ -4,7 +4,29 @@
 
 ### Button
 
+```html
+<button data-ts="Button" class="ts-primary">
+	<span>Primary</span>
+</button>
+<button data-ts="Button" class="ts-secondary">
+	<span>Secondary</span>
+</button>
+<button data-ts="Button" class="ts-tertiary">
+	<span>Tertiary</span>
+</button>
+```
 
+```html
+<button data-ts="Button" class="ts-primary ts-micro">
+	<span>Primary</span>
+</button>
+<button data-ts="Button" class="ts-secondary ts-micro">
+	<span>Secondary</span>
+</button>
+<button data-ts="Button" class="ts-tertiary ts-micro">
+	<span>Tertiary</span>
+</button>
+```
 
 
 
