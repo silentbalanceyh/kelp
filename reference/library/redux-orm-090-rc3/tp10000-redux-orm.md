@@ -1,4 +1,4 @@
-# TP10001 - （redux-orm）官方基础
+# TP10001 - （redux-orm）官方文档
 
 ## Installation
 
@@ -251,6 +251,4 @@ const authorSelector = schema.createSelector(session => {
 使用`createSelector`创建的选择器可以用来作为使用了reselect的其他任何选择器的输入，它们也很适合使用`redux-thunk`：调用`getState()`获取整个状态，将ORM分支传递给选择器，并读取结果。一个很好的用例是将数据序列化为第三方API调用的自定义格式。
 
 因为选择器内存化了（被记忆了），您可以在React使用纯渲染来获得性能。
-
-
 
