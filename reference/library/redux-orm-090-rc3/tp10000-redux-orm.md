@@ -102,5 +102,155 @@ Book.hasId(1)
 const updatedDBState = session.state;
 ```
 
+## 2. Integration
+
+### 2.1. Redux Integration
+
+Redux-ORM和Redux的集成是很基础的，您只需要定义一个reducer用来实例化Redux中的状态对应的数据库会话即可，然后当您需要更新内容时，您可以直接返回下一个状态的会话。
+
+```javascript
+import { orm } from './models';
+function ormReducer(dbState, action) {
+    const sess = orm.session(dbState);
+
+    // Session-specific Models are available
+    // as properties on the Session instance.
+    const { Book } = sess;
+
+    switch (action.type) {
+    case 'CREATE_BOOK':
+        Book.create(action.payload);
+        break;
+    case 'UPDATE_BOOK':
+        Book.withId(action.payload.id).update(action.payload);
+        break;
+    case 'REMOVE_BOOK':
+        Book.withId(action.payload.id).delete();
+        break;
+    case 'ADD_AUTHOR_TO_BOOK':
+        Book.withId(action.payload.bookId).authors.add(action.payload.author);
+        break;
+    case 'REMOVE_AUTHOR_FROM_BOOK':
+        Book.withId(action.payload.bookId).authors.remove(action.payload.authorId);
+        break;
+    case 'ASSIGN_PUBLISHER':
+        Book.withId(action.payload.bookId).publisher = action.payload.publisherId;
+        break;
+    }
+
+    // the state property of Session always points to the current database.
+    // Updates don't mutate the original state, so this reference is not
+    // equal to `dbState` that was an argument to this reducer.
+    return sess.state;
+}
+```
+
+原来的Redux-ORM主张通过在Model类上附加一个静态reducer函数来实现特定Model的reducer，若要在Model类中定义更新逻辑，可以在模型上指定reducer静态方法，该方法作为第一个参数接收、特定模型会话作第二个参数、整个会话作为第三个参数。
+
+```javascript
+class Book extends Model {
+    static reducer(action, Book, session) {
+        switch (action.type) {
+        case 'CREATE_BOOK':
+            Book.create(action.payload);
+            break;
+        case 'UPDATE_BOOK':
+            Book.withId(action.payload.id).update(action.payload);
+            break;
+        case 'REMOVE_BOOK':
+            const book = Book.withId(action.payload);
+            book.delete();
+            break;
+        case 'ADD_AUTHOR_TO_BOOK':
+            Book.withId(action.payload.bookId).authors.add(action.payload.author);
+            break;
+        case 'REMOVE_AUTHOR_FROM_BOOK':
+            Book.withId(action.payload.bookId).authors.remove(action.payload.authorId);
+            break;
+        case 'ASSIGN_PUBLISHER':
+            Book.withId(action.payload.bookId).publisher = action.payload.publisherId;
+            break;
+        }
+        // Return value is ignored.
+        return undefined;
+    }
+
+    toString() {
+        return `Book: ${this.name}`;
+    }
+}
+```
+
+为Redux获取reducer则可调用这些`reducer`方法：
+
+```javascript
+import { createReducer } from 'redux-orm';
+import { orm } from './models';
+
+const reducer = createReducer(orm);
+```
+
+`createReducer`很简单，这里可以看看它的源代码：
+
+```javascript
+function createReducer(orm, updater = defaultUpdater) {
+    return (state, action) => {
+        const session = orm.session(state || orm.getEmptyState());
+        updater(session, action);
+        return session.state;
+    };
+}
+
+function defaultUpdater(session, action) {
+    session.sessionBoundModels.forEach(modelClass => {
+        if (typeof modelClass.reducer === 'function') {
+            modelClass.reducer(action, modelClass, session);
+        }
+    });
+}
+```
+
+如您所见，它只是实例化一个新的Session，循环遍历会话中的所有Model，并调用reducer方法（如果存在），然后它返回应用了所有更新的新数据库状态。
+
+### 2.2. Use with React
+
+您可以使用内存选择器来查询状态，`redux-orm`使用了智能记忆功能：下边选择器访问了Author、AuthorBook分支（AuthorBook是从模型字段声明生成的多对多分支），只有当这些分支更改时，才会重新计算选择器。访问的分支在第一次运行时会被解析。
+
+```javascript
+// selectors.js
+import schema from './schema';
+const authorSelector = schema.createSelector(session => {
+    return session.Author.map(author => {
+
+        // Returns a reference to the raw object in the store,
+        // so it doesn't include any reverse or m2m fields.
+        const obj = author.ref;
+        // Object.keys(obj) === ['id', 'name']
+
+        return Object.assign({}, obj, {
+            books: author.books.withRefs.map(book => book.name),
+        });
+    });
+});
+
+// Will result in something like this when run:
+// [
+//   {
+//     id: 0,
+//     name: 'Tommi Kaikkonen',
+//     books: ['Introduction to redux-orm', 'Developing Redux applications'],
+//   },
+//   {
+//     id: 1,
+//     name: 'John Doe',
+//     books: ['John Doe: an Autobiography']
+//   }
+// ]
+```
+
+使用`createSelector`创建的选择器可以用来作为使用了reselect的其他任何选择器的输入，它们也很适合使用`redux-thunk`：调用`getState()`获取整个状态，将ORM分支传递给选择器，并读取结果。一个很好的用例是将数据序列化为第三方API调用的自定义格式。
+
+因为选择器内存化了（被记忆了），您可以在React使用纯渲染来获得性能。
+
 
 
