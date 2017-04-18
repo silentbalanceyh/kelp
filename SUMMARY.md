@@ -113,7 +113,7 @@
   * redux 3.6.0
   * redux-act 1.1.1
   * [redux-form 6.5.0](reference/library/redux-form-650.md)
-  * redux-observable 0.14.1
+  * [redux-observable 0.14.1](reference/library/redux-observable-0141.md)
   * [redux-orm 0.9.0-rc.3](reference/library/redux-orm-090-rc3.md)
     * [TPL10001 - redux-orm](reference/library/redux-orm-090-rc3/tp10000-redux-orm.md)
   * redux-orm-proptypes 0.1.0
