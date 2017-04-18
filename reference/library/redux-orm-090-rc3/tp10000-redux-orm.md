@@ -289,7 +289,11 @@ export default connect(mapStateToProps)(App);
 
 ### ORM？
 
+`redux-orm`可以处理关联数据，将数据结构化成ER数据库，数据库在这种情况实际上是一个JavaScript对象。
 
+### Why？
+
+对于简单应用，通常会手写reducers，但
 
 
 
