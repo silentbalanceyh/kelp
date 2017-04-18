@@ -293,7 +293,27 @@ export default connect(mapStateToProps)(App);
 
 ### Why？
 
-对于简单应用，通常会手写reducers，但
+对于简单应用，通常会手写reducers，但是如果您定义的对象类型不断增加，则您需要维护它们之间的关系。ImmutableJS已经很大程度降低了复杂度，但`redux-orm`主要用来指定关系数据库。
+
+### Immutability
+
+如果我们从一个初始化数据状态的会话开始，则需要更新对应名称。
+
+首先，开启一个新会话：
+
+```javascript
+import { orm } from './models';
+
+const dbState = getState().db; // getState() returns the redux state.
+const sess = orm.session(dbState);
+```
+
+该会话维护了数据库状态的一个引用，我们没有更新数据库状态，因此它们依然是相等的：
+
+```js
+sess.state == dbState
+// true
+```
 
 
 
