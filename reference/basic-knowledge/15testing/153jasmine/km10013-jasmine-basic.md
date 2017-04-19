@@ -183,5 +183,39 @@ it("reverse word",function(){
 });
 ```
 
+再执行该页面，测试会失败，因为没有reverse函数……
+
+**2）Jasmine语法实践**
+
+以下内容是对Jasmine语法的介绍，都在`test.js`中实现，做一个嵌套的`describe("A suite of jasmine's function")`
+
+**对断言表达式的使用**
+
+```javascript
+describe("A suite of jasmine's function", function() {
+    describe("Expectations",function(){
+        it("Expectations",function(){
+            expect("AAA").toEqual("AAA");
+            expect(52.78).toMatch(/\d*.\d\d/);
+            expect(null).toBeNull();
+            expect("ABCD").toContain("B");
+            expect(52,78).toBeLessThan(99);
+            expect(52.78).toBeGreaterThan(18);
+
+            var x = true;
+            var y;
+            expect(x).toBe(true);
+            expect(x).toBeDefined();
+            expect(y).toBeUndefined();
+            expect(x).toBeTruthy();
+            expect(!x).toBeFalsy();
+
+            var fun = function() { return a + 1;};
+            expect(fun).toThrow();
+        });
+    });
+});
+```
+
 
 
