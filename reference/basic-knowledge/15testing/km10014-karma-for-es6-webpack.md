@@ -199,7 +199,42 @@ npm install babel-plugin-istanbul --save-dev
 }
 ```
 
-搞定以后，就可以直接运行：`karma start`启动Karma，这样就OK了！
+搞定以后，就可以直接运行：`karma start`启动Karma，这样就OK了！Training中的输出如下：
+
+```
+> client@0.1.0 test /Users/lang/KTS/Source/Training/client
+> karma start karma.conf.js
+
+Hash: f4683f5fa2953dc3a97c
+Version: webpack 1.14.0
+Time: 40ms
+webpack: Compiled successfully.
+webpack: Compiling...
+19 04 2017 17:33:51.309:WARN [karma]: No captured browser, open http://localhost:9876/
+Hash: 528e7927dcb75ebc1226
+Version: webpack 1.14.0
+Time: 456ms
+                          Asset     Size  Chunks             Chunk Names
+test/actions/FetchActionTest.js  18.1 kB       0  [emitted]  test/actions/FetchActionTest.js
+chunk    {0} test/actions/FetchActionTest.js (test/actions/FetchActionTest.js) 15.5 kB [rendered]
+    [0] ./test/actions/FetchActionTest.js 151 bytes {0} [built]
+    [1] ./src/redux/actions/MessageAction.js 1.87 kB {0} [built]
+    [2] ./~/redux-act/lib/index.js 2.1 kB {0} [built]
+    [3] ./~/redux-act/lib/createAction.js 4.09 kB {0} [built]
+    [4] ./~/redux-act/lib/types.js 452 bytes {0} [built]
+    [5] ./~/redux-act/lib/createReducer.js 1.98 kB {0} [built]
+    [6] ./~/redux-act/lib/batch.js 597 bytes {0} [built]
+    [7] ./~/redux-act/lib/assignAll.js 660 bytes {0} [built]
+    [8] ./~/redux-act/lib/bindAll.js 648 bytes {0} [built]
+    [9] ./~/redux-act/lib/disbatch.js 1.21 kB {0} [built]
+   [10] ./~/redux-act/lib/loggers/index.js 505 bytes {0} [built]
+   [11] ./~/redux-act/lib/loggers/reduxLogger.js 1.23 kB {0} [built]
+webpack: Compiled successfully.
+19 04 2017 17:33:51.320:INFO [karma]: Karma v1.6.0 server started at http://0.0.0.0:9876/
+19 04 2017 17:33:51.320:INFO [launcher]: Launching browser PhantomJS with unlimited concurrency
+19 04 2017 17:33:51.326:INFO [launcher]: Starting browser PhantomJS
+19 04 2017 17:33:52.269:INFO [PhantomJS 2.1.1 (Mac OS X 0.0.0)]: Connected on socket gY4ieOZcXM5M8IaLAAAA with id 98757950
+```
 
 
 
