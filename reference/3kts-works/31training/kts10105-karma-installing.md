@@ -24,9 +24,5 @@ karma start
 
 ## 3. Karma + Jasmine配置
 
-最初需要初始化karma的配置文件：karma.conf.js
-
-
-
-
+最初需要初始化karma的配置文件：karma.conf.js，在项目中
 
