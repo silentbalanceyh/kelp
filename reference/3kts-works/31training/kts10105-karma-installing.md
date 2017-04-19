@@ -15,7 +15,12 @@ npm install -g karma
 karma start
 ```
 
+运行完成后就可以看到下边的输出：
 
+```
+19 04 2017 11:38:10.492:WARN [karma]: No captured browser, open http://localhost:9876/
+19 04 2017 11:38:10.507:INFO [karma]: Karma v1.6.0 server started at http://0.0.0.0:9876/
+```
 
 
 
