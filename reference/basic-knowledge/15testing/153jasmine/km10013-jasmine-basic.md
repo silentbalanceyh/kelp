@@ -78,5 +78,70 @@ jasmine运行需要四个部分：
 * 测试文件：符合JasmineAPI的测试JS脚本
 * 输出结果：jasmine提供了基于网页的输出结果
 
+使用流程：
+
+1. 新建一个HTML文件：`test.html`
+
+```html
+~ vi test.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>jasmine test</title>
+<link rel="stylesheet" type="text/css" href="bower_components/jasmine/lib/jasmine-core/jasmine.css">
+<script type="text/javascript" src="bower_components/jasmine/lib/jasmine-core/jasmine.js"></script>
+<script type="text/javascript" src="bower_components/jasmine/lib/jasmine-core/jasmine-html.js"></script>
+</head>
+<body>
+<h1>jasmine test</h1>
+<script type="text/javascript" src="src.js"></script>
+<script type="text/javascript" src="test.js"></script>
+<script type="text/javascript" src="report.js"></script>
+</body>
+</html>
+```
+
+我们看到页面上有5个JS导入：
+
+* `jasmine.js`：核心用于执行单元测试的类库【直接导入】
+* `jasmine-html.js`：用于显示单元测试的结果类库【直接导入】
+* `src.js`：我们自己的业务逻辑JS
+* `test.js`：单元测试的JS
+* `report.js`：用于启动单元测试JS【启动脚本，写法固定】
+
+```javascript
+~ vi report.js
+
+(function() {
+    var jasmineEnv = jasmine.getEnv();
+    jasmineEnv.updateInterval = 1000;
+
+    var htmlReporter = new jasmine.HtmlReporter();
+
+    jasmineEnv.addReporter(htmlReporter);
+
+    jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+    };
+
+    var currentWindowOnload = window.onload;
+
+    window.onload = function() {
+        if (currentWindowOnload) {
+            currentWindowOnload();
+        }
+        execJasmine();
+    };
+
+    function execJasmine() {
+        jasmineEnv.execute();
+    }
+
+})();
+```
+
+
+
 
 
