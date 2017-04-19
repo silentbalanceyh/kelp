@@ -67,21 +67,21 @@ module.exports = function(config) {
       'test/**/*.js' 
     ], 
     exclude: [], 
- 
+
     // modified 
     preprocessors: { 
         'src/**/*.js': ['coverage'] 
     }, 
- 
+
     //modified 
     reporters: ['progress', 'coverage'], 
- 
+
     // add 
     coverageReporter: { 
       type : 'html', 
       dir : 'coverage/' 
     }, 
- 
+
     port: 9876, 
     colors: true, 
     logLevel: config.LOG_INFO, 
@@ -90,8 +90,8 @@ module.exports = function(config) {
     singleRun: false, 
     concurrency: Infinity 
   }) 
-}  
+}
 ```
 
-
+然后再运行karma start后，会在目录下生成coverage目录，里面有本次测试覆盖报告。
 
