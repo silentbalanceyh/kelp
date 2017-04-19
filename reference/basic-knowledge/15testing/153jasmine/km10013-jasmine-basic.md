@@ -169,7 +169,19 @@ describe("A suite of basic functions", function() {
 
 ## 4. Jasmine使用
 
+**1）测试先行：**
 
+测试先行，就是没写实现，先写用例。刚刚已经配置好了jasmine的环境，后边将所有功能代码都写在`src.js`中，测试代码都写在`test.js`中。有一个需求，要实现单词翻转功能。
+
+编辑`test.js`
+
+```javascript
+~ vi test.js
+
+it("reverse word",function(){
+    expect("DCBA").toEqual(reverse("ABCD"));
+});
+```
 
 
 
