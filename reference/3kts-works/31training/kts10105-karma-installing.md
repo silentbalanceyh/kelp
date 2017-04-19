@@ -87,7 +87,15 @@ function reverse(name){
 }
 ```
 
+**2.创建测试文件**
 
+```javascript
+describe("A suite of basic functions", function (){
+    it("reverse word",function(){
+        expect("DCBA").toEqual(reverse("ABCD"));
+    });
+});
+```
 
 
 
