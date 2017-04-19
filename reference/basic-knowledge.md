@@ -39,5 +39,9 @@
 * [KTS10104 - Redux Testing with Jasmine](/reference/3kts-works/31training/kts10104-redux-testing-with-jasmine.md)【Pending】（Jasmine测试Redux）
 * [KTS10105 - Karma Installing](/reference/3kts-works/31training/kts10105-karma-installing.md)（Karma Jasmine的安装）
 
+## 8. TP Library
+
+* [TPL10001 - redux-orm](/reference/library/redux-orm-090-rc3/tp10000-redux-orm.md)（Redux-Orm官方文档）
+
 
 
