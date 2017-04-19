@@ -70,6 +70,23 @@ npm install karma-jasmine
 
 ## 4. 自动化单元测试
 
+**3步准备工作**
+
+1. 创建源文件：用于实现某种业务逻辑的文件，通常写得js脚本
+2. 创建测试文件：符合jasmineAPI的测试js脚本
+3. 修改karma.conf.js配置文件
+
+**1.创建源文件**
+
+用于实现某种业务逻辑的文件，就是通常写得JS脚本，如：
+
+```javascript
+~ vi src.js
+function reverse(name){
+    return name.split("").reverse().join("");
+}
+```
+
 
 
 
