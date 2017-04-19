@@ -113,5 +113,11 @@ module.exports = function(config) {
         ]
 ```
 
+## 使用Webpack + Babel
+
+在实际项目中，有时候需要使用Webpack和ES6，所以接下来将Webpack和Babel集成进Karma环境中：
+
+
+
 
 
