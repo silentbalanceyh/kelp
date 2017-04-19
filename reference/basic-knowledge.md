@@ -32,3 +32,13 @@
 
 
 
+## 7. Tradeshift Document
+
+* [KTS10101 - Spring Boot with Docker](/reference/3kts-works/31training/kts10002-spring-boot-with-docker.md)
+* [KTS10102 - Docker PgSQL Init](/reference/3kts-works/31training/kts10102-docker-pgsql-init.md)
+* [KTS10103 - Starter Kit Analyzing \( Upgrading \)](/reference/3kts-works/31training/kts10103-starter-kit-analyzing-upgrading.md)
+* [KTS10104 - Redux Testing with Jasmine](/reference/3kts-works/31training/kts10104-redux-testing-with-jasmine.md)
+* [KTS10105 - Karma Installing](/reference/3kts-works/31training/kts10105-karma-installing.md)
+
+
+
