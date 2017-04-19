@@ -12,7 +12,7 @@
 
 * [KM10003 - Docker for Windows](/reference/basic-knowledge/131docker/km10003-docker-for-windows.md)（Docker在Windows中的安装流程）
 * [KM10005 - Dockerfile语法](/reference/basic-knowledge/131docker/km10005-dockerfileyu-fa.md)（Dockerfile文件规范说明）
-* [KM10007 - Docker 15 Tips](/reference/basic-knowledge/131docker/km10007-docker-15-tips.md)（关于docker的15个提示）
+* [KM10007 - Docker 15 Tips](/reference/basic-knowledge/131docker/km10007-docker-15-tips.md)【Pending】（关于docker的15个提示）
 
 ## 4. Development
 
