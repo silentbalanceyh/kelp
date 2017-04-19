@@ -124,5 +124,9 @@ module.exports = function (config) {
 
 单元测试全自动执行
 
+```
+karma start karma.conf.js
+```
+
 
 
