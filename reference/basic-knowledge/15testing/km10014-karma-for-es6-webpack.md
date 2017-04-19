@@ -55,9 +55,7 @@ describe('index.js: ', function() {
 npm install --save-dev karma-coverage
 ```
 
-然后修改配置文件
-
-
+然后修改配置文件`karma.conf.js`如下：
 
 
 
