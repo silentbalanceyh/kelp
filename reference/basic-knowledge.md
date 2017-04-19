@@ -35,8 +35,8 @@
 
 * [KTS10101 - Spring Boot with Docker](/reference/3kts-works/31training/kts10002-spring-boot-with-docker.md) （使用Spring Boot构造Docker应用）
 * [KTS10102 - Docker PgSQL Init](/reference/3kts-works/31training/kts10102-docker-pgsql-init.md)（初始化PostgreSQL的Docker）
-* [KTS10103 - Starter Kit Analyzing \( Upgrading \)](/reference/3kts-works/31training/kts10103-starter-kit-analyzing-upgrading.md)（针对React-Redux-Starter-Kit项目的分析报告）
-* [KTS10104 - Redux Testing with Jasmine](/reference/3kts-works/31training/kts10104-redux-testing-with-jasmine.md)（Jasmine测试Redux）
+* [KTS10103 - Starter Kit Analyzing \( Upgrading \)](/reference/3kts-works/31training/kts10103-starter-kit-analyzing-upgrading.md)【Pending】（针对React-Redux-Starter-Kit项目的分析报告）
+* [KTS10104 - Redux Testing with Jasmine](/reference/3kts-works/31training/kts10104-redux-testing-with-jasmine.md)【Pending】（Jasmine测试Redux）
 * [KTS10105 - Karma Installing](/reference/3kts-works/31training/kts10105-karma-installing.md)（Karma Jasmine的安装）
 
 
