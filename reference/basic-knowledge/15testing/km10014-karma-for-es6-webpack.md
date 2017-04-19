@@ -16,5 +16,19 @@ karma-example
 | -- package.json
 ```
 
-这里不关注`index.js`文件内容，只要记住它是源代码目录即可，内容可以很简单。
+这里不关注`index.js`文件内容，只要记住它是源代码目录即可，内容可以很简单。接下来可以搭建Karma环境了，虽然这部分内容已经在[KTS10105 - Karma Installing](/reference/3kts-works/31training/kts10105-karma-installing.md) 有说明，但这里重复走一次，加深映像。一般搭建karma环境需要先初始化测试环境，所以可以全局安装`karma-cli`命令行
+
+```bash
+npm install -g karma-cli
+```
+
+全局安装过后，则可以直接在项目中安装karma包
+
+```
+npm install karma --save-dev
+```
+
+然后就可以在工程目录中使用`karma init`命令来初始化测试环境，按照[KTS10105](/reference/3kts-works/31training/kts10105-karma-installing.md)中的步骤来处理，在初始化过程中，使用jasmine测试框架，而运行环境使用PhantomJS，这个命令执行完成过后，项目根目录会生成`karma.conf.js`文件。
+
+
 
