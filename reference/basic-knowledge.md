@@ -20,7 +20,7 @@
 * [KM10006 - Spring Boot Data Source](/reference/basic-knowledge/141spring-boot/km10006-spring-boot-data-source.md) \( Spring Boot中配置SQL数据库连接池）
 * [KM10010 - Spring Boot Testing](/reference/basic-knowledge/141spring-boot/km10010-spring-boot-testing.md)（Spring Boot中的测试）
 * [KM10011 - AOP && OVal](/reference/basic-knowledge/144oval/km10011-aop-andand-oval.md)（AOP & OVal进行防御式编程）
-* [KM10012 - Spring Scope](/reference/basic-knowledge/141spring-boot/km10013-spring-scope.md)（Spring Bean中的Scope）
+* [KM10012 - Spring Scope](/reference/basic-knowledge/141spring-boot/km10013-spring-scope.md)【Pending】（Spring Bean中的Scope）
 
 ## 5. Testing
 

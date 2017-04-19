@@ -80,6 +80,8 @@
     * [1.5.3.Jasmine](reference/basic-knowledge/15testing/153jasmine.md)
       * [KM10013 - Jasmine Basic](reference/basic-knowledge/15testing/153jasmine/km10013-jasmine-basic.md)
     * [1.5.4.JUnit](reference/basic-knowledge/15testing/154junit.md)
+    * 1.5.5.Karma
+      * [KM10014 - Karma for ES6 \( Webpack \)](reference/basic-knowledge/15testing/km10014-karma-for-es6-webpack.md)
   * [1.6.Building](reference/basic-knowledge/16building.md)
     * [1.6.1.Webpack 2.2](reference/basic-knowledge/161webpack.md)
     * [1.6.2.Browserify](reference/basic-knowledge/162browserify.md)
