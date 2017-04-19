@@ -167,6 +167,8 @@ describe("A suite of basic functions", function() {
 });
 ```
 
+## 4. Jasmine使用
+
 
 
 
