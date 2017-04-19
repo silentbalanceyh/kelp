@@ -73,7 +73,10 @@ jasmine#1.3.1 bower_components\jasmine
 
 jasmine运行需要四个部分：
 
-
+* 运行时环境：这里基于Chrome浏览器，通过HTML作为JS载体
+* 源文件：用于实现某种逻辑的文件，就是平时写得JS脚本
+* 测试文件：符合JasmineAPI的测试JS脚本
+* 输出结果：jasmine提供了基于网页的输出结果
 
 
 
