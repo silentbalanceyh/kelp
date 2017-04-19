@@ -69,5 +69,11 @@ bower jasmine#~1.3.1           install jasmine#1.3.1
 jasmine#1.3.1 bower_components\jasmine
 ```
 
+## 3. Jasmine环境配置
+
+jasmine运行需要四个部分：
+
+
+
 
 
