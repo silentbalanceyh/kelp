@@ -141,6 +141,32 @@ jasmine运行需要四个部分：
 })();
 ```
 
+`src.js`是实现业务逻辑的文件，我们定义sayHello的函数
+
+```javascript
+~ vi src.js
+
+function sayHello(name){
+    return "Hello " + name;
+}
+```
+
+`test.js`则是针对源文件的单元测试
+
+```javascript
+~ vi test.js
+
+describe("A suite of basic functions", function() {
+    var name;
+
+    it("sayHello", function() {
+        name = "Conan";
+        var exp = "Hello Conan";
+        expect(exp).toEqual(sayHello(name));
+    });
+});
+```
+
 
 
 
