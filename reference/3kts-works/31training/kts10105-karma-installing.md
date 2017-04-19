@@ -153,5 +153,26 @@ coverageReporter: {
 
 启动karma start，在工程目录下边找到`index.html`文件，coverage/chrome/index.html
 
-打开后，就可以看到代码覆盖率报告。
+用浏览器打开后，就可以看到代码覆盖率报告。
+
+## 6. Karma第一次启动出现的问题
+
+CHROME\_BIN的环境变量问题
+
+```
+~ D:\workspace\javascript\karma>karma start karma.conf.js
+INFO [karma]: Karma v0.10.2 server started at http://localhost:9876/
+INFO [launcher]: Starting browser Chrome
+ERROR [launcher]: Cannot start Chrome
+        Can not find the binary C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chrome.exe
+        Please set env variable CHROME_BIN
+```
+
+设置方法：找到系统中chrome的安装位置，找到chrome.exe文件：
+
+```
+~ D:\workspace\javascript\karma>set CHROME_BIN="C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+```
+
+
 
