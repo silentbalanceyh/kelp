@@ -24,5 +24,50 @@ describe("A suite", function() {
 });
 ```
 
+每个测试都在一个测试集中运行，Suite就是一个测试集，用describe函数封装，Spec表示每个测试用例，用it函数封装。通过expect函数，作为程序断言来判断相等关系。setup过程用beforeEach函数封装，tearDown过程用afterEach封装。
+
+## 2. Jasmine安装
+
+安装jasmine类库时，可直接使用bower一键搞定。
+
+```
+~ D:\workspace\javascript>mkdir jasmine
+~ D:\workspace\javascript>cd jasmine
+
+#查找jasmine项目
+~ D:\workspace\javascript\jasmine>bower search jasmine
+-----------------------------------------
+Update available: 1.2.4 (current: 1.1.2)
+Run npm update -g bower to update
+-----------------------------------------
+
+Search results:
+
+    jasmine git://github.com/pivotal/jasmine.git
+    jasmine-jquery git://github.com/velesin/jasmine-jquery
+    jasmine-sinon git://github.com/froots/jasmine-sinon.git
+    jasmine-ajax git://github.com/pivotal/jasmine-ajax.git
+    jasmine.async git://github.com/derickbailey/jasmine.async.git
+    flight-jasmine git://github.com/twitter/flight-jasmine.git
+    jasmine-jstd-adapter git://github.com/ibolmo/jasmine-jstd-adapter.git
+    jasmine-flight git://github.com/flightjs/jasmine-flight.git
+    jasmine-signals git://github.com/AdamNowotny/jasmine-signals.git
+    jasmine-underscore git://github.com/adscott/jasmine-underscore.git
+    jasmine-bootstrap git://github.com/esbie/jasmine-bootstrap.git
+    jasmine-data-provider git://github.com/sublimino/jasmine-data-provider.git
+    jasmine-sugar git://github.com/fantactuka/jasmine-sugar.git
+
+#安装jasmine类库
+~ D:\workspace\javascript\jasmine>bower install jasmine
+bower jasmine#*             not-cached git://github.com/pivotal/jasmine.git#*
+bower jasmine#*                resolve git://github.com/pivotal/jasmine.git#*
+bower jasmine#*               download https://github.com/pivotal/jasmine/archive/v1.3.1.tar.gz
+bower jasmine#*                extract archive.tar.gz
+bower jasmine#*               resolved git://github.com/pivotal/jasmine.git#1.3.1
+bower jasmine#~1.3.1           install jasmine#1.3.1
+
+jasmine#1.3.1 bower_components\jasmine
+```
+
 
 
