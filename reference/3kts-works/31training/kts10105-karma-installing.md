@@ -130,3 +130,26 @@ karma start karma.conf.js
 
 这样浏览器就会启动然后自动执行，如果修改了`test.js`由于配置文件中设置了autoWatch，所以test.js文件保存后，会自动执行单元测试。执行日志如下：提示我们单元测试出错了。
 
+## 5. Karma和istanbul代码覆盖率
+
+增加代码覆盖率检查和报告，增加istanbul依赖
+
+```
+npm install karma-coverage
+```
+
+修改karma.conf.js配置文件
+
+```javascript
+~ vi karma.conf.js
+
+reporters: ['progress','coverage'],
+preprocessors : {'src.js': 'coverage'},
+coverageReporter: {
+    type : 'html',
+    dir : 'coverage/'
+}
+```
+
+
+
