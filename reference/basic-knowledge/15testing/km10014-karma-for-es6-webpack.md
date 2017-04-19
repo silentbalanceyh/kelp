@@ -30,5 +30,18 @@ npm install karma --save-dev
 
 然后就可以在工程目录中使用`karma init`命令来初始化测试环境，按照[KTS10105](/reference/3kts-works/31training/kts10105-karma-installing.md)中的步骤来处理，在初始化过程中，使用jasmine测试框架，而运行环境使用PhantomJS，这个命令执行完成过后，项目根目录会生成`karma.conf.js`文件。
 
+## Karma运行
+
+在test目录中写一个简单的测试脚本，因为使用的是jasmine测试框架，具体api可参考jasmine api，内容如下：
+
+```javascript
+describe('index.js: ', function() { 
+  it('isNum() should work fine.', function() { 
+    expect(isNum(1)).toBe(true) 
+    expect(isNum('1')).toBe(false) 
+  }) 
+}) 
+```
+
 
 
