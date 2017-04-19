@@ -128,5 +128,5 @@ module.exports = function (config) {
 karma start karma.conf.js
 ```
 
-这样浏览器就会启动然后自动执行，如果修改了`test.js`然后
+这样浏览器就会启动然后自动执行，如果修改了`test.js`由于配置文件中设置了autoWatch，所以test.js文件保存后，会自动执行单元测试。执行日志如下：提示我们单元测试出错了。
 
