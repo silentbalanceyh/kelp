@@ -151,5 +151,7 @@ coverageReporter: {
 }
 ```
 
+启动karma start，在工程目录下边找到`index.html`文件，coverage/chrome/index.html
 
+打开后，就可以看到代码覆盖率报告。
 
