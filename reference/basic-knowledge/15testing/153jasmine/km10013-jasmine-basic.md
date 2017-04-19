@@ -254,7 +254,7 @@ describe("A suite of jasmine's function", function() {
 对异步程序的单元测试
 
 ```javascript
-   describe("Asynchronous Support",function(){
+    describe("Asynchronous Support",function(){
         var value, flag;
         it("Asynchronous Support", function() {
             runs(function() {
