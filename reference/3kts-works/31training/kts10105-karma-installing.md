@@ -62,5 +62,13 @@ Press tab to list possible options.
 Config file generated at "/Users/lang/KTS/Source/Training/client/karma.conf.js".
 ```
 
+安装集成包`karma-jasmine`
+
+```
+npm install karma-jasmine
+```
+
+
+
 
 
