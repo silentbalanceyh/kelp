@@ -16,5 +16,5 @@ karma-example
 | -- package.json
 ```
 
-
+这里不关注`index.js`文件内容，只要记住它是源代码目录即可，内容可以很简单。
 
