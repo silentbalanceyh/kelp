@@ -120,5 +120,9 @@ module.exports = function (config) {
 };
 ```
 
+**启动karma**
+
+单元测试全自动执行
+
 
 
