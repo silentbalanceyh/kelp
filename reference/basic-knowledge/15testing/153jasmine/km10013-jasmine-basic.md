@@ -276,5 +276,5 @@ describe("A suite of jasmine's function", function() {
     });
 ```
 
-
+这样就成功对JS完成了对应单元测试。
 
