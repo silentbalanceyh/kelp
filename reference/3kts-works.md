@@ -6,11 +6,11 @@
 * [KTS10102 - Docker PgSQL Init](/reference/3kts-works/31training/kts10102-docker-pgsql-init.md)（初始化PostgreSQL的Docker）
 * [KTS10103 - Starter Kit Analyzing \( Upgrading \)](/reference/3kts-works/31training/kts10103-starter-kit-analyzing-upgrading.md)（针对React-Redux-Starter-Kit项目的分析报告）
 * [KTS10104 - Redux Testing with Jasmine](/reference/3kts-works/31training/kts10104-redux-testing-with-jasmine.md)（Jasmine测试Redux）
+* [KTS10105 - Karma Installing](/reference/3kts-works/31training/kts10105-karma-installing.md)（Karma Jasmine的安装）
 
 ## UI Component
 
 * [KTS10001 - Get Start](/reference/3kts-works/32ts-ui-component/kts10001-get-start.md)
-
 * [KTS10002 - Design Patterns](/reference/3kts-works/32ts-ui-component/kts10002-design-principles.md)
 * [KTS10003 - \( Code \) Inline Components](/reference/3kts-works/32ts-ui-component/kts10003-inline-components.md)
 
