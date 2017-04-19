@@ -93,5 +93,25 @@ module.exports = function(config) {
 }
 ```
 
-然后再运行karma start后，会在目录下生成coverage目录，里面有本次测试覆盖报告。
+然后再运行karma start后，会在目录下生成coverage目录，里面有本次测试覆盖报告，如果遇到下边错：
+
+```
+19 04 2017 16:46:40.937:ERROR [preprocess]: Can not load "coverage", it is not registered!
+  Perhaps you are missing some plugin?
+```
+
+则还需要添加下边内容：
+
+```javascript
+        plugins: [
+            'karma-webpack',
+            'karma-jasmine',
+            'karma-coverage',            // 这一行是覆盖率专用，同样记得npm install --save-dev karma-coverage
+            "karma-sourcemap-loader",
+            'karma-phantomjs-launcher',
+            'karma-babel-preprocessor'
+        ]
+```
+
+
 
