@@ -168,8 +168,38 @@ module.exports = function(config) {
       } 
     } 
   }) 
-}  
+}
 ```
+
+需要注意的是：
+
+* files只留下test文件，因为webpack会自动把需要的其他文件打包进来，所以只需要留下入口文件。
+* preprocessors也修改为test文件，并加入webpack预处理器。
+* 加入webpack配置选项，可以自己定制配置项，但是不需要entry和output，这里加上babel-loader来编译ES6的代码。
+
+**这种情况Coverage达不到100%**
+
+因为webpac加入了一些代码，影响了代码的Coverage，如果我们引入了一些其他库，比如jquery之类，将源代码和库代码打包一起后覆盖率就不达标了，所以这种情况需要使用另外一个插件。
+
+```
+npm install babel-plugin-istanbul --save-dev
+```
+
+然后修改webpack中的babel-loader配置如下：
+
+```javascript
+{ 
+  test: /\.js$/, 
+  loader: 'babel', 
+  exclude: /node_modules/, 
+  query: { 
+    presets: ['es2015'], 
+    plugins: ['istanbul'] 
+  } 
+}
+```
+
+搞定以后，就可以直接运行：`karma start`启动Karma，这样就OK了！
 
 
 
