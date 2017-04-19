@@ -40,8 +40,12 @@ describe('index.js: ', function() {
     expect(isNum(1)).toBe(true) 
     expect(isNum('1')).toBe(false) 
   }) 
-}) 
+})
 ```
 
+然后在根目录运行karma start命令，则可以看到最终运行结果，因为这个过程中设置了监控文件的修改，如果修改了源文件或测试脚本时，Karma会自动帮我们再次运行，无需手动操作。
 
+## Coverage
+
+如何衡量测试脚本的质量呢？其中一个参考指标就是代码覆盖率（Coverage）。简单说就是测试中运行的代码占到总体代码的比率，其中又分为：行数覆盖率、分支覆盖率等。
 
