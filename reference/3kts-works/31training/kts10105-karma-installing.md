@@ -128,5 +128,5 @@ module.exports = function (config) {
 karma start karma.conf.js
 ```
 
-这样浏览器
+这样浏览器就会启动然后自动执行，如果修改了`test.js`然后
 
