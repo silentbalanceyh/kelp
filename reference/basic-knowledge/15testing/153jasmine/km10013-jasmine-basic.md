@@ -4,9 +4,25 @@ TDD（Test Driven Development）测试驱动开发是敏捷开发中提出的最
 
 ## 1. Jasmine介绍
 
-Jasmine是一个用来编写JS测试的框架，它不依赖于任何其他的JS框架，也不需要对DOM，它拥有灵巧而明确的语法可以让您轻松编写测试代码。
+Jasmine是一个用来编写JS测试的框架，它不依赖于任何其他的JS框架，也不需要对DOM，它拥有灵巧而明确的语法可以让您轻松编写测试代码。Jasmine本身结构很简单：
 
+```javascript
+describe("A suite", function() {
+  var foo;
+  beforeEach(function() {
+    foo = 0;
+    foo += 1;
+  });
 
+  afterEach(function() {
+    foo = 0;
+  });
+
+  it("contains spec with an expectation", function() {
+    expect(true).toBe(true);
+  });
+});
+```
 
 
 
