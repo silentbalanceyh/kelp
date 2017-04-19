@@ -189,7 +189,7 @@ it("reverse word",function(){
 
 以下内容是对Jasmine语法的介绍，都在`test.js`中实现，做一个嵌套的`describe("A suite of jasmine's function")`
 
-**对断言表达式的使用**
+对断言表达式的使用
 
 ```javascript
 describe("A suite of jasmine's function", function() {
@@ -215,6 +215,65 @@ describe("A suite of jasmine's function", function() {
         });
     });
 });
+```
+
+对开始前和使用后的变量赋值
+
+```javascript
+    describe("Setup and Teardown",function(){
+        var foo;
+        beforeEach(function() {
+            foo = 0;
+            foo += 1;
+        });
+        afterEach(function() {
+            foo = 0;
+        });
+
+        it("is just a function, so it can contain any code", function() {
+            expect(foo).toEqual(1);
+        });
+
+        it("can have more than one expectation", function() {
+            expect(foo).toEqual(1);
+            expect(true).toEqual(true);
+        });
+    });
+```
+
+对忽略suite的声明
+
+```javascript
+    describe("Disabling Specs and Suites", function() {
+        it("Disabling Specs and Suites",function(){
+            expect("AAA").toEqual("AAA");
+        });
+    });
+```
+
+对异步程序的单元测试
+
+```javascript
+   describe("Asynchronous Support",function(){
+        var value, flag;
+        it("Asynchronous Support", function() {
+            runs(function() {
+                flag = false;
+                value = 0;
+                setTimeout(function() {
+                    flag = true;
+                }, 500);
+            });
+            waitsFor(function() {
+                value++;
+                return flag;
+            }, "The Value should be incremented", 750);
+
+            runs(function() {
+                expect(value).toBeGreaterThan(0);
+            });
+        });
+    });
 ```
 
 
