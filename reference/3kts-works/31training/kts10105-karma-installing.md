@@ -22,5 +22,11 @@ karma start
 19 04 2017 11:38:10.507:INFO [karma]: Karma v1.6.0 server started at http://0.0.0.0:9876/
 ```
 
+## 3. Karma + Jasmine配置
+
+最初需要初始化karma的配置文件：karma.conf.js
+
+
+
 
 
