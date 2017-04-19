@@ -117,7 +117,59 @@ module.exports = function(config) {
 
 在实际项目中，有时候需要使用Webpack和ES6，所以接下来将Webpack和Babel集成进Karma环境中：
 
+安装karma-webpack
 
+```bash
+npm install karma-webpack --save-dev
+```
+
+安装babel
+
+```
+npm install babel-loader babel-core babel-preset-es2015 --save-dev
+```
+
+然后可以在`src`源代码文件中随意使用ES6的语法，并且在测试文件中随意使用，接下来在`karma.conf.js`中修改成下边这种：
+
+```javascript
+module.exports = function(config) { 
+  config.set({ 
+    basePath: '', 
+    frameworks: ['jasmine'], 
+    files: [ 
+      'test/**/*.js' 
+    ], 
+    exclude: [], 
+    preprocessors: { 
+      'test/**/*.js': ['webpack', 'coverage'] 
+    }, 
+    reporters: ['progress', 'coverage'], 
+    coverageReporter: { 
+      type: 'html', 
+      dir: 'coverage/' 
+    }, 
+    port: 9876, 
+    colors: true, 
+    logLevel: config.LOG_INFO, 
+    autoWatch: true, 
+    browsers: ['PhantomJS'], 
+    singleRun: false, 
+    concurrency: Infinity, 
+    webpack: { 
+      module: { 
+        loaders: [{ 
+          test: /\.js$/, 
+          loader: 'babel', 
+          exclude: /node_modules/, 
+          query: { 
+            presets: ['es2015'] 
+          } 
+        }] 
+      } 
+    } 
+  }) 
+}  
+```
 
 
 
