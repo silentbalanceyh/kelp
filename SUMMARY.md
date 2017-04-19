@@ -78,6 +78,7 @@
       * [KM10009 - Mockito Using](reference/basic-knowledge/15testing/151mockito/km10009-mock-using.md)
     * [1.5.2.Jacoco](reference/basic-knowledge/15testing/152jacoco.md)
     * [1.5.3.Jasmine](reference/basic-knowledge/15testing/153jasmine.md)
+      * [KM10013 - Jasmine Basic](reference/basic-knowledge/15testing/153jasmine/km10013-jasmine-basic.md)
     * [1.5.4.JUnit](reference/basic-knowledge/15testing/154junit.md)
   * [1.6.Building](reference/basic-knowledge/16building.md)
     * [1.6.1.Webpack 2.2](reference/basic-knowledge/161webpack.md)

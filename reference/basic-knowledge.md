@@ -26,6 +26,7 @@
 
 * [KM10008 - Mockito Basic](/reference/basic-knowledge/15testing/151mockito/km10008-junit-and-mockito-basic.md)（Mock测试基本概念）
 * [KM10009 - Mockito Using](/reference/basic-knowledge/15testing/151mockito/km10009-mock-using.md)（Mockito的使用）
+* [KM10013 - Jasmine Basic](/reference/basic-knowledge/15testing/153jasmine/km10013-jasmine-basic.md)（Jasmine基础知识）
 
 ## 6. Building
 
