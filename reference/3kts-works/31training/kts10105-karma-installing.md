@@ -26,5 +26,41 @@ karma start
 
 最初需要初始化karma的配置文件：karma.conf.js，在项目中直接使用命令：`karma init`来初始化：
 
+```bash
+Which testing framework do you want to use ?
+Press tab to list possible options. Enter to move to the next question.
+> jasmine
+
+Do you want to use Require.js ?
+This will add Require.js plugin.
+Press tab to list possible options. Enter to move to the next question.
+> no
+
+Do you want to capture any browsers automatically ?
+Press tab to list possible options. Enter empty string to move to the next question.
+> Chrome
+>
+
+What is the location of your source and test files ?
+You can use glob patterns, eg. "js/*.js" or "test/**/*Spec.js".
+Enter empty string to move to the next question.
+> src/test/**/*Test.js
+19 04 2017 11:41:58.262:WARN [init]: There is no file matching this pattern.
+
+>
+
+Should any of the files included by the previous patterns be excluded ?
+You can use glob patterns, eg. "**/*.swp".
+Enter empty string to move to the next question.
+>
+
+Do you want Karma to watch all the files and run the tests on change ?
+Press tab to list possible options.
+> yes
+
+
+Config file generated at "/Users/lang/KTS/Source/Training/client/karma.conf.js".
+```
+
 
 
