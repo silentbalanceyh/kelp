@@ -68,6 +68,8 @@ Config file generated at "/Users/lang/KTS/Source/Training/client/karma.conf.js".
 npm install karma-jasmine
 ```
 
+## 4. 自动化单元测试
+
 
 
 
