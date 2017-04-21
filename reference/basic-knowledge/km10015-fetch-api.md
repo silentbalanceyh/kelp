@@ -61,7 +61,119 @@ Fetch API提供了JavaScript接口用来操作控制HTTP中的管道（如Reques
 
 ### 3.1. 创建fetch请求
 
+一个基本的fetch请求可通过下边代码简单创建：
 
+```javascript
+var myImage = document.querySelector('img');
 
+fetch('flowers.jpg')
+.then(function(response) {
+  return response.blob();
+})
+.then(function(myBlob) {
+  var objectURL = URL.createObjectURL(myBlob);
+  myImage.src = objectURL;
+});
+```
 
+这里我们从网络上获取图片资源，然后填充到`<img>`元素中，最简单的使用fetch的方式仅需要一个参数——您想获取的资源路径的地址——并且返回一个包含了Response对象的Promise。当然这是一个HTTP的响应对象，并不是实际的图片，若要图片内容则需要从响应中抽取数据。这里使用了blob\(\)方法读取二进制数据（在`Body`中定义，Request和Response都提供了相关实现）。
+
+_**NOTES**_：Body mixin中提供了很多和Body正文相近的处理方法，具体可参考Body部分。
+
+在Blob中读取数据时会包含一个`objectURL`对象，它会插入到`<img/>`标签内。Fetch请求是由Content Security Policy的connect-src指令控制，而不是检索其他资源指令。
+
+#### 3.1.1.提供请求选项options
+
+fetch\(\)方法可接收可选的第二参数，该参数允许您控制一些不同的设置：
+
+```javascript
+var myHeaders = new Headers();
+
+var myInit = { method: 'GET',
+               headers: myHeaders,
+               mode: 'cors',
+               cache: 'default' };
+
+fetch('flowers.jpg', myInit)
+.then(function(response) {
+  return response.blob();
+})
+.then(function(myBlob) {
+  var objectURL = URL.createObjectURL(myBlob);
+  myImage.src = objectURL;
+});
+```
+
+参考fetch\(\)的API查看详细的选项以及相关描述。
+
+#### 3.1.2.发送带credential的请求
+
+若您想要发送一个带credential的浏览器请求，则可添加`credentials: 'include`在第二参数中，传给fetch\(\)方法：
+
+```javascript
+fetch('https://example.com', {
+  credentials: 'include'  
+})
+```
+
+相反若浏览器请求不包含credential信息，则可使用`credentials: 'omit'`参数：
+
+```javascript
+fetch('https://example.com', {
+  credentials: 'omit'  
+})
+```
+
+### 3.1.3.检查fetch是否成功
+
+一个`fetch()`的Promise将会Reject一个网络中遇到的[TypeError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError)，尽管它通常表示近似于权限错误——404不会称为网络错误。一个成功的fetch\(\)的精确检查将包含Promise是否解决，然后检查Response中的ok属性是否为true，调用代码类似：
+
+```javascript
+fetch('flowers.jpg')
+.then(function(response) {
+  if(response.ok) {
+    return response.blob();
+  }
+  throw new Error('Network response was not ok.');
+})
+.then(function(myBlob) { 
+  var objectURL = URL.createObjectURL(myBlob); 
+  myImage.src = objectURL; 
+})
+.catch(function(error) {
+  console.log('There has been a problem with your fetch operation: ' + error.message);
+});
+```
+
+#### 3.1.4.提供自己的请求对象
+
+若您不想仅仅通过资源请求地址发送请求，您可以创建一个请求专用对象Request，然后将它传入到fetch\(\)方法中：
+
+```javascript
+var myHeaders = new Headers();
+
+var myInit = { method: 'GET',
+               headers: myHeaders,
+               mode: 'cors',
+               cache: 'default' };
+
+var myRequest = new Request('flowers.jpg', myInit);
+
+fetch(myRequest)
+.then(function(response) {
+  return response.blob();
+})
+.then(function(myBlob) {
+  var objectURL = URL.createObjectURL(myBlob);
+  myImage.src = objectURL;
+});
+```
+
+Request\(\)方法接收和fetch\(\)一样的参数，您同样可以将存在的Request对象传入而拷贝一个同样的对象：
+
+```javascript
+var anotherRequest = new Request(myRequest, myInit);
+```
+
+这个十分有用，
 
