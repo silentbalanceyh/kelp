@@ -93,5 +93,41 @@ fetch(myRequest)
 });
 ```
 
+**Body.formData\(\)**：读取Response流直到完成，它将返回一个处理了FormData对象的Promise
+
+```javascript
+response.formData().then(function(formdata) {
+  // do something with your formdata
+});
+```
+
+**Body.json\(\)**：读取Response流直到完成，它将返回一个处理了JSON对象的Promise
+
+```javascript
+response.json().then(function(json) {
+  // do something with your JSON
+});
+```
+
+示例
+
+```javascript
+var myList = document.querySelector('ul');
+
+var myRequest = new Request('products.json');
+
+fetch(myRequest)
+  .then(function(response) { return response.json(); })
+  .then(function(json) {
+    for(i = 0; i < json.products.length; i++) {
+      var listItem = document.createElement('li');
+      listItem.innerHTML = '<strong>' + json.products[i].Name + 
+        '</strong> can be found in ' + json.products[i].Location + 
+        '. Cost: <strong>£' + json.products[i].Price + '</strong>';
+      myList.appendChild(listItem);
+    }
+  });
+```
+
 
 
