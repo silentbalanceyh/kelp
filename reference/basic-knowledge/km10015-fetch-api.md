@@ -179,5 +179,9 @@ var anotherRequest = new Request(myRequest, myInit);
 
 _**NOTES**_：这里同样提供了一个`clone()`方法用于创建请求副本，但是它和拷贝方法具有不同的语义——若原始的正文已经被读取，则这种格式将会有问题。
 
+### 3.2. Headers
+
+
+
 
 
