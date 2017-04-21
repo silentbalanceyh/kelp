@@ -260,6 +260,30 @@ _**NOTES**_：对于Header值，您不可追加或者设置`Content-Length`，�
 
 ### 3.3. Response
 
+根据您所看到的上述内容，当fetch\(\)方法的Promise被处理（Resolve）时，它将会返回一个[Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)实例。这个对象同样可通过JavaScript编程的方式创建，但是当您通过[respondWith\(\)](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent/respondWith)方法接收了自定义的请求时，这种方式在[ServiceWorkers](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker_API)中不生效。
+
+```javascript
+var myBody = new Blob();
+
+addEventListener('fetch', function(event) {
+  event.respondWith(
+    new Response(myBody, {
+      headers: { "Content-Type" : "text/plain" }
+    })
+  );
+});
+```
+
+构造函数Response\(\)可传入两个可选参数——一个Response的Body（响应正文），一个初始化专用Options对象（和Request、fetch第二参数一样）。下边这些response的属性是您通常会使用到的：
+
+* [Response.status](https://developer.mozilla.org/en-US/docs/Web/API/Response/status)——一个整数值描述响应状态代码（默认200）
+* [Response.statusText](https://developer.mozilla.org/en-US/docs/Web/API/Response/statusText)——和状态代码对应的字符串描述响应状态信息
+* [Response.ok](https://developer.mozilla.org/en-US/docs/Web/API/Response/ok)——和前文阐述一样，它用于简单检查响应状态是否在200 ~ 299范围内，返回一个boolean值
+
+_**NOTES**_：静态方法[error\(\)](https://developer.mozilla.org/en-US/docs/Web/API/Response/error)会简单返回一个错误的响应，类似的[redirect\(\)](https://developer.mozilla.org/en-US/docs/Web/API/Response/redirect)将会返回一个重定向的响应，它们和Service Workers同样相关。
+
+### 3.4. Body
+
 
 
 
