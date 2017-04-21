@@ -129,5 +129,5 @@ fetch(myRequest)
   });
 ```
 
-
+**Body.text\(\)**：读取Response流直到完成，它将返回一个包含了USVString对象的Promise，USVString是所有可能的有序Unicode字符串的集合，可使用JavaScript中的String表示，通常用于处理文本数据。
 
