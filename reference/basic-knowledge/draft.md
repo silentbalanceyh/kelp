@@ -25,10 +25,10 @@ console.log(myHeaders.has("Content-Type")); // true
 console.log(myHeaders.has("Set-Cookie")); // false
 myHeaders.set("Content-Type", "text/html");
 myHeaders.append("X-Custom-Header", "AnotherValue");
- 
+
 console.log(myHeaders.get("Content-Length")); // 11
 console.log(myHeaders.get("X-Custom-Header")); // ["ProcessThisImmediately", "AnotherValue"]
- 
+
 myHeaders.delete("X-Custom-Header");
 console.log(myHeaders.get("X-Custom-Header")); // [ ]
 ```
@@ -44,6 +44,21 @@ try {
 } catch(e) {
   console.log("Cannot pretend to be a bank!");
 }
+```
+
+更好的使用头的场景是检查头内容是否合法：
+
+```javascript
+fetch(myRequest).then(function(response) {
+  var contentType = response.headers.get("content-type");
+  if(contentType && contentType.indexOf("application/json") !== -1) {
+    return response.json().then(function(json) {
+      // process your JSON further
+    });
+  } else {
+    console.log("Oops, we haven't got JSON!");
+  }
+});
 ```
 
 
