@@ -1,14 +1,18 @@
-因为头信息可以在请求中发送，并且可以从响应中接收，所以这些信息会有一定的限制，为了不更改Header的信息，所以提供了和它相关的Guard属性。这个属性不是对Web应用开放的，但它限制了是否可更改Header的一些行为。
+根据您所看到的上述内容，当fetch\(\)方法的Promise被处理（Resolve）时，它将会返回一个[Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)实例。这个对象同样可通过JavaScript编程的方式创建，但是当您通过[respondWith\(\)](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent/respondWith)方法接收了自定义的请求时，这种方式在[ServiceWorkers](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker_API)中不生效。
 
-可用的Guard值包括：
+```javascript
+var myBody = new Blob();
 
-* none：默认值
-* request：从一个Request中可读取的Guard信息（[Request.headers](https://developer.mozilla.org/en-US/docs/Web/API/Request/headers)）
-* request-no-cors：使用了[Request.mode](https://developer.mozilla.org/en-US/docs/Web/API/Request/mode) = no-cors创建的一个请求，并从该请求中读取Header的Guard信息
-* response：直接从响应中读取的Header对应Guard信息（[Response.headers](https://developer.mozilla.org/en-US/docs/Web/API/Response/headers)）
-* immutable：大部分时间用于ServiceWorkers，将Header处理成只读。
+addEventListener('fetch', function(event) {
+  event.respondWith(
+    new Response(myBody, {
+      headers: { "Content-Type" : "text/plain" }
+    })
+  );
+});
+```
 
-_**NOTES**_：对于Header值，您不可追加或者设置`Content-Length`，类似的，在Response头信息中添加`Set-Cookie`也是不允许的，ServiceWorkers同样也不允许在响应中同步设置`Set-Cookie`。
+构造函数Response\(\)可传入两个可选参数——一个Response的Body（响应正文），一个初始化专用Options对象（和Request、fetch第二参数一样）。下边这些response的属性是您通常会使用到的：
 
 
 
