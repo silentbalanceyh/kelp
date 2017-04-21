@@ -68,5 +68,30 @@ play.onclick = function() {
 }
 ```
 
+**Body.blob\(\)**：读取Response流直到完成，它将返回一个处理了Blob内容的Promise。
+
+```javascript
+response.blob().then(function(myBlob) {
+  // do something with myBlob
+});
+```
+
+示例：
+
+```javascript
+var myImage = document.querySelector('img');
+
+var myRequest = new Request('flowers.jpg');
+
+fetch(myRequest)
+.then(function(response) {
+  return response.blob();
+})
+.then(function(myBlob) {
+  var objectURL = URL.createObjectURL(myBlob);
+  myImage.src = objectURL;
+});
+```
+
 
 
