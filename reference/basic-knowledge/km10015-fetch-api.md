@@ -175,5 +175,9 @@ Request\(\)方法接收和fetch\(\)一样的参数，您同样可以将存在的
 var anotherRequest = new Request(myRequest, myInit);
 ```
 
-这个十分有用，因为Request和Response的正文都是一次性的，
+这个十分有用，因为Request和Response的正文都是一次性的，这样创建一个请求的副本允许您重新发送请求/响应，并且可验证初始化options。
+
+_**NOTES**_：这里同样提供了一个`clone()`方法用于创建请求副本，但是它和拷贝方法具有不同的语义——若原始的正文已经被读取，则这种格式将会有问题。
+
+
 
