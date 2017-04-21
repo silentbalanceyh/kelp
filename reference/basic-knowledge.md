@@ -28,6 +28,7 @@
 * [KM10009 - Mockito Using](/reference/basic-knowledge/15testing/151mockito/km10009-mock-using.md)（Mockito的使用）
 * [KM10013 - Jasmine Basic](/reference/basic-knowledge/15testing/153jasmine/km10013-jasmine-basic.md)（Jasmine基础知识）
 * [KM10014 - Karma for ES6 \( Webpack \)](/reference/basic-knowledge/15testing/km10014-karma-for-es6-webpack.md)（Karma ES6环境搭建）
+* [KM10015 - Fetch Api](/reference/basic-knowledge/km10015-fetch-api.md)（Fetch API详解）
 
 ## 6. Building
 

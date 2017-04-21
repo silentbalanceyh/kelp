@@ -72,6 +72,8 @@
       * [KM10004 - JSR330](reference/basic-knowledge/143jersey/km10004-jsr330.md)
     * [1.4.4.OVal](reference/basic-knowledge/144oval.md)
       * [KM10011 - AOP && OVal](reference/basic-knowledge/144oval/km10011-aop-andand-oval.md)
+    * 1.4.5.Ajax Remote
+      * [KM10015 - Fetch Api](reference/basic-knowledge/km10015-fetch-api.md)
   * [1.5.Testing](reference/basic-knowledge/15testing.md)
     * [1.5.1.Mockito](reference/basic-knowledge/15testing/151mockito.md)
       * [KM10008 - Mockito Basic](reference/basic-knowledge/15testing/151mockito/km10008-junit-and-mockito-basic.md)
