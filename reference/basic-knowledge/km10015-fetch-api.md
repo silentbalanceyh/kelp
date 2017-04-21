@@ -1,5 +1,7 @@
 # KM10015 - Fetch API
 
+[Reference: Fetch Specification](https://fetch.spec.whatwg.org/)
+
 这是目前一项实验性技术，暂时还没有稳定，可检查[兼容表](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API#Browser_compatibility)来查看对各种浏览器的支持，既然是实验性技术那么很有可能在不久的将来发生改变。Fetch API提供了读取资源的同意接口（包括从网络访问），它将和传统的XMLHttpRequest类似，但是提供的API会更加强大。
 
 ## 1.概念和使用
