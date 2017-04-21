@@ -315,3 +315,42 @@ fetch("/login", {
 
 请求和响应（可以被fetch\(\)函数扩展的），都尝试智能分析Content Type，如果没设置Content-Type头信息则它会尝试自己分析头信息。
 
+### 3.5. Feature Detection
+
+Fetch API可以通过检查存在的Headers、Request、Response或Window/Worker范围内的fetch\(\)来判断当前环境是否支持：
+
+```javascript
+if (self.fetch) {
+    // run my fetch request here
+} else {
+    // do something with XMLHttpRequest?
+}
+```
+
+### 3.6. Polyfill
+
+若要在不支持它的浏览器中使用，则需要考虑[Fetch Polyfill](https://github.com/github/fetch)在这些浏览器中可使用：
+
+### 3.7. Specifications
+
+* [Fetch](https://fetch.spec.whatwg.org/)：状态Living Standard
+
+### 3.8. Browser Compatibility
+
+| 浏览器 | 版本 | 桌面系统/移动端？ |
+| :--- | :--- | :--- |
+| Chrome | 42 / 41\[1\] | Desktop |
+| Edge | 14 |  |
+| Firefox \( Gecko \) | 39 \(39\) / 34 \(34\)\[1\] / 52 \(52\) \[2\] |  |
+| Internet Explorer | Not Support |  |
+| Opera | 29 28\[1\] |  |
+| Safari \( WebKit \) | 10.1 |  |
+| Android | ? | Mobile |
+| Firefox Mobile \( Gecko \) | \(YES\) |  |
+| IE Phone | Not Support |  |
+| Opera Mobile | ? |  |
+| Safari Mobile | 10.1 |  |
+| Chrome for Android | ? |  |
+
+
+
