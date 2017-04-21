@@ -519,5 +519,7 @@ fetch(myRequest)
 
 关于Fetch API的详细用法参考案例项目：
 
+* [kp-web-api](https://github.com/silentbalanceyh/kelp-package/blob/master/kp-web-api/README.md)
+
 
 
