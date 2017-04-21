@@ -52,7 +52,16 @@ Guard是Headers对象的一个特征，它具有不可变、请求、不跨域�
 
 ## 3. Fetch的使用
 
-Fetch API提供了JavaScript接口用来操作控制HTTP中的管道（如Request何Response），它提供了一个fetch\(\)全局方法可以用简易、更具逻辑的方法从网络上异步读取数据。
+Fetch API提供了JavaScript接口用来操作控制HTTP中的管道（如Request何Response），它提供了一个fetch\(\)全局方法可以用简易、更具逻辑的方法从网络上异步读取数据。这类功能之前一般通过[XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)来提供，Fetch则提供了更好的方法可以让您更容易使用这种技术，如[Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker_API)。Fetch同样提供了HTTP相关概念的简单逻辑定义，如CORS和扩展（Extension）。
+
+需要注意的是Fetch规范和jQuery.ajax\(\)中定义的主要有两点不同：
+
+* 即使响应返回了404或500，fetch\(\)中的Promise不会执行HTTP错误状态事件的Reject。相反，它使用通常的方式Resolve（将OK设成false），它仅仅会Reject一些网络错误或者其他防止请求完成的错误。
+* 默认情况，fetch不会发送或接收任何服务器相关的Cookie，对于未认证的请求通常这个站点自身需要管理以及维护用户会话状态（发送Cookies，提供credentials头）
+
+### 3.1. 创建fetch请求
+
+
 
 
 
