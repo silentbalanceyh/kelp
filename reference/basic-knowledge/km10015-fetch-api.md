@@ -175,5 +175,5 @@ Request\(\)方法接收和fetch\(\)一样的参数，您同样可以将存在的
 var anotherRequest = new Request(myRequest, myInit);
 ```
 
-这个十分有用，
+这个十分有用，因为Request和Response的正文都是一次性的，
 
