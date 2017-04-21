@@ -10,9 +10,7 @@ GlobalFetch的mixin的Fetch API包含了[GlobalFetch.fetch\(\)](https://develope
 
 None.
 
-### Methods
-
-
+#### Methods
 
 
 
