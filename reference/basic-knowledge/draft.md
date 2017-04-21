@@ -1,65 +1,14 @@
-Headers接口允许您通过Headers\(\)方法创建自定义的HTTP头信息，一个Header对象就是简单的键值对：
+因为头信息可以在请求中发送，并且可以从响应中接收，所以这些信息会有一定的限制，为了不更改Header的信息，所以提供了和它相关的Guard属性。这个属性不是对Web应用开放的，但它限制了是否可更改Header的一些行为。
 
-```javascript
-var content = "Hello World";
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "text/plain");
-myHeaders.append("Content-Length", content.length.toString());
-myHeaders.append("X-Custom-Header", "ProcessThisImmediately");
-```
+可用的Guard值包括：
 
-同样的创建方法，您可以通过一个JavaScript对象来构造这样的Header：
+* none：默认值
+* request：从一个Request中可读取的Guard信息（[Request.headers](https://developer.mozilla.org/en-US/docs/Web/API/Request/headers)）
+* request-no-cors：使用了[Request.mode](https://developer.mozilla.org/en-US/docs/Web/API/Request/mode) = no-cors创建的一个请求，并从该请求中读取Header的Guard信息
+* response：直接从响应中读取的Header对应Guard信息（[Response.headers](https://developer.mozilla.org/en-US/docs/Web/API/Response/headers)）
+* immutable：大部分时间用于ServiceWorkers，将Header处理成只读。
 
-```javascript
-myHeaders = new Headers({
-  "Content-Type": "text/plain",
-  "Content-Length": content.length.toString(),
-  "X-Custom-Header": "ProcessThisImmediately",
-});
-```
-
-这些设置的内容可以通过查询和获取拿到：
-
-```javascript
-console.log(myHeaders.has("Content-Type")); // true
-console.log(myHeaders.has("Set-Cookie")); // false
-myHeaders.set("Content-Type", "text/html");
-myHeaders.append("X-Custom-Header", "AnotherValue");
-
-console.log(myHeaders.get("Content-Length")); // 11
-console.log(myHeaders.get("X-Custom-Header")); // ["ProcessThisImmediately", "AnotherValue"]
-
-myHeaders.delete("X-Custom-Header");
-console.log(myHeaders.get("X-Custom-Header")); // [ ]
-```
-
-上边有些操作仅仅对[ServiceWorkers](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker_API)生效，并且提供了更友好的API来操作Header。
-
-如果提供的HTTP头信息并不是一个合法的HTTP头键，则这个头方法会抛出一个TypeError错误，若这里存在一个不可变的Guard，改变它的操作也会引起TypeError：
-
-```javascript
-var myResponse = Response.error();
-try {
-  myResponse.headers.set("Origin", "http://mybank.com");
-} catch(e) {
-  console.log("Cannot pretend to be a bank!");
-}
-```
-
-更好的使用头的场景是检查头内容是否合法：
-
-```javascript
-fetch(myRequest).then(function(response) {
-  var contentType = response.headers.get("content-type");
-  if(contentType && contentType.indexOf("application/json") !== -1) {
-    return response.json().then(function(json) {
-      // process your JSON further
-    });
-  } else {
-    console.log("Oops, we haven't got JSON!");
-  }
-});
-```
+_**NOTES**_：对于Header值，您不可追加或者设置`Content-Length`，类似的，在Response头信息中添加`Set-Cookie`也是不允许的，ServiceWorkers同样也不允许在响应中同步设置`Set-Cookie`。
 
 
 
