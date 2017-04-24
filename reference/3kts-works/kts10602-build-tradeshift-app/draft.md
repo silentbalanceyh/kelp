@@ -45,7 +45,10 @@ App Vendor将会创建一个请求发送到Token Endpoint：
 POST: https://api-sandbox.tradeshift.com/tradeshift/auth/token
 ```
 
-* Authorization: 使用Basic认证，参数值通过Base64的方式加密`username:password`，username的格式如：`{vendorId.appId}`，密码则是OAUTH2中在Developer设置的
-
+* Authorization: 使用Basic认证，参数值通过Base64的方式加密`username:password`，username的格式如：`{vendorId.appId}`，密码则是OAUTH2中在Developer设置的；
+* Body内容类型：`application/x-www-form-urlencoded`
+* 请求中发送的POST正文的参数编码使用`UTF-8`
+* 参数`grant_type`：值必须是`authorization`
+* 
 
 
