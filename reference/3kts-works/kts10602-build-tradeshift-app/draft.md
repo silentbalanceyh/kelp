@@ -51,5 +51,9 @@ POST: https://api-sandbox.tradeshift.com/tradeshift/auth/token
 * 参数`grant_type`：值必须是`authorization_code`
 * 参数`code`：先前从应用中获取的授权码
 
+该接口响应信息包括下边：
+
+
+
 
 
