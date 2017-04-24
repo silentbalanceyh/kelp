@@ -2,7 +2,7 @@
 
 大部分应用都需要和Tradeshift的API进行交互，若要启用它，Tradeshift实现了标准的OAUTH2协议（[RFC6749](https://tools.ietf.org/html/rfc6749)），对于APP，我们使用OAUTH中的3-legged协议，当激活这个应用时，用户将被要求当前账号进行认证和授权保证账号有权限做这些。当创建/编辑一个App时，您可以设置App的secret、client identifier，另外您需要选择您所访问的资源地址（OAUTH域中）。
 
-### 2.1. OAuth 2 Authentication Sequence
+### OAuth 2 Authentication Sequence
 
 **Step 1 - 重定向到Authorization Server获取授权码（Auth Code）**
 
@@ -75,16 +75,14 @@ Authorization=Basic RWx0ZWMuTWFwQXBwOnRlc3QxMjM=&grant_type=authorization_code&c
 
 ```json
 {
- "access_token": "EQ90um+/ODi7Gf1E98CSXNIhIVUY8w96n+6vKf5JtWwr2awGQoACND0XCVOaeza+HNocg10QujGnw6VlxMng3z7eVe6RCFAlGayFD4p3wVvaWzQKECwRoVxFjwcX3XwOcwfE1tT1MTAHGKb435VUaIN7peD9zo6L5SbdTuX5jNZzz4GWiZjdDo7iWVZQ0HmB/HzrIi6goTIohazOUJepAEZWV8koHrMwpqJFaKAaFJDgecJMREm18eaXhZ55Un2L6wwPOqF3KPV0dj/7ycNVRPlWrUC6M1oVlH4zsrdEGVMvN6ccpnD3pcDskQwLNtmos8srCXvy7doMsKmm1tliB8hmrzh/P9Eywjw8xSKeiW0wWGpe/oYLEgL10loqVGUn1vGRBRR5GUjIs+ysBVAAWgIAAQ==",
- "token_type": "Bearer",
- "expires_in": 30,
- "id_token": "eyJhbGciOiJub25lIn0.eyJleHAiOjE0MzYyMjYyNzAsInN1YiI6InNtYStzYXJhaGJyb3duQHRyYWRlc2hpZnQuY29tIiwidXNlcklkIjoiMjFkMjVjOTItYzBmNy00NGZkLWJiMzgtMzhiZjZmYmE3NDBmIiwiYXVkIjpbIkFCQ0luYy5NYXBBcHAiXSwiaXNzIjoiaHR0cHM6XC9cL2FwaS1zYW5kYm94LnRyYWRlc2hpZnQuY29tXC90cmFkZXNoaWZ0XC8iLCJqdGkiOiJqMmFyQXhRNHJOMFVVQm1qIiwiY29tcGFueUlkIjoiMDZhY2Q5MmItNmNiNS00OWZlLWFmZWUtOWY3YTBmZjMxODU1IiwiaWF0IjoxNDM2MjI2MjQwfQ.",
- "client_id": "ABCInc.MapApp",
- "refresh_token": "EQ90um+/ODi7Gf1E98CSXNIhIVUY8w96n+6vKf5JtWwr2awGQoACS8+RJkINGl1T50JQSVbLfxNhMPYb50Wv/t1ULeNdiPHrVqU1r/1wkjw56M1xhYSkkrXJsS25KCfHecV8lbrCt9d80ZASR6QrHd1O5/gWQ3Hzg09xCefVLm2Apq1ZRihWUIx2CEQU6SR+0U6cNbbtY7JdW/iwhD2ygPW40deguOrqYHtwZKqG/vSR1InWMBEzRNC2EZmSKkAfx+qoQa8ZDGcLRMvn3d4Jqc2W57YNzpOSTu/z8+Yeiob1Eeg3Ocse44yivDEkv9N82AgLSxpkQgWhZglkh+OgSnFU0Lt5dvQl/KuRb8+CgdFAg6usaUU+NYf/31pp68kZb5G4+7bxcUjAjPG7BVADWgIAAQ=="
+   "access_token": "EQ90um+/ODi7Gf1E98CSXNIhIVUY8w96n+6vKf5JtWwr2awGQoACND0XCVOaeza+HNocg10QujGnw6VlxMng3z7eVe6RCFAlGayFD4p3wVvaWzQKECwRoVxFjwcX3XwOcwfE1tT1MTAHGKb435VUaIN7peD9zo6L5SbdTuX5jNZzz4GWiZjdDo7iWVZQ0HmB/HzrIi6goTIohazOUJepAEZWV8koHrMwpqJFaKAaFJDgecJMREm18eaXhZ55Un2L6wwPOqF3KPV0dj/7ycNVRPlWrUC6M1oVlH4zsrdEGVMvN6ccpnD3pcDskQwLNtmos8srCXvy7doMsKmm1tliB8hmrzh/P9Eywjw8xSKeiW0wWGpe/oYLEgL10loqVGUn1vGRBRR5GUjIs+ysBVAAWgIAAQ==",
+   "token_type": "Bearer",
+   "expires_in": 30,
+   "id_token": "eyJhbGciOiJub25lIn0.eyJleHAiOjE0MzYyMjYyNzAsInN1YiI6InNtYStzYXJhaGJyb3duQHRyYWRlc2hpZnQuY29tIiwidXNlcklkIjoiMjFkMjVjOTItYzBmNy00NGZkLWJiMzgtMzhiZjZmYmE3NDBmIiwiYXVkIjpbIkFCQ0luYy5NYXBBcHAiXSwiaXNzIjoiaHR0cHM6XC9cL2FwaS1zYW5kYm94LnRyYWRlc2hpZnQuY29tXC90cmFkZXNoaWZ0XC8iLCJqdGkiOiJqMmFyQXhRNHJOMFVVQm1qIiwiY29tcGFueUlkIjoiMDZhY2Q5MmItNmNiNS00OWZlLWFmZWUtOWY3YTBmZjMxODU1IiwiaWF0IjoxNDM2MjI2MjQwfQ.",
+   "client_id": "ABCInc.MapApp",
+   "refresh_token": "EQ90um+/ODi7Gf1E98CSXNIhIVUY8w96n+6vKf5JtWwr2awGQoACS8+RJkINGl1T50JQSVbLfxNhMPYb50Wv/t1ULeNdiPHrVqU1r/1wkjw56M1xhYSkkrXJsS25KCfHecV8lbrCt9d80ZASR6QrHd1O5/gWQ3Hzg09xCefVLm2Apq1ZRihWUIx2CEQU6SR+0U6cNbbtY7JdW/iwhD2ygPW40deguOrqYHtwZKqG/vSR1InWMBEzRNC2EZmSKkAfx+qoQa8ZDGcLRMvn3d4Jqc2W57YNzpOSTu/z8+Yeiob1Eeg3Ocse44yivDEkv9N82AgLSxpkQgWhZglkh+OgSnFU0Lt5dvQl/KuRb8+CgdFAg6usaUU+NYf/31pp68kZb5G4+7bxcUjAjPG7BVADWgIAAQ=="
 }
 ```
-
-
 
 
 
