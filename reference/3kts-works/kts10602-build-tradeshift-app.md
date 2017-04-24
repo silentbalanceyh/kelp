@@ -34,5 +34,9 @@ Tradeshift维护了两套环境：sandbox.tradeshift.com和go.tradeshift.com，�
 
 ### 1.3. Main URL Gotcha & X-Frame-Origin
 
-一些开发框架会自动发送代码防止它们的页面被包含在一个IFrame中，它们将发送HTTP头`X-Frame-Origin: SAMEORIGIN`或`X-Frame-Origin: Deny`比如上边的Google Map应用，我们则是用了嵌入式代码。查看[RFC7034](https://tools.ietf.org/html/rfc7034)了解更多X-Frame-Origin头，这些信息可以直接从Developer Tool中看到。
+一些开发框架会自动发送代码防止它们的页面被包含在一个IFrame中，它们将发送HTTP头`X-Frame-Origin: SAMEORIGIN`或`X-Frame-Origin: Deny`比如上边的Google Map应用，我们则是用了嵌入式代码。查看[RFC7034](https://tools.ietf.org/html/rfc7034)了解更多X-Frame-Origin头，这些信息可以直接从Developer Tool中看到。我们推荐您确保您的应用不会发送`X-Frame-Origin`头——它可以允许Tradeshift将您的应用嵌入到IFrame中，您可以指定`ALLOW-FROM`，但这个仅仅只被一些浏览器支持（Firefox/IE），如果是基于Chromium的浏览器则会报错。
+
+_Releasing App Into Appstore_
+
+当您创建您自己的应用时，实际上创建的是一个隐藏类型——这个应用不可以在AppStore中方法，但可以安装在自己的账号下进行测试。若要发布您的应用到AppStore中，您需要提交给Tradeshift进行Review，发邮件到[apps@tradeshift.com](mailto:apps@tradeshift.com)（带上VendorId和AppId），
 
