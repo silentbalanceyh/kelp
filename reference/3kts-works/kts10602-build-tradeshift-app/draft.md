@@ -16,7 +16,11 @@ POST?event=AFTER_DOCUMENT_RECEIVE&id={event uuid}&tsUserId={user uuid}&tsCompany
 
 **Parameters**
 
-* **event**：事件名称，如：\`\`
+* **event**：事件名称，如：`AFTER_DOCUMENT_RECEIVE`
+* **id**：事件ID
+* **tsUserLanguage**：用户使用语言，如：`en_UK`
+* **tsUserId**：用户关联的ID——您将在创建用户账号时得到用户的ID
+* **tsCompanyAccountId**：激活App的公司
 
 
 
