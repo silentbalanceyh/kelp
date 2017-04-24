@@ -8,5 +8,5 @@
 
 Webhooks允许您和Tradeshift中的一些特殊的事件【Event】交互，当其中某一个事件发生时，我们叫发送一个HTTP POST请求到Webhook中配置的URL，而Webhook是在应用级别配置的，当它触发时，它们将根据公司安装时的一些参数发送信息，这个事件的正文包含了额外的信息：如文档已经收到等。您可以在Developer的App中配置Webhook，滑动到Webhook章节，点击Add，则需要填写Webhook的名称以及提供POST请求将发送的地址。
 
-如（`AFTER_DOCUMENT`
+如（`AFTER_DOCUMENT_RECEIVE`）
 
