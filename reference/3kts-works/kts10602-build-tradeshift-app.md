@@ -40,5 +40,5 @@ _Releasing App Into Appstore_
 
 当您创建您自己的应用时，实际上创建的是一个隐藏类型——这个应用不可以在AppStore中方法，但可以安装在自己的账号下进行测试。若要发布您的应用到AppStore中，您需要提交给Tradeshift进行Review，发邮件到[apps@tradeshift.com](mailto:apps@tradeshift.com)（带上VendorId和AppId），则我们可以Review并Unhide它，Tradeshift最终会将它分配到对应的类别中。
 
-一旦Tradeshift审批了这个应用，则它将在AppStore中可用并且可以激活。如果您在Sandbox中（sandbox.tradeshift.com）测试该应用，则您可以在生产环境部署它，接下来让Tradeshift做最终的Review。
+一旦Tradeshift审批了这个应用，则它将在AppStore中可用并且可以激活。如果您在Sandbox中（sandbox.tradeshift.com）测试该应用，则您可以在生产环境部署它，接下来让Tradeshift做最终的Review，为了保证一致性，尽可能在两个环境中保持VendorId的一致性。
 
