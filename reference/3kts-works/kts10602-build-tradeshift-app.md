@@ -12,7 +12,12 @@ Tradeshift维护了两套环境：sandbox.tradeshift.com和go.tradeshift.com，�
 
 一旦设置了VendorId，则您就可以直接创建您的应用，应用参数会在您的Developer App界面中，主要需要填写的参数如下：
 
-* APP NAME：
-
+* **APP ID**：系统自动生成（不可带点`.`符号）
+* **APP NAME**：应用名称，主要用于显示
+* **APP DESCRIPTION**：应用描述信息，主要用于介绍该应用
+* **APP ICON**：应用本身的图标信息
+* **DEFAULT LOCALE**：默认的时区信息、语言信息
+* **OAUTH2 CLIENT ID**：OAuth集成专用的Client ID参数信息
+* 
 
 
