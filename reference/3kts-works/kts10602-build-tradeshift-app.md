@@ -18,6 +18,13 @@ Tradeshift维护了两套环境：sandbox.tradeshift.com和go.tradeshift.com，�
 * **APP ICON**：应用本身的图标信息
 * **DEFAULT LOCALE**：默认的时区信息、语言信息
 * **OAUTH2 CLIENT ID**：OAuth集成专用的Client ID参数信息
-* 
+* **OAUTH2 CLIENT SECRET**：OAuth集成专用的客户端secret信息
+* **OAUTH2 REDIRECT URI**：OAuth专用的Callback的URI地址（注意区分Main URL）
+* **PERMISSIONS**：一些支持的Tradeshift服务端API的权限
+* **WEBHOOKS**：Web应用的一些钩子程序
+* **MAIN URL**：应用的主界面地址
+
+
+
 
 
