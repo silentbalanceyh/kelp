@@ -22,5 +22,14 @@ POST?event=AFTER_DOCUMENT_RECEIVE&id={event uuid}&tsUserId={user uuid}&tsCompany
 * **tsUserId**：用户关联的ID——您将在创建用户账号时得到用户的ID
 * **tsCompanyAccountId**：激活App的公司
 
+**Tips**：如果您想要查看请求内容，则您可以直接将webhook配置到https://requestb.in/或者https://hookbin.com/。
+
+### Webhook Events
+
+当配置一个webhook时，您可选择哪个事件您将接收数据，文档相关【Document-related】的webhook当前仅仅支持的文档类型为：Invoice、Order、OrderChange。
+
+Document Sending Events
+
+* 
 
 
