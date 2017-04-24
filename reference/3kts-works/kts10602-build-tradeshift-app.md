@@ -38,5 +38,5 @@ Tradeshift维护了两套环境：sandbox.tradeshift.com和go.tradeshift.com，�
 
 _Releasing App Into Appstore_
 
-当您创建您自己的应用时，实际上创建的是一个隐藏类型——这个应用不可以在AppStore中方法，但可以安装在自己的账号下进行测试。若要发布您的应用到AppStore中，您需要提交给Tradeshift进行Review，发邮件到[apps@tradeshift.com](mailto:apps@tradeshift.com)（带上VendorId和AppId），
+当您创建您自己的应用时，实际上创建的是一个隐藏类型——这个应用不可以在AppStore中方法，但可以安装在自己的账号下进行测试。若要发布您的应用到AppStore中，您需要提交给Tradeshift进行Review，发邮件到[apps@tradeshift.com](mailto:apps@tradeshift.com)（带上VendorId和AppId），则我们可以Review并Unhide它，Tradeshift最终会将它分配到对应的类别中。
 
