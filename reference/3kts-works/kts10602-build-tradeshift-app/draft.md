@@ -49,6 +49,7 @@ POST: https://api-sandbox.tradeshift.com/tradeshift/auth/token
 * Body内容类型：`application/x-www-form-urlencoded`
 * 请求中发送的POST正文的参数编码使用`UTF-8`
 * 参数`grant_type`：值必须是`authorization`
-* 
+* 参数`code`：先前从应用中获取的授权码
+
 
 
