@@ -30,6 +30,21 @@ POST?event=AFTER_DOCUMENT_RECEIVE&id={event uuid}&tsUserId={user uuid}&tsCompany
 
 文档发送事件
 
-* 
+* `DOCUMENT_VALIDATING`：第一步，当您发送文档之前，验证文档中是否包含了所有信息。
+* `DOCUMENT_SENDING`：开始发送Document，等待接收的信息。
+* `DOCUMENT_SENT`：最后一步，发送文档完成。
+
+文档接收事件
+
+* `BEFORE_DOCUMENT_RECEIVE`：当文档被接收者接收之前触发。
+* `AFTER_DOCUMENT_RECEIVE`：当文档全部被接收过后触发。
+
+网络连接事件
+
+* `NETWORK_REQUEST_RECEIVED`：公司接收到一个新的Network连接请求时触发。
+* `NETWORK_REQUEST_ACCEPTED`：其他的Party接收当前网络连接时触发。
+* `NETWORK_RESPONSE_RECEIVED`：接收到网络请求响应时触发。
+
+
 
 
