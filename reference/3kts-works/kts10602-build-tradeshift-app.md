@@ -42,3 +42,13 @@ _Releasing App Into Appstore_
 
 一旦Tradeshift审批了这个应用，则它将在AppStore中可用并且可以激活。如果您在Sandbox中（sandbox.tradeshift.com）测试该应用，则您可以在生产环境部署它，接下来让Tradeshift做最终的Review，为了保证一致性，尽可能在两个环境中保持VendorId的一致性。
 
+### 1.4. Full App Examples
+
+Tradeshift创建了许多应用的例子让您更容易去理解这个架构，包括如何针对Tradeshift服务器授权，其中一个例子使用了Spring Boot、Node.JS、PHP，您可以在[GitHub](https://github.com/Tradeshift/tradeshift-app-samples)中查看。这里有[12分钟](https://drive.google.com/file/d/0Bx2z3BvoWzgtU05QdFludEROZ2c/view)视频演示了如何发布Spring.Boot应用以及如何配置成和Tradeshift这边协同工作。我们强烈推荐您完成这些简单联系来熟悉它，简单应用——Java Spring Boot演示了Tradeshift的Platform中不同的方面。
+
+**Development Tips**
+
+在开发过程，您往往需要迭代您的应用，并且Tradeshift服务器需要传递authentication tokens，我们推荐您使用[ngrok](https://ngrok.com/)或[localtunnel](https://localtunnel.github.io/www/)，允许将您的本地应用开放到公网上。
+
+
+
