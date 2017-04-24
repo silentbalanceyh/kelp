@@ -10,3 +10,7 @@ Webhooks允许您和Tradeshift中的一些特殊的事件【Event】交互，当
 
 如（`AFTER_DOCUMENT_RECEIVE`）
 
+```
+POST ?event= AFTER_DOCUMENT_RECEIVE&id={event uuid}&tsUserId={user uuid}&tsCompanyAccountId={account uuid}&tsUserLanguage={user language}
+```
+
