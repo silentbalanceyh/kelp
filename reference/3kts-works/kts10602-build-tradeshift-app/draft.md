@@ -1,49 +1,5 @@
-## 4. Permissions
+## 6. API Usage最佳实践
 
-你的App若调用Tradeshift Api，则当激活该应用时，用户需要设置相关权限。在Developer应用中，您可以控制应用所需权限。当激活该应用时，用户或管理员将检查所需的权限，尽可能保证您仅仅启用您所需要的权限，下边加锁的权限则没有办法修改。——权限信息是映射到OAuth2的域中。
-
-## 5. Webhooks
-
-通常，嵌入的应用需要和Tradeshift进行交互，如：当一个发票【invoice】或采购订单【purchase order】被一个公司激活的应用接收过后，这个app也许需要回应——要么存储一个文档、要么执行其他行为。
-
-Webhooks允许您和Tradeshift中的一些特殊的事件【Event】交互，当其中某一个事件发生时，我们叫发送一个HTTP POST请求到Webhook中配置的URL，而Webhook是在应用级别配置的，当它触发时，它们将根据公司安装时的一些参数发送信息，这个事件的正文包含了额外的信息：如文档已经收到等。您可以在Developer的App中配置Webhook，滑动到Webhook章节，点击Add，则需要填写Webhook的名称以及提供POST请求将发送的地址。
-
-如（`AFTER_DOCUMENT_RECEIVE`）
-
-```
-POST?event=AFTER_DOCUMENT_RECEIVE&id={event uuid}&tsUserId={user uuid}&tsCompanyAccountId={account uuid}&tsUserLanguage={user language}
-```
-
-**Parameters**
-
-* **event**：事件名称，如：`AFTER_DOCUMENT_RECEIVE`
-* **id**：事件ID
-* **tsUserLanguage**：用户使用语言，如：`en_UK`
-* **tsUserId**：用户关联的ID——您将在创建用户账号时得到用户的ID
-* **tsCompanyAccountId**：激活App的公司
-
-**Tips**：如果您想要查看请求内容，则您可以直接将webhook配置到[https://requestb.in/或者https://hookbin.com/。](https://requestb.in/或者https://hookbin.com/。)
-
-### Webhook Events
-
-当配置一个webhook时，您可选择哪个事件您将接收数据，文档相关【Document-related】的webhook当前仅仅支持的文档类型为：Invoice、Order、OrderChange。
-
-文档发送事件
-
-* `DOCUMENT_VALIDATING`：第一步，当您发送文档之前，验证文档中是否包含了所有信息。
-* `DOCUMENT_SENDING`：开始发送Document，等待接收的信息。
-* `DOCUMENT_SENT`：最后一步，发送文档完成。
-
-文档接收事件
-
-* `BEFORE_DOCUMENT_RECEIVE`：当文档被接收者接收之前触发。
-* `AFTER_DOCUMENT_RECEIVE`：当文档全部被接收过后触发。
-
-网络连接事件
-
-* `NETWORK_REQUEST_RECEIVED`：公司接收到一个新的Network连接请求时触发。
-* `NETWORK_REQUEST_ACCEPTED`：其他的Party接收当前网络连接时触发。
-* `NETWORK_RESPONSE_RECEIVED`：接收到网络请求响应时触发。
 
 
 
