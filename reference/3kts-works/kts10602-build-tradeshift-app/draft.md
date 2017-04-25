@@ -10,5 +10,9 @@ Tradeshift REST API可以有很多用途，这儿有一些开发过程中的最�
 
 ### 6.2.文档同步
 
+* 常用的API主要用于文档同步，有可能直接同步改变的文档资源部分。这里有两种策略：
+  * 从上一次Poll到这一次Poll的改变，这种情况仅仅做一个Poll，保存时间戳，包括下一次Poll中的`since`查询参数。
+  * 针对不可知的文档执行Poll，当Poll不可知的文档时，直接执行一次Poll，迭代所有收到的文档，使用地址`external/documents/{documentId}/tags/{tag}`资源来PUT一个自定义的Tag到文档中，如
+
 
 
