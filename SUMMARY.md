@@ -113,7 +113,7 @@
     * [KTS10601 - Restful Api Introduction](reference/3kts-works/kts10601-restful-api-introduction.md)
     * [KTS10602 - Build Tradeshift App](reference/3kts-works/kts10602-build-tradeshift-app.md)
       * [Draft](reference/3kts-works/kts10602-build-tradeshift-app/draft.md)
-    * [KTS10603 - Babelway Notes](reference/3kts-works/kts10603-babelway-notes.md)
+    * [KTS10603 - Babelway Notes Chapter 2](reference/3kts-works/kts10603-babelway-notes.md)
 * [4. Library](reference/library.md)
   * react
   * react-dom
