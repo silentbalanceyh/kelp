@@ -23,7 +23,9 @@
 
 ## 2. Chapter 3
 
-### Status
+### 2.1. Message Details
+
+#### Status
 
 | Status | Comment |
 | :--- | :--- |
@@ -42,7 +44,23 @@
 * 文件生成成功并上传到正确位置，但我们并没有收到回执
 * 执行过程Crashed
 
+#### Type = Test/Regular
 
+#### Test status = Test failed, Waiting result, Test successful
+
+### 2.2. Resubmitting a Message
+
+#### Send To
+
+
+
+
+
+
+
+### 
+
+### 
 
 
 
