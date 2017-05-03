@@ -1,4 +1,4 @@
-# KTS10603 - Babelway Notes
+# KTS10603 - Babelway Notes Chapter 2
 
 [http://www.babelway.com/help/BabelwayHelp.html](http://www.babelway.com/help/BabelwayHelp.html)
 
@@ -24,8 +24,6 @@
 | :--- | :--- |
 | = | equals |
 |  |  |
-
-
 
 
 
