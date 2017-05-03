@@ -64,5 +64,41 @@
 
 所有消息会形成一个Chain，安全Chain则使用SHA-512算法进行加密形成Secure Chain。
 
+### 2.4. Alert Details
+
+* Severity：High, Medium, Low, Info
+* Status: Open, Closed
+* Type:
+  * General Monitoring
+  * Message Processing Issue
+  * Unidentified Source
+  * Unidentified Message In
+  * Unidentified Channel
+  * Message Validation Issue
+  * Failed Delivery
+  * Planned Deletion of Unattended Messages
+  * Hub Issue
+  * Storage Capacity Reached
+  * Planned Maintenance Unavailability
+  * New Functionality Available
+  * Account Issue
+  * Credit Limit Reached
+  * Outstanding Invoice
+  * Credit Limit Almost Reached
+  * VAT Rate Has Changed
+  * Channel Management Issue
+  * Notification of a Change in a Linked Channel
+  * Planned Deletion of Unused Channels
+  * Documentation of a Channel
+  * User Management Issue
+  * Failed Connection Attempts
+  * First Connection of new New User
+  * Planned Deletion of Inactive Users
+  * Invitation Expired
+
+
+
+
+
 
 
