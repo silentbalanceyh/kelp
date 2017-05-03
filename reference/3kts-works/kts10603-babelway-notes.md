@@ -17,13 +17,9 @@
 |  | regular expression \( Pending \) |
 | \# | is empty |
 | !\# | is empty |
+| \[\] | \( Numeric to select range \) |
 
-### Numeric
 
-| Operator | Comments |
-| :--- | :--- |
-| = | equals |
-|  |  |
 
 
 
