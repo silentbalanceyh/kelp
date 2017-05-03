@@ -1,4 +1,4 @@
-# KTS10603 - Babelway Notes Chapter 2
+# KTS10603 - Babelway Notes One
 
 [http://www.babelway.com/help/BabelwayHelp.html](http://www.babelway.com/help/BabelwayHelp.html)
 
@@ -18,8 +18,8 @@
 | \# | is empty |
 | !\# | is empty |
 | \[\] | \( Numeric to select range \) |
-
-
+| , | id is in \( Component only \) |
+| !, | id is not in（Component only） |
 
 
 
