@@ -26,7 +26,7 @@
 
 * [KTS10601 - Restful Api Introduction](/reference/3kts-works/kts10601-restful-api-introduction.md)（Restful API基本介绍/测试）
 * [KTS10602 - Build Tradeshift App](/reference/3kts-works/kts10602-build-tradeshift-app.md)（Tradeshift Restful官方引用教程）
-* [KTS10603 - Babelway Notes Chapter 2](/reference/3kts-works/kts10603-babelway-notes.md)（Babelway笔记 - Chapter 2）
+* [KTS10603 - Babelway Notes One](/reference/3kts-works/kts10603-babelway-notes.md)（Babelway基础笔记）
 
 
 
