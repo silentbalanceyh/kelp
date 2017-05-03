@@ -52,13 +52,12 @@
 
 #### Send To
 
+* Same channel
+* Channel
+* Same gateway in
+* Gateway in
 
 
-
-
-
-
-### 
 
 ### 
 
