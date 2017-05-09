@@ -44,9 +44,11 @@
 * 文件生成成功并上传到正确位置，但我们并没有收到回执
 * 执行过程Crashed
 
-#### Type = Test/Regular
+Type字段的两个值：Test/Regular
 
-#### Test status = Test failed, Waiting result, Test successful
+Test status字段的三个值： Test failed, Waiting result, Test successful
+
+Internal Files主要包含两种：Step Files/Other Files——主要用于诊断问题以及理解系统行为
 
 ### 2.2. Resubmitting a Message
 
