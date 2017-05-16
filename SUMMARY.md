@@ -109,6 +109,7 @@
     * [KTS10002 - Design Patterns](reference/3kts-works/32ts-ui-component/kts10002-design-principles.md)
     * [KTS10003 - \( Code \) Inline Components](reference/3kts-works/32ts-ui-component/kts10003-inline-components.md)
   * [3.3.Server \( sco-server \)](reference/3kts-works/33server-sco-server.md)
+    * [KTS10301 - Two-Way SSL](reference/3kts-works/33server-sco-server/kts10301-two-way-ssl.md)
   * [3.4.Client \( sco-portal \)](reference/3kts-works/34client-sco-portal.md)
   * 3.5.Business
     * [KTS10501 - 产品站点图](reference/3kts-works/kts10501-chan-pin-zhan-dian-tu.md)

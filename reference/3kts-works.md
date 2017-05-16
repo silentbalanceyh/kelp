@@ -16,6 +16,8 @@
 
 ## Project: sco-server
 
+* [KTS10301 - Two-Way SSL](/reference/3kts-works/33server-sco-server/kts10301-two-way-ssl.md)
+
 ## Project: sco-portal
 
 ## Business
