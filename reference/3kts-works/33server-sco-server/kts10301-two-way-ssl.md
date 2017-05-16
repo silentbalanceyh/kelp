@@ -24,19 +24,19 @@ To avoid certificate warnings/errors, import the CA certificate as a trusted aut
 
 ### 3.2. Create a keystore and a truststore
 
-A keystore is a file used by Java applications, containing certificates and/or private keys. A truststore is another name for the same thing, but used differently. In essence, keystore is meant to hold key pairs \(private + certificate\), and a truststore is meant to hold only trusted certificates \(no keys\). Mechanically there’s no difference, they’re both keystores.
+A keystore is a file used by Java applications, containing certificates and/or private keys. A truststore is another name for the same thing, but used differently. In essence, keystore is meant to hold key pairs \(private + certificate\), and a truststore is meant to hold only trusted certificates \(no keys\). Mechanically there’s no difference, they’re both keystores.
 
-For managing keystores, all of the internet resources will tell you to use Java’s “keytool” command line tool. This once again proves that the internet is a dark place full of people who want everyone to suffer. Command line is for automation and GUI-less environments, if you’re working with any kind of desktop OS, grab yourself a copy of [KeyStore Explorer](http://www.keystore-explorer.org/) and be welcome into the 21st century. Now then:
+For managing keystores, all of the internet resources will tell you to use Java’s “keytool” command line tool. This once again proves that the internet is a dark place full of people who want everyone to suffer. Command line is for automation and GUI-less environments, if you’re working with any kind of desktop OS, grab yourself a copy of [KeyStore Explorer](http://www.keystore-explorer.org/) and be welcome into the 21st century. Now then:
 
-1. Create a new keystore, the format doesn’t matter much \(and you can always change it\), but the convention is to use JKS for Java-only usage \(since it’s Java-specific and propretary\) and P12 \(PKCS\#12\) for compatibility with other software. Setting a password \(&gt;6 characters\) for the keystore is mandatory.
-   1. Import the server key pair, give it a simple name / alias. Password for the key pair is optional.
+1. Create a new keystore, the format doesn’t matter much \(and you can always change it\), but the convention is to use JKS for Java-only usage \(since it’s Java-specific and propretary\) and P12 \(PKCS\#12\) for compatibility with other software. Setting a password \(&gt;6 characters\) for the keystore is mandatory.
+   1. Import the server key pair, give it a simple name / alias. Password for the key pair is optional.
 2. Create another new keystore \(this will be the truststore\).
    1. Import the CA certificate.
 3. Save everything.
 
 ## 4. Part 2: Server-Side authentication / HTTPS
 
-When developing Spring Boot applications, you always have two ways to run them: running with the embedded Tomcat server or deploying to a standalone Tomcat server \(have not tried with other servers\). Each configures a bit differently, but once you have the keystore, it’s all pretty straightforward. For the server to run under HTTPS, all it needs is the configuration to tell it how to access the key pair in the keystore \(and you probably want a customized port as well\).
+When developing Spring Boot applications, you always have two ways to run them: running with the embedded Tomcat server or deploying to a standalone Tomcat server \(have not tried with other servers\). Each configures a bit differently, but once you have the keystore, it’s all pretty straightforward. For the server to run under HTTPS, all it needs is the configuration to tell it how to access the key pair in the keystore \(and you probably want a customized port as well\).
 
 ### 4.1. Embedded Spring Boot Tomcat
 
@@ -60,7 +60,7 @@ server.ssl.key-alias=localhost
 server.ssl.key-password=
 ```
 
-And that’s it. Run the app and it should start a HTTPS server on 8443 port.
+And that’s it. Run the app and it should start a HTTPS server on 8443 port.
 
 ### 4.2. Standalone Tomcat
 
@@ -75,6 +75,27 @@ Open Tomcat’s `conf/server.xml`among the other connectors, add this, adjusting
                  certificateKeyAlias="localhost" />
   </SSLHostConfig>
 </Connector>
+```
+
+## 5. Part 3: Client-Side authentication
+
+In order to use a client certificate, the client needs to send one, and the server needs to accept. In order for the server to accept a certificate, the server must trust either the certificate itself, or the CA that issued/signed it. We already imported the CA certificate into the truststore, now we just need to configure the servers to know where it is and use it.
+
+### 5.1. Embedded Spring Boot Tomcat
+
+Open `application.properties` resource file and add the following, customizing as necessary:
+
+```
+# Requires client authentication.
+# You can also use "want" to request it but
+# allow to see the page without it.
+server.ssl.client-auth=need
+
+# Truststore file
+server.ssl.trust-store=truststore.jks
+
+# Truststore password
+server.ssl.trust-store-password=
 ```
 
 
