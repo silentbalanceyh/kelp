@@ -100,7 +100,7 @@ server.ssl.trust-store-password=
 
 ### 5.2. Standalone Tomcat
 
-Open Tomcat’s`conf/server.xml`, find the Connector that you configured and add additional parameters to the SSLHostConfig element that tell Tomcat where to find the truststore, and to verify client certificates:
+Open Tomcat’s`conf/server.xml`, find the Connector that you configured and add additional parameters to the SSLHostConfig element that tell Tomcat where to find the truststore, and to verify client certificates:
 
 ```xml
 <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true">
@@ -115,9 +115,10 @@ Open Tomcat’s`conf/server.xml`, find the Connector that you configured and ad
 </Connector>
 ```
 
+## 6. Client Side
 
+Now that the server knows to ask for a client certificate and which CA to accept them from, all that’s left is to actually send it. Most of the time the client certificate is sent by software programmatically, but to simply test that it works, we’ll use the browser. Unfortunately, setting up a client certificate varies quite a bit depending on OS and browser. The simplest way for a quick test is to use Firefox — it manages its own certificates and is therefore consistent across different systems.
 
-  
 
 
 
