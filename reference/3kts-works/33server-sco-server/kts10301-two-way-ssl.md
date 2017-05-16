@@ -79,11 +79,11 @@ Open Tomcat’s `conf/server.xml`among the other connectors, add this, adjusting
 
 ## 5. Part 3: Client-Side authentication
 
-In order to use a client certificate, the client needs to send one, and the server needs to accept. In order for the server to accept a certificate, the server must trust either the certificate itself, or the CA that issued/signed it. We already imported the CA certificate into the truststore, now we just need to configure the servers to know where it is and use it.
+In order to use a client certificate, the client needs to send one, and the server needs to accept. In order for the server to accept a certificate, the server must trust either the certificate itself, or the CA that issued/signed it. We already imported the CA certificate into the truststore, now we just need to configure the servers to know where it is and use it.
 
 ### 5.1. Embedded Spring Boot Tomcat
 
-Open `application.properties` resource file and add the following, customizing as necessary:
+Open `application.properties` resource file and add the following, customizing as necessary:
 
 ```
 # Requires client authentication.
@@ -97,6 +97,28 @@ server.ssl.trust-store=truststore.jks
 # Truststore password
 server.ssl.trust-store-password=
 ```
+
+### 5.2. Standalone Tomcat
+
+Open Tomcat’s`conf/server.xml`, find the Connector that you configured and add additional parameters to the SSLHostConfig element that tell Tomcat where to find the truststore, and to verify client certificates:
+
+```xml
+<Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true">
+  <SSLHostConfig truststoreFile="conf/truststore.jks"
+                 truststorePassword="accounts-api"
+                 certificateVerification="true">
+    <Certificate certificateKeystoreFile="conf/keystore.jks"
+                 certificateKeystorePassword="accounts-api"
+                 certificateKeyPassword=""
+                 certificateKeyAlias="localhost" />
+  </SSLHostConfig>
+</Connector>
+```
+
+
+
+  
+
 
 
 
