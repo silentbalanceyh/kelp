@@ -137,7 +137,7 @@
   * 5.1.Database
 * [6. Nodes](reference/nodes.md)
   * [6.1. Scala In Programming](reference/nodes/61-scala-in-programming.md)
-    * [NOT60001 - Scala初探](reference/nodes/61-scala-in-programming/scalachu-tan.md)
+    * [NOT61001 - Scala初探](reference/nodes/61-scala-in-programming/scalachu-tan.md)
 
 ## Training
 
