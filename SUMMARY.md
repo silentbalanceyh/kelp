@@ -135,6 +135,8 @@
   * rxjs 5.2.0
 * [5. Exception List](reference/exception-list.md)
   * 5.1.Database
+* [6. Nodes](reference/nodes.md)
+  * [6.1. Scala In Programming](reference/nodes/61-scala-in-programming.md)
 
 ## Training
 
