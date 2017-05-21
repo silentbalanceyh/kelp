@@ -48,8 +48,5 @@
 
 * [TPL10001 - redux-orm](/reference/library/redux-orm-090-rc3/tp10000-redux-orm.md)（Redux-Orm官方文档）
 
-## 10. Notes
-
-* 
 
 
