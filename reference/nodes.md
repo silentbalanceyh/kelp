@@ -1,8 +1,7 @@
 # Notes
 
-## 1. Scala In Programming
+## 1. Language \( 编程语言类）
 
-* [NOT60001 - Scala初探](/reference/nodes/61-scala-in-programming/scalachu-tan.md)
-
+* 
 
 
