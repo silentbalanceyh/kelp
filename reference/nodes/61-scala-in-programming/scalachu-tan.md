@@ -15,5 +15,7 @@ def max(x: Int, y: Int): Int = {
 
 \*：Scala支持类型推断，所以并不是所有的定义都需要写类型定义。
 
+Scala中Unit类似Java中的void类型，也就是说结果类型为Unit则表示该函数并非为了得到返回值。
+
 
 
