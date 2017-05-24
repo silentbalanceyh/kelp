@@ -51,9 +51,11 @@
 ## Reference
 
 * [1. Basic Knowledge](reference/basic-knowledge.md)
-  * 1.1.Computer Language
+  * [1.1.Computer Language](reference/basic-knowledge/11computer-language.md)
     * [1.1.1.JavaScript](reference/basic-knowledge/11javascript-library.md)
       * [KM10001 - ECMA Script 6.0](reference/basic-knowledge/11javascript-library/111ecma-60.md)
+    * [1.1.2.XPath](reference/basic-knowledge/xpath.md)
+      * [KM10017 - XPath Introduction](reference/basic-knowledge/xpath/km10017-xpath-introduction.md)
   * 1.2.Source Control
     * [1.2.1.Git](reference/basic-knowledge/121git.md)
       * [KM10002 - Forking Workflow](reference/basic-knowledge/121git/km10002-forking-workflow.md)
