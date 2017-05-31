@@ -31,7 +31,10 @@
 * [KM10013 - Jasmine Basic](/reference/basic-knowledge/15testing/153jasmine/km10013-jasmine-basic.md)（Jasmine基础知识）
 * [KM10014 - Karma for ES6 \( Webpack \)](/reference/basic-knowledge/15testing/km10014-karma-for-es6-webpack.md)（Karma ES6环境搭建）
 
-## 6. Building
+## 6. Notes
+
+* [6.1. Scala In Programming](/reference/nodes/61-scala-in-programming.md)
+* [6.2.Supply Chain Finance](/reference/nodes/62supply-chain-finance.md)
 
 ## 7. Quality Coding
 
