@@ -140,6 +140,7 @@
 * [6. Nodes](reference/nodes.md)
   * [6.1. Scala In Programming](reference/nodes/61-scala-in-programming.md)
     * [NOT61001 - Scala初探](reference/nodes/61-scala-in-programming/scalachu-tan.md)
+  * [6.2.Supply Chain Finance](reference/nodes/62supply-chain-finance.md)
 
 ## Training
 
