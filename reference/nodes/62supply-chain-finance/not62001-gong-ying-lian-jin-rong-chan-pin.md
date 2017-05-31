@@ -6,6 +6,8 @@
 
 ### 2.1. 融通仓模式
 
+风险/流程：[融通仓模式](/reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/rong-tong-cang-mo-shi.md)
+
 
 
 

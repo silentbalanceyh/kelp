@@ -142,6 +142,7 @@
     * [NOT61001 - Scala初探](reference/nodes/61-scala-in-programming/scalachu-tan.md)
   * [6.2.Supply Chain Finance](reference/nodes/62supply-chain-finance.md)
     * [NOT62001 - 供应链金融产品](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin.md)
+      * [融通仓模式](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/rong-tong-cang-mo-shi.md)
 
 ## Training
 
