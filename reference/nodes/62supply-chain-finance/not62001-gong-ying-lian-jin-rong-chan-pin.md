@@ -6,7 +6,7 @@
 
 ### 2.1. 预付类：融通仓模式
 
-风险/流程：[融通仓模式](/reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/rong-tong-cang-mo-shi.md)
+风险/流程：[预付 - 融通仓模式](/reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/rong-tong-cang-mo-shi.md)
 
 ### 2.2. 预付类：保兑仓模式
 
