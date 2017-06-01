@@ -145,6 +145,7 @@
       * [预付 - 融通仓模式](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/rong-tong-cang-mo-shi.md)
       * [预付 - 保兑仓模式](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/yu-fu-bao-dui-cang-mo-shi.md)
       * [存货融资 - 静态质押](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/cun-huo-rong-zi-jing-tai-zhi-ya.md)
+      * [存货融资 - 动态质押](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/cun-huo-rong-zi-dong-tai-zhi-ya.md)
 
 ## Training
 
