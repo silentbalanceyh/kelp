@@ -22,3 +22,11 @@
 
 风险/流程：[存货融资 - 静态质押](/reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/cun-huo-rong-zi-jing-tai-zhi-ya.md)
 
+### 2.4. 存货融资：动态质押
+
+风险/流程：
+
+该产品适用于库存稳定、货物品较为一般、出货率高、质押物的价值核定较为容易的客户。
+
+
+
