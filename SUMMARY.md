@@ -142,8 +142,8 @@
     * [NOT61001 - Scala初探](reference/nodes/61-scala-in-programming/scalachu-tan.md)
   * [6.2.Supply Chain Finance](reference/nodes/62supply-chain-finance.md)
     * [NOT62001 - 供应链金融产品](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin.md)
-      * [预付 - 融通仓模式](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/rong-tong-cang-mo-shi.md)
-      * [预付 - 保兑仓模式](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/yu-fu-bao-dui-cang-mo-shi.md)
+      * [预付融资 - 融通仓模式](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/rong-tong-cang-mo-shi.md)
+      * [预付融资 - 保兑仓模式](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/yu-fu-bao-dui-cang-mo-shi.md)
       * [存货融资 - 静态质押](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/cun-huo-rong-zi-jing-tai-zhi-ya.md)
       * [存货融资 - 动态质押](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/cun-huo-rong-zi-dong-tai-zhi-ya.md)
 
