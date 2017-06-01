@@ -30,9 +30,11 @@
 
 ### 2.5. 应收账款：质押融资
 
-风险/流程：
+风险/流程：[应收账款 - 质押融资](/reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/ying-shou-zhang-kuan-zhi-ya-rong-zi.md)
 
 ### 2.6. 应收账款：保理融资
+
+风险/流程：[应收账款 - 保理融资](/reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/ying-shou-zhang-kuan-bao-li-rong-zi.md)
 
 
 
