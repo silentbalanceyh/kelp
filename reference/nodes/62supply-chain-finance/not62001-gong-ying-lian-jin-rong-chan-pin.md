@@ -10,7 +10,7 @@
 
 ### 2.2. 预付类：保兑仓模式
 
-风险/流程：
+风险/流程：[预付 - 保兑仓模式](/reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/yu-fu-bao-dui-cang-mo-shi.md)
 
 基于特殊贸易背景：
 
