@@ -89,7 +89,18 @@ $highlight-border: 1px solid $highlight-color;
 
 不过，`sass`并不想强迫任何人一定使用中划线或下划线，所以这两种用法相互兼容。用中划线声明的变量可以使用下划线的方式引用，反之亦然。这意味着即使`compass`选择用中划线的命名方式，这并不影响你在使用`compass`的样式中用下划线的命名方式进行引用：
 
+```sass
+$link-color: blue;
+a {
+  color: $link_color;
+}
 
+//编译后
+
+a {
+  color: blue;
+}
+```
 
 
 
