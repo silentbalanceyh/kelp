@@ -38,10 +38,10 @@ width: $fancybox-width;
 ```sass
 aside
  {
-  
+
 background
 : blue;
-  
+
 color
 : white;
 }
@@ -54,7 +54,6 @@ color
 
 
 //生成的结果跟你直接在.blue-theme选择器内写_blue-theme.scss文件的内容完全一样。
-
 
 .blue-theme {
   aside {
@@ -69,6 +68,4 @@ color
 被导入的局部文件中定义的所有变量和混合器，也会在这个规则范围内生效。这些变量和混合器不会全局有效，这样我们就可以通过嵌套导入只对站点中某一特定区域运用某种颜色主题或其他通过变量配置的样式。
 
 有时，可用`css`原生的`@import`机制，在浏览器中下载必需的`css`文件。`sass`也提供了几种方法来达成这种需求。
-
-
 
