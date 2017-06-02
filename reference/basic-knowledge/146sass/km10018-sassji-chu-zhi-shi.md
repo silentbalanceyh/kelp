@@ -108,7 +108,118 @@ a {
 
 ## 2. 嵌套CSS规则
 
+`css`中重复写选择器是非常恼人的。如果要写一大串指向页面中同一块的样式时，往往需要 一遍又一遍地写同一个`ID`
 
+```sass
+#content article h1 { color: #333 }
+#content article p { margin-bottom: 1.4em }
+#content aside { background-color: #EEE }
+```
+
+像这种情况，`sass`可以让你只写一遍，且使样式可读性更高。在Sass中，你可以像俄罗斯套娃那样在规则块中嵌套规则块。`sass`在输出`css`时会帮你把这些嵌套规则处理好，避免你的重复书写。
+
+```sass
+#content {
+  article {
+    h1 { color: #333 }
+    p { margin-bottom: 1.4em }
+  }
+  aside { background-color: #EEE }
+}
+/* 编译后 */
+#content article h1 { color: #333 }
+#content article p { margin-bottom: 1.4em }
+#content aside { background-color: #EEE }
+```
+
+上边的例子，会在输出`css`时把它转换成跟你之前看到的一样的效果。这个过程中，`sass`用了两步，每一步都是像打开俄罗斯套娃那样把里边的嵌套规则块一个个打开。首先，把`#content`（父级）这个`id`放到`article`选择器（子级）和`aside`选择器（子级）的前边：
+
+```sass
+#content {
+  article {
+    h1 { color: #333 }
+    p { margin-bottom: 1.4em }
+  }
+  #content aside { background-color: #EEE }
+}
+/* 编译后 */
+#content article h1 { color: #333 }
+#content article p { margin-bottom: 1.4em }
+#content aside { background-color: #EEE }
+```
+
+然后，`#content article`里边还有嵌套的规则，`sass`重复一遍上边的步骤，把新的选择器添加到内嵌的选择器前边。一个给定的规则块，既可以像普通的CSS那样包含属性，又可以嵌套其他规则块。当你同时要为一个容器元素及其子元素编写特定样式时，这种能力就非常有用了。
+
+```sass
+#content {
+  background-color: #f5f5f5;
+  aside { background-color: #eee }
+}
+```
+
+容器元素的样式规则会被单独抽离出来，而嵌套元素的样式规则会像容器元素没有包含任何属性时那样被抽离出来。
+
+```sass
+#content { background-color: #f5f5f5 }
+#content aside { background-color: #eee }
+```
+
+大多数情况下这种简单的嵌套都没问题，但是有些场景下不行，比如你想要在嵌套的选择器 里边立刻应用一个类似于`：hover`的伪类。为了解决这种以及其他情况，`sass`提供了一个特殊结构`&`。
+
+### 2.1.父选择器的标示符&
+
+一般情况下，`sass`在解开一个嵌套规则时就会把父选择器（`#content`）通过一个空格连接到子选择器的前边（`article`和`aside`）形成（`#content article`和`#content aside`）。这种在CSS里边被称为后代选择器，因为它选择ID为`content`的元素内所有命中选择器`article`和`aside`的元素。但在有些情况下你却不会希望`sass`使用这种后代选择器的方式生成这种连接。
+
+最常见的一种情况是当你为链接之类的元素写`：hover`这种伪类时，你并不希望以后代选择器的方式连接。比如说，下面这种情况`sass`就无法正常工作：
+
+```sass
+article a {
+  color: blue;
+  :hover { color: red }
+}
+```
+
+这意味着`color: red`这条规则将会被应用到选择器`article a :hover`，`article`元素内链接的所有子元素在被`hover`时都会变成红色。这是不正确的！你想把这条规则应用到超链接自身，而后代选择器的方式无法帮你实现。
+
+解决之道为使用一个特殊的`sass`选择器，即父选择器。在使用嵌套规则时，父选择器能对于嵌套规则如何解开提供更好的控制。它就是一个简单的`&`符号，且可以放在任何一个选择器可出现的地方，比如`h1`放在哪，它就可以放在哪。
+
+```sass
+article a {
+  color: blue;
+  &:hover { color: red }
+}
+```
+
+当包含父选择器标识符的嵌套规则被打开时，它不会像后代选择器那样进行拼接，而是`&`被父选择器直接替换：
+
+```sass
+article a { color: blue }
+article a:hover { color: red }
+```
+
+在为父级选择器添加`：hover`等伪类时，这种方式非常有用。同时父选择器标识符还有另外一种用法，你可以在父选择器之前添加选择器。举例来说，当用户在使用IE浏览器时，你会通过`JavaScript`在`<body>`标签上添加一个ie的类名，为这种情况编写特殊的样式如下：
+
+```sass
+#content aside {
+  color: red;
+  body.ie & { color: green }
+}
+/*编译后*/
+#content aside {color: red};
+body.ie #content aside { color: green }
+```
+
+`sass`在选择器嵌套上是非常智能的，即使是带有父选择器的情况。当`sass`遇到群组选择器（由多个逗号分隔开的选择器形成）也能完美地处理这种嵌套。
+
+### 2.2.群组选择器的嵌套
+
+在`CSS`里边，选择器```h1``h2```和`h3`会同时命中h1元素、h2元素和h3元素。与此类似，`.button button`会命中button元素和类名为.button的元素。这种选择器称为群组选择器。群组选择器 的规则会对命中群组中任何一个选择器的元素生效。
+
+```sass
+.button, button {
+  margin: 0;
+}
+```
 
 
 
