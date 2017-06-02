@@ -126,6 +126,9 @@ a {
   }
   aside { background-color: #EEE }
 }
+```
+
+```css
 /* 编译后 */
 #content article h1 { color: #333 }
 #content article p { margin-bottom: 1.4em }
@@ -303,6 +306,8 @@ article dl > dt { color: #333 }
 article dl > dd { color: #555 }
 nav + article { margin-top: 0 }
 ```
+
+在`sass`中，不仅仅`css`规则可以嵌套，对属性进行嵌套也可以减少很多重复性的工作。
 
 
 
