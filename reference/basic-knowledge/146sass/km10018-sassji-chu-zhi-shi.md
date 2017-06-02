@@ -142,6 +142,9 @@ a {
   }
   #content aside { background-color: #EEE }
 }
+```
+
+```css
 /* 编译后 */
 #content article h1 { color: #333 }
 #content article p { margin-bottom: 1.4em }
@@ -159,7 +162,7 @@ a {
 
 容器元素的样式规则会被单独抽离出来，而嵌套元素的样式规则会像容器元素没有包含任何属性时那样被抽离出来。
 
-```sass
+```css
 #content { background-color: #f5f5f5 }
 #content aside { background-color: #eee }
 ```
@@ -204,6 +207,9 @@ article a:hover { color: red }
   color: red;
   body.ie & { color: green }
 }
+```
+
+```css
 /*编译后*/
 #content aside {color: red};
 body.ie #content aside { color: green }
@@ -219,6 +225,83 @@ body.ie #content aside { color: green }
 .button, button {
   margin: 0;
 }
+```
+
+当看到上边这段代码时，你可能还没意识到会有重复性的工作。但会很快发现：如果你需要在一个特定的容器元素内对这样一个群组选择器进行修饰，情况就不同了。`css`的写法会让你在群组选择器中的每一个选择器前都重复一遍容器元素的选择器。
+
+```sass
+.container h1, .container h2, .container h3 { margin-bottom: .8em }
+```
+
+非常幸运，`sass`的嵌套特性在这种场景下也非常有用。当`sass`解开一个群组选择器规则内嵌的规则时，它会把每一个内嵌选择器的规则都正确地解出来：
+
+```sass
+.container {
+  h1, h2, h3 {margin-bottom: .8em}
+}
+```
+
+首先`sass`将`.container`和```h1``.container```和```h2``.container```和`h3`分别组合，然后将三 者重新组合成一个群组选择器，生成你前边看到的普通`css`样式。对于内嵌在群组选择器内的嵌 套规则，处理方式也一样：
+
+```sass
+nav, aside {
+  a {color: blue}
+}
+```
+
+首先`sass`将`nav`和```a``aside```和`a`分别组合，然后将二者重新组合成一个群组选择器：
+
+```sass
+nav a, aside a {color: blue}
+```
+
+处理这种群组选择器规则嵌套上的强大能力，正是`sass`在减少重复敲写方面的贡献之一。尤其在当嵌套级别达到两层甚至三层以上时，与普通的`css`编写方式相比，只写一遍群组选择器大大减少了工作量。有利必有弊，你需要特别注意群组选择器的规则嵌套生成的`css`。虽然`sass`让你的样式表看上去很小，但实际生成的`css`却可能非常大，这会降低网站的速度。关于选择器嵌套的最后一个方面，我们看看`sass`如何处理组合选择器，比如&gt;、+和~的使用。你将看到，这种场景下你甚至无需使用父选择器标识符。
+
+### 2.3. 子组合选择器和同层组合选择器：&gt;, +, ~
+
+上边这三个组合选择器必须和其他选择器配合使用，以指定浏览器仅选择某种特定上下文中的元素。
+
+```sass
+article section { margin: 5px }
+article > section { border: 1px solid #ccc }
+```
+
+你可以用子组合选择器&gt;选择一个元素的直接子元素。上例中，第一个选择器会选择article下的所有命中section选择器的元素。第二个选择器只会选择article下紧跟着的子元素中命中section选择器的元素。
+
+在下例中，你可以用同层相邻组合选择器`+`选择`header`元素后紧跟的`p`元素：
+
+```sass
+header + p { font-size: 1.1em }
+```
+
+你也可以用同层全体组合选择器`~`，选择所有跟在`article`后的同层`article`元素，不管它们之间隔了多少其他元素：
+
+```sass
+article ~ article { border-top: 1px dashed #ccc }
+```
+
+这些组合选择器可以毫不费力地应用到`sass`的规则嵌套中。可以把它们放在外层选择器后边，或里层选择器前边：
+
+```sass
+article {
+  ~ article { border-top: 1px dashed #ccc }
+  > section { background: #eee }
+  dl > {
+    dt { color: #333 }
+    dd { color: #555 }
+  }
+  nav + & { margin-top: 0 }
+}
+```
+
+`sass`会如你所愿地将这些嵌套规则一一解开组合在一起：
+
+```css
+article ~ article { border-top: 1px dashed #ccc }
+article > footer { background: #eee }
+article dl > dt { color: #333 }
+article dl > dd { color: #555 }
+nav + article { margin-top: 0 }
 ```
 
 
