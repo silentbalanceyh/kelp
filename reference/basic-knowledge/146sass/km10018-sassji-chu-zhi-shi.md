@@ -20,5 +20,7 @@ sass变量的声明和css属性的声明很像：
 $highlight-color: #F90;
 ```
 
-这个意味着变量`$highlight-color`现在的值是\#F90，任何可以用作css属性值的赋值都可以用作sass的变量值，甚至是以空格分割的多个属性值。
+这个意味着变量`$highlight-color`现在的值是`#F90`，任何可以用作css属性值的赋值都可以用作sass的变量值，甚至是以空格分割的多个属性值，如`$basic-border: 1px solid black`，或以都好分割的多个属性值。
+
+
 
