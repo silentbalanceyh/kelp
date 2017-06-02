@@ -309,5 +309,58 @@ nav + article { margin-top: 0 }
 
 在`sass`中，不仅仅`css`规则可以嵌套，对属性进行嵌套也可以减少很多重复性的工作。
 
+### 2.4. 嵌套属性
+
+在`sass`中，除了CSS选择器，属性也可以进行嵌套。尽管编写属性涉及的重复不像编写选择器那么糟糕，但是要反复写```border-style``border-width``border-color```以及`border-*`等也是非常烦人的。在`sass`中，你只需敲写一遍`border`
+
+```sass
+nav {
+  border: {
+  style: solid;
+  width: 1px;
+  color: #ccc;
+  }
+}
+```
+
+嵌套属性的规则是这样的：把属性名从中划线-的地方断开，在根属性后边添加一个冒号:，紧跟一个`{ }`块，把子属性部分写在这个`{ }`块中。就像`css`选择器嵌套一样，`sass`会把你的子属性一一解开，把根属性和子属性部分通过中划线-连接起来，最后生成的效果与你手动一遍遍写的`css`样式一样：
+
+```sass
+nav {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+}
+```
+
+对于属性的缩写形式，你甚至可以像下边这样来嵌套，指明例外规则：
+
+```sass
+nav {
+  border: 1px solid #ccc {
+  left: 0px;
+  right: 0px;
+  }
+}
+```
+
+这比下边这种同等样式的写法要好：
+
+```sass
+nav {
+  border: 1px solid #ccc;
+  border-left: 0px;
+  border-right: 0px;
+}
+```
+
+属性和选择器嵌套是非常伟大的特性，因为它们不仅大大减少了你的编写量，而且通过视觉上的缩进使你编写的样式结构更加清晰，更易于阅读和开发。
+
+即便如此，随着你的样式表变得越来越大，这种写法也很难保持结构清晰。有时，处理这种大量样式的唯一方法就是把它们分拆到多个文件中。`sass`通过对`css`原有`@import`规则的改进直接支持了这一特性。
+
+## 3. 导入SASS文件：
+
+
+
 
 
