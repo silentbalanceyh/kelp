@@ -120,38 +120,22 @@ ul.plain li {
 
 混合器并不一定总得生成相同的样式。可以通过在`@include`混合器时给混合器传参，来定制混合器生成的精确样式。当`@include`混合器时，参数其实就是可以赋值给`css`属性值的变量。如果你写过`JavaScript`，这种方式跟`JavaScript`的`function`很像：
 
-```
+```sass
 @mixin link-colors($normal, $hover, $visited) {
-  
-color:
- $normal;
-  
-&
-:hover
- { 
-color:
- $hover; }
-  
-&
-:visited
- { 
-color:
- $visited; }
+  color: $normal;
+  &:hover { color: $hover; }
+  &:visited { color: $visited; }
 }
 ```
 
 当混合器被`@include`时，你可以把它当作一个`css`函数来传参。如果你像下边这样写：
 
-```
+```sass
 a {
-  
-@include
- link-colors(blue, red, green);
+  @include link-colors(blue, red, green);
 }
 
-
 //Sass最终生成的是：
-
 
 a { color: blue; }
 a:hover { color: red; }
@@ -160,11 +144,9 @@ a:visited { color: green; }
 
 当你@include混合器时，有时候可能会很难区分每个参数是什么意思，参数之间是一个什么样的顺序。为了解决这个问题，`sass`允许通过语法`$name: value`的形式指定每个参数的值。这种形式的传参，参数顺序就不必再在乎了，只需要保证没有漏掉参数即可：
 
-```
+```sass
 a {
-    @include 
-link
--colors(
+    @include link-colors(
       $normal: blue,
       $visited: green,
       $hover: red
@@ -178,34 +160,20 @@ link
 
 为了在`@include`混合器时不必传入所有的参数，我们可以给参数指定一个默认值。参数默认值使用`$name: default-value`的声明形式，默认值可以是任何有效的`css`属性值，甚至是其他参数的引用，如下代码：
 
-```
+```sass
 @mixin link-colors(
     $normal,
     $hover: $normal,
     $visited: $normal
   )
 {
-  
-color:
- $normal;
-  
-&
-:hover
- { 
-color:
- $hover; }
-  
-&
-:visited
- { 
-color:
- $visited; }
+  color: $normal;
+  &:hover { color: $hover; }
+  &:visited { color: $visited; }
 }
 ```
 
 如果像下边这样调用：`@include link-colors(red)$hover`和`$visited`也会被自动赋值为`red`。
 
 混合器只是`sass`样式重用特性中的一个。我们已经了解到混合器主要用于样式展示层的重用，如果你想重用语义化的类呢？这就涉及`sass`的另一个重要的重用特性：选择器继承。
-
-
 
