@@ -26,7 +26,23 @@ $highlight-color: #F90;
 $plain-font: "Myriad Pro"、Myriad、"Helvetica Neue"、Helvetica、"Liberation Sans"、Arial和sans-serif; sans-serif;
 ```
 
-这时变量还没有生效，除非你引用了这个变量——我们很快就会了解如何引用。与css属性不同，变量可以在css规则块定义之外存在。当变量定义在css规则块内，那么该变量只能在次规则块内使用；如果它们出现在任何形式的`{...}`块中（
+这时变量还没有生效，除非你引用了这个变量——我们很快就会了解如何引用。与css属性不同，变量可以在css规则块定义之外存在。当变量定义在css规则块内，那么该变量只能在次规则块内使用；如果它们出现在任何形式的`{...}`块中（如`@media`或者`@font-face`块），情况也是如此：
+
+```sass
+$nav-color: #F90;
+nav {
+  $width: 100px;
+  width: $width;
+  color: $nav-color;
+}
+
+//编译后
+
+nav {
+  width: 100px;
+  color: #F90;
+}
+```
 
 
 
