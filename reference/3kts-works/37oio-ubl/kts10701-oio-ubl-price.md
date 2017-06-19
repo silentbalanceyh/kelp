@@ -23,7 +23,7 @@
                 <cbc:Quantity unitCode="LTR">11</cbc:Quantity>
             </cbc:Delivery>
             <cbc:Item>
-                
+                <cbc:PackQuantity></cbc:PackQuantity>
             </cbc:Item>
         </cbc:LineItem>
     </cbc:OrderLine>
