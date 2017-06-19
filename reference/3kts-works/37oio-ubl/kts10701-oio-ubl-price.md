@@ -13,6 +13,15 @@
 
 在OrderLine元素中，主要涉及的结构如下：
 
+* Quantity
+* LineExtensionAmount
+* Delivery / Quantity
+* Item / PackQuantity
+* Item / PackSizeNumeric
+* Price / PriceAmount
+* Price / BaseQuantity
+* Price / OrderableUnitFactorRate
+
 ```xml
 <cbc:OrderLine>
     <cbc:LineItem>
@@ -36,6 +45,13 @@
 
 在InvoiceLine元素中，主要涉及的结构如下：
 
+* InvoicedQuantity
+* LineExtensionAmount
+* Delivery / Quantity
+* Price / PriceAmount
+* Price / BaseQuantity
+* Price / OrderableUnitFactorRate
+
 ```xml
 <cbc:InvoiceLine>
     <cbc:InvoicedQuantity unitCode="LTR">10</cbc:InvoicedQuantity>
@@ -56,8 +72,6 @@
 ```
 
 ## Table Content
-
-
 
 
 
