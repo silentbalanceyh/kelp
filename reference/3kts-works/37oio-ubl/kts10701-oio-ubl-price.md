@@ -53,22 +53,22 @@
 * Price / OrderableUnitFactorRate
 
 ```xml
-<cbc:InvoiceLine>
+<cac:InvoiceLine>
     <cbc:InvoicedQuantity unitCode="LTR">10</cbc:InvoicedQuantity>
     <cbc:LineExtensionAmount currencyID="CNY">120</cbc:LineExtensionAmount>
-    <cbc:Delivery>
+    <cac:Delivery>
         <cbc:Quantity unitCode="LTR">20</cbc:Quantity>
-    </cbc:Delivery>
-    <cbc:Item>
+    </cac:Delivery>
+    <cac:Item>
         <cbc:PackQuantity unitCode="EA">30</cbc:PackQuantity>
         <cbc:PackSizeNumeric>40</cbc:PackSizeNumeric>
-    </cbc:Item>
-    <cbc:Price>
+    </cac:Item>
+    <cac:Price>
         <cbc:PriceAmount currencyID="CNY">1</cbc:PriceAmount>
         <cbc:BaseQuantity unitCode="EA">9</cbc:BaseQuantity>
         <cbc:OrderableUnitFactorRate>1</cbc:OrderableUnitFactoryRate>
-    </cbc:Price>
-</cbc:InvoiceLine>
+    </cac:Price>
+</cac:InvoiceLine>
 ```
 
 ## 2. Element Explanations
@@ -90,11 +90,11 @@ _注意：BaseQuantity和OrderableUnitFactorRate应该不为空，并且给予�
 
 ## 3. Price和Quantity的关系
 
-
-
 ### 3.1. BaseQuantity
 
 Price最终结果是通过计算得到了的，看看下边例子：
+
+**Simple**
 
 ```xml
 <cac:InvoiceLine>
@@ -110,6 +110,28 @@ Price最终结果是通过计算得到了的，看看下边例子：
         <cbc:PriceAmount currencyID="DKK">60.00</cbc:PriceAmount>
         <cbc:BaseQuantity unitCode="BO">1</cbc:BaseQuantity>
         <cbc:OrderableUnitFactorRate>1</cbc:OrderableUnitFactorRate>
+    </cac:Price>
+</cac:InvoiceLine>
+```
+
+上边描述了InvoicedQuantity的unitCode = BO，值为12，则表示12 Bottles，总价格为DKK 720，实际上每一个单位（Bottle）的价格是DKK 60.00，每一个单位（OrderableUnitFactorRate）包含了1 Bottle，所以最终的Amount计算结果为DKK 720。
+
+**Advanced**
+
+```xml
+<cac:InvoiceLine>
+    <cbc:InvoicedQuantity unitCode="CS">1</cbc:InvoicedQuantity>
+    <cbc:LineExtensionTotalAmount currencyID="DKK">720.00</cbc:LineExtensionTotalAmount>
+    <cac:Item>
+        <cbc:Name>Red wine</cbc:Name>
+        <cac:SellersItemIdentification>
+            <cbc:ID>1234567</cbc:ID>
+        </cac:SellersItemIdentification>
+    </cac:Item>
+    <cac:Price>
+        <cbc:PriceAmount currencyID="DKK">60.00</cbc:PriceAmount>
+        <cbc:BaseQuantity unitCode="BO">1</cbc:BaseQuantity>
+        <cbc:OrderableUnitFactorRate>12</cbc:OrderableUnitFactorRate>
     </cac:Price>
 </cac:InvoiceLine>
 ```
