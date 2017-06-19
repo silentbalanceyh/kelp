@@ -76,7 +76,7 @@
 | UK-name | Use | Remarks |
 | :--- | :--- | :--- |
 | Quantity | 1 | 和单位对应的数量信息 |
-|  |  |  |
+| Quantity@unitCode |  | 数量对应的单位代码 |
 
 
 
