@@ -6,6 +6,11 @@
 
 ## UBL Classes & Elements
 
+在UBL的行级别，下边的元素用于描述价格和数量信息：
+
+* OrderLine
+* InvoiceLine
+
 
 
 
