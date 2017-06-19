@@ -24,6 +24,7 @@
             </cbc:Delivery>
             <cbc:Item>
                 <cbc:PackQuantity unitCode="EA"></cbc:PackQuantity>
+                <cbc:PackSizeNumber unitCode="EA"></cbc:PackSizeNumber>
             </cbc:Item>
         </cbc:LineItem>
     </cbc:OrderLine>
