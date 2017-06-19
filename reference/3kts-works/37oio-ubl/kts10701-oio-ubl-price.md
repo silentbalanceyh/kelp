@@ -20,6 +20,9 @@
             <cbc:Quantity unitCode="LTR">10</cbc:Quantity>
             <cbc:LineExtensionAmount currencyID="CNY">120</cbc:LineExtensionAmount>
         </cbc:LineItem>
+        <cbc:Delivery>
+            
+        </cbc:Delivery>
     </cbc:OrderLine>
 </Order>
 ```
