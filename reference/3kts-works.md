@@ -33,6 +33,7 @@
 ## UBL Guide
 
 * [KTS10701 - OIO UBL Price](/reference/3kts-works/37oio-ubl/kts10701-oio-ubl-price.md)
+* [KTS10702 - UBL中的unitCode和currencyID](/reference/3kts-works/37oio-ubl/kts10702-ublzhong-de-unitcode-he-currencyid.md)
 
 
 
