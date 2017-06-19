@@ -36,5 +36,10 @@
 
 在InvoiceLine元素中，主要涉及的结构如下：
 
+```xml
+<cbc:InvoiceLine>
+</cbc:InvoiceLine>
+```
+
 
 
