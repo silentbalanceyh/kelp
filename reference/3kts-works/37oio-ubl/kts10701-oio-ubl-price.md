@@ -90,5 +90,29 @@ _注意：BaseQuantity和OrderableUnitFactorRate应该不为空，并且给予�
 
 ## 3. Price和Quantity的关系
 
-![](/assets/KTS10701/001.png)
+
+
+### 3.1. BaseQuantity
+
+Price最终结果是通过计算得到了的，看看下边例子：
+
+```xml
+<cac:InvoiceLine>
+    <cbc:InvoicedQuantity unitCode="BO">12</cbc:InvoicedQuantity>
+    <cbc:LineExtensionTotalAmount currencyID="DKK">720.00</cbc:LineExtensionTotalAmount>
+    <cac:Item>
+        <cbc:Name>Red wine</cbc:Name>
+        <cac:SellersItemIdentification>
+            <cbc:ID>1234567</cbc:ID>
+        </cac:SellersItemIdentification>
+    </cac:Item>
+    <cac:Price>
+        <cbc:PriceAmount currencyID="DKK">60.00</cbc:PriceAmount>
+        <cbc:BaseQuantity unitCode="BO">1</cbc:BaseQuantity>
+        <cbc:OrderableUnitFactorRate>1</cbc:OrderableUnitFactorRate>
+    </cac:Price>
+</cac:InvoiceLine>
+```
+
+
 
