@@ -11,7 +11,7 @@
 * OrderLine
 * InvoiceLine
 
-
+在OrderLine元素中，主要涉及的结构如下：
 
 
 
