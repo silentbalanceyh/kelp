@@ -29,7 +29,7 @@
             <cbc:Price>
                 <cbc:PriceAmount currencyID="CNY">1</cbc:PriceAmount>
                 <cbc:BaseQuantity unitCode="EA">9</cbc:BaseQuantity>
-                <cbc:OrderableUnitFactorRate></cbc:OrderableUnitFactoryRate>
+                <cbc:OrderableUnitFactorRate>1</cbc:OrderableUnitFactoryRate>
             </cbc:Price>
         </cbc:LineItem>
     </cbc:OrderLine>
