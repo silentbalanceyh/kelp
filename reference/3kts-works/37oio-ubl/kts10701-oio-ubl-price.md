@@ -20,11 +20,11 @@
             <cbc:Quantity unitCode="LTR">10</cbc:Quantity>
             <cbc:LineExtensionAmount currencyID="CNY">120</cbc:LineExtensionAmount>
             <cbc:Delivery>
-                <cbc:Quantity unitCode="LTR">11</cbc:Quantity>
+                <cbc:Quantity unitCode="LTR">20</cbc:Quantity>
             </cbc:Delivery>
             <cbc:Item>
-                <cbc:PackQuantity unitCode="EA"></cbc:PackQuantity>
-                <cbc:PackSizeNumber unitCode="EA"></cbc:PackSizeNumber>
+                <cbc:PackQuantity unitCode="EA">30</cbc:PackQuantity>
+                <cbc:PackSizeNumber>40</cbc:PackSizeNumber>
             </cbc:Item>
         </cbc:LineItem>
     </cbc:OrderLine>
