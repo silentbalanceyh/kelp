@@ -17,7 +17,8 @@
 <Order>
     <cbc:OrderLine>
         <cbc:LineItem>
-            <cbc:Quantity unitCode="LTR"></cbc:Quantity>
+            <cbc:Quantity unitCode="LTR">10</cbc:Quantity>
+            <cbc:LineExtensionAmount currencyID="CNY">120</cbc:LineExtensionAmount>
         </cbc:LineItem>
     </cbc:OrderLine>
 </Order>
