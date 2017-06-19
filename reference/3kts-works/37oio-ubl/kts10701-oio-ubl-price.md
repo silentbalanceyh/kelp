@@ -73,7 +73,10 @@
 
 ## 2. Element Explanations
 
-|  |  |
-| :--- | :--- |
-|  |  |
+| UK-name | Use | Remarks |
+| :--- | :--- | :--- |
+| Quantity | 1 | 和单位对应的数量信息 |
+|  |  |  |
+
+
 
