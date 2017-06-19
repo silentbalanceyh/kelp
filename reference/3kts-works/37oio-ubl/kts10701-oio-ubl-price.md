@@ -14,9 +14,13 @@
 在OrderLine元素中，主要涉及的结构如下：
 
 ```xml
-<cbc:OrderLine>
-    
-</cbc:OrderLine>
+<Order>
+    <cbc:OrderLine>
+        <cbc:LineItem>
+            <cbc:Quantity unitCode="LTR"></cbc:Quantity>
+        </cbc:LineItem>
+    </cbc:OrderLine>
+</Order>
 ```
 
 
