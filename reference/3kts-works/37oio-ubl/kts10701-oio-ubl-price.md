@@ -11,7 +11,7 @@
 * OrderLine
 * InvoiceLine
 
-在OrderLine元素中，主要涉及的结构如下：
+在OrderLine元素中，主要涉及的结构如下（OrderLine/LineItem）：
 
 * Quantity
 * LineExtensionAmount
@@ -43,7 +43,7 @@
 </cbc:OrderLine>
 ```
 
-在InvoiceLine元素中，主要涉及的结构如下：
+在InvoiceLine元素中，主要涉及的结构如下（InvoiceLine）：
 
 * InvoicedQuantity
 * LineExtensionAmount
