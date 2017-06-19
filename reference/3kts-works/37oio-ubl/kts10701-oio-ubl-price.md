@@ -90,7 +90,5 @@ _注意：BaseQuantity和OrderableUnitFactorRate应该不为空，并且给予�
 
 ## 3. Price和Quantity的关系
 
-
-
-
+![](/assets/KTS10701/001.png)
 
