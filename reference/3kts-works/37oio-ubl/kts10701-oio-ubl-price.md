@@ -32,7 +32,7 @@
         </cbc:Delivery>
         <cbc:Item>
             <cbc:PackQuantity unitCode="EA">30</cbc:PackQuantity>                
-            <cbc:PackSizeNumber>40</cbc:PackSizeNumber>
+            <cbc:PackSizeNumeric>40</cbc:PackSizeNumeric>
         </cbc:Item>
         <cbc:Price>
             <cbc:PriceAmount currencyID="CNY">1</cbc:PriceAmount>
@@ -61,7 +61,7 @@
     </cbc:Delivery>
     <cbc:Item>
         <cbc:PackQuantity unitCode="EA">30</cbc:PackQuantity>
-        <cbc:PackSizeNumber>40</cbc:PackSizeNumber>
+        <cbc:PackSizeNumeric>40</cbc:PackSizeNumeric>
     </cbc:Item>
     <cbc:Price>
         <cbc:PriceAmount currencyID="CNY">1</cbc:PriceAmount>
@@ -77,7 +77,14 @@
 | :--- | :--- | :--- |
 | Quantity | 1 | 和单位对应的数量信息 |
 | Quantity@unitCode |  | 数量对应的单位代码 |
-| PackQuantity | 0..1 |  |
+| PackQuantity | 0..1 | Item中打包的数量信息，这个信息在PackSizeNumeric中有描述。 |
+| PackQuantity@unitCode |  | 指定单位代码 |
+| PackSizeNumeric | 0..1 | 打包时一个包的数量信息 |
+| PriceAmount | 1 | 基于BaseQuantity的最终金额信息，浮点格式 |
+| PriceAmount@currencyID |  | 价格对应的货币代码 |
+| BaseQuantity | 0..1 | 基数数量信息 |
+| BaseQuantity@unitCode |  | 指定BaseQuantity的单位代码 |
+| OrderableUnitFactorRate | 0..1 | 针对BaseQuantity的计算因子 |
 
 
 
