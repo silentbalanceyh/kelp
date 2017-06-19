@@ -21,7 +21,7 @@
             <cbc:LineExtensionAmount currencyID="CNY">120</cbc:LineExtensionAmount>
         </cbc:LineItem>
         <cbc:Delivery>
-            
+            <cbc:Quantity unitCode="LTR">11</cbc:Quantity>
         </cbc:Delivery>
     </cbc:OrderLine>
 </Order>
