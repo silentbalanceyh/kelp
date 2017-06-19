@@ -138,5 +138,142 @@ Price最终结果是通过计算得到了的，看看下边例子：
 
 上边描述了每一个单位（Bottle）价格为DKK 60.00，而每一个单元（OrderableUnitFactorRate）是12 Bottles。，最终结果和上边计算结果一致。
 
+**Delivery Unit**
 
+```xml
+<cac:InvoiceLine>
+    …
+    <cac:Delivery>
+        <cbc:Quantity unitCode="CS">1</cbc:Quantity>
+    </cac:Delivery>
+    …
+</cac:InvoiceLine>
+```
+
+### 3.2. Orderable and Invoice Unit
+
+**OrderableUnit**
+
+该属性在OrderLine/LineItem中使用，示例如下：
+
+```xml
+<cac:OrderLine>
+    …
+    <cac:LineItem>
+        <cbc:ID>1</cbc:ID>
+        <cbc:Quantity unitCode="CS">1</cbc:Quantity>
+        <cbc:LineExtensionAmount currencyID="DKK">720</cbc:LineExtensionAmount>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="DKK">60.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="BO">1</cbc:BaseQuantity>
+            <cbc:OrderableUnitFactorRate>12</cbc:OrderableUnitFactorRate>
+        </cac:Price>
+        <cac:Item>
+            <cbc:Name>Red wine</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>1234567</cbc:ID>
+            </cac:SellersItemIdentification>
+        </cac:Item>
+    </cac:LineItem>
+    …
+<cac:OrderLine>
+```
+
+上述几种属性的直接关系如下（`LineExtensionAmount、Quantity、PriceAmount、BaseQuantity、OrderableUnitFactorRate`）：
+
+```
+BaseQuantity x OrderableUnitFactorRate = Quantity@unitCode中按照计量单位描述的信息
+```
+
+* BaseQuantity = 1 BO（Bottle）
+* OrderableUnitFactorRate = 12
+* Quantity@unitCode = CS（Case）
+
+则表示1 case of 12 bottles：一件12瓶，最终计算结果为：
+
+```
+PriceAmount / BaseQuantity x ( BaseQuantity x OrderableUnitFactorRate ) = 订单中每一个单位的价格（单价）
+PriceAmount x OrderableUnitFactorRate = 这个订单单位的价格（非单价）
+```
+
+* PriceAmount = DKK 60.00
+* BaseQuantity = 1
+* OrderableUnitFactorRate = 12
+
+那么LineExtensionAmount的值应该是DKK 720.00，并且含义为12瓶一件，实际上这个价格是每一个订单单位的价格。
+
+**InvoicedQuantity**
+
+```xml
+<cac:InvoiceLine>
+    …
+    <cbc:ID>1</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="BO">12</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="DKK">720</cbc:LineExtensionAmount>
+    <cac:Item>
+        <cbc:Name>Red wine</cbc:Name>
+        <cac:SellersItemIdentification>
+            <cbc:ID>1234567</cbc:ID>
+        </cac:SellersItemIdentification>
+    </cac:Item>
+    <cac:Price>
+        <cbc:PriceAmount currencyID="DKK">60.00</cbc:PriceAmount>
+        <cbc:BaseQuantity unitCode="BO">1</cbc:BaseQuantity>
+        <cbc:OrderableUnitFactorRate>1</cbc:OrderableUnitFactorRate>
+    </cac:Price>
+    …
+<cac:InvoiceLine>
+```
+
+上述例子中的计算为：
+
+```
+LineExtensionAmount = PriceAmount / BaseQuantity x (BaseQuantity x OrderableUnitFactorRate ) x InvoicedQuantity
+```
+
+**PackSizeNumeric**
+
+和单位还相关的是另外两个元素PackQuantity和PackSizeNumeric，它的定义如下：
+
+```xml
+<cac:Item>
+    …
+    <cbc:PackQuantity unitCode="CS">1</cbc:PackQuantity>
+    <cbc:PackSizeNumeric>12</cbc:PackSizeNumeric>
+    …
+<cac:Item>
+```
+
+计算含义为：
+
+```
+BaseQuantity x PackSizeNumeric = PackQuantity@unitCode中描述的单位计量
+```
+
+## 4. BaseQuantity -&gt; InvoicedQuantity
+
+```xml
+<cac:InvoiceLine>
+    …
+    <cbc:ID>1</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="BLL">1</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="DKK">3600.00</cbc:LineExtensionAmount>
+    <cac:Item>
+        <cbc:Name>Let smøreolie</cbc:Name>
+        <cac:SellersItemIdentification>
+            <cbc:ID>11223344</cbc:ID>
+        </cac:SellersItemIdentification>
+    </cac:Item>
+    <cac:Price>
+        <cbc:PriceAmount currencyID="DKK">4800.00</cbc:PriceAmount>
+        <cbc:BaseQuantity unitCode="LTR">1000</cbc:BaseQuantity>
+        <cbc:OrderableUnitFactorRate>0.75</cbc:OrderableUnitFactorRate>
+    </cac:Price>
+    …
+<cac:InvoiceLine>
+```
+
+原文解释：
+
+The quantity unit code of "BLL" in InvoicedQuantity specifies that the invoiced quantity is a barrel. The supplier's base price \(PriceAmount\) is DKK 4800.00 for kilolitre \(the BaseQuantity\). Because the supplier sells the oil in barrels of 750 litres and not kilolitres, the supplier must specify the conversion factor \(OrderableUnitFactorRate\) that should be applied to convert the supplier's base quantity to the unit of 1 barrel. In this case, the OrderableUnitFactorRate is 0.75. \(1000 litres \* 0.75 = 750 litres ≈ 1 barrel\). The price of one barrel of oil is calculated by multiplying the supplier's base price \(PriceAmount\) with the OrderableUnitFactorRate, that is DKK 4800.00 \* 0.75 or DKK 3600.00 per barrel.
 
