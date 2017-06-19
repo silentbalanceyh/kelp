@@ -136,5 +136,7 @@ Price最终结果是通过计算得到了的，看看下边例子：
 </cac:InvoiceLine>
 ```
 
+上边描述了每一个单位（Bottle）价格为DKK 60.00，而每一个单元（OrderableUnitFactorRate）是12 Bottles。，最终结果和上边计算结果一致。
+
 
 
