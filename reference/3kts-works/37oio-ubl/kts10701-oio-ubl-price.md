@@ -86,5 +86,7 @@
 | BaseQuantity@unitCode |  | 指定BaseQuantity的单位代码 |
 | OrderableUnitFactorRate | 0..1 | 针对BaseQuantity的计算因子 |
 
+_注意：BaseQuantity和OrderableUnitFactorRate应该不为空，并且给予默认值：BaseQuantity默认值为"1 EA"（Each），OrderableUnitFactorRate的默认值为1。_
+
 
 
