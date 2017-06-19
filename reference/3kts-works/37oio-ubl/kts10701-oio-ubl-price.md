@@ -73,7 +73,7 @@
 
 ## 2. Element Explanations
 
-
-
-
+|  |  |
+| :--- | :--- |
+|  |  |
 
