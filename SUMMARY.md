@@ -98,10 +98,6 @@
   * 1.7.Quality Coding
     * [KM10016 - 75 Rules in Java](reference/basic-knowledge/km10016-75-rules-in-java.md)
       * [Rule 01: Limit the lifetime of sensitive data](reference/basic-knowledge/km10016-75-rules-in-java/rule-01-limit-the-lifetime-of-sensitive-data.md)
-* [2. Vert.X Works](reference/external-courses.md)
-  * [2.1.Translation](reference/external-courses/21translation.md)
-    * [VTX10001 - Vert.X Core](reference/external-courses/21translation/vtx10001-vertx-core.md)
-    * [VTX10002 - Vert.X Web](reference/external-courses/21translation/vtx10002-vertx-web.md)
 * [3. KTS Works](reference/3kts-works.md)
   * [3.1.Training](reference/3kts-works/31training.md)
     * [KTS10101 - Spring Boot with Docker](reference/3kts-works/31training/kts10002-spring-boot-with-docker.md)
@@ -127,6 +123,10 @@
   * [3.7.OIO-UBL](reference/3kts-works/37oio-ubl.md)
     * [KTS10701 - OIO UBL Price](reference/3kts-works/37oio-ubl/kts10701-oio-ubl-price.md)
     * [KTS10702 - UBL中的unitCode和currencyID](reference/3kts-works/37oio-ubl/kts10702-ublzhong-de-unitcode-he-currencyid.md)
+* [2. Vert.X Works](reference/external-courses.md)
+  * [2.1.Translation](reference/external-courses/21translation.md)
+    * [VTX10001 - Vert.X Core](reference/external-courses/21translation/vtx10001-vertx-core.md)
+    * [VTX10002 - Vert.X Web](reference/external-courses/21translation/vtx10002-vertx-web.md)
 * [4. Library](reference/library.md)
   * react
   * react-dom
@@ -154,6 +154,8 @@
       * [存货融资 - 动态质押](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/cun-huo-rong-zi-dong-tai-zhi-ya.md)
       * [应收账款 - 质押融资](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/ying-shou-zhang-kuan-zhi-ya-rong-zi.md)
       * [应收账款 - 保理融资](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/ying-shou-zhang-kuan-bao-li-rong-zi.md)
+* [7. Exam](reference/7exam.md)
+  * [7.1. CDA考试大纲](reference/7exam/71-cdakao-shi-da-gang.md)
 
 ## Training
 
