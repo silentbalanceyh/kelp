@@ -155,7 +155,7 @@
       * [应收账款 - 质押融资](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/ying-shou-zhang-kuan-zhi-ya-rong-zi.md)
       * [应收账款 - 保理融资](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/ying-shou-zhang-kuan-bao-li-rong-zi.md)
 * [7. Exam](reference/7exam.md)
-  * [7.1. CDA考试大纲](reference/7exam/71-cdakao-shi-da-gang.md)
+  * [7.1. KM10019 - CDA考试大纲](reference/7exam/71-cdakao-shi-da-gang.md)
 
 ## Training
 

@@ -34,7 +34,7 @@
 
 ## 6. Notes
 
-* [6.1. Scala In Programming](/reference/nodes/61-scala-in-programming.md)
+* [6.1.Scala In Programming](/reference/nodes/61-scala-in-programming.md)
 * [6.2.Supply Chain Finance](/reference/nodes/62supply-chain-finance.md)
 
 ## 7. Quality Coding
@@ -55,7 +55,7 @@
 
 ## 10. Exam
 
-
+* [KM10019 - CDA考试大纲](/reference/7exam/71-cdakao-shi-da-gang.md)（CDA考试大纲）
 
 
 
