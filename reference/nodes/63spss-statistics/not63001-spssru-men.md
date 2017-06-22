@@ -29,6 +29,7 @@
 | Categories | 对应分析、感知图、PROXSCAL等 |
 | Missing Value | 缺失数据的报告与填补 |
 | Conjoint | 正交设计、联合分析等、适用于市场研究 |
+| Forecasting | Arima模型、指数平滑、自回归 |
 |  |  |
 
 
