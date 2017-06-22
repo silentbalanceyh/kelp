@@ -26,6 +26,9 @@
 | Statistic Base | 提供最常用的数据管理和统计分析功能 |
 | Advanced Statistics | 一般线性模型、混合线性模型、对数线性模型、生存分析 |
 | Regression | Logistic回归、非线性回归、Probit回归 |
+| Categories | 对应分析、感知图、PROXSCAL等 |
+| Missing Value | 缺失数据的报告与填补 |
+| Conjoint | 正交设计、联合分析等、适用于市场研究 |
 |  |  |
 
 
