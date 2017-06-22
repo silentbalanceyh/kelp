@@ -4,7 +4,7 @@
 
 ### 1.1.2. SPSS产品定位
 
-* Data Collection Family
+* Data Collection Family：低端数据采集和报告
   * Online Survey
   * Phone Survey
   * Offline Survey
