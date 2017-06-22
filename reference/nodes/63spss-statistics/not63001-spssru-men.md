@@ -32,6 +32,7 @@
 | Forecasting | Arima模型、指数平滑、自回归 |
 | Custom Tables | 交互式创建各种表格（堆积表、嵌套表、分层表等） |
 | Complex Samples | 多阶段复杂抽样技术等 |
+| Bootstrap | 提供计算统计学中的Bootstrap方法用于参数估计 |
 |  |  |
 
 
