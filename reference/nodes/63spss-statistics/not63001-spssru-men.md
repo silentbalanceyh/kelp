@@ -30,7 +30,7 @@
 | Missing Value | 缺失数据的报告与填补 |
 | Conjoint | 正交设计、联合分析等、适用于市场研究 |
 | Forecasting | Arima模型、指数平滑、自回归 |
-|  |  |
+| Custom Tables | 交互式创建各种表格（堆积表、嵌套表、分层表等） |
 
 
 
