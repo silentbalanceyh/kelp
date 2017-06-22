@@ -72,7 +72,12 @@
 
 ### 1.3.1. SPSS的4种窗口
 
-数据窗口、输出窗口、语法窗口、脚本窗口
+* 数据窗口：SPSS Data Editor
+  * 一行代表一个观测个体：Case
+  * 一列代表一个属性：Variable
+* 输出窗口：SPSS Output Viewer
+* 语法窗口：SPSS Syntax Editor
+* 脚本窗口：SPSS Script Editor
 
 
 
