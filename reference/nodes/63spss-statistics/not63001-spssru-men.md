@@ -25,7 +25,8 @@
 | :--- | :--- |
 | Statistic Base | 提供最常用的数据管理和统计分析功能 |
 | Advanced Statistics | 一般线性模型、混合线性模型、对数线性模型、生存分析 |
-| Regression | Logistic |
+| Regression | Logistic回归、非线性回归、Probit回归 |
+|  |  |
 
 
 
