@@ -21,7 +21,11 @@
 
 ### 1.1.4. SPSS模块化架构
 
-
+| 模块功能 | 功能 |
+| :--- | :--- |
+| Statistic Base | 提供最常用的数据管理和统计分析功能 |
+| Advanced Statistics | 一般线性模型、混合线性模型、对数线性模型、生存分析 |
+| Regression | Logistic |
 
 
 
