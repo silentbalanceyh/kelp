@@ -33,7 +33,11 @@
 | Custom Tables | 交互式创建各种表格（堆积表、嵌套表、分层表等） |
 | Complex Samples | 多阶段复杂抽样技术等 |
 | Bootstrap | 提供计算统计学中的Bootstrap方法用于参数估计 |
-|  |  |
+| Decision Trees | 提供树结构模型分析方法 |
+| Neural Network | 提供BP神经网络和RBF神经网络方法 |
+| Data Preparation | 提供数据核查、自动清理等一系列数据准备工具 |
+| Statistic Adapter | 实际上属于SPSS和Deployment Famuly产品的接口，可以在企业应用程序、工具和解决方案环境中管理对象的生命周期 |
+| Direct Market | 提供了一组用于改善直销活动效果的工具、以针对特定的目标群体最大限度地提供促销措施的响应率 |
 
 
 
