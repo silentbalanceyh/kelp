@@ -35,6 +35,12 @@ SPSS中三种基本类型：
 
 * 定类尺度（Nominal Measurement）：度量标准（Measure）属性对变量测量尺度定义；
 * 定序尺度（Ordinal Measurement）；
-* 
+* 定距尺度（Interval Measurement）；
+* 定比尺度（Scale Measurement）；
+
+
+
+
+
 
 
