@@ -33,9 +33,8 @@ SPSS中三种基本类型：
 
 按照对事物描述的精度程度，将采用的测量尺度从低到高分4个层次：定类尺度、定序尺度、定距尺度、定比尺度。转换：高层次测量尺度 ----&gt; 低层次测量尺度（单向转换）。
 
-* 定类尺度（Nominal Measurement）
-
-
-
+* 定类尺度（Nominal Measurement）：度量标准（Measure）属性对变量测量尺度定义；
+* 定序尺度（Ordinal Measurement）；
+* 
 
 
