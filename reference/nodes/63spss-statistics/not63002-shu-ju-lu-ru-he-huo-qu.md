@@ -20,6 +20,14 @@
 SPSS中三种基本类型：
 
 * 数值类型（Numeric）
-* 
+  * 标准数值（Numeric）
+  * 逗号数值（Comma）
+  * 圆点分割（Dot）
+  * 科学计数（Scientific Notation）
+  * 美元数值（Dollar）
+  * 自定义（Custom Currency）
+* 字符型（String）
+* 日期型（Date）
+
 
 
