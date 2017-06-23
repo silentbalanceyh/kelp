@@ -27,7 +27,7 @@ SPSS中三种基本类型：
   * 美元数值（Dollar）
   * 自定义（Custom Currency）
 * 字符型（String）
-* 日期型（Date）
+* 日期型（Date）——从1582年10月14日零点相差的秒数
 
 
 
