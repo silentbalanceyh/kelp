@@ -13,6 +13,7 @@
 ### Level II 建模分析师、大数据分析师
 
 * 理论基础：统计学、概率论和数理统计、多元统计分析、时间序列、数据挖掘（DM）
+* 软件需求：Required（Excel、SQL、SAS/SPSS）/Optional（R、MATLAB等）
 * 
 
 
