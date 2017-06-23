@@ -2,7 +2,7 @@
 
 ## 考试类别
 
-### Level I 业务数据分析师
+### Level I 业务分析师
 
 * 理论基础：概率论、统计学理论基础
 * 软件需求：Required（Excel）/Optional（SPSS、SAS）
