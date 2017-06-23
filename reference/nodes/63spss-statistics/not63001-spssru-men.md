@@ -79,7 +79,12 @@
 * 语法窗口：SPSS Syntax Editor
 * 脚本窗口：SPSS Script Editor
 
+### 1.3.3. SPSS的4种输出结果
 
+* 枢轴表/轻量表
+* 文本格式
+* 统计图表
+* 模型
 
 
 
