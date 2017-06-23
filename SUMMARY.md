@@ -156,6 +156,7 @@
       * [应收账款 - 保理融资](reference/nodes/62supply-chain-finance/not62001-gong-ying-lian-jin-rong-chan-pin/ying-shou-zhang-kuan-bao-li-rong-zi.md)
   * [6.3.SPSS Statistics](reference/nodes/63spss-statistics.md)
     * [NOT63001 - SPSS入门](reference/nodes/63spss-statistics/not63001-spssru-men.md)
+    * [NOT63002 - 数据录入和获取](reference/nodes/63spss-statistics/not63002-shu-ju-lu-ru-he-huo-qu.md)
 * [7. Exam](reference/7exam.md)
   * [7.1. KM10019 - CDA考试大纲](reference/7exam/71-cdakao-shi-da-gang.md)
 
