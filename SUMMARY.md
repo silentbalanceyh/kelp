@@ -48,6 +48,7 @@
 * [4. Engine Analyzing](environment/engine-analyzing.md)
   * [4.1.Structures](environment/engine-analyzing/41structures.md)
 * [5. Epic Arch](environment/epic-arch.md)
+  * [5.1.Building Environment](environment/epic-arch/building-environment.md)
 
 ## Reference
 
